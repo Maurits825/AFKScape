@@ -34,22 +34,10 @@ public class MainController : MonoBehaviour
         }
 
         //TODO how will we only update the required? does it matter?
-        fishingXp.text = skillsClasses[0].xp.ToString();
-        fishingLvl.text = string.Concat(skillsClasses[0].currentLevel, "/", skillsClasses[0].currentLevel);
-        woodcuttingXp.text = skillsClasses[1].xp.ToString();
-        woodcuttingLvl.text = string.Concat(skillsClasses[1].currentLevel, "/", skillsClasses[1].currentLevel);
-    }
-
-    public void FishingSelected()
-    {
-        selectedSkill = skillsClasses[0];
-        status.text = selectedSkill.name;
-    }
-
-    public void WoodCuttingSelected()
-    {
-        selectedSkill = skillsClasses[1];
-        status.text =  selectedSkill.name;
+        //fishingXp.text = skillsClasses[0].xp.ToString();
+        //fishingLvl.text = string.Concat(skillsClasses[0].currentLevel, "/", skillsClasses[0].currentLevel);
+        //woodcuttingXp.text = skillsClasses[1].xp.ToString();
+        //woodcuttingLvl.text = string.Concat(skillsClasses[1].currentLevel, "/", skillsClasses[1].currentLevel);
     }
 
     private int getLevel(int xp)
@@ -59,6 +47,6 @@ public class MainController : MonoBehaviour
 
     public void handleSkillbuttonClicked(Button button)
     {
-        
+        status.text = string.Concat("Selected Skill:\n", button.name);
     }
 }
