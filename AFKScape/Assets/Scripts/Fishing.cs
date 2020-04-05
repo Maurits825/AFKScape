@@ -16,13 +16,13 @@ public class Fishing : Skill
             level = 1,
             quest = ""
         };
-        skillTrainingMethods.Add(new SkillTrainingMethod("Shrimp", 10, req));
+        skillTrainingMethods.Add(new TrainingMethod("Shrimp", 10, req));
 
         req = new Requirements
         {
             level = 30,
             quest = ""
         };
-        skillTrainingMethods.Add(new SkillTrainingMethod("Salmon", 70, req));
+        skillTrainingMethods.Add(new TrainingMethod("Salmon", 70, req));
     }
 }

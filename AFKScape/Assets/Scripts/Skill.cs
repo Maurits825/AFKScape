@@ -9,7 +9,7 @@ public abstract class Skill
     public int currentLevel = 1;
     public int boostedLevel = 1;
     
-    public List<SkillTrainingMethod> skillTrainingMethods = new List<SkillTrainingMethod>();
+    public List<TrainingMethod> skillTrainingMethods = new List<TrainingMethod>();
 
     public abstract void populateTrainingMethods();
 

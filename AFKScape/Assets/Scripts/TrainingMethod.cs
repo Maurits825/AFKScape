@@ -8,14 +8,14 @@ public struct Requirements
     public string quest;
 }
 
-public class SkillTrainingMethod
+public class TrainingMethod
 {
     public Requirements requirements;
 
     public string name;
     public int baseXpRate;
 
-    public SkillTrainingMethod(string methodName, int xpRate, Requirements req)
+    public TrainingMethod(string methodName, int xpRate, Requirements req)
     {
         name = methodName;
         baseXpRate = xpRate;

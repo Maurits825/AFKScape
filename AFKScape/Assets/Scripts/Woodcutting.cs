@@ -16,13 +16,13 @@ public class Woodcutting : Skill
             level = 1,
             quest = ""
         };
-        skillTrainingMethods.Add(new SkillTrainingMethod("Tree", 25, req));
+        skillTrainingMethods.Add(new TrainingMethod("Tree", 25, req));
 
         req = new Requirements
         {
             level = 15,
             quest = ""
         };
-        skillTrainingMethods.Add(new SkillTrainingMethod("Oak", 38, req));
+        skillTrainingMethods.Add(new TrainingMethod("Oak", 38, req));
     }
 }
