@@ -19,7 +19,7 @@ public class MainController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        skillsClasses.Add(new Fishing());
+        skillsClasses.Add(new Fishing()); //these will need to be singleton classes
         skillsClasses.Add(new Woodcutting());
     }
 
@@ -55,5 +55,10 @@ public class MainController : MonoBehaviour
     private int getLevel(int xp)
     {
         return Mathf.RoundToInt(xp / 10000.0F);
+    }
+
+    public void handleSkillbuttonClicked(Button button)
+    {
+        
     }
 }
