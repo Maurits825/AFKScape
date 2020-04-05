@@ -8,21 +8,4 @@ public class Fishing : Skill
     {
         populateTrainingMethods();
     }
-
-    public override void populateTrainingMethods()
-    {
-        Requirements req = new Requirements
-        {
-            level = 1,
-            quest = ""
-        };
-        skillTrainingMethods.Add(new TrainingMethod("Shrimp", 10, req));
-
-        req = new Requirements
-        {
-            level = 30,
-            quest = ""
-        };
-        skillTrainingMethods.Add(new TrainingMethod("Salmon", 70, req));
-    }
 }

@@ -8,13 +8,23 @@ public abstract class Skill
     public int xp = 0;
     public int currentLevel = 1;
     public int boostedLevel = 1;
-    
-    public List<TrainingMethod> skillTrainingMethods = new List<TrainingMethod>();
 
-    public abstract void populateTrainingMethods();
+    public TextAsset trainingMethodsJSONFile;
+    public List<TrainingMethod> trainingMethods = new List<TrainingMethod>();
 
     public Skill(string skillName)
     {
         name = skillName;
+        trainingMethodsJSONFile = Resources.Load<TextAsset>(string.Concat("JSON/", name, "TrainingMethods"));        
+    }
+
+    public void populateTrainingMethods()
+    {
+        TrainingMethodList trainingMethodListJSON = JsonUtility.FromJson<TrainingMethodList>(trainingMethodsJSONFile.text);
+
+        foreach (TrainingMethod trainingMethod in trainingMethodListJSON.trainingMethodList)
+        {
+            trainingMethods.Add(trainingMethod);
+        }
     }
 }

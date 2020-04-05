@@ -9,7 +9,7 @@ public class MainController : MonoBehaviour
     private Skill selectedSkill;
 
     public Text fishingLvl;
-    public Text woodcuttingLvl; //TODO make this a list?
+    public Text woodcuttingLvl; //TODO make this a list or dict
 
     public Text fishingXp;
     public Text woodcuttingXp;
@@ -28,7 +28,7 @@ public class MainController : MonoBehaviour
     {
         if (selectedSkill != null)
         {
-            selectedSkill.xp += selectedSkill.skillTrainingMethods[0].baseXpRate;
+            selectedSkill.xp += selectedSkill.trainingMethods[0].baseXpRate;
             int lvl = getLevel(selectedSkill.xp);
             selectedSkill.currentLevel = lvl;
         }

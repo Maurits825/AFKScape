@@ -1,0 +1,37 @@
+{
+  "trainingMethodList": [
+    {
+      "name": "Shrimp",
+      "requirements": {
+        "levelRequirements": [
+          {
+            "SkillName": "Fishing",
+            "levelReq": 5
+          }
+        ],
+        "quest": [
+          "quest1",
+          "quest2"
+        ]
+      },
+      "baseXpRate": 10
+    },
+    
+    {
+      "name": "Salmon",
+      "requirements": {
+        "levelRequirements": [
+          {
+            "SkillName": "Fishing",
+            "levelReq": 10
+          }
+        ],
+        "quest": [
+          "quest3",
+          "quest4"
+        ]
+      },
+      "baseXpRate": 25
+    }
+  ]
+}
