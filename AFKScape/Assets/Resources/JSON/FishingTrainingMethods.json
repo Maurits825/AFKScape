@@ -5,7 +5,7 @@
       "requirements": {
         "levelRequirements": [
           {
-            "SkillName": "Fishing",
+            "skillName": "Fishing",
             "levelReq": 5
           }
         ],
@@ -22,7 +22,7 @@
       "requirements": {
         "levelRequirements": [
           {
-            "SkillName": "Fishing",
+            "skillName": "Fishing",
             "levelReq": 10
           }
         ],

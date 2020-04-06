@@ -5,22 +5,26 @@ using UnityEngine.UI;
 
 public class MainController : MonoBehaviour
 {
-    private List<Skill> skillsClasses = new List<Skill>();
+    public GameObject UILevelTextParent;
+    private Dictionary<string, Text> UILevelText = new Dictionary<string, Text>();
+
+    private Dictionary<string, Skill> skillsClasses = new Dictionary<string, Skill>();
     private Skill selectedSkill;
 
-    public Text fishingLvl;
-    public Text woodcuttingLvl; //TODO make this a list or dict
-
-    public Text fishingXp;
-    public Text woodcuttingXp;
-
     public Text status;
+    public Text currentXp;
 
     // Start is called before the first frame update
     void Start()
     {
-        skillsClasses.Add(new Fishing()); //these will need to be singleton classes
-        skillsClasses.Add(new Woodcutting());
+        skillsClasses.Add("Fishing", new Fishing()); //these will need to be singleton classes
+        skillsClasses.Add("Woodcutting", new Woodcutting());
+
+        Text[] lvlTexts = UILevelTextParent.GetComponentsInChildren<Text>();
+        foreach (Text lvlText in lvlTexts)
+        {
+            UILevelText.Add(lvlText.name, lvlText);
+        }
     }
 
     // Update is called once per frame
@@ -28,16 +32,12 @@ public class MainController : MonoBehaviour
     {
         if (selectedSkill != null)
         {
-            selectedSkill.xp += selectedSkill.trainingMethods[0].baseXpRate;
-            int lvl = getLevel(selectedSkill.xp);
-            selectedSkill.currentLevel = lvl;
-        }
+            selectedSkill.xp += selectedSkill.trainingMethods[0].baseXpRate; //[0] index 0 for now
+            selectedSkill.currentLevel = getLevel(selectedSkill.xp);
 
-        //TODO how will we only update the required? does it matter?
-        //fishingXp.text = skillsClasses[0].xp.ToString();
-        //fishingLvl.text = string.Concat(skillsClasses[0].currentLevel, "/", skillsClasses[0].currentLevel);
-        //woodcuttingXp.text = skillsClasses[1].xp.ToString();
-        //woodcuttingLvl.text = string.Concat(skillsClasses[1].currentLevel, "/", skillsClasses[1].currentLevel);
+            UILevelText[selectedSkill.name].text = string.Concat(selectedSkill.currentLevel, "/", selectedSkill.currentLevel);
+            currentXp.text = selectedSkill.xp.ToString();
+        }
     }
 
     private int getLevel(int xp)
@@ -47,6 +47,8 @@ public class MainController : MonoBehaviour
 
     public void handleSkillbuttonClicked(Button button)
     {
+        string skill = button.name;
         status.text = string.Concat("Selected Skill:\n", button.name);
+        selectedSkill = skillsClasses[skill];
     }
 }

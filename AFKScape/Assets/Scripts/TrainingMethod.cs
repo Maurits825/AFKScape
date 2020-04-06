@@ -6,12 +6,12 @@ using UnityEngine;
 [Serializable]
 public struct LevelRequirement
 {
-    public string SkillName;
+    public string skillName;
     public int levelReq;
 
     public LevelRequirement(string name, int lvl)
     {
-        SkillName = name;
+        skillName = name;
         levelReq = lvl;
     }
 }
@@ -21,6 +21,7 @@ public struct Requirements
 {
     public List<LevelRequirement> levelRequirements;
     public List<string> quest;
+    public List<string> items;
 }
 
 [Serializable]
