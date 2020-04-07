@@ -15,7 +15,7 @@ public abstract class Skill
     public Skill(string skillName)
     {
         name = skillName;
-        trainingMethodsJSONFile = Resources.Load<TextAsset>(string.Concat("JSON/", name, "TrainingMethods"));        
+        trainingMethodsJSONFile = Resources.Load<TextAsset>(string.Concat("JSON/TrainingMethods/", name));        
     }
 
     public void populateTrainingMethods()

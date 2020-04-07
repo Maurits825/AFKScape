@@ -8,29 +8,57 @@ public class trainingMethodEditor : Editor
 {
     SerializedProperty trainingMethod;
     private string selectedSkillName;
-    public static bool[] isTrainMethodSelected = new bool[2] { false, false }; //TODO init this from list size
-    int selected = 0;
+    public List<bool> isTrainMethodSelected;
+    int selectedSkillIndPrev = 0;
+    int selectedSkillInd = 0;
+
+    bool JSONLoaded = false;
+
+    string newResource;
 
     void OnEnable()
     {
-        // Fetch the objects from the GameObject script to display in the inspector
         trainingMethod = serializedObject.FindProperty("trainingMethods");
     }
 
     public override void OnInspectorGUI()
     {
-        TrainingMethodAdder myTarget = (TrainingMethodAdder)target;
+        TrainingMethodAdder trainingMethodAdder = (TrainingMethodAdder)target;
 
         EditorGUILayout.HelpBox("Load a JSON file from a skill", MessageType.Info);
 
-        selected = EditorGUILayout.Popup("Select Skill:", selected, MainController.skillNames);
-        selectedSkillName = MainController.skillNames[selected];
-        myTarget.LoadJsonFile(selectedSkillName);
+        selectedSkillInd = EditorGUILayout.Popup("Select Skill:", selectedSkillInd, MainController.skillNames);
+        selectedSkillName = MainController.skillNames[selectedSkillInd];
+        if (selectedSkillInd != selectedSkillIndPrev)
+        {
+            JSONLoaded = false;
+        }
 
-        if (selectedSkillName != null)
+        if (GUILayout.Button("Load JSON"))
+        {
+            trainingMethodAdder.LoadJsonFile(selectedSkillName);
+            selectedSkillIndPrev = selectedSkillInd;
+            JSONLoaded = true;
+
+            isTrainMethodSelected = new List<bool>();
+            for (int i = 0; i < trainingMethodAdder.trainingMethods.Count; i++)
+            {
+                isTrainMethodSelected.Add(false);
+            }
+        }
+            
+        if (selectedSkillName != null && JSONLoaded)
         {
             EditorGUILayout.LabelField(string.Concat("JSON File: ", selectedSkillName));
-            EditorGUILayout.PropertyField(trainingMethod, new GUIContent("Training Methods:"));
+            EditorGUILayout.Space(10);
+
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField("Training Methods:", EditorStyles.boldLabel);
+            if (GUILayout.Button("Add"))
+            {
+                trainingMethodAdder.trainingMethods.Add(new TrainingMethod());
+            }
+            EditorGUILayout.EndHorizontal();
 
             int methodIndex = 0;
             foreach (SerializedProperty method in trainingMethod)
@@ -42,20 +70,32 @@ public class trainingMethodEditor : Editor
 
                 if (isTrainMethodSelected[methodIndex])
                 {
-                    foreach (SerializedProperty p in method)
-                    {
-                        EditorGUILayout.LabelField(p.displayName);
-                    }
+                    //This will be the main place to change/add/remove properties
+                    //for example if the lootable becomes a class, would need to include children
+                    EditorGUI.indentLevel++;
+                    EditorGUILayout.PropertyField(method.FindPropertyRelative("name"));
+                    EditorGUILayout.Space(5);
+                    EditorGUILayout.PropertyField(method.FindPropertyRelative("baseXpRate"));
+                    EditorGUILayout.Space(5);
+                    EditorGUILayout.PropertyField(method.FindPropertyRelative("lootTable"));
+                    EditorGUILayout.Space(5);
+                    EditorGUILayout.PropertyField(method.FindPropertyRelative("requirements"));
+                    EditorGUI.indentLevel--;
                 }
-
                 methodIndex++;
+
+                EditorGUILayout.Space(3);
             }
+
+            
         }
 
+        serializedObject.ApplyModifiedProperties();
+
+        EditorGUILayout.Space(5);
         if (GUILayout.Button("Apply"))
         {
-            serializedObject.ApplyModifiedProperties();
-            myTarget.saveJsonFile(); //TODO
+            trainingMethodAdder.saveJsonFile(selectedSkillName);
 
         }
             

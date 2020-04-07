@@ -1,0 +1,1 @@
+{"trainingMethodList":[{"name":"Shrimp","baseXpRate":10,"lootTable":[],"requirements":{"levelRequirements":[{"skillName":"Fishing","levelReq":5}],"quest":["quest1","quest2"],"items":[]}},{"name":"Salmon","baseXpRate":25,"lootTable":[],"requirements":{"levelRequirements":[{"skillName":"Fishing","levelReq":10}],"quest":["quest3","quest4"],"items":[]}}]}

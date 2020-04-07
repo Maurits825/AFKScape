@@ -29,9 +29,17 @@ public class TrainingMethod
 {
     public string name;
     public int baseXpRate;
+    public List<string> lootTable; //todo implemet a loot table class?
 
-    public Requirements requirements;    
+    public Requirements requirements;
 
+
+    public TrainingMethod()
+    {
+        name = "";
+        baseXpRate = 0;
+        requirements = new Requirements();
+    }
     public TrainingMethod(string methodName, int xpRate, Requirements req)
     {
         name = methodName;

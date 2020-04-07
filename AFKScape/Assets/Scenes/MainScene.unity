@@ -5660,6 +5660,7 @@ MonoBehaviour:
   trainingMethods:
   - name: Shrimp
     baseXpRate: 10
+    lootTable: []
     requirements:
       levelRequirements:
       - skillName: Fishing
@@ -5670,6 +5671,7 @@ MonoBehaviour:
       items: []
   - name: Salmon
     baseXpRate: 25
+    lootTable: []
     requirements:
       levelRequirements:
       - skillName: Fishing
