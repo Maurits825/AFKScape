@@ -1,1 +1,3 @@
 # AFKScape
+
+Imagine not juicing
