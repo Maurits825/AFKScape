@@ -2,16 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
+
+[Serializable]
+public struct JsonHelper
+{
+    public List<string> data;
+}
 
 public class MainController : MonoBehaviour
 {
+    public static string[] skillNames = new string[23];
+
     public GameObject UILevelTextParent;
     private Dictionary<string, Text> UILevelText = new Dictionary<string, Text>();
 
     private Dictionary<string, Skill> skillsClasses = new Dictionary<string, Skill>();
     private Skill selectedSkill;
-
-    public static string[] skillNames = new string[]{"Fishing", "Woodcutting"};
 
     public Text status;
     public Text currentXp;
@@ -19,6 +26,8 @@ public class MainController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        loadDataFromJson();
+
         skillsClasses.Add("Fishing", new Fishing()); //these will need to be singleton classes, will basic skills need a special class?
         skillsClasses.Add("Woodcutting", new Woodcutting()); //some skills can have all the functionality included in skill class
 
@@ -52,5 +61,14 @@ public class MainController : MonoBehaviour
         string skill = button.name;
         status.text = string.Concat("Selected Skill:\n", button.name);
         selectedSkill = skillsClasses[skill];
+    }
+
+    void loadDataFromJson()
+    {
+        TextAsset skillJSON = Resources.Load<TextAsset>("JSON/Skills");
+        JsonHelper jsonHelperSkills = JsonUtility.FromJson<JsonHelper>(skillJSON.text);
+        skillNames = jsonHelperSkills.data.ToArray();
+
+        //also load quest and stuff
     }
 }

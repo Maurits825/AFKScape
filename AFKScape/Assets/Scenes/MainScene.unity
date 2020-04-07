@@ -941,7 +941,7 @@ PrefabInstance:
     - target: {fileID: 2450235597776512603, guid: e86c8e6d26b558e42b2febfcb3446b19,
         type: 3}
       propertyPath: m_Name
-      value: Theiving
+      value: Thieving
       objectReference: {fileID: 0}
     - target: {fileID: 7207236965666619716, guid: e86c8e6d26b558e42b2febfcb3446b19,
         type: 3}
@@ -7475,7 +7475,7 @@ PrefabInstance:
     - target: {fileID: 706526613501924717, guid: 8c668be8c2c19fb4baf0fb0247824e05,
         type: 3}
       propertyPath: m_Name
-      value: Theiving
+      value: Thieving
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c668be8c2c19fb4baf0fb0247824e05, type: 3}
