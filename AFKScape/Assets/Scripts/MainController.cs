@@ -11,14 +11,16 @@ public class MainController : MonoBehaviour
     private Dictionary<string, Skill> skillsClasses = new Dictionary<string, Skill>();
     private Skill selectedSkill;
 
+    public static string[] skillNames = new string[]{"Fishing", "Woodcutting"};
+
     public Text status;
     public Text currentXp;
 
     // Start is called before the first frame update
     void Start()
     {
-        skillsClasses.Add("Fishing", new Fishing()); //these will need to be singleton classes
-        skillsClasses.Add("Woodcutting", new Woodcutting());
+        skillsClasses.Add("Fishing", new Fishing()); //these will need to be singleton classes, will basic skills need a special class?
+        skillsClasses.Add("Woodcutting", new Woodcutting()); //some skills can have all the functionality included in skill class
 
         Text[] lvlTexts = UILevelTextParent.GetComponentsInChildren<Text>();
         foreach (Text lvlText in lvlTexts)
