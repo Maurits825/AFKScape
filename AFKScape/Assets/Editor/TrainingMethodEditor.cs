@@ -87,7 +87,20 @@ public class trainingMethodEditor : Editor
                         EditorGUILayout.Space(5);
                         EditorGUILayout.PropertyField(method.FindPropertyRelative("xpPerResource"));
                         EditorGUILayout.Space(5);
+
+                        EditorGUILayout.BeginHorizontal();
                         EditorGUILayout.PropertyField(method.FindPropertyRelative("dropTables"));
+                        if (GUILayout.Button("Add General Table"))
+                        {
+                            trainingMethodAdder.trainingMethods[methodIndex].dropTables.Add(new DropTable("General"));
+                        }
+                        if (GUILayout.Button("Add Clue Table"))
+                        {
+                            trainingMethodAdder.trainingMethods[methodIndex].dropTables.Add(new ClueDropTable());
+                        }
+                        EditorGUILayout.EndHorizontal();
+
+
                         EditorGUILayout.Space(5);
                         EditorGUILayout.PropertyField(method.FindPropertyRelative("requirements"));
                         EditorGUI.indentLevel--;
