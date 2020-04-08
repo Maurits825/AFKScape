@@ -9,6 +9,9 @@ public abstract class Skill
     public int currentLevel = 1;
     public int boostedLevel = 1;
 
+    //included here the actualXprate? this is calculated using basexprate and lvl, items, perks...
+    //can provided a default way to calc this that can be overridden
+
     public TextAsset trainingMethodsJSONFile;
     public List<TrainingMethod> trainingMethods = new List<TrainingMethod>();
 

@@ -28,6 +28,8 @@ public class TrainingMethod
 {
     public string name;
     public int baseXpRate;
+    public float xpPerResource;
+    public float resourceRate { get { return baseXpRate / xpPerResource; } }
     public List<string> lootTable; //todo implemet a loot table class?
 
     public Requirements requirements;
