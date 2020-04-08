@@ -1,0 +1,57 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using NUnit.Framework;
+using UnityEngine;
+using UnityEngine.TestTools;
+
+namespace Tests
+{
+    public class TestSuite
+    {
+        // A Test behaves as an ordinary method
+        [Test]
+        public void TestClueDropTable()
+        {
+            ClueDropTable clueDropTable = new ClueDropTable();
+
+            DropTable.Loot loot = new DropTable.Loot("")
+            {
+                baseChance = 101 //with lvl 1 = 1/1 chance
+            };
+            clueDropTable.lootItems[0] = loot;
+
+            int fishLevel = 1;
+
+            int iterations = 1000;
+            string item;
+
+            Dictionary<string, int> cluesInv = new Dictionary<string, int>() {
+                { "easy", 0 },
+                { "medium", 0 },
+                { "hard", 0 },
+                { "elite", 0 },
+                { "beginner", 0 }};
+
+            for (int i = 0; i < iterations; i++)
+            {
+                (item, _) = clueDropTable.RollTable(fishLevel);
+                if (!string.IsNullOrEmpty(item))
+                {
+                    cluesInv[item]++;
+                }
+            }
+
+            Assert.IsTrue(true);
+        }
+
+        // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
+        // `yield return null;` to skip a frame.
+        [UnityTest]
+        public IEnumerator TestSuiteWithEnumeratorPasses()
+        {
+            // Use the Assert class to test conditions.
+            // Use yield to skip a frame.
+            yield return null;
+        }
+    }
+}
