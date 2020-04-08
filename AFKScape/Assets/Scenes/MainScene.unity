@@ -5662,13 +5662,22 @@ MonoBehaviour:
     baseXpRate: 4000
     xpPerResource: 0
     dropTables:
-    - numRolls: 1
+    - name: General
+      numRolls: 1
       lootItems:
       - item: Shrimp
         amountMin: 1
         amountMax: 1
         chance: 1
         baseChance: 1
+    - name: Clue
+      numRolls: 1
+      lootItems:
+      - item: 
+        amountMin: 1
+        amountMax: 1
+        chance: 1
+        baseChance: 870330
     requirements:
       levelRequirements:
       - skillName: Fishing

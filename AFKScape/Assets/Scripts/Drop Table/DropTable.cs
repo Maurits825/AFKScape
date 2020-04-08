@@ -56,9 +56,10 @@ public class DropTable
         return retItems;
     }
 
-    public virtual Dictionary<string, int> RollTable(int skillLevel)
+    public virtual (string, int) RollTable(int skillLevel)
     {
-        return RollTable();
+        return (null, 0);
+        //return RollTable();
     }
 
     private int GetAmount(int amountMin, int amountMax)

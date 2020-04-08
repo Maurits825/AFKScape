@@ -15,18 +15,20 @@ public class ClueDropTable : DropTable
         clueChances.Add("beginner", new int[] { 1, 1000 });
     }
 
-    public override Dictionary<string, int> RollTable(int skillLevel)
+    public override (string, int) RollTable(int skillLevel)
     {
-        Dictionary<string, int> retItems = new Dictionary<string, int>();
+        string retItem = null;
+        int retAmount = 0;
 
         string clueName = GetClue(lootItems[0].chance, lootItems[0].baseChance, skillLevel);
 
         if (clueName != null)
         {
-            retItems.Add(clueName, 1);
+            retItem = clueName;
+            retAmount = 0;
         }
 
-        return retItems;
+        return (retItem, retAmount);
     }
 
     private string GetClue(int chance, int baseChance, int skillLevel)
@@ -37,7 +39,7 @@ public class ClueDropTable : DropTable
         int actualChance = chance * accuracyGain;
         int actualBaseChance = Mathf.FloorToInt((baseChance / (100 + skillLevel)) * accuracyGain);
 
-        if (IsLootDropped(actualBaseChance, actualBaseChance))
+        if (IsLootDropped(actualChance, actualBaseChance))
         {
             foreach (KeyValuePair<string, int[]> clue in clueChances)
             {
