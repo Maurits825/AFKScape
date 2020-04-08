@@ -29,8 +29,8 @@ public class TrainingMethod
     public string name;
     public int baseXpRate;
     public float xpPerResource;
-    public float resourceRate { get { return baseXpRate / xpPerResource; } }
-    public List<string> lootTable; //todo implemet a loot table class?
+    private float resourceRate { get { return baseXpRate / xpPerResource; } }
+    public List<DropTable> dropTables;
 
     public Requirements requirements;
 
@@ -39,6 +39,8 @@ public class TrainingMethod
     {
         name = "";
         baseXpRate = 0;
+        xpPerResource = 0;
+        dropTables = new List<DropTable>() { new DropTable("General") };
         requirements = new Requirements();
     }
     public TrainingMethod(string methodName, int xpRate, Requirements req)

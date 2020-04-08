@@ -1,11 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+
 public class DropTable
 {
-    private int numRolls;
-    private List<Loot> lootItems = new List<Loot>();
-    private struct Loot
+    public string name;
+    public int numRolls;
+    public List<Loot> lootItems;
+
+    [Serializable]
+    public struct Loot
     {
         public string item;
         public int amountMin;
@@ -13,9 +18,25 @@ public class DropTable
 
         public int chance;
         public int baseChance;
+
+        public Loot(string itemName)
+        {
+            item = itemName;
+            amountMin = 1;
+            amountMax = 1;
+            chance = 1;
+            baseChance = 1;
+        }
     }
 
-    private Dictionary<string, int> rollTable()
+    public DropTable(string n)
+    {
+        name = n;
+        numRolls = 1;
+        lootItems = new List<Loot>() { new Loot("") };
+    }
+
+    public virtual Dictionary<string, int> RollTable()
     {
         Dictionary<string, int> retItems = new Dictionary<string, int>();
 
@@ -23,9 +44,9 @@ public class DropTable
         {
             foreach (Loot loot in lootItems)
             {
-                if (isLootDropped(loot.chance, loot.baseChance))
+                if (IsLootDropped(loot.chance, loot.baseChance))
                 {
-                    int amount = getAmount(loot.amountMin, loot.amountMax);
+                    int amount = GetAmount(loot.amountMin, loot.amountMax);
                     retItems.Add(loot.item, amount);
                 }
             }
@@ -34,15 +55,19 @@ public class DropTable
         return retItems;
     }
 
-    private bool isLootDropped(int chance, int baseChance)
+    public virtual Dictionary<string, int> RollTable(int skillLevel)
     {
-        int num = Random.Range(1, baseChance);
-
-        return (num < chance);
+        return RollTable();
     }
 
-    private int getAmount(int amountMin, int amountMax)
+    private int GetAmount(int amountMin, int amountMax)
     {
-        return Random.Range(amountMin, amountMax);
+        return UnityEngine.Random.Range(amountMin, amountMax);
+    }
+
+    public bool IsLootDropped(int chance, int baseChance)
+    {
+        int num = UnityEngine.Random.Range(1, baseChance);
+        return (num < chance);
     }
 }

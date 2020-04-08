@@ -38,7 +38,7 @@ public class TrainingMethodAdder : MonoBehaviour
         }
     }
 
-    public void saveJsonFile(string selectedSkillName)
+    public void SaveJsonFile(string selectedSkillName)
     {
         TrainingMethodList trainingMethodList = new TrainingMethodList();
         trainingMethodList.trainingMethodList = trainingMethods;

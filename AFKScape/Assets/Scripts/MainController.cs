@@ -26,7 +26,7 @@ public class MainController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        loadDataFromJson();
+        LoadDataFromJson();
 
         skillsClasses.Add("Fishing", new Fishing()); //these will need to be singleton classes, will basic skills need a special class?
         skillsClasses.Add("Woodcutting", new Woodcutting()); //some skills can have all the functionality included in skill class
@@ -56,14 +56,14 @@ public class MainController : MonoBehaviour
         return Mathf.RoundToInt(xp / 10000.0F);
     }
 
-    public void handleSkillbuttonClicked(Button button)
+    public void handleSkillbuttonClicked(Button button) //TODO uppercase, gonna messe up links, maybe to a list?
     {
         string skill = button.name;
         status.text = string.Concat("Selected Skill:\n", button.name);
         selectedSkill = skillsClasses[skill];
     }
 
-    void loadDataFromJson()
+    public static void LoadDataFromJson()
     {
         TextAsset skillJSON = Resources.Load<TextAsset>("JSON/Skills");
         JsonHelper jsonHelperSkills = JsonUtility.FromJson<JsonHelper>(skillJSON.text);
