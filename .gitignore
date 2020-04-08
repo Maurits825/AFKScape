@@ -58,3 +58,5 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+# some remaining UTs files, seems to be recurring bug
+/AFKScape/Assets/InitTestScene*.*
