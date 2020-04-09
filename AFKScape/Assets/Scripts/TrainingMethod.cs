@@ -27,9 +27,10 @@ public struct Requirements
 public class TrainingMethod
 {
     public string name;
-    public int baseXpRate;
+    public float baseXpRate { get { return xpPerResource * baseResourceRate; } }
     public float xpPerResource;
-    private float resourceRate { get { return baseXpRate / xpPerResource; } }
+    public float baseResourceRate;
+
     public List<DropTable> dropTables;
 
     public Requirements requirements;
@@ -38,15 +39,15 @@ public class TrainingMethod
     public TrainingMethod()
     {
         name = "";
-        baseXpRate = 0;
+        baseResourceRate = 0;
         xpPerResource = 0;
         dropTables = new List<DropTable>() { new DropTable("General") };
         requirements = new Requirements();
     }
-    public TrainingMethod(string methodName, int xpRate, Requirements req)
+    public TrainingMethod(string methodName, int resourceRate, Requirements req)
     {
         name = methodName;
-        baseXpRate = xpRate;
+        baseResourceRate = resourceRate;
         requirements = req;
     }
 }

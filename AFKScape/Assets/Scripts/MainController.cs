@@ -23,19 +23,20 @@ public class MainController : MonoBehaviour
     public Text status;
     public Text currentXp;
 
+    //move these somewhere else?
+    private readonly int speedUpConstant = 10;
+    private float timeConstant; 
+
     // Start is called before the first frame update
     void Start()
     {
+        timeConstant = (1.0F / (60.0F * 60.0F)) * speedUpConstant;
+
         LoadDataFromJson();
+        InitUI();
 
         skillsClasses.Add("Fishing", new Fishing()); //these will need to be singleton classes, will basic skills need a special class?
         skillsClasses.Add("Woodcutting", new Woodcutting()); //some skills can have all the functionality included in skill class
-
-        Text[] lvlTexts = UILevelTextParent.GetComponentsInChildren<Text>();
-        foreach (Text lvlText in lvlTexts)
-        {
-            UILevelText.Add(lvlText.name, lvlText);
-        }
     }
 
     // Update is called once per frame
@@ -43,7 +44,10 @@ public class MainController : MonoBehaviour
     {
         if (selectedSkill != null)
         {
-            selectedSkill.xp += selectedSkill.trainingMethods[0].baseXpRate; //[0] index 0 for now
+            //[0] index 0 for now
+            float xpGained = selectedSkill.trainingMethods[0].baseXpRate * Time.deltaTime * timeConstant;
+            selectedSkill.xpFloat += xpGained;
+            selectedSkill.xp = (int)selectedSkill.xpFloat;
             selectedSkill.currentLevel = getLevel(selectedSkill.xp);
 
             UILevelText[selectedSkill.name].text = string.Concat(selectedSkill.currentLevel, "/", selectedSkill.currentLevel);
@@ -70,5 +74,19 @@ public class MainController : MonoBehaviour
         skillNames = jsonHelperSkills.data.ToArray();
 
         //also load quest and stuff
+    }
+
+    public void InitUI()
+    {
+        Text[] lvlTexts = UILevelTextParent.GetComponentsInChildren<Text>();
+        foreach (Text lvlText in lvlTexts)
+        {
+            UILevelText.Add(lvlText.name, lvlText);
+        }
+    }
+
+    private void MainGameLoop()
+    {
+
     }
 }

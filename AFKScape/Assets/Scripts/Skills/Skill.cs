@@ -6,6 +6,7 @@ public abstract class Skill
 {
     public string name;
     public int xp = 0;
+    public float xpFloat = 0;
     public int currentLevel = 1;
     public int boostedLevel = 1;
 

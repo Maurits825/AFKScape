@@ -81,11 +81,20 @@ public class trainingMethodEditor : Editor
                         //This will be the main place to change/add/remove properties
                         //for example if the lootable becomes a class, would need to include children
                         EditorGUI.indentLevel++;
+
+                        EditorGUILayout.BeginHorizontal();
                         EditorGUILayout.PropertyField(method.FindPropertyRelative("name"));
+                        EditorGUILayout.LabelField("Xp rate: " + trainingMethodAdder.trainingMethods[methodIndex].baseXpRate);
+                        EditorGUILayout.EndHorizontal();
+
                         EditorGUILayout.Space(5);
-                        EditorGUILayout.PropertyField(method.FindPropertyRelative("baseXpRate"));
-                        EditorGUILayout.Space(5);
+
+                        EditorGUILayout.BeginHorizontal();
+                        EditorGUILayout.PropertyField(method.FindPropertyRelative("baseResourceRate"));
+                        //EditorGUILayout.Space(5);
                         EditorGUILayout.PropertyField(method.FindPropertyRelative("xpPerResource"));
+                        EditorGUILayout.EndHorizontal();
+
                         EditorGUILayout.Space(5);
 
                         EditorGUILayout.BeginHorizontal();
