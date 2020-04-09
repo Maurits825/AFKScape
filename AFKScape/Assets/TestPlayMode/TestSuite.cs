@@ -8,7 +8,6 @@ namespace Tests
 {
     public class TestSuite
     {
-        // A Test behaves as an ordinary method
         [Test]
         public void TestClueDropTable()
         {
@@ -42,6 +41,34 @@ namespace Tests
             }
 
             Assert.IsTrue(true);
+        }
+
+        [Test]
+        public void TestPetDropTable()
+        {
+            PetDropTable petDropTable = new PetDropTable();
+            DropTable.Loot loot = new DropTable.Loot("")
+            {
+                baseChance = 2501, //with lvl 100 = 1/1 chance
+                item = "Heron"
+            };
+            petDropTable.lootItems[0] = loot;
+
+            int fishLvl = 100;
+
+            int iterations = 10;
+            int petNum = 0;
+            string pet;
+            for (int i = 0; i < iterations; i++)
+            {
+                (pet, _) = petDropTable.RollTable(fishLvl);
+                if (!string.IsNullOrEmpty(pet))
+                {
+                    petNum++;
+                }
+            }
+
+            Assert.AreEqual(iterations, petNum);
         }
 
         // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use

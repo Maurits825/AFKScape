@@ -25,7 +25,7 @@ public class ClueDropTable : DropTable
         if (clueName != null)
         {
             retItem = clueName;
-            retAmount = 0;
+            retAmount = 1;
         }
 
         return (retItem, retAmount);

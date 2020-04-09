@@ -5,6 +5,7 @@ using UnityEngine;
 public class Item
 {
     private string name;
+    private int id;
     private string category;
     private int price;
 
