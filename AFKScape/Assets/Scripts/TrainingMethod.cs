@@ -35,13 +35,12 @@ public class TrainingMethod
 
     public Requirements requirements;
 
-
     public TrainingMethod()
     {
         name = "";
         baseResourceRate = 0;
         xpPerResource = 0;
-        dropTables = new List<DropTable>() { new DropTable("General") };
+        dropTables = new List<DropTable>() { new GeneralDropTable() };
         requirements = new Requirements();
     }
     public TrainingMethod(string methodName, int resourceRate, Requirements req)

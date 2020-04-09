@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System;
+
+[Serializable]
 public class PetDropTable : DropTable
 {
     public PetDropTable() : base("Pet")

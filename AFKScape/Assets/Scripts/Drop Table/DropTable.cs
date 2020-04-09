@@ -22,7 +22,7 @@ public class DropTable
 
         public Loot(string itemName)
         {
-            item = itemName;
+            item = itemName; //TODO item should be item name maybe beacuse it a string, not intance of Item class
             amountMin = 1;
             amountMax = 1;
             chance = 1;
@@ -37,32 +37,17 @@ public class DropTable
         lootItems = new List<Loot>() { new Loot("") };
     }
 
-    public virtual Dictionary<string, int> RollTable()
+    public virtual List<(string, int)> RollTable()
     {
-        Dictionary<string, int> retItems = new Dictionary<string, int>();
-
-        for (int i = 0; i < numRolls; i++)
-        {
-            foreach (Loot loot in lootItems)
-            {
-                if (IsLootDropped(loot.chance, loot.baseChance))
-                {
-                    int amount = GetAmount(loot.amountMin, loot.amountMax);
-                    retItems.Add(loot.item, amount);
-                }
-            }
-        }
-
-        return retItems;
+        return new List<(string, int)>() { (null, 0) };
     }
 
-    public virtual (string, int) RollTable(int skillLevel)
+    public virtual (string, int) RollTable(int skillLevel) //is this the way to do it?
     {
         return (null, 0);
-        //return RollTable();
     }
 
-    private int GetAmount(int amountMin, int amountMax)
+    public int GetAmount(int amountMin, int amountMax)
     {
         return UnityEngine.Random.Range(amountMin, amountMax);
     }
@@ -70,6 +55,6 @@ public class DropTable
     public bool IsLootDropped(int chance, int baseChance)
     {
         int num = UnityEngine.Random.Range(1, baseChance);
-        return (num < chance);
+        return (num <= chance);
     }
 }

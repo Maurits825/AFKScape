@@ -101,7 +101,7 @@ public class trainingMethodEditor : Editor
                         EditorGUILayout.PropertyField(method.FindPropertyRelative("dropTables"));
                         if (GUILayout.Button("Add General"))
                         {
-                            trainingMethodAdder.trainingMethods[methodIndex].dropTables.Add(new DropTable("General"));
+                            trainingMethodAdder.trainingMethods[methodIndex].dropTables.Add(new GeneralDropTable());
                         }
                         if (GUILayout.Button("Add Clue"))
                         {

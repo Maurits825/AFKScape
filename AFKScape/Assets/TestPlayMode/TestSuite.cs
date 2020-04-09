@@ -9,6 +9,20 @@ namespace Tests
     public class TestSuite
     {
         [Test]
+        public void TestGeneralDropTable()
+        {
+            GeneralDropTable generalDropTable = new GeneralDropTable();
+            string item = "Shrimp";
+            DropTable.Loot loot = new DropTable.Loot(item);
+            generalDropTable.lootItems[0] = loot;
+
+            List<(string, int)> items;
+            items = generalDropTable.RollTable();
+
+            Assert.AreEqual(item, items[0].Item1);
+        }
+
+        [Test]
         public void TestClueDropTable()
         {
             ClueDropTable clueDropTable = new ClueDropTable();

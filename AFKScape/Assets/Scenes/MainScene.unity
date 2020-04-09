@@ -5692,6 +5692,22 @@ MonoBehaviour:
         levelReq: 1
       quest: []
       items: []
+  - name: Shark
+    xpPerResource: 110
+    baseResourceRate: 200
+    dropTables:
+    - name: General
+      numRolls: 1
+      lootItems:
+      - item: Shark
+        amountMin: 1
+        amountMax: 1
+        chance: 1
+        baseChance: 1
+    requirements:
+      levelRequirements: []
+      quest: []
+      items: []
 --- !u!4 &1537179034
 Transform:
   m_ObjectHideFlags: 0

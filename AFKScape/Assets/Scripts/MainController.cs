@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using System.Linq;
 
 [Serializable]
 public struct JsonHelper
@@ -23,9 +24,17 @@ public class MainController : MonoBehaviour
     public Text status;
     public Text currentXp;
 
+    private readonly int inventorySlots = 28;
+    private static Inventory inventory;
+
+    //TODO add item databse, from json?
+    //have one like this for only string to id, another for id to item?
+    private static Dictionary<string, int> itemDataBase = new Dictionary<string, int>() { { "Shrimp", 1 } };
+
     //move these somewhere else?
     private readonly int speedUpConstant = 10;
-    private float timeConstant; 
+    private float timeConstant;
+    private float actionCount;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +43,8 @@ public class MainController : MonoBehaviour
 
         LoadDataFromJson();
         InitUI();
+
+        inventory = new Inventory(inventorySlots);
 
         skillsClasses.Add("Fishing", new Fishing()); //these will need to be singleton classes, will basic skills need a special class?
         skillsClasses.Add("Woodcutting", new Woodcutting()); //some skills can have all the functionality included in skill class
@@ -44,20 +55,13 @@ public class MainController : MonoBehaviour
     {
         if (selectedSkill != null)
         {
-            //[0] index 0 for now
-            float xpGained = selectedSkill.trainingMethods[0].baseXpRate * Time.deltaTime * timeConstant;
-            selectedSkill.xpFloat += xpGained;
-            selectedSkill.xp = (int)selectedSkill.xpFloat;
-            selectedSkill.currentLevel = getLevel(selectedSkill.xp);
-
-            UILevelText[selectedSkill.name].text = string.Concat(selectedSkill.currentLevel, "/", selectedSkill.currentLevel);
-            currentXp.text = selectedSkill.xp.ToString();
+            MainGameLoop(selectedSkill.trainingMethods[0], selectedSkill);
         }
     }
 
     private int getLevel(int xp)
     {
-        return Mathf.RoundToInt(xp / 10000.0F);
+        return Mathf.RoundToInt(xp / 10000.0F); //TODO xp table
     }
 
     public void handleSkillbuttonClicked(Button button) //TODO uppercase, gonna messe up links, maybe to a list?
@@ -85,8 +89,53 @@ public class MainController : MonoBehaviour
         }
     }
 
-    private void MainGameLoop()
+    private void MainGameLoop(TrainingMethod trainingMethod, Skill skill)
     {
+        float actionIncrement = trainingMethod.baseResourceRate * Time.deltaTime * timeConstant;
+        actionCount += actionIncrement;
+        if (actionCount >= 1.0F)
+        {
+            int actions = (int)actionCount;
+            skill.xpFloat += (trainingMethod.xpPerResource * actions);
+            actionCount -= actions;
 
+            //TODO roll the resources
+            for (int roll = 0; roll < actions; roll++)
+            {
+                List<(string, int)> itemList;
+                foreach (GeneralDropTable generalTable in trainingMethod.dropTables.OfType<GeneralDropTable>())
+                {
+                    itemList = generalTable.RollTable();
+                    if(itemList.Count > 0)
+                    {
+                        //inventory.AddItem(itemDataBase[item], amount);
+                    }
+                }
+
+                string itemName;
+                int amount;
+                foreach (ClueDropTable clueTable in trainingMethod.dropTables.OfType<ClueDropTable>())
+                {
+                    (itemName, amount) = clueTable.RollTable(skill.boostedLevel);
+                    if (!string.IsNullOrEmpty(itemName))
+                    {
+                        //inventory.AddItem(itemDataBase[item], amount);
+                    }
+                }
+
+                foreach (PetDropTable petTable in trainingMethod.dropTables.OfType<PetDropTable>())
+                {
+                    (itemName, amount) = petTable.RollTable(skill.boostedLevel);
+                    if (!string.IsNullOrEmpty(itemName))
+                    {
+                        //inventory.AddItem(itemDataBase[item], amount);
+                    }
+                }
+            }
+        }
+        skill.currentLevel = getLevel(skill.xp);
+
+        UILevelText[skill.name].text = string.Concat(skill.currentLevel, "/", skill.currentLevel);
+        currentXp.text = skill.xp.ToString();
     }
 }
