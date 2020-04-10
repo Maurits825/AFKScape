@@ -6,7 +6,7 @@ using UnityEngine.TestTools;
 
 namespace Tests
 {
-    public class TestSuite
+    public class DropTableTest
     {
         [Test]
         public void TestGeneralDropTable()

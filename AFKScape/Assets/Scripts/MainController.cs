@@ -100,43 +100,52 @@ public class MainController : MonoBehaviour
             skill.xpFloat += (trainingMethod.xpPerResource * actions);
             actionCount -= actions;
 
-            //TODO roll the resources
-            for (int roll = 0; roll < actions; roll++)
-            {
-                List<(string, int)> itemList;
-                foreach (GeneralDropTable generalTable in trainingMethod.dropTables.OfType<GeneralDropTable>())
-                {
-                    itemList = generalTable.RollTable();
-                    if(itemList.Count > 0)
-                    {
-                        //inventory.AddItem(itemDataBase[item], amount);
-                    }
-                }
+            RollResources(trainingMethod, skill, actions);
 
-                string itemName;
-                int amount;
-                foreach (ClueDropTable clueTable in trainingMethod.dropTables.OfType<ClueDropTable>())
-                {
-                    (itemName, amount) = clueTable.RollTable(skill.boostedLevel);
-                    if (!string.IsNullOrEmpty(itemName))
-                    {
-                        //inventory.AddItem(itemDataBase[item], amount);
-                    }
-                }
 
-                foreach (PetDropTable petTable in trainingMethod.dropTables.OfType<PetDropTable>())
-                {
-                    (itemName, amount) = petTable.RollTable(skill.boostedLevel);
-                    if (!string.IsNullOrEmpty(itemName))
-                    {
-                        //inventory.AddItem(itemDataBase[item], amount);
-                    }
-                }
-            }
         }
         skill.currentLevel = getLevel(skill.xp);
 
         UILevelText[skill.name].text = string.Concat(skill.currentLevel, "/", skill.currentLevel);
         currentXp.text = skill.xp.ToString();
+    }
+
+    private void RollResources(TrainingMethod trainingMethod, Skill skill, int actions)
+    {
+        for (int roll = 0; roll < actions; roll++)
+        {
+            List<(string, int)> itemList;
+            foreach (GeneralDropTable generalTable in trainingMethod.dropTables.OfType<GeneralDropTable>())
+            {
+                itemList = generalTable.RollTable();
+                if (itemList.Count > 0)
+                {
+                    foreach ((string, int) item in itemList)
+                    {
+                        inventory.AddItem(itemDataBase[item.Item1], item.Item2);
+                    }
+                }
+            }
+
+            string itemName;
+            int amount;
+            foreach (ClueDropTable clueTable in trainingMethod.dropTables.OfType<ClueDropTable>())
+            {
+                (itemName, amount) = clueTable.RollTable(skill.boostedLevel);
+                if (!string.IsNullOrEmpty(itemName))
+                {
+                    inventory.AddItem(itemDataBase[itemName], amount);
+                }
+            }
+
+            foreach (PetDropTable petTable in trainingMethod.dropTables.OfType<PetDropTable>())
+            {
+                (itemName, amount) = petTable.RollTable(skill.boostedLevel);
+                if (!string.IsNullOrEmpty(itemName))
+                {
+                    inventory.AddItem(itemDataBase[itemName], amount);
+                }
+            }
+        }
     }
 }
