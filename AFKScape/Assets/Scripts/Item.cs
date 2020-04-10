@@ -8,64 +8,79 @@ using UnityEditor;
 [Serializable]
 public class Item
 {
-    public Info info;
+    public long id;
+    public string name;
 
-    [Serializable]
-    public class Info
-    {
-        public long id;
-        public string name;
-        public bool Iincomplete;
-        public bool members;
-        public bool tradeable;
+    public bool tradeable;
+    public bool tradeableOnGe;
 
-        public bool tradeableOnGe;
+    public bool stackable;
+    public bool noted;
+    public bool noteable;
 
-        public bool stackable;
+    public long linkedIdItem;
+    public long linkedIdNoted;
 
-        public bool noted;
+    public long linkedIdPlaceholder;
+    public bool placeholder;
 
-        public bool noteable;
+    public bool equipable;
+    public bool equipableByPlayer;
+    public bool equipableWeapon;
 
-        public object linkedIdItem;
+    public long cost;
+    public long lowalch;
+    public long highalch;
+    public long buyLimit;
 
-        public long linkedIdNoted;
+    public bool questItem;
 
-        public long linkedIdPlaceholder;
+    public Equipment equipment;
+    public Weapon weapon;
+}
 
-        public bool placeholder;
+[Serializable]
+public class Equipment
+{
+    public int attack_stab;
+    public int attack_slash;
+    public int attack_crush;
+    public int attack_magic;
+    public int attack_ranged;
 
-        public bool equipable;
+    public int defence_stab;
+    public int defence_slash;
+    public int defence_crush;
+    public int defence_magic;
+    public int defence_ranged;
 
-        public bool equipableByPlayer;
+    public int melee_strength;
+    public int ranged_strength;
+    public int magic_damage;
 
-        public bool equipableWeapon;
+    public int prayer;
 
-        public long cost;
+    public string slot;
 
-        public long lowalch;
+    public Requirements requirements;
+}
 
-        public long highalch;
+[Serializable]
+public class Weapon
+{
+    public int attack_speed;
+    public string weapon_type;
+    public List<Stance> stances;
+}
 
-        public double weight;
-
-        public long buyLimit;
-
-        public bool questItem;
-
-        public DateTimeOffset releaseDate;
-
-        public bool duplicate;
-
-        public string examine;
-
-        public string wwikiName;
-
-        public Uri wikiUrl;
-        // public Equipment Equipment { get; set; }
-
-        //public Weapon Weapon { get; set; }
-    }
+[Serializable]
+public class Stance
+{
+    public string combat_style;
+    public string attack_type;
+    public string attack_style;
+    public string experience;
+    public object boosts;
 }
 
 [Serializable]
