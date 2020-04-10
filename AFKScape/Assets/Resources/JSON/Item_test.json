@@ -1,0 +1,31 @@
+{
+  "info": {
+    "id": 4151,
+    "name": "Abyssal whip",
+    "incomplete": true,
+    "members": true,
+    "tradeable": true,
+    "tradeable_on_ge": true,
+    "stackable": false,
+    "noted": false,
+    "noteable": true,
+    "linked_id_item": null,
+    "linked_id_noted": 4152,
+    "linked_id_placeholder": 14032,
+    "placeholder": false,
+    "equipable": true,
+    "equipable_by_player": true,
+    "equipable_weapon": true,
+    "cost": 120001,
+    "lowalch": 48000,
+    "highalch": 72000,
+    "weight": 0.453,
+    "buy_limit": 70,
+    "quest_item": false,
+    "release_date": "2005-01-26",
+    "duplicate": false,
+    "examine": "A weapon from the abyss.",
+    "wiki_name": "Abyssal whip",
+    "wiki_url": "https://oldschool.runescape.wiki/w/Abyssal_whip"
+  }
+}

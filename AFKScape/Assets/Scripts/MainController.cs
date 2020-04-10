@@ -6,7 +6,7 @@ using System;
 using System.Linq;
 
 [Serializable]
-public struct JsonHelper
+public struct JsonHelper //TODO move somehwere?
 {
     public List<string> data;
 }
