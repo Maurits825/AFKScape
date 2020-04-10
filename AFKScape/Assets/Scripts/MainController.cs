@@ -91,6 +91,7 @@ public class MainController : MonoBehaviour
 
     private void MainGameLoop(TrainingMethod trainingMethod, Skill skill)
     {
+        //TODO UT this
         float actionIncrement = trainingMethod.baseResourceRate * Time.deltaTime * timeConstant;
         actionCount += actionIncrement;
         if (actionCount >= 1.0F)

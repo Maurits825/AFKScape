@@ -5670,22 +5670,6 @@ MonoBehaviour:
         amountMax: 1
         chance: 1
         baseChance: 1
-    - name: Clue
-      numRolls: 1
-      lootItems:
-      - item: 
-        amountMin: 1
-        amountMax: 1
-        chance: 1
-        baseChance: 870330
-    - name: Pet
-      numRolls: 1
-      lootItems:
-      - item: Heron
-        amountMin: 1
-        amountMax: 1
-        chance: 1
-        baseChance: 435165
     requirements:
       levelRequirements:
       - skillName: Fishing
