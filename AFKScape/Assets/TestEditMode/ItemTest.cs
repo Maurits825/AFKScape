@@ -8,15 +8,14 @@ namespace Tests
 {
     public class ItemTest
     {
-        // A Test behaves as an ordinary method
         [Test]
-        public void TestItemParsing()
+        public void TestItemListParsing()
         {
-            Item item = new Item();
-            TextAsset JSONFile = Resources.Load<TextAsset>(string.Concat("JSON/", "Item_test"));
-            item = JsonUtility.FromJson<Item>(JSONFile.text);
+            ItemList itemList = new ItemList();
+            TextAsset JSONFile = Resources.Load<TextAsset>(string.Concat("JSON/Test/", "item"));
+            itemList = JsonUtility.FromJson<ItemList>(JSONFile.text);
 
-            Assert.AreEqual("Abyssal whip", item.info.name);
+            Assert.AreEqual("Abyssal whip", itemList.itemList[0].info.name);
         }
     }
 }

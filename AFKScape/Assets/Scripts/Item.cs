@@ -15,62 +15,61 @@ public class Item
     {
         public long id;
         public string name;
-        public bool Incomplete { get; set; }
-        public bool Members { get; set; }
-        public bool Tradeable { get; set; }
+        public bool Iincomplete;
+        public bool members;
+        public bool tradeable;
 
-        public bool TradeableOnGe { get; set; }
+        public bool tradeableOnGe;
 
-        public bool Stackable { get; set; }
+        public bool stackable;
 
-        public bool Noted { get; set; }
+        public bool noted;
 
-        public bool Noteable { get; set; }
+        public bool noteable;
 
-        public object LinkedIdItem { get; set; }
+        public object linkedIdItem;
 
-        public long LinkedIdNoted { get; set; }
+        public long linkedIdNoted;
 
-        public long LinkedIdPlaceholder { get; set; }
+        public long linkedIdPlaceholder;
 
-        public bool Placeholder { get; set; }
+        public bool placeholder;
 
-        public bool Equipable { get; set; }
+        public bool equipable;
 
-        public bool EquipableByPlayer { get; set; }
+        public bool equipableByPlayer;
 
-        public bool EquipableWeapon { get; set; }
+        public bool equipableWeapon;
 
         public long cost;
 
-        public long Lowalch { get; set; }
+        public long lowalch;
 
-        public long Highalch { get; set; }
+        public long highalch;
 
-        public double Weight { get; set; }
+        public double weight;
 
-        public long BuyLimit { get; set; }
+        public long buyLimit;
 
-        public bool QuestItem { get; set; }
+        public bool questItem;
 
-        public DateTimeOffset ReleaseDate { get; set; }
+        public DateTimeOffset releaseDate;
 
-        public bool Duplicate { get; set; }
+        public bool duplicate;
 
-        public string Examine { get; set; }
+        public string examine;
 
-        public string WikiName { get; set; }
+        public string wwikiName;
 
-        public Uri WikiUrl { get; set; }
+        public Uri wikiUrl;
         // public Equipment Equipment { get; set; }
 
         //public Weapon Weapon { get; set; }
-
-        public Info()
-        {
-            id = 0;
-            name = "test";
-            cost = 3;
-        }
     }
+}
+
+[Serializable]
+public class ItemList
+{
+    public List<Item> itemList;
 }
