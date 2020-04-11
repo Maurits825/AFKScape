@@ -5665,7 +5665,7 @@ MonoBehaviour:
     - name: General
       numRolls: 1
       lootItems:
-      - item: Shrimp
+      - id: 315
         amountMin: 1
         amountMax: 1
         chance: 1
@@ -5683,7 +5683,7 @@ MonoBehaviour:
     - name: General
       numRolls: 1
       lootItems:
-      - item: Shark
+      - id: 0
         amountMin: 1
         amountMax: 1
         chance: 1

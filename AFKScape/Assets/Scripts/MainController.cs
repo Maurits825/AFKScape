@@ -18,10 +18,6 @@ public class MainController : MonoBehaviour
     private readonly int inventorySlots = 28;
     private static Inventory inventory;
 
-    //TODO add item databse, from json?
-    //have one like this for only string to id, another for id to item?
-    private static Dictionary<string, int> itemDataBase = new Dictionary<string, int>() { { "Shrimp", 1 } };
-
     //move these somewhere else?
     private readonly int speedUpConstant = 10;
     private float timeConstant;

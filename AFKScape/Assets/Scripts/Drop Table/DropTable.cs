@@ -13,7 +13,9 @@ public class DropTable
     [Serializable]
     public struct Loot
     {
+        [ItemId]
         public long id;
+
         public int amountMin;
         public int amountMax;
 
