@@ -1,18 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
-public class ClueDropTablePropertyDrawer : MonoBehaviour
+[CustomPropertyDrawer(typeof(ClueDropTable))]
+public class ClueDropTablePropertyDrawer : PropertyDrawer
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
-        
-    }
+        EditorGUI.BeginProperty(position, label, property);
+        EditorGUI.LabelField(position, "HELLO");
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        EditorGUI.EndProperty();
     }
 }

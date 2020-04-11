@@ -9,7 +9,12 @@ public class ClueDropTable : DropTable
 
     public ClueDropTable() : base("Clue")
     {
-        clueChances.Add(2677, new int[]{ 4, 10});
+        
+    }
+
+    static ClueDropTable()
+    {
+        clueChances.Add(2677, new int[] { 4, 10 });
         clueChances.Add(2801, new int[] { 3, 10 });
         clueChances.Add(2722, new int[] { 2, 10 });
         clueChances.Add(12073, new int[] { 1, 10 });
