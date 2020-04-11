@@ -20,10 +20,10 @@ public class ItemIdPropertyDrawer : PropertyDrawer
 
         Rect idRect = position;
         idRect.width = idRect.width / 2;
-        EditorGUI.PropertyField(position, property);
+        EditorGUI.PropertyField(idRect, property);
 
         Rect nameRect = position;
-        nameRect.x = nameRect.x + position.width;
+        nameRect.x = nameRect.x + idRect.width;
 
         string itemName;
         try

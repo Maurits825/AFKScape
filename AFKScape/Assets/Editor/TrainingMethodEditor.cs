@@ -105,21 +105,23 @@ public class trainingMethodEditor : Editor
                         EditorGUILayout.Space(5);
 
                         EditorGUILayout.BeginHorizontal();
-                        EditorGUILayout.PropertyField(method.FindPropertyRelative("dropTables"));
                         if (GUILayout.Button("Add General"))
                         {
-                            trainingMethodAdder.trainingMethods[methodIndex].dropTables.Add(new GeneralDropTable());
+                            trainingMethodAdder.trainingMethods[methodIndex].generalDropTable.Add(new GeneralDropTable());
                         }
                         if (GUILayout.Button("Add Clue"))
                         {
-                            trainingMethodAdder.trainingMethods[methodIndex].dropTables.Add(new ClueDropTable());
+                            trainingMethodAdder.trainingMethods[methodIndex].clueDropTable = new ClueDropTable();
                         }
                         if (GUILayout.Button("Add Pet"))
                         {
-                            trainingMethodAdder.trainingMethods[methodIndex].dropTables.Add(new PetDropTable());
+                            trainingMethodAdder.trainingMethods[methodIndex].petDropTable = new PetDropTable();
                         }
                         EditorGUILayout.EndHorizontal();
 
+                        EditorGUILayout.PropertyField(method.FindPropertyRelative("generalDropTable"));
+                        EditorGUILayout.PropertyField(method.FindPropertyRelative("clueDropTable"));
+                        EditorGUILayout.PropertyField(method.FindPropertyRelative("petDropTable"));
 
                         EditorGUILayout.Space(5);
                         EditorGUILayout.PropertyField(method.FindPropertyRelative("requirements"));

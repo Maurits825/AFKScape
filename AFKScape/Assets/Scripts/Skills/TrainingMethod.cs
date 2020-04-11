@@ -25,6 +25,13 @@ public struct Requirements
 }
 
 [Serializable]
+public struct Consumables
+{
+    public long itemId;
+    public int amount;
+}
+
+[Serializable]
 public class TrainingMethod
 {
     public string name;
@@ -32,7 +39,11 @@ public class TrainingMethod
     public float xpPerResource;
     public float baseResourceRate;
 
-    public List<DropTable> dropTables;
+    public List<Consumables> consumables;
+
+    public List<GeneralDropTable> generalDropTable;
+    public ClueDropTable clueDropTable;
+    public PetDropTable petDropTable;
 
     public Requirements requirements;
 
@@ -41,7 +52,9 @@ public class TrainingMethod
         name = "";
         baseResourceRate = 0;
         xpPerResource = 0;
-        dropTables = new List<DropTable>() { new GeneralDropTable() };
+        consumables = new List<Consumables>();
+        generalDropTable = new List<GeneralDropTable>();
+        clueDropTable = new ClueDropTable();
         requirements = new Requirements();
     }
     public TrainingMethod(string methodName, int resourceRate, Requirements req)

@@ -20,18 +20,15 @@ public class MainController : MonoBehaviour
 
     //move these somewhere else?
     private readonly int speedUpConstant = 10;
-    private float timeConstant;
+    private float timeConstant = (1.0F / (60.0F * 60.0F)) * 10;
     private float actionCount;
 
     // Start is called before the first frame update
     void Start()
     {
-        timeConstant = (1.0F / (60.0F * 60.0F)) * speedUpConstant;
-
         Database.LoadAll();
         InitUI();
-
-        inventory = new Inventory(inventorySlots);
+        InitStatic();
 
         skillsClasses.Add("Fishing", new Fishing()); //these will need to be singleton classes, will basic skills need a special class?
         skillsClasses.Add("Woodcutting", new Woodcutting()); //some skills can have all the functionality included in skill class
@@ -42,13 +39,14 @@ public class MainController : MonoBehaviour
     {
         if (selectedSkill != null)
         {
-            MainGameLoop(selectedSkill.trainingMethods[0], selectedSkill);
+            MainGameLoop(selectedSkill.trainingMethods[0], selectedSkill, Time.deltaTime);
+            UpdateUI(selectedSkill);
         }
     }
 
     private int getLevel(int xp)
     {
-        return Mathf.RoundToInt(xp / 10000.0F); //TODO xp table
+        return (Mathf.RoundToInt(xp / 100.0F)) + 1; //TODO xp table
     }
 
     public void handleSkillbuttonClicked(Button button) //TODO uppercase, gonna messe up links, maybe to a list?
@@ -67,63 +65,86 @@ public class MainController : MonoBehaviour
         }
     }
 
-    private void MainGameLoop(TrainingMethod trainingMethod, Skill skill)
+    public void InitStatic()
     {
-        //TODO UT this
-        float actionIncrement = trainingMethod.baseResourceRate * Time.deltaTime * timeConstant;
+        inventory = new Inventory(inventorySlots);
+    }
+    public void MainGameLoop(TrainingMethod trainingMethod, Skill skill, float deltaTime)
+    {
+        float currentDeltaTime = deltaTime;
+        float actionIncrement = skill.GetResourceRate(trainingMethod.baseResourceRate) * currentDeltaTime * timeConstant;
         actionCount += actionIncrement;
-        if (actionCount >= 1.0F)
+
+        int actionDone = 0;
+        while (actionCount >= 1.0F)
         {
-            int actions = (int)actionCount;
-            skill.xpFloat += (trainingMethod.xpPerResource * actions);
-            actionCount -= actions;
+            skill.xpFloat += trainingMethod.xpPerResource;
+            actionCount -= 1.0F;
+            actionDone++;
 
-            RollResources(trainingMethod, skill, actions);
+            RollResources(trainingMethod, skill);
+            //remove consumables
 
+            int newLvl = getLevel(skill.xp);
+
+            if (newLvl != skill.currentLevel)
+            {
+                //update actionCount?
+                float deltaTimePerAction = currentDeltaTime / actionIncrement;
+                float timePassed = actionDone * deltaTimePerAction;
+                float newDeltaTime = currentDeltaTime - timePassed;
+                currentDeltaTime = newDeltaTime;
+                actionDone = 0;
+
+                skill.currentLevel = newLvl;
+                if (skill.boostedLevel < skill.currentLevel)
+                {
+                    skill.boostedLevel = skill.currentLevel;
+                }
+
+                actionIncrement = skill.GetResourceRate(trainingMethod.baseResourceRate) * newDeltaTime * timeConstant;
+                actionCount += actionIncrement;
+            }
 
         }
-        skill.currentLevel = getLevel(skill.xp);
-
-        UILevelText[skill.name].text = string.Concat(skill.currentLevel, "/", skill.currentLevel);
-        currentXp.text = skill.xp.ToString();
     }
 
-    private void RollResources(TrainingMethod trainingMethod, Skill skill, int actions)
+    private void RollResources(TrainingMethod trainingMethod, Skill skill)
     {
-        for (int roll = 0; roll < actions; roll++)
+        //fix oftype doesnt work when you load json file
+        List<(long, int)> itemList;
+
+        foreach (GeneralDropTable generalTable in trainingMethod.generalDropTable)
         {
-            List<(long, int)> itemList;
-            foreach (GeneralDropTable generalTable in trainingMethod.dropTables.OfType<GeneralDropTable>())
+            itemList = generalTable.RollTable();
+            if (itemList.Count > 0)
             {
-                itemList = generalTable.RollTable();
-                if (itemList.Count > 0)
+                foreach ((long, int) item in itemList)
                 {
-                    foreach ((long, int) item in itemList)
-                    {
-                        inventory.AddItem(item.Item1, item.Item2);
-                    }
-                }
-            }
-
-            long itemId;
-            int amount;
-            foreach (ClueDropTable clueTable in trainingMethod.dropTables.OfType<ClueDropTable>())
-            {
-                (itemId, amount) = clueTable.RollTable(skill.boostedLevel);
-                if (itemId != -1)
-                {
-                    inventory.AddItem(itemId, amount);
-                }
-            }
-
-            foreach (PetDropTable petTable in trainingMethod.dropTables.OfType<PetDropTable>())
-            {
-                (itemId, amount) = petTable.RollTable(skill.boostedLevel);
-                if (itemId != -1)
-                {
-                    inventory.AddItem(itemId, amount);
+                    inventory.AddItem(item.Item1, item.Item2);
                 }
             }
         }
+
+        long itemId;
+        int amount;
+        (itemId, amount) = trainingMethod.clueDropTable.RollTable(skill.boostedLevel);
+        if (itemId != -1)
+        {
+            inventory.AddItem(itemId, amount);
+        }
+
+        (itemId, amount) = trainingMethod.petDropTable.RollTable(skill.boostedLevel);
+        if (itemId != -1)
+        {
+            inventory.AddItem(itemId, amount);
+        }
+    }
+    
+
+    private void UpdateUI(Skill skill)
+    {
+        UILevelText[skill.name].text = string.Concat(skill.currentLevel, "/", skill.currentLevel);
+        currentXp.text = skill.xp.ToString();
     }
 }

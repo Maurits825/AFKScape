@@ -5659,26 +5659,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trainingMethods:
-  - name: Test1
-    xpPerResource: 0.87
-    baseResourceRate: 1.33
-    dropTables:
+  - name: Shrim
+    xpPerResource: 10
+    baseResourceRate: 100
+    consumables: []
+    generalDropTable:
     - name: General
       numRolls: 1
       lootItems:
-      - id: 0
+      - id: 315
         amountMin: 1
         amountMax: 1
         chance: 1
         baseChance: 1
-    - name: Clue
+    clueDropTable:
+      name: Clue
       numRolls: 1
       lootItems:
       - id: 0
         amountMin: 1
         amountMax: 1
         chance: 1
-        baseChance: 55
+        baseChance: 870330
+    petDropTable:
+      name: Pet
+      numRolls: 1
+      lootItems:
+      - id: 13320
+        amountMin: 1
+        amountMax: 1
+        chance: 1
+        baseChance: 435165
     requirements:
       levelRequirements: []
       quest: []
