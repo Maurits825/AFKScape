@@ -2,19 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
 using System.Linq;
-
-[Serializable]
-public struct JsonHelper //TODO move somehwere?
-{
-    public List<string> data;
-}
 
 public class MainController : MonoBehaviour
 {
-    public static string[] skillNames = new string[23];
-
     public GameObject UILevelTextParent;
     private Dictionary<string, Text> UILevelText = new Dictionary<string, Text>();
 
@@ -41,7 +32,7 @@ public class MainController : MonoBehaviour
     {
         timeConstant = (1.0F / (60.0F * 60.0F)) * speedUpConstant;
 
-        LoadDataFromJson();
+        Database.LoadAll();
         InitUI();
 
         inventory = new Inventory(inventorySlots);
@@ -69,15 +60,6 @@ public class MainController : MonoBehaviour
         string skill = button.name;
         status.text = string.Concat("Selected Skill:\n", button.name);
         selectedSkill = skillsClasses[skill];
-    }
-
-    public static void LoadDataFromJson()
-    {
-        TextAsset skillJSON = Resources.Load<TextAsset>("JSON/Skills");
-        JsonHelper jsonHelperSkills = JsonUtility.FromJson<JsonHelper>(skillJSON.text);
-        skillNames = jsonHelperSkills.data.ToArray();
-
-        //also load quest and stuff
     }
 
     public void InitUI()
@@ -114,36 +96,36 @@ public class MainController : MonoBehaviour
     {
         for (int roll = 0; roll < actions; roll++)
         {
-            List<(string, int)> itemList;
+            List<(long, int)> itemList;
             foreach (GeneralDropTable generalTable in trainingMethod.dropTables.OfType<GeneralDropTable>())
             {
                 itemList = generalTable.RollTable();
                 if (itemList.Count > 0)
                 {
-                    foreach ((string, int) item in itemList)
+                    foreach ((long, int) item in itemList)
                     {
-                        inventory.AddItem(itemDataBase[item.Item1], item.Item2);
+                        inventory.AddItem(item.Item1, item.Item2);
                     }
                 }
             }
 
-            string itemName;
+            long itemId;
             int amount;
             foreach (ClueDropTable clueTable in trainingMethod.dropTables.OfType<ClueDropTable>())
             {
-                (itemName, amount) = clueTable.RollTable(skill.boostedLevel);
-                if (!string.IsNullOrEmpty(itemName))
+                (itemId, amount) = clueTable.RollTable(skill.boostedLevel);
+                if (itemId != -1)
                 {
-                    inventory.AddItem(itemDataBase[itemName], amount);
+                    inventory.AddItem(itemId, amount);
                 }
             }
 
             foreach (PetDropTable petTable in trainingMethod.dropTables.OfType<PetDropTable>())
             {
-                (itemName, amount) = petTable.RollTable(skill.boostedLevel);
-                if (!string.IsNullOrEmpty(itemName))
+                (itemId, amount) = petTable.RollTable(skill.boostedLevel);
+                if (itemId != -1)
                 {
-                    inventory.AddItem(itemDataBase[itemName], amount);
+                    inventory.AddItem(itemId, amount);
                 }
             }
         }

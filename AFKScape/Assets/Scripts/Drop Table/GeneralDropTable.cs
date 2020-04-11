@@ -10,11 +10,11 @@ public class GeneralDropTable : DropTable
     {
 
     }
-    public override List<(string, int)> RollTable()
+    public override List<(long, int)> RollTable()
     {
-        List<(string, int)> retList = new List<(string, int)>();
+        List<(long, int)> retList = new List<(long, int)>();
 
-        string itemName = null;
+        long itemId = 0;
         int amount = 0;
 
         for (int i = 0; i < numRolls; i++)
@@ -23,10 +23,10 @@ public class GeneralDropTable : DropTable
             {
                 if (IsLootDropped(loot.chance, loot.baseChance)) //TODO this is wrong
                 {
-                    itemName = loot.item;
+                    itemId = loot.id;
                     amount = GetAmount(loot.amountMin, loot.amountMax);
 
-                    retList.Add((itemName, amount));
+                    retList.Add((itemId, amount));
                 }
             }
         }

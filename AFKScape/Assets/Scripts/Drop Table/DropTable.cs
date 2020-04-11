@@ -13,16 +13,16 @@ public class DropTable
     [Serializable]
     public struct Loot
     {
-        public string item;
+        public long id;
         public int amountMin;
         public int amountMax;
 
         public int chance;
         public int baseChance;
 
-        public Loot(string itemName)
+        public Loot(long idNum)
         {
-            item = itemName; //TODO item should be item name maybe beacuse it a string, not intance of Item class
+            id = idNum;
             amountMin = 1;
             amountMax = 1;
             chance = 1;
@@ -34,17 +34,17 @@ public class DropTable
     {
         name = n;
         numRolls = 1;
-        lootItems = new List<Loot>() { new Loot("") };
+        lootItems = new List<Loot>() { new Loot(0) };
     }
 
-    public virtual List<(string, int)> RollTable()
+    public virtual List<(long, int)> RollTable()
     {
-        return new List<(string, int)>() { (null, 0) };
+        return new List<(long, int)>() { (0, 0) };
     }
 
-    public virtual (string, int) RollTable(int skillLevel) //is this the way to do it?
+    public virtual (long, int) RollTable(int skillLevel) //is this the way to do it?
     {
-        return (null, 0);
+        return (0, 0);
     }
 
     public int GetAmount(int amountMin, int amountMax)

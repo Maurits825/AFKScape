@@ -1,41 +1,40 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 [Serializable]
 public class ClueDropTable : DropTable
 {
-    private static Dictionary<string, int[]> clueChances = new Dictionary<string, int[]>();
+    private static Dictionary<int, int[]> clueChances = new Dictionary<int, int[]>();
 
     public ClueDropTable() : base("Clue")
     {
-        clueChances.Add("easy", new int[]{ 4, 10});
-        clueChances.Add("medium", new int[] { 3, 10 });
-        clueChances.Add("hard", new int[] { 2, 10 });
-        clueChances.Add("elite", new int[] { 1, 10 });
-        clueChances.Add("beginner", new int[] { 1, 1000 });
+        clueChances.Add(2677, new int[]{ 4, 10});
+        clueChances.Add(2801, new int[] { 3, 10 });
+        clueChances.Add(2722, new int[] { 2, 10 });
+        clueChances.Add(12073, new int[] { 1, 10 });
+        clueChances.Add(23182, new int[] { 1, 1000 });
     }
 
-    public override (string, int) RollTable(int skillLevel)
+    public override (long, int) RollTable(int skillLevel)
     {
-        string retItem = null;
-        int retAmount = 0;
+        long itemId = -1;
+        int amount = 0;
 
-        string clueName = GetClue(lootItems[0].chance, lootItems[0].baseChance, skillLevel);
+        long clueId = GetClue(lootItems[0].chance, lootItems[0].baseChance, skillLevel);
 
-        if (clueName != null)
+        if (clueId != -1)
         {
-            retItem = clueName;
-            retAmount = 1;
+            itemId = clueId;
+            amount = 1;
         }
 
-        return (retItem, retAmount);
+        return (itemId, amount);
     }
 
-    private string GetClue(int chance, int baseChance, int skillLevel)
+    private long GetClue(int chance, int baseChance, int skillLevel)
     {
-        string retClue = null;
+        long clueId = -1;
 
         int accuracyGain = 100;
         int actualChance = chance * accuracyGain;
@@ -43,7 +42,7 @@ public class ClueDropTable : DropTable
 
         if (IsLootDropped(actualChance, actualBaseChance))
         {
-            foreach (KeyValuePair<string, int[]> clue in clueChances)
+            foreach (KeyValuePair<int, int[]> clue in clueChances)
             {
                 if (IsLootDropped(clue.Value[0], clue.Value[1]))
                 {
@@ -52,6 +51,6 @@ public class ClueDropTable : DropTable
             }
         }
 
-        return retClue;
+        return clueId;
     }
 }

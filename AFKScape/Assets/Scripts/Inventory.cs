@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Inventory
 {
-    public Dictionary<int, int> items = new Dictionary<int, int>(); //id and amount
+    public Dictionary<long, int> items = new Dictionary<long, int>(); //id and amount
     private int usedSlots = 0;
     private int totalSlots;
 
@@ -13,7 +13,7 @@ public class Inventory
         totalSlots = slots;
     }
 
-    public void AddItem(int id, int amount)
+    public void AddItem(long id, int amount)
     {
         if (items.ContainsKey(id))
         {
@@ -27,7 +27,7 @@ public class Inventory
             
     }
 
-    public void RemoveItem(int id, int amount)
+    public void RemoveItem(long id, int amount)
     {
         if (items.ContainsKey(id))
         {

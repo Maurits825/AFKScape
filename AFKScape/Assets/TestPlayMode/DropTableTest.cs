@@ -12,14 +12,14 @@ namespace Tests
         public void TestGeneralDropTable()
         {
             GeneralDropTable generalDropTable = new GeneralDropTable();
-            string item = "Shrimp";
-            DropTable.Loot loot = new DropTable.Loot(item);
+            long itemId = 315;
+            DropTable.Loot loot = new DropTable.Loot(itemId);
             generalDropTable.lootItems[0] = loot;
 
-            List<(string, int)> items;
+            List<(long, int)> items;
             items = generalDropTable.RollTable();
 
-            Assert.AreEqual(item, items[0].Item1);
+            Assert.AreEqual(itemId, items[0].Item1);
         }
 
         [Test]
@@ -27,7 +27,7 @@ namespace Tests
         {
             ClueDropTable clueDropTable = new ClueDropTable();
 
-            DropTable.Loot loot = new DropTable.Loot("")
+            DropTable.Loot loot = new DropTable.Loot(-1)
             {
                 baseChance = 101 //with lvl 1 = 1/1 chance
             };
@@ -36,21 +36,21 @@ namespace Tests
             int fishLevel = 1;
 
             int iterations = 1000;
-            string item;
+            long itemId;
 
-            Dictionary<string, int> cluesInv = new Dictionary<string, int>() {
-                { "easy", 0 },
-                { "medium", 0 },
-                { "hard", 0 },
-                { "elite", 0 },
-                { "beginner", 0 }};
+            Dictionary<long, int> cluesInv = new Dictionary<long, int>() {
+                { 2677, 0 },
+                { 2801, 0 },
+                { 2722, 0 },
+                { 12073, 0 },
+                { 23182, 0 }};
 
             for (int i = 0; i < iterations; i++)
             {
-                (item, _) = clueDropTable.RollTable(fishLevel);
-                if (!string.IsNullOrEmpty(item))
+                (itemId, _) = clueDropTable.RollTable(fishLevel);
+                if (itemId != -1)
                 {
-                    cluesInv[item]++;
+                    cluesInv[itemId]++;
                 }
             }
 
@@ -61,10 +61,10 @@ namespace Tests
         public void TestPetDropTable()
         {
             PetDropTable petDropTable = new PetDropTable();
-            DropTable.Loot loot = new DropTable.Loot("")
+            DropTable.Loot loot = new DropTable.Loot(0)
             {
                 baseChance = 2501, //with lvl 100 = 1/1 chance
-                item = "Heron"
+                id = 13320 // heron
             };
             petDropTable.lootItems[0] = loot;
 
@@ -72,11 +72,11 @@ namespace Tests
 
             int iterations = 10;
             int petNum = 0;
-            string pet;
+            long petId;
             for (int i = 0; i < iterations; i++)
             {
-                (pet, _) = petDropTable.RollTable(fishLvl);
-                if (!string.IsNullOrEmpty(pet))
+                (petId, _) = petDropTable.RollTable(fishLvl);
+                if (petId != -1)
                 {
                     petNum++;
                 }
