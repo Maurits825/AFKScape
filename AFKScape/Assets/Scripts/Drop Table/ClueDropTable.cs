@@ -18,7 +18,6 @@ public class ClueDropTable : DropTable
         clueChances.Add(2801, new int[] { 3, 10 });
         clueChances.Add(2722, new int[] { 2, 10 });
         clueChances.Add(12073, new int[] { 1, 10 });
-        clueChances.Add(23182, new int[] { 1, 1000 });
     }
 
     public override (long, int) RollTable(int skillLevel)
@@ -54,6 +53,12 @@ public class ClueDropTable : DropTable
                     return clue.Key;
                 }
             }
+        }
+
+        //roll beginner clue seperatly
+        if (IsLootDropped(1, 1000))
+        {
+            return 23182; //beginner clue id
         }
 
         return clueId;

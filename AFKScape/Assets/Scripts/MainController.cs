@@ -29,8 +29,9 @@ public class MainController : MonoBehaviour
     private static Inventory inventory;
 
     //move these somewhere else?
+    //TODO init problems when uting
     private readonly int speedUpConstant = 10;
-    private float timeConstant = (1.0F / (60.0F * 60.0F)) * 10;
+    private float timeConstant = (1.0F / (60.0F * 60.0F)) * 10000;
     private float actionCount;
 
     // Start is called before the first frame update
@@ -62,7 +63,7 @@ public class MainController : MonoBehaviour
 
     private int getLevel(int xp)
     {
-        return (Mathf.RoundToInt(xp / 100.0F)) + 1; //TODO xp table
+        return Mathf.Min((Mathf.RoundToInt(xp / 100.0F)) + 1, 126); //TODO xp table
     }
 
     public void handleSkillbuttonClicked(Button button) //TODO uppercase, gonna messe up links, maybe to a list?
@@ -77,6 +78,7 @@ public class MainController : MonoBehaviour
 
     public void SetTrainingMethod(int i)
     {
+        //TODO check reqs
         selectedTrainingMethodInd = i;
         isTrainingMethodSelected = true;
     }
@@ -188,11 +190,12 @@ public class MainController : MonoBehaviour
         foreach (KeyValuePair<long, int> item in inventory.items)
         {
             inventoryText[index].text = string.Concat(Database.items[item.Key].name, "\n", item.Value.ToString());
+            index++;
         }
     }
     private void UpdateUI(Skill skill)
     {
-        UILevelText[skill.name].text = string.Concat(skill.currentLevel, "/", skill.currentLevel, "  "); //two space for formating...
+        UILevelText[skill.name].text = string.Concat(skill.currentLevel, "/", skill.currentLevel, " "); //space for formating...
         UpdateTotalLevel();
         currentXp.text = skill.xp.ToString();
     }

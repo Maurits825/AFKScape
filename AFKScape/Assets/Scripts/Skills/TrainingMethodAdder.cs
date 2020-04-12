@@ -11,18 +11,6 @@ public class TrainingMethodAdder : MonoBehaviour
     private TrainingMethodList trainingMethodListJSON;
     public List<TrainingMethod> trainingMethods = new List<TrainingMethod>();
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void LoadJsonFile(string selectedSkillName)
     {
         trainingMethodsJSONFile = Resources.Load<TextAsset>(string.Concat("JSON/TrainingMethods/", selectedSkillName));

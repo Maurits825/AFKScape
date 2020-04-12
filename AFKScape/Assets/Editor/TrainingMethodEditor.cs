@@ -120,8 +120,27 @@ public class trainingMethodEditor : Editor
                         EditorGUILayout.EndHorizontal();
 
                         EditorGUILayout.PropertyField(method.FindPropertyRelative("generalDropTable"));
-                        EditorGUILayout.PropertyField(method.FindPropertyRelative("clueDropTable"));
-                        EditorGUILayout.PropertyField(method.FindPropertyRelative("petDropTable"));
+
+                        SerializedProperty clueTable = method.FindPropertyRelative("clueDropTable");
+                        EditorGUILayout.PropertyField(clueTable, false);
+                        EditorGUI.indentLevel++;
+                        SerializedProperty lootList = method.FindPropertyRelative("clueDropTable.lootItems");
+                        if (clueTable.isExpanded)
+                        {
+                            EditorGUILayout.PropertyField(lootList.GetArrayElementAtIndex(0).FindPropertyRelative("baseChance"));
+                        }
+                        EditorGUI.indentLevel--;
+
+                        SerializedProperty petTable = method.FindPropertyRelative("petDropTable");
+                        EditorGUILayout.PropertyField(petTable, false);
+                        EditorGUI.indentLevel++;
+                        SerializedProperty pet = method.FindPropertyRelative("petDropTable.lootItems");
+                        if (petTable.isExpanded)
+                        {
+                            EditorGUILayout.PropertyField(pet.GetArrayElementAtIndex(0).FindPropertyRelative("id"));
+                            EditorGUILayout.PropertyField(pet.GetArrayElementAtIndex(0).FindPropertyRelative("baseChance"));
+                        }
+                        EditorGUI.indentLevel--;
 
                         EditorGUILayout.Space(5);
                         EditorGUILayout.PropertyField(method.FindPropertyRelative("requirements"));
