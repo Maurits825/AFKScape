@@ -43,9 +43,10 @@ public class MainController : MonoBehaviour
         InitUI();
         InitStatic();
 
-
         skillsClasses.Add("Fishing", new Fishing()); //these will need to be singleton classes, will basic skills need a special class?
         skillsClasses.Add("Woodcutting", new Woodcutting()); //some skills can have all the functionality included in skill class
+
+        UpdateTotalLevel();
     }
 
     // Update is called once per frame
@@ -66,6 +67,7 @@ public class MainController : MonoBehaviour
 
     public void handleSkillbuttonClicked(Button button) //TODO uppercase, gonna messe up links, maybe to a list?
     {
+        isTrainingMethodSelected = false;
         string skill = button.name;
         status.text = skill;
         selectedSkill = skillsClasses[skill];
@@ -169,7 +171,17 @@ public class MainController : MonoBehaviour
             inventory.AddItem(itemId, amount);
         }
     }
-    
+    private int GetTotalLevel()
+    {
+        int totalLvl = 0;
+        foreach  (KeyValuePair<string, Skill> skill in skillsClasses)
+        {
+            totalLvl = totalLvl + skill.Value.currentLevel;
+        }
+
+        return totalLvl;
+    }
+
     private void UpdateInventoryUI()
     {
         int index = 0;
@@ -180,7 +192,13 @@ public class MainController : MonoBehaviour
     }
     private void UpdateUI(Skill skill)
     {
-        UILevelText[skill.name].text = string.Concat(skill.currentLevel, "/", skill.currentLevel);
+        UILevelText[skill.name].text = string.Concat(skill.currentLevel, "/", skill.currentLevel, "  "); //two space for formating...
+        UpdateTotalLevel();
         currentXp.text = skill.xp.ToString();
+    }
+
+    private void UpdateTotalLevel()
+    {
+        UILevelText["TotalLvl"].text = string.Concat("Total level:\n", GetTotalLevel().ToString());
     }
 }

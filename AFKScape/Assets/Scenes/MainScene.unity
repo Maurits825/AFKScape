@@ -734,7 +734,7 @@ PrefabInstance:
       propertyPath: m_Text
       value: 'Total level:
 
-        1250'
+        1'
       objectReference: {fileID: 0}
     - target: {fileID: 706526613501924715, guid: 8c668be8c2c19fb4baf0fb0247824e05,
         type: 3}
