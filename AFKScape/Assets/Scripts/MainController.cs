@@ -10,11 +10,17 @@ public class MainController : MonoBehaviour
     public GameObject UILevelTextParent;
     private Dictionary<string, Text> UILevelText = new Dictionary<string, Text>();
 
+    //TODO is there a better way
+    public GameObject TrainingMethodPanel;
+    private TrainingMethodScrollView trainingMethodScrollView;
+
     public GameObject inventoryPanel;
     private Dictionary<int, Text> inventoryText = new Dictionary<int, Text>();
 
     private Dictionary<string, Skill> skillsClasses = new Dictionary<string, Skill>();
     private Skill selectedSkill;
+    private int selectedTrainingMethodInd = 0;
+    private bool isTrainingMethodSelected = false;
 
     public Text status;
     public Text currentXp;
@@ -31,8 +37,12 @@ public class MainController : MonoBehaviour
     void Start()
     {
         Database.LoadAll();
+
+        trainingMethodScrollView = TrainingMethodPanel.GetComponent<TrainingMethodScrollView>();
+
         InitUI();
         InitStatic();
+
 
         skillsClasses.Add("Fishing", new Fishing()); //these will need to be singleton classes, will basic skills need a special class?
         skillsClasses.Add("Woodcutting", new Woodcutting()); //some skills can have all the functionality included in skill class
@@ -41,9 +51,9 @@ public class MainController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (selectedSkill != null)
+        if (selectedSkill != null && isTrainingMethodSelected)
         {
-            MainGameLoop(selectedSkill.trainingMethods[0], selectedSkill, Time.deltaTime);
+            MainGameLoop(selectedSkill.trainingMethods[selectedTrainingMethodInd], selectedSkill, Time.deltaTime);
             UpdateUI(selectedSkill);
             UpdateInventoryUI();
         }
@@ -59,6 +69,14 @@ public class MainController : MonoBehaviour
         string skill = button.name;
         status.text = skill;
         selectedSkill = skillsClasses[skill];
+
+        trainingMethodScrollView.CreateTrainingMethodButtons(selectedSkill.trainingMethods);
+    }
+
+    public void SetTrainingMethod(int i)
+    {
+        selectedTrainingMethodInd = i;
+        isTrainingMethodSelected = true;
     }
 
     public void InitUI()
