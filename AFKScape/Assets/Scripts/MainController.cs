@@ -6,8 +6,12 @@ using System.Linq;
 
 public class MainController : MonoBehaviour
 {
+    //move to ui script?
     public GameObject UILevelTextParent;
     private Dictionary<string, Text> UILevelText = new Dictionary<string, Text>();
+
+    public GameObject inventoryPanel;
+    private Dictionary<int, Text> inventoryText = new Dictionary<int, Text>();
 
     private Dictionary<string, Skill> skillsClasses = new Dictionary<string, Skill>();
     private Skill selectedSkill;
@@ -41,6 +45,7 @@ public class MainController : MonoBehaviour
         {
             MainGameLoop(selectedSkill.trainingMethods[0], selectedSkill, Time.deltaTime);
             UpdateUI(selectedSkill);
+            UpdateInventoryUI();
         }
     }
 
@@ -52,7 +57,7 @@ public class MainController : MonoBehaviour
     public void handleSkillbuttonClicked(Button button) //TODO uppercase, gonna messe up links, maybe to a list?
     {
         string skill = button.name;
-        status.text = string.Concat("Selected Skill:\n", button.name);
+        status.text = skill;
         selectedSkill = skillsClasses[skill];
     }
 
@@ -62,6 +67,14 @@ public class MainController : MonoBehaviour
         foreach (Text lvlText in lvlTexts)
         {
             UILevelText.Add(lvlText.name, lvlText);
+        }
+
+        Text[] invTexts = inventoryPanel.GetComponentsInChildren<Text>();
+        int slot = 0;
+        foreach (Text invText in invTexts)
+        {
+            inventoryText.Add(slot, invText);
+            slot++;
         }
     }
 
@@ -83,13 +96,12 @@ public class MainController : MonoBehaviour
             actionDone++;
 
             RollResources(trainingMethod, skill);
-            //remove consumables
+            //TODO remove consumables
 
             int newLvl = getLevel(skill.xp);
 
             if (newLvl != skill.currentLevel)
             {
-                //update actionCount?
                 float deltaTimePerAction = currentDeltaTime / actionIncrement;
                 float timePassed = actionDone * deltaTimePerAction;
                 float newDeltaTime = currentDeltaTime - timePassed;
@@ -111,7 +123,6 @@ public class MainController : MonoBehaviour
 
     private void RollResources(TrainingMethod trainingMethod, Skill skill)
     {
-        //fix oftype doesnt work when you load json file
         List<(long, int)> itemList;
 
         foreach (GeneralDropTable generalTable in trainingMethod.generalDropTable)
@@ -141,7 +152,14 @@ public class MainController : MonoBehaviour
         }
     }
     
-
+    private void UpdateInventoryUI()
+    {
+        int index = 0;
+        foreach (KeyValuePair<long, int> item in inventory.items)
+        {
+            inventoryText[index].text = string.Concat(Database.items[item.Key].name, "\n", item.Value.ToString());
+        }
+    }
     private void UpdateUI(Skill skill)
     {
         UILevelText[skill.name].text = string.Concat(skill.currentLevel, "/", skill.currentLevel);

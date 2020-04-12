@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Inventory
 {
-    public Dictionary<long, int> items = new Dictionary<long, int>(); //id and amount
+    public Dictionary<long, int> items = new Dictionary<long, int>(); //id and amount, add slot num here?
     private int usedSlots = 0;
     private int totalSlots;
 
