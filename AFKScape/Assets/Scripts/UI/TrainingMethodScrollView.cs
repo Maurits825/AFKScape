@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class TrainingMethodScrollView : MonoBehaviour
 {
     [SerializeField]
@@ -40,10 +40,19 @@ public class TrainingMethodScrollView : MonoBehaviour
             buttonGameObjects.Add(button);
             button.SetActive(true);
 
-            button.GetComponent<TrainingMethodButton>().SetText(trainingMethod.name);
-            button.GetComponent<TrainingMethodButton>().SetIndex(index);
+            TrainingMethodButton trainingMethodButton = button.GetComponent<TrainingMethodButton>();
+            trainingMethodButton.SetText(trainingMethod.requirements.levelRequirements[0].levelReq, trainingMethod.name);
+            trainingMethodButton.SetIndex(index);
 
             button.transform.SetParent(transform, false);
+
+            button.GetComponent<Button>().onClick.AddListener(() => HandleClicked(trainingMethodButton.index));
+            index++;
         }
+    }
+
+    public void HandleClicked(int index)
+    {
+        Debug.Log(index);
     }
 }

@@ -69,9 +69,8 @@ public class MainController : MonoBehaviour
     public void handleSkillbuttonClicked(Button button) //TODO uppercase, gonna messe up links, maybe to a list?
     {
         isTrainingMethodSelected = false;
-        string skill = button.name;
-        status.text = skill;
-        selectedSkill = skillsClasses[skill];
+        status.text = button.name;
+        selectedSkill = skillsClasses[button.name];
 
         trainingMethodScrollView.CreateTrainingMethodButtons(selectedSkill.trainingMethods);
     }

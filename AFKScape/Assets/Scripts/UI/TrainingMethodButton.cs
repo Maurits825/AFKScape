@@ -7,21 +7,15 @@ public class TrainingMethodButton : MonoBehaviour
     [SerializeField]
     private Text buttonText;
 
-    private int index;
+    public int index;
 
     public void SetIndex(int i)
     {
         index = i;
     }
 
-    public void SetText(string text)
+    public void SetText(int lvl, string text)
     {
-        buttonText.text = text;
-    }
-
-    //TODO better way? maincontroller as singleton maybe, or static, or have instance manager
-    public void HandleClick()
-    {
-        GameObject.Find("MainController").GetComponent<MainController>().SetTrainingMethod(index);
+        buttonText.text = lvl + ", " + text;
     }
 }
