@@ -14,6 +14,7 @@ namespace Tests
         {
             Fishing fishing = new Fishing();
 
+            EventManager.setIntance(new EventManager()); //TODO fix warning
             MainController mainController = new MainController(); //TODO fix this warning
             mainController.InitStatic();
             mainController.MainGameLoop(fishing.trainingMethods[0], fishing, 60.0F);

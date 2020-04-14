@@ -4131,6 +4131,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39063523f3d1a2540b3790f112cef81e, type: 3}
+--- !u!1 &716405202 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1708136380904134060, guid: 10beb05c6c9061c49a7b7899b887a8f0,
+    type: 3}
+  m_PrefabInstance: {fileID: 868381108}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &756830060 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 491972891584927929, guid: 39063523f3d1a2540b3790f112cef81e,
@@ -7270,11 +7276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33d4b947cfe36544e979bdbfddc69f72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UILevelTextParent: {fileID: 767983788}
   TrainingMethodPanel: {fileID: 1168825765}
-  inventoryPanel: {fileID: 1712303711}
-  status: {fileID: 372755118}
-  currentXp: {fileID: 1084064464}
 --- !u!4 &1243866483
 Transform:
   m_ObjectHideFlags: 0
@@ -10007,6 +10009,7 @@ GameObject:
   - component: {fileID: 1712303714}
   - component: {fileID: 1712303713}
   - component: {fileID: 1712303715}
+  - component: {fileID: 1712303716}
   m_Layer: 5
   m_Name: InventoryPanel
   m_TagString: Untagged
@@ -10121,6 +10124,19 @@ MonoBehaviour:
   m_Spacing: {x: 5, y: 5}
   m_Constraint: 1
   m_ConstraintCount: 4
+--- !u!114 &1712303716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1712303711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cfa0242c6ed7bb4ca36f97ec9ce1094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryPanel: {fileID: 1712303711}
 --- !u!1001 &1732609466
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11098,6 +11114,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1831703501
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1831703503}
+  - component: {fileID: 1831703502}
+  m_Layer: 0
+  m_Name: EventManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1831703502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831703501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7325d1e5887ade44898325b7e5d370c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1831703503
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831703501}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 297.23126, y: 266.30334, z: -80.31118}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1832939063
 GameObject:
   m_ObjectHideFlags: 0
@@ -11109,6 +11168,7 @@ GameObject:
   - component: {fileID: 1832939064}
   - component: {fileID: 1832939067}
   - component: {fileID: 1832939066}
+  - component: {fileID: 1832939065}
   m_Layer: 5
   m_Name: SkillPanel
   m_TagString: Untagged
@@ -11137,6 +11197,22 @@ RectTransform:
   m_AnchoredPosition: {x: 569.1, y: 0}
   m_SizeDelta: {x: -1137.5, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1832939065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1832939063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfecdb70905401b4189c3b9bef03958c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelTextParent: {fileID: 767983788}
+  levelButtonParent: {fileID: 716405202}
+  status: {fileID: 372755118}
+  currentXp: {fileID: 1084064464}
 --- !u!114 &1832939066
 MonoBehaviour:
   m_ObjectHideFlags: 0

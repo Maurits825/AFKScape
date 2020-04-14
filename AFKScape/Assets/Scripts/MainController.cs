@@ -6,24 +6,10 @@ using System.Linq;
 
 public class MainController : MonoBehaviour
 {
-    //move to ui script?
-    public GameObject UILevelTextParent;
-    private Dictionary<string, Text> UILevelText = new Dictionary<string, Text>();
-
-    //TODO is there a better way
-    public GameObject TrainingMethodPanel;
-    private TrainingMethodScrollView trainingMethodScrollView;
-
-    public GameObject inventoryPanel;
-    private Dictionary<int, Text> inventoryText = new Dictionary<int, Text>();
-
     private Dictionary<string, Skill> skillsClasses = new Dictionary<string, Skill>();
     private Skill selectedSkill;
     private int selectedTrainingMethodInd = 0;
     private bool isTrainingMethodSelected = false;
-
-    public Text status;
-    public Text currentXp;
 
     private readonly int inventorySlots = 28;
     private static Inventory inventory;
@@ -31,23 +17,23 @@ public class MainController : MonoBehaviour
     //move these somewhere else?
     //TODO init problems when uting
     private readonly int speedUpConstant = 10;
-    private float timeConstant = (1.0F / (60.0F * 60.0F)) * 10000;
+    private float timeConstant = (1.0F / (60.0F * 60.0F)) * 10;
     private float actionCount;
 
     // Start is called before the first frame update
     void Start()
     {
+        //TODO order of these?
         Database.LoadAll();
 
-        trainingMethodScrollView = TrainingMethodPanel.GetComponent<TrainingMethodScrollView>();
+        EventManager.Instance.onSkillClicked += OnSkillSelected;
+        EventManager.Instance.onTrainingMethodClicked += SetTrainingMethod;
 
-        InitUI();
         InitStatic();
 
         skillsClasses.Add("Fishing", new Fishing()); //these will need to be singleton classes, will basic skills need a special class?
         skillsClasses.Add("Woodcutting", new Woodcutting()); //some skills can have all the functionality included in skill class
-
-        UpdateTotalLevel();
+        //TODO foreach (skill in skillsClasses) EventManager.levelup ? for ui lvls and total lvl
     }
 
     // Update is called once per frame
@@ -56,8 +42,6 @@ public class MainController : MonoBehaviour
         if (selectedSkill != null && isTrainingMethodSelected)
         {
             MainGameLoop(selectedSkill.trainingMethods[selectedTrainingMethodInd], selectedSkill, Time.deltaTime);
-            UpdateUI(selectedSkill);
-            UpdateInventoryUI();
         }
     }
 
@@ -66,13 +50,12 @@ public class MainController : MonoBehaviour
         return Mathf.Min((Mathf.RoundToInt(xp / 100.0F)) + 1, 126); //TODO xp table
     }
 
-    public void handleSkillbuttonClicked(Button button) //TODO uppercase, gonna messe up links, maybe to a list?
+    public void OnSkillSelected(string skillName)
     {
         isTrainingMethodSelected = false;
-        status.text = button.name;
-        selectedSkill = skillsClasses[button.name];
+        selectedSkill = skillsClasses[skillName];
 
-        trainingMethodScrollView.CreateTrainingMethodButtons(selectedSkill.trainingMethods);
+        EventManager.Instance.DrawTrainingMethods(selectedSkill.trainingMethods);
     }
 
     public void SetTrainingMethod(int i)
@@ -80,23 +63,6 @@ public class MainController : MonoBehaviour
         //TODO check reqs
         selectedTrainingMethodInd = i;
         isTrainingMethodSelected = true;
-    }
-
-    public void InitUI()
-    {
-        Text[] lvlTexts = UILevelTextParent.GetComponentsInChildren<Text>();
-        foreach (Text lvlText in lvlTexts)
-        {
-            UILevelText.Add(lvlText.name, lvlText);
-        }
-
-        Text[] invTexts = inventoryPanel.GetComponentsInChildren<Text>();
-        int slot = 0;
-        foreach (Text invText in invTexts)
-        {
-            inventoryText.Add(slot, invText);
-            slot++;
-        }
     }
 
     public void InitStatic()
@@ -115,6 +81,14 @@ public class MainController : MonoBehaviour
             skill.xpFloat += trainingMethod.xpPerResource;
             actionCount -= 1.0F;
             actionDone++;
+
+            EventManager.Instance.XpGained(skill.xp);
+
+            //TODO handle multiple skill earning xp
+            //foreach (skill in trainingMethod.additionSkills)
+            // skill.xp += xpPerResource
+            // raise xp event? --> eventManager.xpgained
+            //if (getlevel(xp) != skill.lvl) --> eventManager.levelup
 
             RollResources(trainingMethod, skill);
             //TODO remove consumables
@@ -137,11 +111,16 @@ public class MainController : MonoBehaviour
 
                 actionIncrement = skill.GetResourceRate(trainingMethod.baseResourceRate) * newDeltaTime * timeConstant;
                 actionCount += actionIncrement;
+
+                int totalLvl = GetTotalLevel();
+                EventManager.Instance.LevelUp(skill.name, skill.currentLevel, totalLvl);
             }
 
         }
     }
 
+    //TODO move this to drop table manager, this is droptable repsonsiblity to handle this
+    //TODO have one entry point on DropTableManager: List<(long, int)> = trainingMethod.dropTableManager.roll()
     private void RollResources(TrainingMethod trainingMethod, Skill skill)
     {
         List<(long, int)> itemList;
@@ -175,32 +154,12 @@ public class MainController : MonoBehaviour
     private int GetTotalLevel()
     {
         int totalLvl = 0;
-        foreach  (KeyValuePair<string, Skill> skill in skillsClasses)
+        foreach  (Skill skill in skillsClasses.Values)
         {
-            totalLvl = totalLvl + skill.Value.currentLevel;
+            totalLvl = totalLvl + skill.currentLevel;
         }
 
         return totalLvl;
     }
 
-    private void UpdateInventoryUI()
-    {
-        int index = 0;
-        foreach (KeyValuePair<long, int> item in inventory.items)
-        {
-            inventoryText[index].text = string.Concat(Database.items[item.Key].name, "\n", item.Value.ToString());
-            index++;
-        }
-    }
-    private void UpdateUI(Skill skill)
-    {
-        UILevelText[skill.name].text = string.Concat(skill.currentLevel, "/", skill.currentLevel, " "); //space for formating...
-        UpdateTotalLevel();
-        currentXp.text = skill.xp.ToString();
-    }
-
-    private void UpdateTotalLevel()
-    {
-        UILevelText["TotalLvl"].text = string.Concat("Total level:\n", GetTotalLevel().ToString());
-    }
 }

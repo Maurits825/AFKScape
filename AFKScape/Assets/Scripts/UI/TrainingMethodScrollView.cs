@@ -12,12 +12,7 @@ public class TrainingMethodScrollView : MonoBehaviour
     void Start()
     {
         buttonGameObjects = new List<GameObject>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        EventManager.Instance.onDrawTrainingMethods += CreateTrainingMethodButtons;
     }
 
     public void CreateTrainingMethodButtons(List<TrainingMethod> trainingMethodList)
@@ -46,13 +41,8 @@ public class TrainingMethodScrollView : MonoBehaviour
 
             button.transform.SetParent(transform, false);
 
-            button.GetComponent<Button>().onClick.AddListener(() => HandleClicked(trainingMethodButton.index));
+            button.GetComponent<Button>().onClick.AddListener(() => EventManager.Instance.TrainingMethodClicked(trainingMethodButton.index));
             index++;
         }
-    }
-
-    public void HandleClicked(int index)
-    {
-        Debug.Log(index);
     }
 }
