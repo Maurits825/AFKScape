@@ -9,7 +9,7 @@ public class ItemLookup : MonoBehaviour
         List<(long, string, string)> itemList = new List<(long, string, string)>();
         foreach (KeyValuePair<long, Item> item in Database.items)
         {
-            if (item.Value.name.Contains(itemName))
+            if (item.Value.name.IndexOf(itemName, System.StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 string extraInfo = "";
                 if (item.Value.noted)
