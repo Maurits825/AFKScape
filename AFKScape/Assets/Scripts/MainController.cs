@@ -43,7 +43,7 @@ public class MainController : MonoBehaviour
         skillsClasses.Add("Hunter", new Hunter());
         skillsClasses.Add("Mining", new Mining());
         skillsClasses.Add("Prayer", new Prayer());
-        skillsClasses.Add("Runecrafting", new Runecrafting());
+        skillsClasses.Add("Runecraft", new Runecraft());
         skillsClasses.Add("Smithing", new Smithing());
         skillsClasses.Add("Thieving", new Thieving());
         skillsClasses.Add("Woodcutting", new Woodcutting()); //some skills can have all the functionality included in skill class
