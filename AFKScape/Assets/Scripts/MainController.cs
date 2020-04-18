@@ -19,6 +19,7 @@ public class MainController : MonoBehaviour
     private readonly int speedUpConstant = 10;
     private float timeConstant = (1.0F / (60.0F * 60.0F)) * 10;
     private float actionCount;
+    private static int maxLvL = 126; //TODO move somewhere
 
     // Start is called before the first frame update
     void Start()
@@ -69,7 +70,7 @@ public class MainController : MonoBehaviour
                 return i;
             }
         }
-        return 99;
+        return maxLvL;
     }
 
     public void OnSkillSelected(string skillName)

@@ -28,7 +28,9 @@ namespace Tests
             Database.LoadLevels();
             Assert.AreEqual(MainController.getLevel(407015), 64);
             Assert.AreEqual(MainController.getLevel(13034431), 99);
-            Assert.AreEqual(MainController.getLevel(100000000), 99);
+            Assert.AreEqual(MainController.getLevel(171077457), 125);
+            Assert.AreEqual(MainController.getLevel(188884740), 126);
+            Assert.AreEqual(MainController.getLevel(200000000), 126);
         }
 
     }
