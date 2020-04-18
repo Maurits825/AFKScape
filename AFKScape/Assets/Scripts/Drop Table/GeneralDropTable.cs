@@ -10,6 +10,14 @@ public class GeneralDropTable : DropTable
     {
         tableType = DropTableType.General;
     }
+
+    public GeneralDropTable(DropTable dropTable) : base("General")
+    {
+        tableType = DropTableType.General;
+        numRolls = dropTable.numRolls;
+        lootItems = dropTable.lootItems;
+    }
+
     public override List<(long, int)> RollTable()
     {
         List<(long, int)> retList = new List<(long, int)>();

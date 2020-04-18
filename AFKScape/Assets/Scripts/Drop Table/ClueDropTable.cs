@@ -12,6 +12,13 @@ public class ClueDropTable : DropTable
         tableType = DropTableType.Clue;
     }
 
+    public ClueDropTable(DropTable dropTable) : base("Clue")
+    {
+        tableType = DropTableType.Clue;
+        numRolls = dropTable.numRolls;
+        lootItems = dropTable.lootItems;
+    }
+
     static ClueDropTable()
     {
         clueChances.Add(2677, new int[] { 4, 10 });

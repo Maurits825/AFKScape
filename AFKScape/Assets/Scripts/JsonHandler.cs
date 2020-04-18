@@ -22,15 +22,15 @@ public static class JsonHandler
                     switch (trainingMethod.dropTables[i].tableType)
                     {
                         case DropTable.DropTableType.General:
-                            trainingMethod.dropTables[i] = (GeneralDropTable)trainingMethod.dropTables[i];
+                            trainingMethod.dropTables[i] = new GeneralDropTable(trainingMethod.dropTables[i]);
                             break;
 
                         case DropTable.DropTableType.Clue:
-                            trainingMethod.dropTables[i] = (ClueDropTable)trainingMethod.dropTables[i];
+                            trainingMethod.dropTables[i] = new ClueDropTable(trainingMethod.dropTables[i]);
                             break;
 
                         case DropTable.DropTableType.Pet:
-                            trainingMethod.dropTables[i] = (PetDropTable)trainingMethod.dropTables[i];
+                            trainingMethod.dropTables[i] = new PetDropTable(trainingMethod.dropTables[i]);
                             break;
 
                         default:

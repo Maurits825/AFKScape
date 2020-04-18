@@ -9003,7 +9003,7 @@ MonoBehaviour:
       tableType: 0
       numRolls: 1
       lootItems:
-      - id: 0
+      - id: 317
         amountMin: 1
         amountMax: 1
         chance: 1
@@ -9016,7 +9016,16 @@ MonoBehaviour:
         amountMin: 1
         amountMax: 1
         chance: 1
-        baseChance: 1
+        baseChance: 2467
+    - name: Pet
+      tableType: 2
+      numRolls: 1
+      lootItems:
+      - id: 13320
+        amountMin: 1
+        amountMax: 1
+        chance: 1
+        baseChance: 50000
     requirements:
       levelRequirements:
       - skillName: Fishing
