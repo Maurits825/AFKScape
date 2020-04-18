@@ -8,7 +8,7 @@ public class GeneralDropTable : DropTable
 {
     public GeneralDropTable() : base("General")
     {
-
+        tableType = DropTableType.General;
     }
     public override List<(long, int)> RollTable()
     {

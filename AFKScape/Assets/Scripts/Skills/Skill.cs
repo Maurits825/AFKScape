@@ -4,29 +4,22 @@ using UnityEngine;
 
 public abstract class Skill
 {
-    public string name;
+    public string skillName;
     public int xp { get { return (int)xpFloat; } }
     public float xpFloat = 0;
     public int currentLevel = 1;
     public int boostedLevel = 1;
 
-    public TextAsset trainingMethodsJSONFile; //TODO is this neededhere?
     public List<TrainingMethod> trainingMethods = new List<TrainingMethod>();
 
-    public Skill(string skillName)
+    public Skill(string name)
     {
-        name = skillName;
-        trainingMethodsJSONFile = Resources.Load<TextAsset>(string.Concat("JSON/TrainingMethods/", name));        
+        skillName = name;      
     }
 
-    public void populateTrainingMethods()
+    public void populateTrainingMethods(string skillName)
     {
-        TrainingMethodList trainingMethodListJSON = JsonUtility.FromJson<TrainingMethodList>(trainingMethodsJSONFile.text);
-
-        foreach (TrainingMethod trainingMethod in trainingMethodListJSON.trainingMethodList)
-        {
-            trainingMethods.Add(trainingMethod);
-        }
+        trainingMethods = JsonHandler.getTrainingMethods(skillName);
     }
 
     //included here the actualXprate? this is calculated using basexprate and lvl, items, perks...

@@ -17,7 +17,7 @@ public class MainController : MonoBehaviour
     //move these somewhere else?
     //TODO init problems when uting
     private readonly int speedUpConstant = 10;
-    private float timeConstant = (1.0F / (60.0F * 60.0F)) * 10;
+    private float timeConstant = (1.0F / (60.0F * 60.0F)) * 10000;
     private float actionCount;
 
     // Start is called before the first frame update
@@ -113,7 +113,7 @@ public class MainController : MonoBehaviour
                 actionCount += actionIncrement;
 
                 int totalLvl = GetTotalLevel();
-                EventManager.Instance.LevelUp(skill.name, skill.currentLevel, totalLvl);
+                EventManager.Instance.LevelUp(skill.skillName, skill.currentLevel, totalLvl);
             }
 
         }
@@ -125,7 +125,7 @@ public class MainController : MonoBehaviour
     {
         List<(long, int)> itemList;
 
-        foreach (GeneralDropTable generalTable in trainingMethod.generalDropTable)
+        foreach (GeneralDropTable generalTable in trainingMethod.dropTables.OfType<GeneralDropTable>())
         {
             itemList = generalTable.RollTable();
             if (itemList.Count > 0)
@@ -137,20 +137,29 @@ public class MainController : MonoBehaviour
             }
         }
 
-        long itemId;
-        int amount;
-        (itemId, amount) = trainingMethod.clueDropTable.RollTable(skill.boostedLevel);
+        long itemId = -1;
+        int amount = 0;
+        foreach (ClueDropTable clueDropTable in trainingMethod.dropTables.OfType<ClueDropTable>())
+        {
+            (itemId, amount) = clueDropTable.RollTable(skill.boostedLevel);
+        }
+
         if (itemId != -1)
         {
             inventory.AddItem(itemId, amount);
         }
 
-        (itemId, amount) = trainingMethod.petDropTable.RollTable(skill.boostedLevel);
+        foreach (PetDropTable petDropTable in trainingMethod.dropTables.OfType<PetDropTable>())
+        {
+            (itemId, amount) = petDropTable.RollTable(skill.boostedLevel);
+        }
+
         if (itemId != -1)
         {
             inventory.AddItem(itemId, amount);
         }
     }
+
     private int GetTotalLevel()
     {
         int totalLvl = 0;

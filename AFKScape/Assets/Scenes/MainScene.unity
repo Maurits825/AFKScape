@@ -7276,7 +7276,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33d4b947cfe36544e979bdbfddc69f72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TrainingMethodPanel: {fileID: 1168825765}
 --- !u!4 &1243866483
 Transform:
   m_ObjectHideFlags: 0
@@ -8999,33 +8998,25 @@ MonoBehaviour:
     xpPerResource: 10
     baseResourceRate: 100
     consumables: []
-    generalDropTable:
+    dropTables:
     - name: General
-      numRolls: 1
-      lootItems:
-      - id: 315
-        amountMin: 1
-        amountMax: 1
-        chance: 1
-        baseChance: 1
-    clueDropTable:
-      name: Clue
+      tableType: 0
       numRolls: 1
       lootItems:
       - id: 0
         amountMin: 1
         amountMax: 1
         chance: 1
-        baseChance: 870330
-    petDropTable:
-      name: Pet
+        baseChance: 1
+    - name: Clue
+      tableType: 1
       numRolls: 1
       lootItems:
-      - id: 13320
+      - id: 0
         amountMin: 1
         amountMax: 1
         chance: 1
-        baseChance: 435165
+        baseChance: 1
     requirements:
       levelRequirements:
       - skillName: Fishing
@@ -9036,33 +9027,7 @@ MonoBehaviour:
     xpPerResource: 110
     baseResourceRate: 200
     consumables: []
-    generalDropTable:
-    - name: General
-      numRolls: 1
-      lootItems:
-      - id: 385
-        amountMin: 1
-        amountMax: 1
-        chance: 1
-        baseChance: 1
-    clueDropTable:
-      name: Clue
-      numRolls: 1
-      lootItems:
-      - id: 0
-        amountMin: 1
-        amountMax: 1
-        chance: 1
-        baseChance: 1
-    petDropTable:
-      name: Pet
-      numRolls: 1
-      lootItems:
-      - id: 0
-        amountMin: 1
-        amountMax: 1
-        chance: 1
-        baseChance: 1
+    dropTables: []
     requirements:
       levelRequirements:
       - skillName: Fishing

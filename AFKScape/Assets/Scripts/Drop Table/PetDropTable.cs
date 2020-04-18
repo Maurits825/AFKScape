@@ -8,6 +8,7 @@ public class PetDropTable : DropTable
 {
     public PetDropTable() : base("Pet")
     {
+        tableType = DropTableType.Pet;
     }
 
     public override (long, int) RollTable(int skillLevel)

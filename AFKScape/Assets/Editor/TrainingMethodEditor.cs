@@ -107,20 +107,21 @@ public class trainingMethodEditor : Editor
                         EditorGUILayout.BeginHorizontal();
                         if (GUILayout.Button("Add General"))
                         {
-                            trainingMethodAdder.trainingMethods[methodIndex].generalDropTable.Add(new GeneralDropTable());
+                            trainingMethodAdder.trainingMethods[methodIndex].dropTables.Add(new GeneralDropTable());
                         }
                         if (GUILayout.Button("Add Clue"))
                         {
-                            trainingMethodAdder.trainingMethods[methodIndex].clueDropTable = new ClueDropTable();
+                            trainingMethodAdder.trainingMethods[methodIndex].dropTables.Add(new ClueDropTable()); ;
                         }
                         if (GUILayout.Button("Add Pet"))
                         {
-                            trainingMethodAdder.trainingMethods[methodIndex].petDropTable = new PetDropTable();
+                            trainingMethodAdder.trainingMethods[methodIndex].dropTables.Add(new PetDropTable()); ;
                         }
                         EditorGUILayout.EndHorizontal();
 
-                        EditorGUILayout.PropertyField(method.FindPropertyRelative("generalDropTable"));
+                        EditorGUILayout.PropertyField(method.FindPropertyRelative("dropTables"));
 
+                        /*
                         SerializedProperty clueTable = method.FindPropertyRelative("clueDropTable");
                         EditorGUILayout.PropertyField(clueTable, false);
                         EditorGUI.indentLevel++;
@@ -141,6 +142,7 @@ public class trainingMethodEditor : Editor
                             EditorGUILayout.PropertyField(pet.GetArrayElementAtIndex(0).FindPropertyRelative("baseChance"));
                         }
                         EditorGUI.indentLevel--;
+                        */
 
                         EditorGUILayout.Space(5);
                         EditorGUILayout.PropertyField(method.FindPropertyRelative("requirements"));

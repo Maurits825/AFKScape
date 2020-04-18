@@ -7,8 +7,16 @@ using System;
 public class DropTable
 {
     public string name;
+    public DropTableType tableType;
     public int numRolls;
     public List<Loot> lootItems;
+
+    public enum DropTableType
+    {
+        General,
+        Clue,
+        Pet,
+    }
 
     [Serializable]
     public struct Loot
