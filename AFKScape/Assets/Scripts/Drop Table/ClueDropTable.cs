@@ -9,7 +9,14 @@ public class ClueDropTable : DropTable
 
     public ClueDropTable() : base("Clue")
     {
-        
+        tableType = DropTableType.Clue;
+    }
+
+    public ClueDropTable(DropTable dropTable) : base("Clue")
+    {
+        tableType = DropTableType.Clue;
+        numRolls = dropTable.numRolls;
+        lootItems = dropTable.lootItems;
     }
 
     static ClueDropTable()

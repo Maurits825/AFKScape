@@ -7,34 +7,15 @@ using UnityEditor;
 
 public class TrainingMethodAdder : MonoBehaviour
 {
-    private TextAsset trainingMethodsJSONFile;
-    private TrainingMethodList trainingMethodListJSON;
     public List<TrainingMethod> trainingMethods = new List<TrainingMethod>();
 
     public void LoadJsonFile(string selectedSkillName)
     {
-        trainingMethodsJSONFile = Resources.Load<TextAsset>(string.Concat("JSON/TrainingMethods/", selectedSkillName));
-        trainingMethodListJSON = JsonUtility.FromJson<TrainingMethodList>(trainingMethodsJSONFile.text);
-
-        trainingMethods.Clear();
-        if (trainingMethodListJSON.trainingMethodList.Count > 0)
-        {
-            foreach (TrainingMethod trainingMethod in trainingMethodListJSON.trainingMethodList)
-            {
-                trainingMethods.Add(trainingMethod);
-            }
-        }
+        trainingMethods = JsonHandler.getTrainingMethods(selectedSkillName);
     }
 
     public void SaveJsonFile(string selectedSkillName)
     {
-        TrainingMethodList trainingMethodList = new TrainingMethodList();
-        trainingMethodList.trainingMethodList = trainingMethods;
-
-        string JSONString = JsonUtility.ToJson(trainingMethodList);
-
-        //TODO better way for path?
-        File.WriteAllText(string.Concat(Application.dataPath, "/Resources/JSON/TrainingMethods/", selectedSkillName, ".json"), JSONString);
-        AssetDatabase.Refresh();
+        JsonHandler.SaveJsonFile(trainingMethods, selectedSkillName);
     }
 }

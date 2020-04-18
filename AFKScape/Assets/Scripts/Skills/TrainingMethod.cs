@@ -41,9 +41,7 @@ public class TrainingMethod
 
     public List<Consumables> consumables;
 
-    public List<GeneralDropTable> generalDropTable;
-    public ClueDropTable clueDropTable;
-    public PetDropTable petDropTable;
+    public List<DropTable> dropTables;
 
     public Requirements requirements;
 
@@ -53,8 +51,7 @@ public class TrainingMethod
         baseResourceRate = 0;
         xpPerResource = 0;
         consumables = new List<Consumables>();
-        generalDropTable = new List<GeneralDropTable>();
-        clueDropTable = new ClueDropTable();
+        dropTables = new List<DropTable>();
         requirements = new Requirements();
     }
     public TrainingMethod(string methodName, int resourceRate, Requirements req)

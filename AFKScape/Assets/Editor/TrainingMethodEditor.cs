@@ -107,40 +107,70 @@ public class trainingMethodEditor : Editor
                         EditorGUILayout.BeginHorizontal();
                         if (GUILayout.Button("Add General"))
                         {
-                            trainingMethodAdder.trainingMethods[methodIndex].generalDropTable.Add(new GeneralDropTable());
+                            trainingMethodAdder.trainingMethods[methodIndex].dropTables.Add(new GeneralDropTable());
                         }
                         if (GUILayout.Button("Add Clue"))
                         {
-                            trainingMethodAdder.trainingMethods[methodIndex].clueDropTable = new ClueDropTable();
+                            trainingMethodAdder.trainingMethods[methodIndex].dropTables.Add(new ClueDropTable()); ;
                         }
                         if (GUILayout.Button("Add Pet"))
                         {
-                            trainingMethodAdder.trainingMethods[methodIndex].petDropTable = new PetDropTable();
+                            trainingMethodAdder.trainingMethods[methodIndex].dropTables.Add(new PetDropTable()); ;
                         }
                         EditorGUILayout.EndHorizontal();
 
-                        EditorGUILayout.PropertyField(method.FindPropertyRelative("generalDropTable"));
-
-                        SerializedProperty clueTable = method.FindPropertyRelative("clueDropTable");
-                        EditorGUILayout.PropertyField(clueTable, false);
-                        EditorGUI.indentLevel++;
-                        SerializedProperty lootList = method.FindPropertyRelative("clueDropTable.lootItems");
-                        if (clueTable.isExpanded)
+                        //EditorGUILayout.PropertyField(method.FindPropertyRelative("dropTables"));
+                        SerializedProperty dropTables = method.FindPropertyRelative("dropTables");
+                        int tableIndex = 0;
+                        foreach (SerializedProperty table in dropTables)
                         {
-                            EditorGUILayout.PropertyField(lootList.GetArrayElementAtIndex(0).FindPropertyRelative("baseChance"));
-                        }
-                        EditorGUI.indentLevel--;
+                            DropTable.DropTableType tableType = trainingMethodAdder.trainingMethods[methodIndex].dropTables[tableIndex].tableType;
+                            if (tableType == DropTable.DropTableType.General)
+                            {
+                                EditorGUILayout.PropertyField(table);
+                            }
 
-                        SerializedProperty petTable = method.FindPropertyRelative("petDropTable");
-                        EditorGUILayout.PropertyField(petTable, false);
-                        EditorGUI.indentLevel++;
-                        SerializedProperty pet = method.FindPropertyRelative("petDropTable.lootItems");
-                        if (petTable.isExpanded)
-                        {
-                            EditorGUILayout.PropertyField(pet.GetArrayElementAtIndex(0).FindPropertyRelative("id"));
-                            EditorGUILayout.PropertyField(pet.GetArrayElementAtIndex(0).FindPropertyRelative("baseChance"));
+                            tableIndex++;
                         }
-                        EditorGUI.indentLevel--;
+
+                        tableIndex = 0;
+                        foreach (SerializedProperty table in dropTables)
+                        {
+                            DropTable.DropTableType tableType = trainingMethodAdder.trainingMethods[methodIndex].dropTables[tableIndex].tableType;
+                            if (tableType == DropTable.DropTableType.Clue)
+                            {
+                                EditorGUILayout.PropertyField(table, false);
+                                EditorGUI.indentLevel++;
+                                SerializedProperty clueLoot = table.FindPropertyRelative("lootItems");
+                                if (table.isExpanded)
+                                {
+                                    EditorGUILayout.PropertyField(clueLoot.GetArrayElementAtIndex(0).FindPropertyRelative("baseChance"));
+                                }
+                                EditorGUI.indentLevel--;
+                            }
+
+                            tableIndex++;
+                        }
+
+                        tableIndex = 0;
+                        foreach (SerializedProperty table in dropTables)
+                        {
+                            DropTable.DropTableType tableType = trainingMethodAdder.trainingMethods[methodIndex].dropTables[tableIndex].tableType;
+                            if (tableType == DropTable.DropTableType.Pet)
+                            {
+                                EditorGUILayout.PropertyField(table, false);
+                                EditorGUI.indentLevel++;
+                                SerializedProperty petLoot = table.FindPropertyRelative("lootItems");
+                                if (table.isExpanded)
+                                {
+                                    EditorGUILayout.PropertyField(petLoot.GetArrayElementAtIndex(0).FindPropertyRelative("id"));
+                                    EditorGUILayout.PropertyField(petLoot.GetArrayElementAtIndex(0).FindPropertyRelative("baseChance"));
+                                }
+                                EditorGUI.indentLevel--;
+                            }
+
+                            tableIndex++;
+                        }
 
                         EditorGUILayout.Space(5);
                         EditorGUILayout.PropertyField(method.FindPropertyRelative("requirements"));
