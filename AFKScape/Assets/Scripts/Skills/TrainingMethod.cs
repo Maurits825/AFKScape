@@ -17,11 +17,18 @@ public struct LevelRequirement
 }
 
 [Serializable]
-public struct Requirements
+public class Requirements
 {
     public List<LevelRequirement> levelRequirements;
     public List<string> quest;
     public List<string> items;
+
+    public Requirements()
+    {
+        levelRequirements = new List<LevelRequirement>();
+        quest = new List<string>();
+        items = new List<string>();
+    }
 }
 
 [Serializable]

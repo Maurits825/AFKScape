@@ -102,7 +102,7 @@ public class trainingMethodEditor : Editor
                         EditorGUILayout.PropertyField(method.FindPropertyRelative("xpPerResource"));
                         EditorGUILayout.EndHorizontal();
 
-                        EditorGUILayout.Space(5);
+                        EditorGUILayout.Space(10);
 
                         EditorGUILayout.BeginHorizontal();
                         if (GUILayout.Button("Add General"))
@@ -172,7 +172,21 @@ public class trainingMethodEditor : Editor
                             tableIndex++;
                         }
 
-                        EditorGUILayout.Space(5);
+                        EditorGUILayout.Space(10);
+                        EditorGUILayout.BeginHorizontal();
+                        if (GUILayout.Button("Add Level Requirement"))
+                        {
+                            trainingMethodAdder.trainingMethods[methodIndex].requirements.levelRequirements.Add(new LevelRequirement());
+                        }
+                        if (GUILayout.Button("Add Quest Requirement"))
+                        {
+                            trainingMethodAdder.trainingMethods[methodIndex].requirements.quest.Add("");
+                        }
+                        if (GUILayout.Button("Add Item Requirement"))
+                        {
+                            trainingMethodAdder.trainingMethods[methodIndex].requirements.items.Add("");
+                        }
+                        EditorGUILayout.EndHorizontal();
                         EditorGUILayout.PropertyField(method.FindPropertyRelative("requirements"));
                         EditorGUI.indentLevel--;
                     }
