@@ -6,6 +6,6 @@ public class Thieving : Skill
 {
     public Thieving() : base("Thieving")
     {
-        populateTrainingMethods();
+        populateTrainingMethods(skillName);
     }
 }

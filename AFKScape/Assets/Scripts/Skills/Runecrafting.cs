@@ -6,6 +6,6 @@ public class Runecrafting : Skill
 {
     public Runecrafting() : base("Runecrafting")
     {
-        populateTrainingMethods();
+        populateTrainingMethods(skillName);
     }
 }

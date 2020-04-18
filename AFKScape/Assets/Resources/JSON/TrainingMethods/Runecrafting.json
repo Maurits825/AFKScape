@@ -1,1 +1,1 @@
-{}
+{"trainingMethodList":[{"name":"Air Rune","xpPerResource":5.0,"baseResourceRate":10000.0,"consumables":[],"dropTables":[{"name":"General","tableType":0,"numRolls":1,"lootItems":[{"id":556,"amountMin":1,"amountMax":1,"chance":1,"baseChance":1}]},{"name":"Pet","tableType":2,"numRolls":1,"lootItems":[{"id":20665,"amountMin":1,"amountMax":1,"chance":1,"baseChance":1795758}]}],"requirements":{"levelRequirements":[{"skillName":"Runecrafting","levelReq":1}],"quest":[],"items":[]}}]}

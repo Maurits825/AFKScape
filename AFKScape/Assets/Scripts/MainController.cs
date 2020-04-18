@@ -17,7 +17,7 @@ public class MainController : MonoBehaviour
     //move these somewhere else?
     //TODO init problems when uting
     private readonly int speedUpConstant = 10;
-    private float timeConstant = (1.0F / (60.0F * 60.0F)) * 10000;
+    private float timeConstant = (1.0F / (60.0F * 60.0F)) * 10;
     private float actionCount;
 
     // Start is called before the first frame update

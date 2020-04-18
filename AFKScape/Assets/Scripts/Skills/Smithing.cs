@@ -6,6 +6,6 @@ public class Smithing : Skill
 {
     public Smithing() : base("Smithing")
     {
-        populateTrainingMethods();
+        populateTrainingMethods(skillName);
     }
 }

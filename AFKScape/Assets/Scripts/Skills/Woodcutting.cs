@@ -6,6 +6,6 @@ public class Woodcutting : Skill
 {
     public Woodcutting() : base("Woodcutting")
     {
-        populateTrainingMethods();
+        populateTrainingMethods(skillName);
     }
 }

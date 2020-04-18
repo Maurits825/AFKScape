@@ -6,6 +6,6 @@ public class Cooking : Skill
 {
     public Cooking() : base("Cooking")
     {
-        populateTrainingMethods();
+        populateTrainingMethods(skillName);
     }
 }
