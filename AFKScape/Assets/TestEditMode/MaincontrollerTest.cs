@@ -22,5 +22,16 @@ namespace Tests
             Assert.AreEqual(true, true);
         }
 
+        [Test]
+        public void LevelsTest()
+        {
+            Database.LoadLevels();
+            Assert.AreEqual(64, MainController.getLevel(407015));
+            Assert.AreEqual(99, MainController.getLevel(13034431));
+            Assert.AreEqual(125, MainController.getLevel(171077457));
+            Assert.AreEqual(126, MainController.getLevel(188884740));
+            Assert.AreEqual(126, MainController.getLevel(200000000));
+        }
+
     }
 }

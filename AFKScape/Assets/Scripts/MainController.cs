@@ -19,6 +19,7 @@ public class MainController : MonoBehaviour
     private readonly int speedUpConstant = 10;
     private float timeConstant = (1.0F / (60.0F * 60.0F)) * 10;
     private float actionCount;
+    private static int maxLvL = 126; //TODO move somewhere
 
     // Start is called before the first frame update
     void Start()
@@ -59,9 +60,16 @@ public class MainController : MonoBehaviour
         }
     }
 
-    private int getLevel(int xp)
+    public static int getLevel(int xp)
     {
-        return Mathf.Min((Mathf.RoundToInt(xp / 100.0F)) + 1, 126); //TODO xp table
+        for (int i = 0; i < Database.skillLevels.Count; i++)
+        {
+            if (xp < Database.skillLevels[i])
+            {
+                return i;
+            }
+        }
+        return maxLvL;
     }
 
     public void OnSkillSelected(string skillName)
