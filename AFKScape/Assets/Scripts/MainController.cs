@@ -62,10 +62,9 @@ public class MainController : MonoBehaviour
 
     public static int getLevel(int xp)
     {
-        List<int> levelList = Database.skillLevels;
-        for (int i = 0; i < levelList.Count; i++)
+        for (int i = 0; i < Database.skillLevels.Count; i++)
         {
-            if (xp < levelList[i])
+            if (xp < Database.skillLevels[i])
             {
                 return i;
             }

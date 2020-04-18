@@ -12,7 +12,6 @@ public static class Database
 
     public static List<int> skillLevels;
 
-
     [Serializable]
     private struct JsonHelper
     {

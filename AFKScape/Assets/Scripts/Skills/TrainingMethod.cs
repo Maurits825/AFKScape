@@ -74,9 +74,3 @@ public class TrainingMethodList
 {
     public List<TrainingMethod> trainingMethodList;
 }
-
-[Serializable]
-public class SkillLevelList
-{
-    public List<int> levels;
-}

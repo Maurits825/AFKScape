@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
@@ -41,6 +42,11 @@ public static class JsonHandler
         }
 
         return trainingMethods;
+    }
+    [Serializable]
+    public class SkillLevelList
+    {
+        public List<int> levels;
     }
 
     public static List<int> getSkillLevels()

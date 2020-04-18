@@ -26,11 +26,11 @@ namespace Tests
         public void LevelsTest()
         {
             Database.LoadLevels();
-            Assert.AreEqual(MainController.getLevel(407015), 64);
-            Assert.AreEqual(MainController.getLevel(13034431), 99);
-            Assert.AreEqual(MainController.getLevel(171077457), 125);
-            Assert.AreEqual(MainController.getLevel(188884740), 126);
-            Assert.AreEqual(MainController.getLevel(200000000), 126);
+            Assert.AreEqual(64, MainController.getLevel(407015));
+            Assert.AreEqual(99, MainController.getLevel(13034431));
+            Assert.AreEqual(125, MainController.getLevel(171077457));
+            Assert.AreEqual(126, MainController.getLevel(188884740));
+            Assert.AreEqual(126, MainController.getLevel(200000000));
         }
 
     }
