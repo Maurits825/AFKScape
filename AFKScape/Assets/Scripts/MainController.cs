@@ -17,7 +17,7 @@ public class MainController : MonoBehaviour
     //move these somewhere else?
     //TODO init problems when uting
     private readonly int speedUpConstant = 10;
-    private float timeConstant = (1.0F / (60.0F * 60.0F)) * 10;
+    private float timeConstant = (1.0F / (60.0F * 60.0F)) * 10000;
     private float actionCount;
 
     // Start is called before the first frame update
@@ -30,8 +30,22 @@ public class MainController : MonoBehaviour
         EventManager.Instance.onTrainingMethodClicked += SetTrainingMethod;
 
         InitStatic();
-
+        //combat training not included
+        skillsClasses.Add("Agility", new Agility());
+        skillsClasses.Add("Construction", new Construction());
+        skillsClasses.Add("Cooking", new Cooking());
+        skillsClasses.Add("Crafting", new Crafting());
+        skillsClasses.Add("Farming", new Farming());
+        skillsClasses.Add("Firemaking", new Firemaking());
         skillsClasses.Add("Fishing", new Fishing()); //these will need to be singleton classes, will basic skills need a special class?
+        skillsClasses.Add("Fletching", new Fletching());
+        skillsClasses.Add("Herblore", new Herblore());
+        skillsClasses.Add("Hunter", new Hunter());
+        skillsClasses.Add("Mining", new Mining());
+        skillsClasses.Add("Prayer", new Prayer());
+        skillsClasses.Add("Runecrafting", new Runecrafting());
+        skillsClasses.Add("Smithing", new Smithing());
+        skillsClasses.Add("Thieving", new Thieving());
         skillsClasses.Add("Woodcutting", new Woodcutting()); //some skills can have all the functionality included in skill class
         //TODO foreach (skill in skillsClasses) EventManager.levelup ? for ui lvls and total lvl
     }

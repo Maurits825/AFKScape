@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4903,7 +4903,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 535688372}
   m_HandleRect: {fileID: 535688371}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -7276,7 +7276,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33d4b947cfe36544e979bdbfddc69f72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TrainingMethodPanel: {fileID: 1168825765}
 --- !u!4 &1243866483
 Transform:
   m_ObjectHideFlags: 0
@@ -9040,7 +9039,7 @@ MonoBehaviour:
     - name: General
       numRolls: 1
       lootItems:
-      - id: 385
+      - id: 383
         amountMin: 1
         amountMax: 1
         chance: 1
@@ -9058,11 +9057,11 @@ MonoBehaviour:
       name: Pet
       numRolls: 1
       lootItems:
-      - id: 0
+      - id: 13320
         amountMin: 1
         amountMax: 1
         chance: 1
-        baseChance: 1
+        baseChance: 82243
     requirements:
       levelRequirements:
       - skillName: Fishing

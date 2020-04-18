@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Woodcutting : Skill
+public class Smithing : Skill
 {
-    public Woodcutting() : base("Woodcutting")
+    public Smithing() : base("Smithing")
     {
         populateTrainingMethods();
     }
