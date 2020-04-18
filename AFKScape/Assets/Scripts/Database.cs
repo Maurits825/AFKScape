@@ -10,6 +10,8 @@ public static class Database
     public static Dictionary<long, Item> items = new Dictionary<long, Item>();
     public static Dictionary<int, string> quest = new Dictionary<int, string>();
 
+    public static List<int> skillLevels;
+
 
     [Serializable]
     private struct JsonHelper
@@ -22,6 +24,7 @@ public static class Database
         LoadSkills();
         LoadItems();
         LoadQuests();
+        LoadLevels();
     }
 
     public static void LoadSkills()
@@ -40,6 +43,11 @@ public static class Database
         {
             items.Add(item.id, item);
         }
+    }
+
+    public static void LoadLevels()
+    {
+        skillLevels = JsonHandler.getSkillLevels();
     }
 
     public static void LoadQuests()

@@ -59,9 +59,17 @@ public class MainController : MonoBehaviour
         }
     }
 
-    private int getLevel(int xp)
+    public static int getLevel(int xp)
     {
-        return Mathf.Min((Mathf.RoundToInt(xp / 100.0F)) + 1, 126); //TODO xp table
+        List<int> levelList = Database.skillLevels;
+        for (int i = 0; i < levelList.Count; i++)
+        {
+            if (xp < levelList[i])
+            {
+                return i;
+            }
+        }
+        return 99;
     }
 
     public void OnSkillSelected(string skillName)

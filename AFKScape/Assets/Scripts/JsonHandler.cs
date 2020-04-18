@@ -43,6 +43,13 @@ public static class JsonHandler
         return trainingMethods;
     }
 
+    public static List<int> getSkillLevels()
+    {
+        TextAsset skillLevelsJsonFile = Resources.Load<TextAsset>("JSON/Levels");
+        SkillLevelList levels = JsonUtility.FromJson<SkillLevelList>(skillLevelsJsonFile.text);
+        return levels.levels;
+    }
+
     public static void SaveJsonFile(List<TrainingMethod> tMethodList, string selectedSkillName)
     {
         TrainingMethodList trainingMethodList = new TrainingMethodList
