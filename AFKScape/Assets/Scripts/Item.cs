@@ -18,6 +18,8 @@ public class Item
     public bool noted;
     public bool noteable;
 
+    public bool duplicate;
+
     public long linkedIdItem;
     public long linkedIdNoted;
 

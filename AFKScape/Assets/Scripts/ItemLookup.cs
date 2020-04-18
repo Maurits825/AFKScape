@@ -4,15 +4,31 @@ using UnityEngine;
 
 public class ItemLookup : MonoBehaviour
 {
-    public static long GetItemId(string itemName)
+    public static List<(long, string, string)> GetItemId(string itemName)
     {
+        List<(long, string, string)> itemList = new List<(long, string, string)>();
         foreach (KeyValuePair<long, Item> item in Database.items)
         {
-            if (string.Equals(item.Value.name, itemName, System.StringComparison.OrdinalIgnoreCase))
+            if (item.Value.name.Contains(itemName))
             {
-                return item.Key;
+                string extraInfo = "";
+                if (item.Value.noted)
+                {
+                    extraInfo += " Noted";
+                }
+                if (item.Value.duplicate)
+                {
+                    extraInfo += " Duplicate";
+                }
+                if (item.Value.placeholder)
+                {
+                    extraInfo += " Placeholder";
+                }
+
+                itemList.Add((item.Key, item.Value.name, extraInfo));
             }
         }
-        return -1;
+
+        return itemList;
     }
 }
