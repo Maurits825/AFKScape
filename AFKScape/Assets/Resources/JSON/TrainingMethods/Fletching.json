@@ -1,1 +1,1 @@
-{}
+{"trainingMethodList":[{"name":"Opal-tipped bronze bolts","xpPerResource":16.0,"baseResourceRate":3000.0,"consumables":[],"dropTables":[{"name":"General","tableType":0,"numRolls":1,"lootItems":[{"id":879,"amountMin":10,"amountMax":10,"chance":1,"baseChance":1}]}],"requirements":{"levelRequirements":[{"skillName":"Fletching","levelReq":11}],"quest":[],"items":[]}}]}

@@ -1,1 +1,1 @@
-{}
+{"trainingMethodList":[{"name":"Attack potion","xpPerResource":25.0,"baseResourceRate":2500.0,"consumables":[],"dropTables":[{"name":"General","tableType":0,"numRolls":1,"lootItems":[{"id":121,"amountMin":1,"amountMax":1,"chance":1,"baseChance":1}]}],"requirements":{"levelRequirements":[{"skillName":"Herblore","levelReq":3}],"quest":[],"items":[]}}]}

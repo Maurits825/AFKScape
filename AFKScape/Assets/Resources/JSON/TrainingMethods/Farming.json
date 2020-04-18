@@ -1,1 +1,1 @@
-{}
+{"trainingMethodList":[{"name":"Acorn Tree","xpPerResource":481.29998779296877,"baseResourceRate":0.2800000011920929,"consumables":[],"dropTables":[{"name":"Pet","tableType":2,"numRolls":1,"lootItems":[{"id":20661,"amountMin":1,"amountMax":1,"chance":1,"baseChance":22483}]}],"requirements":{"levelRequirements":[{"skillName":"Farming","levelReq":15}],"quest":[],"items":[]}}]}

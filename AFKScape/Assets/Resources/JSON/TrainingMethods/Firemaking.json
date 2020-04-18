@@ -1,1 +1,1 @@
-{}
+{"trainingMethodList":[{"name":"Logs","xpPerResource":40.0,"baseResourceRate":1485.0,"consumables":[],"dropTables":[],"requirements":{"levelRequirements":[{"skillName":"Firemaking","levelReq":1}],"quest":[],"items":[]}}]}

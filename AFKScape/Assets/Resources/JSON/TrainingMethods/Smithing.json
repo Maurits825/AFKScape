@@ -1,1 +1,1 @@
-{}
+{"trainingMethodList":[{"name":"Bronze bar","xpPerResource":6.199999809265137,"baseResourceRate":1680.0,"consumables":[],"dropTables":[{"name":"General","tableType":0,"numRolls":1,"lootItems":[{"id":2349,"amountMin":1,"amountMax":1,"chance":1,"baseChance":1}]}],"requirements":{"levelRequirements":[{"skillName":"Smithing","levelReq":1}],"quest":[],"items":[]}}]}
