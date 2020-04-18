@@ -8994,13 +8994,80 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trainingMethods:
-  - name: 
-    xpPerResource: 0
-    baseResourceRate: 0
+  - name: Shrimp
+    xpPerResource: 10
+    baseResourceRate: 100
     consumables: []
-    dropTables: []
+    dropTables:
+    - name: General
+      tableType: 0
+      numRolls: 1
+      lootItems:
+      - id: 317
+        amountMin: 1
+        amountMax: 1
+        chance: 1
+        baseChance: 1
+    - name: Pet
+      tableType: 2
+      numRolls: 1
+      lootItems:
+      - id: 13320
+        amountMin: 1
+        amountMax: 1
+        chance: 1
+        baseChance: 435165
+    - name: Clue
+      tableType: 1
+      numRolls: 1
+      lootItems:
+      - id: 0
+        amountMin: 1
+        amountMax: 1
+        chance: 1
+        baseChance: 870330
     requirements:
-      levelRequirements: []
+      levelRequirements:
+      - skillName: Fishing
+        levelReq: 1
+      quest: []
+      items: []
+  - name: Shark
+    xpPerResource: 110
+    baseResourceRate: 200
+    consumables: []
+    dropTables:
+    - name: General
+      tableType: 0
+      numRolls: 1
+      lootItems:
+      - id: 383
+        amountMin: 1
+        amountMax: 1
+        chance: 1
+        baseChance: 1
+    - name: Pet
+      tableType: 2
+      numRolls: 1
+      lootItems:
+      - id: 13320
+        amountMin: 1
+        amountMax: 1
+        chance: 1
+        baseChance: 82243
+    - name: Clue
+      tableType: 1
+      numRolls: 1
+      lootItems:
+      - id: 0
+        amountMin: 1
+        amountMax: 1
+        chance: 1
+        baseChance: 82243
+    requirements:
+      levelRequirements:
+      - skillName: Fishing
+        levelReq: 76
       quest: []
       items: []
 --- !u!4 &1537179034
