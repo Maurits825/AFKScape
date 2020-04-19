@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 
 [CustomEditor(typeof(MainController))]
-public class InventoryEditor : Editor
+public class MainControllerEditor : Editor
 {
     long id;
     int amount;
