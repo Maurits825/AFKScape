@@ -9,6 +9,10 @@ public class MainControllerEditor : Editor
     long id;
     int amount;
 
+    string skillName;
+    int selectedSkillInd;
+    int experience;
+
     float timeConstantGain;
 
     public override void OnInspectorGUI()
@@ -44,6 +48,24 @@ public class MainControllerEditor : Editor
         if (GUILayout.Button("Remove all"))
         {
             MainController.inventory.RemoveAll();
+        }
+
+        EditorGUILayout.Space(10);
+
+        EditorGUILayout.LabelField("Experience", EditorStyles.boldLabel);
+        selectedSkillInd = EditorGUILayout.Popup("Select Skill:", selectedSkillInd, Database.skillNames);
+        skillName = Database.skillNames[selectedSkillInd];
+        experience = EditorGUILayout.IntField("Experience:", experience);
+
+        if (GUILayout.Button("Add xp"))
+        {
+            Skill skill = mainController.skillsClasses[skillName];
+            skill.xpFloat += experience;
+
+            //sim events
+            EventManager.Instance.SkillClicked(skillName);
+            EventManager.Instance.XpGained(skill.xp);
+            //TODO doesnt auto update lvl and total lvl
         }
     }
 }

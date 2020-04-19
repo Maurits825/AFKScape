@@ -6,7 +6,7 @@ using System.Linq;
 
 public class MainController : MonoBehaviour
 {
-    private Dictionary<string, Skill> skillsClasses = new Dictionary<string, Skill>();
+    public Dictionary<string, Skill> skillsClasses = new Dictionary<string, Skill>();
     private Skill selectedSkill;
     private int selectedTrainingMethodInd = 0;
     private bool isTrainingMethodSelected = false;
@@ -18,7 +18,7 @@ public class MainController : MonoBehaviour
     //TODO init problems when uting
     public float timeConstant = (1.0F / (60.0F * 60.0F)) * 10;
     private float actionCount;
-    private static int maxLvL = 126; //TODO move somewhere
+    private static int maxLvl = 126; //TODO move somewhere
 
     // Start is called before the first frame update
     void Start()
@@ -68,7 +68,7 @@ public class MainController : MonoBehaviour
                 return i;
             }
         }
-        return maxLvL;
+        return maxLvl;
     }
 
     public void OnSkillSelected(string skillName)
