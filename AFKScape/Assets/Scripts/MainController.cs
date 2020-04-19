@@ -8,7 +8,7 @@ public class MainController : MonoBehaviour
 {
     public Dictionary<string, Skill> skillsClasses = new Dictionary<string, Skill>();
     private Skill selectedSkill;
-    private int selectedTrainingMethodInd = 0;
+    public int selectedTrainingMethodInd = 0;
     private bool isTrainingMethodSelected = false;
 
     private readonly int inventorySlots = 28;
@@ -71,6 +71,11 @@ public class MainController : MonoBehaviour
         return maxLvl;
     }
 
+    public bool LvlRequirement(int i)
+    {
+        return selectedSkill.currentLevel >= selectedSkill.trainingMethods[selectedTrainingMethodInd].requirements.levelRequirements[0].levelReq;
+    }
+
     public void OnSkillSelected(string skillName)
     {
         isTrainingMethodSelected = false;
@@ -83,7 +88,12 @@ public class MainController : MonoBehaviour
     {
         //TODO check reqs
         selectedTrainingMethodInd = i;
-        isTrainingMethodSelected = true;
+        if (LvlRequirement(i))
+        {
+            isTrainingMethodSelected = true;
+        } else {
+            isTrainingMethodSelected = false;
+        }
     }
 
     public void InitStatic()

@@ -33,5 +33,11 @@ namespace Tests
             Assert.AreEqual(126, MainController.getLevel(200000000));
         }
 
+        [Test]
+        public void LevelRequirementTest()
+        {
+            
+        }
+
     }
 }
