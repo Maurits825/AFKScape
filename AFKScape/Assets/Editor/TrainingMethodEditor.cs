@@ -27,17 +27,10 @@ public class trainingMethodEditor : Editor
 
         EditorGUILayout.HelpBox("Load a JSON file from a skill", MessageType.Info);
 
-        EditorGUILayout.BeginHorizontal();
         if (GUILayout.Button("Load Skills"))
         {
             Database.LoadSkills();
         }
-
-        if (GUILayout.Button("Load Items"))
-        {
-            Database.LoadItems();
-        }
-        EditorGUILayout.EndHorizontal();
 
         selectedSkillInd = EditorGUILayout.Popup("Select Skill:", selectedSkillInd, Database.skillNames);
         selectedSkillName = Database.skillNames[selectedSkillInd];

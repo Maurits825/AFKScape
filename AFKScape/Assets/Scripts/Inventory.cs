@@ -81,5 +81,21 @@ public class Inventory
         }
 
         return removedItem;
-    } 
+    }
+    
+    public void RemoveAll()
+    {
+        List<long> ids = new List<long>();
+        List<int> amounts = new List<int>();
+        foreach (KeyValuePair<long, ItemSlot> item in items)
+        {
+            ids.Add(item.Key);
+            amounts.Add(item.Value.amount);
+        }
+
+        for (int i = 0; i < ids.Count; i++)
+        {
+            RemoveItem(ids[i], amounts[i]);
+        }
+    }
 }

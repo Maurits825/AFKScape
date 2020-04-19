@@ -25,6 +25,11 @@ public class ItemLookupEditor : Editor
             status = "Database Loaded";
         }
 
+        if (GUILayout.Button("Load Items"))
+        {
+            Database.LoadItems();
+        }
+
         EditorGUILayout.LabelField("Status: " + status, EditorStyles.boldLabel);
 
         itemName = EditorGUILayout.TextField("Name:", itemName);
