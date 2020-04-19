@@ -8,7 +8,7 @@ public class MainController : MonoBehaviour
 {
     public Dictionary<string, Skill> skillsClasses = new Dictionary<string, Skill>();
     private Skill selectedSkill;
-    private int selectedTrainingMethodInd = 0;
+    public int selectedTrainingMethodInd = 0;
     private bool isTrainingMethodSelected = false;
 
     private readonly int inventorySlots = 28;
@@ -30,6 +30,20 @@ public class MainController : MonoBehaviour
         EventManager.Instance.onTrainingMethodClicked += SetTrainingMethod;
 
         InitStatic();
+        initSkillClasses();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (selectedSkill != null && isTrainingMethodSelected)
+        {
+            MainGameLoop(selectedSkill.trainingMethods[selectedTrainingMethodInd], selectedSkill, Time.deltaTime);
+        }
+    }
+
+    public void initSkillClasses()
+    {
         //combat training not included
         skillsClasses.Add("Agility", new Agility());
         skillsClasses.Add("Construction", new Construction());
@@ -50,15 +64,6 @@ public class MainController : MonoBehaviour
         //TODO foreach (skill in skillsClasses) EventManager.levelup ? for ui lvls and total lvl
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (selectedSkill != null && isTrainingMethodSelected)
-        {
-            MainGameLoop(selectedSkill.trainingMethods[selectedTrainingMethodInd], selectedSkill, Time.deltaTime);
-        }
-    }
-
     public static int getLevel(int xp)
     {
         for (int i = 0; i < Database.skillLevels.Count; i++)
@@ -69,6 +74,53 @@ public class MainController : MonoBehaviour
             }
         }
         return maxLvl;
+    }
+
+    public bool LevelRequirement(List<LevelRequirement> Levelrequirement)
+    {
+        for (int i = 0; i < Levelrequirement.Count; i++)
+        {
+            string skillName = Levelrequirement[i].skillName;
+            if (skillsClasses[skillName].boostedLevel < Levelrequirement[i].levelReq)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public bool ItemRequirement(List<long> itemIds)
+    {
+        for (int i = 0; i < itemIds.Count; i++)
+        {
+            if (!inventory.Contains(itemIds[i]))
+            {
+                return false;
+            }
+        }
+        return true;
+    }//TODO add general list check
+
+    public bool QuestRequirement(List<int> questIds)
+    {
+        return true;
+    }
+
+    public bool CheckRequirement(TrainingMethod trainingMethod) //TODO implement quest requirements
+    {
+        if (!LevelRequirement(trainingMethod.requirements.levelRequirements))
+        {
+            return false; //requirement was not met and returns
+        }
+        if (!ItemRequirement(trainingMethod.requirements.itemIDs))
+        {
+            return false;
+        }
+        if (!QuestRequirement(trainingMethod.requirements.questIDs))
+        {
+            return false;
+        }
+        return true;
     }
 
     public void OnSkillSelected(string skillName)
@@ -83,7 +135,12 @@ public class MainController : MonoBehaviour
     {
         //TODO check reqs
         selectedTrainingMethodInd = i;
-        isTrainingMethodSelected = true;
+        if (CheckRequirement(selectedSkill.trainingMethods[selectedTrainingMethodInd]))
+        {
+            isTrainingMethodSelected = true;
+        } else {
+            isTrainingMethodSelected = false;
+        }
     }
 
     public void InitStatic()

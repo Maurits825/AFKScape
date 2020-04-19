@@ -27,6 +27,11 @@ public class Inventory
         totalSlots = slots;
     }
 
+    public bool Contains(long id)
+    {
+        return items.ContainsKey(id);
+    }
+
     public bool AddItem(long id, int amount)
     {
         bool addedItem;
