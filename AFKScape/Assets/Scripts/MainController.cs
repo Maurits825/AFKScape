@@ -12,7 +12,7 @@ public class MainController : MonoBehaviour
     private bool isTrainingMethodSelected = false;
 
     private readonly int inventorySlots = 28;
-    private static Inventory inventory;
+    public static Inventory inventory;
 
     //move these somewhere else?
     //TODO init problems when uting

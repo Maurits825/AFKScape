@@ -66,14 +66,13 @@ public class Inventory
             items[id].amount -= amount;
             removedItem = true;
 
+            EventManager.Instance.ItemChanged(id, items[id].amount, items[id].slotIndex);
 
-
-            if (items[id].amount < 0)
+            if (items[id].amount <= 0)
             {
                 items.Remove(id);
                 nextAvailableSlot--;
                 usedSlots--;
-
             }
         }
         else
@@ -81,12 +80,6 @@ public class Inventory
             removedItem = false;
         }
 
-        if (removedItem)
-        {
-            EventManager.Instance.ItemChanged(id, items[id].amount, items[id].slotIndex);
-        }
-
         return removedItem;
-
-    }
+    } 
 }

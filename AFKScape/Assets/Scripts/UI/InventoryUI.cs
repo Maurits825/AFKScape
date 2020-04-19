@@ -21,7 +21,15 @@ public class InventoryUI : MonoBehaviour
 
     private void UpdateInventoryUI(long id, int amount, int slotIndex)
     {
-        inventoryText[slotIndex].text = string.Concat(Database.items[id].name, "\n", amount.ToString());
+        if (amount <= 0)
+        {
+            inventoryText[slotIndex].text = "";
+        }
+        else
+        {
+            inventoryText[slotIndex].text = string.Concat(Database.items[id].name, "\n", amount.ToString());
+        }
+        
     }
 
     // Start is called before the first frame update
