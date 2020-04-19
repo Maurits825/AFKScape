@@ -38,7 +38,6 @@ namespace Tests
         {
             Mining mining = new Mining();
             Cooking cooking = new Cooking();
-            TrainingMethod trainingMethods = new TrainingMethod();
             MainController mainController = new MainController(); //TODO fix this warning
             mainController.initSkillClasses();
             Assert.AreEqual(false, mainController.CheckRequirement(mining.trainingMethods[0]));

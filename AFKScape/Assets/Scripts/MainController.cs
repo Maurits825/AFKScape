@@ -76,13 +76,12 @@ public class MainController : MonoBehaviour
         return maxLvl;
     }
 
-    public bool LvlRequirement(List<LevelRequirement> Levelrequirement)
+    public bool LevelRequirement(List<LevelRequirement> Levelrequirement)
     {
         for (int i = 0; i < Levelrequirement.Count; i++)
         {
             string skillName = Levelrequirement[i].skillName;
-            Skill currentSkill = skillsClasses[skillName];
-            if (currentSkill.boostedLevel < Levelrequirement[i].levelReq)
+            if (skillsClasses[skillName].boostedLevel < Levelrequirement[i].levelReq)
             {
                 return false;
             }
@@ -100,24 +99,24 @@ public class MainController : MonoBehaviour
             }
         }
         return true;
-    }
+    }//TODO add general list check
 
     public bool QuestRequirement(List<int> questIds)
     {
         return true;
     }
 
-    public bool CheckRequirement(TrainingMethod requirement) //TODO implement quest requirements
+    public bool CheckRequirement(TrainingMethod trainingMethod) //TODO implement quest requirements
     {
-        if (!LvlRequirement(requirement.requirements.levelRequirements))
+        if (!LevelRequirement(trainingMethod.requirements.levelRequirements))
         {
             return false; //requirement was not met and returns
         }
-        if (!ItemRequirement(requirement.requirements.itemIDs))
+        if (!ItemRequirement(trainingMethod.requirements.itemIDs))
         {
             return false;
         }
-        if (!QuestRequirement(requirement.requirements.questIDs))
+        if (!QuestRequirement(trainingMethod.requirements.questIDs))
         {
             return false;
         }
