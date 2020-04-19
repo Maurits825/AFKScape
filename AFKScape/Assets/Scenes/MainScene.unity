@@ -7277,6 +7277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33d4b947cfe36544e979bdbfddc69f72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedTrainingMethodInd: 0
   timeConstant: 0.0027777778
 --- !u!4 &1243866483
 Transform:
@@ -9008,40 +9009,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trainingMethods:
-  - name: Shrimp
-    xpPerResource: 30
-    baseResourceRate: 1166
+  - name: Tin ore
+    xpPerResource: 17.5
+    baseResourceRate: 200
     consumables: []
     dropTables:
-    - name: General
-      tableType: 0
+    - name: Pet
+      tableType: 2
       numRolls: 1
       lootItems:
-      - id: 315
+      - id: 13321
         amountMin: 1
         amountMax: 1
         chance: 1
-        baseChance: 1
-    requirements:
-      levelRequirements:
-      - skillName: Cooking
-        levelReq: 1
-      quest: []
-      items: []
-  - name: Trout
-    xpPerResource: 70
-    baseResourceRate: 1214
-    consumables: []
-    dropTables:
-    - name: General
-      tableType: 0
-      numRolls: 1
-      lootItems:
-      - id: 333
-        amountMin: 1
-        amountMax: 1
-        chance: 1
-        baseChance: 1
+        baseChance: 741600
     - name: Clue
       tableType: 1
       numRolls: 1
@@ -9050,22 +9031,23 @@ MonoBehaviour:
         amountMin: 1
         amountMax: 1
         chance: 1
-        baseChance: 923616
-    - name: Pet
-      tableType: 2
+        baseChance: 741600
+    - name: General
+      tableType: 0
       numRolls: 1
       lootItems:
-      - id: 13320
+      - id: 438
         amountMin: 1
         amountMax: 1
         chance: 1
-        baseChance: 461808
+        baseChance: 1
     requirements:
       levelRequirements:
-      - skillName: Cooking
-        levelReq: 15
-      quest: []
-      items: []
+      - skillName: Mining
+        levelReq: 1
+      questIDs: 
+      itemIDs: f304000000000000
+      generalSkillItems: 
 --- !u!4 &1537179034
 Transform:
   m_ObjectHideFlags: 0

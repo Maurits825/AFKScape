@@ -34,9 +34,18 @@ namespace Tests
         }
 
         [Test]
-        public void LevelRequirementTest()
+        public void RequirementTest()
         {
-            
+            Mining mining = new Mining();
+            Cooking cooking = new Cooking();
+            TrainingMethod trainingMethods = new TrainingMethod();
+            MainController mainController = new MainController(); //TODO fix this warning
+            mainController.initSkillClasses();
+            Assert.AreEqual(false, mainController.CheckRequirement(mining.trainingMethods[0]));
+            MainController.inventory.AddItem(1267,1);
+            Assert.AreEqual(true,mainController.CheckRequirement(mining.trainingMethods[0]));
+            Assert.AreEqual(true, mainController.CheckRequirement(cooking.trainingMethods[0]));
+            Assert.AreEqual(false, mainController.CheckRequirement(cooking.trainingMethods[1]));
         }
 
     }
