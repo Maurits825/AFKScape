@@ -9,33 +9,21 @@ public class DropTableManager
     {
         List<(long, int)> retItemList = new List<(long, int)>();
 
-        long itemId;
-        int amount;
-
-        for (int i = 0; i < trainingMethod.dropTables.Count; i++)
+        List<DropTable> dropTables = trainingMethod.dropTables; //TODO is this better or slower?
+        for (int i = 0; i < dropTables.Count; i++)
         {
-            switch (trainingMethod.dropTables[i].tableType)
+            switch (dropTables[i].tableType)
             {
                 case DropTable.DropTableType.General:
-                    List<(long, int)> itemList = trainingMethod.dropTables[i].RollTable();
-
-                    if (itemList.Count > 0)
-                    {
-                        foreach ((long, int) item in itemList)
-                        {
-                            retItemList.Add((item.Item1, item.Item2));
-                        }
-                    }
+                    dropTables[i].RollTable(retItemList);
                     break;
 
                 case DropTable.DropTableType.Clue:
-                    (itemId, amount) = trainingMethod.dropTables[i].RollTable(boostedLvl);
-                    retItemList.Add((itemId, amount));
+                    dropTables[i].RollTable(retItemList, boostedLvl);
                     break;
 
                 case DropTable.DropTableType.Pet:
-                    (itemId, amount) = trainingMethod.dropTables[i].RollTable(boostedLvl);
-                    retItemList.Add((itemId, amount));
+                    dropTables[i].RollTable(retItemList, boostedLvl);
                     break;
 
                 default:

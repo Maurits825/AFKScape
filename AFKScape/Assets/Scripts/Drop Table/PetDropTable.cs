@@ -19,21 +19,15 @@ public class PetDropTable : DropTable
     }
 
 
-    public override (long, int) RollTable(int skillLevel)
+    public override void RollTable(List<(long, int)> itemList, int skillLevel)
     {
-        long itemId = -1;
-        int amount = 0;
-
-        if (isPet(lootItems[0].chance, lootItems[0].baseChance, skillLevel))
+        if (IsPet(lootItems[0].chance, lootItems[0].baseChance, skillLevel))
         {
-            itemId = lootItems[0].id;
-            amount = 1;
+            itemList.Add((lootItems[0].id, 1));
         }
-
-        return (itemId, amount);
     }
 
-    private bool isPet(int chance, int baseChance, int skillLevel)
+    private bool IsPet(int chance, int baseChance, int skillLevel)
     {
         int accuracyGain = 100;
         int actualChance = chance * accuracyGain;

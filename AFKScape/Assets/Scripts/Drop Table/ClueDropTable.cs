@@ -5,7 +5,8 @@ using UnityEngine;
 [Serializable]
 public class ClueDropTable : DropTable
 {
-    private static Dictionary<int, int[]> clueChances = new Dictionary<int, int[]>();
+    private static List<(int, int[])> clueChances = new List<(int, int[])>();
+    private static int clueCount;
 
     public ClueDropTable() : base("Clue")
     {
@@ -21,26 +22,21 @@ public class ClueDropTable : DropTable
 
     static ClueDropTable()
     {
-        clueChances.Add(2677, new int[] { 4, 10 });
-        clueChances.Add(2801, new int[] { 3, 10 });
-        clueChances.Add(2722, new int[] { 2, 10 });
-        clueChances.Add(12073, new int[] { 1, 10 });
+        clueChances.Add((2677, new int[] { 4, 10 }));
+        clueChances.Add((2801, new int[] { 3, 10 }));
+        clueChances.Add((2722, new int[] { 2, 10 }));
+        clueChances.Add((12073, new int[] { 1, 10 }));
+        clueCount = clueChances.Count;
     }
 
-    public override (long, int) RollTable(int skillLevel)
+    public override void RollTable(List<(long, int)> itemList, int skillLevel)
     {
-        long itemId = -1;
-        int amount = 0;
-
         long clueId = GetClue(lootItems[0].chance, lootItems[0].baseChance, skillLevel);
 
         if (clueId != -1)
         {
-            itemId = clueId;
-            amount = 1;
+            itemList.Add((clueId, 1));
         }
-
-        return (itemId, amount);
     }
 
     private long GetClue(int chance, int baseChance, int skillLevel)
@@ -53,11 +49,11 @@ public class ClueDropTable : DropTable
 
         if (IsLootDropped(actualChance, actualBaseChance))
         {
-            foreach (KeyValuePair<int, int[]> clue in clueChances)
+            for (int i = 0; i < clueCount; i++)
             {
-                if (IsLootDropped(clue.Value[0], clue.Value[1]))
+                if (IsLootDropped(clueChances[i].Item2[0], clueChances[i].Item2[1]))
                 {
-                    return clue.Key;
+                    return clueChances[i].Item1;
                 }
             }
         }

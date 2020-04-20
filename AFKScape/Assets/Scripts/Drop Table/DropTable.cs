@@ -47,14 +47,12 @@ public class DropTable
         lootItems = new List<Loot>() { new Loot(0) };
     }
 
-    public virtual List<(long, int)> RollTable()
+    public virtual void RollTable(List<(long, int)> items)
     {
-        return new List<(long, int)>() { (0, 0) };
     }
 
-    public virtual (long, int) RollTable(int skillLevel) //is this the way to do it?
+    public virtual void RollTable(List<(long, int)> items, int skillLevel) //is this the way to do it?
     {
-        return (0, 0);
     }
 
     public int GetAmount(int amountMin, int amountMax)

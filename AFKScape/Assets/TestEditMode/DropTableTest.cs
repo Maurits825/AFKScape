@@ -16,8 +16,8 @@ namespace Tests
             DropTable.Loot loot = new DropTable.Loot(itemId);
             generalDropTable.lootItems[0] = loot;
 
-            List<(long, int)> items;
-            items = generalDropTable.RollTable();
+            List<(long, int)> items = new List<(long, int)>();
+            generalDropTable.RollTable(items);
 
             Assert.AreEqual(itemId, items[0].Item1);
         }
@@ -36,8 +36,8 @@ namespace Tests
             int fishLevel = 1;
 
             int iterations = 1000;
-            long itemId;
 
+            //TODO look at this ut
             Dictionary<long, int> cluesInv = new Dictionary<long, int>() {
                 { 2677, 0 },
                 { 2801, 0 },
@@ -45,13 +45,10 @@ namespace Tests
                 { 12073, 0 },
                 { 23182, 0 }};
 
+            List<(long, int)> items = new List<(long, int)>();
             for (int i = 0; i < iterations; i++)
             {
-                (itemId, _) = clueDropTable.RollTable(fishLevel);
-                if (itemId != -1)
-                {
-                    cluesInv[itemId]++;
-                }
+                clueDropTable.RollTable(items, fishLevel);
             }
 
             Assert.IsTrue(true);
@@ -72,11 +69,11 @@ namespace Tests
 
             int iterations = 10;
             int petNum = 0;
-            long petId;
+            List<(long, int)> items = new List<(long, int)>();
             for (int i = 0; i < iterations; i++)
             {
-                (petId, _) = petDropTable.RollTable(fishLvl);
-                if (petId != -1)
+                petDropTable.RollTable(items, fishLvl);
+                if (items[i].Item1 != -1)
                 {
                     petNum++;
                 }
