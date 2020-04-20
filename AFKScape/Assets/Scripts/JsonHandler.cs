@@ -17,6 +17,8 @@ public static class JsonHandler
             foreach (TrainingMethod trainingMethod in trainingMethodList.trainingMethodList)
             {
                 trainingMethods.Add(trainingMethod);
+                //inplace sort method. fast and not expensiv
+                trainingMethods.Sort((x, y) => x.requirements.levelRequirements[0].levelReq.CompareTo(y.requirements.levelRequirements[0].levelReq)); //TODO change how level requirements is accessed
 
                 for (int i = 0; i < trainingMethod.dropTables.Count; i++)
                 {

@@ -9009,44 +9009,89 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trainingMethods:
-  - name: Tin ore
-    xpPerResource: 17.5
-    baseResourceRate: 200
+  - name: Shrimp
+    xpPerResource: 30
+    baseResourceRate: 1166
     consumables: []
     dropTables:
-    - name: Pet
-      tableType: 2
-      numRolls: 1
-      lootItems:
-      - id: 13321
-        amountMin: 1
-        amountMax: 1
-        chance: 1
-        baseChance: 741600
-    - name: Clue
-      tableType: 1
-      numRolls: 1
-      lootItems:
-      - id: 0
-        amountMin: 1
-        amountMax: 1
-        chance: 1
-        baseChance: 741600
     - name: General
       tableType: 0
       numRolls: 1
       lootItems:
-      - id: 438
+      - id: 315
         amountMin: 1
         amountMax: 1
         chance: 1
         baseChance: 1
     requirements:
       levelRequirements:
-      - skillName: Mining
+      - skillName: Cooking
         levelReq: 1
       questIDs: 
-      itemIDs: f304000000000000
+      itemIDs: 
+      generalSkillItems: 
+  - name: Trout
+    xpPerResource: 70
+    baseResourceRate: 1214
+    consumables: []
+    dropTables:
+    - name: General
+      tableType: 0
+      numRolls: 1
+      lootItems:
+      - id: 333
+        amountMin: 1
+        amountMax: 1
+        chance: 1
+        baseChance: 1
+    requirements:
+      levelRequirements:
+      - skillName: Cooking
+        levelReq: 15
+      questIDs: 
+      itemIDs: 
+      generalSkillItems: 
+  - name: Karambwan
+    xpPerResource: 190
+    baseResourceRate: 4200
+    consumables: []
+    dropTables:
+    - name: General
+      tableType: 0
+      numRolls: 1
+      lootItems:
+      - id: 3144
+        amountMin: 1
+        amountMax: 1
+        chance: 1
+        baseChance: 1
+    requirements:
+      levelRequirements:
+      - skillName: Cooking
+        levelReq: 30
+      questIDs: 
+      itemIDs: 
+      generalSkillItems: 
+  - name: Salmon
+    xpPerResource: 90
+    baseResourceRate: 666
+    consumables: []
+    dropTables:
+    - name: General
+      tableType: 0
+      numRolls: 1
+      lootItems:
+      - id: 329
+        amountMin: 1
+        amountMax: 1
+        chance: 1
+        baseChance: 1
+    requirements:
+      levelRequirements:
+      - skillName: Cooking
+        levelReq: 25
+      questIDs: 
+      itemIDs: 
       generalSkillItems: 
 --- !u!4 &1537179034
 Transform:
