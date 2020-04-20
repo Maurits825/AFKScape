@@ -23,7 +23,7 @@ public class MainController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //TODO order of these?
+        //TODO order of these? well skills now depends on database
         Database.LoadAll();
 
         EventManager.Instance.onSkillClicked += OnSkillSelected;
@@ -61,9 +61,9 @@ public class MainController : MonoBehaviour
 
     public static int getLevel(int xp)
     {
-        for (int i = 0; i < Database.skillLevels.Count; i++)
+        for (int i = 0; i < Database.experienceTable.Count; i++)
         {
-            if (xp < Database.skillLevels[i])
+            if (xp < Database.experienceTable[i])
             {
                 return i;
             }
@@ -111,13 +111,16 @@ public class MainController : MonoBehaviour
             // raise xp event? --> eventManager.xpgained
             //if (getlevel(xp) != skill.lvl) --> eventManager.levelup
 
-            RollResources(trainingMethod, skill);
+            List<(long, int)> items = DropTableManager.RollResources(trainingMethod, skill.boostedLevel);
+            AddItemsToInventory(items);
+
             //TODO remove consumables
 
-            int newLvl = getLevel(skill.xp);
-
-            if (newLvl != skill.currentLevel)
+            
+            if (skill.xp >= skill.xpNextLvl)
             {
+                int newLvl = getLevel(skill.xp);
+                skill.xpNextLvl = Database.experienceTable[newLvl];
                 float deltaTimePerAction = currentDeltaTime / actionIncrement;
                 float timePassed = actionDone * deltaTimePerAction;
                 float newDeltaTime = currentDeltaTime - timePassed;
@@ -140,44 +143,11 @@ public class MainController : MonoBehaviour
         }
     }
 
-    //TODO move this to drop table manager, this is droptable repsonsiblity to handle this
-    //TODO have one entry point on DropTableManager: List<(long, int)> = trainingMethod.dropTableManager.roll()
-    private void RollResources(TrainingMethod trainingMethod, Skill skill)
+    private void AddItemsToInventory(List<(long, int)> items)
     {
-        List<(long, int)> itemList;
-
-        foreach (GeneralDropTable generalTable in trainingMethod.dropTables.OfType<GeneralDropTable>())
+        for (int i = 0; i < items.Count; i++)
         {
-            itemList = generalTable.RollTable();
-            if (itemList.Count > 0)
-            {
-                foreach ((long, int) item in itemList)
-                {
-                    inventory.AddItem(item.Item1, item.Item2);
-                }
-            }
-        }
-
-        long itemId = -1;
-        int amount = 0;
-        foreach (ClueDropTable clueDropTable in trainingMethod.dropTables.OfType<ClueDropTable>())
-        {
-            (itemId, amount) = clueDropTable.RollTable(skill.boostedLevel);
-        }
-
-        if (itemId != -1)
-        {
-            inventory.AddItem(itemId, amount);
-        }
-
-        foreach (PetDropTable petDropTable in trainingMethod.dropTables.OfType<PetDropTable>())
-        {
-            (itemId, amount) = petDropTable.RollTable(skill.boostedLevel);
-        }
-
-        if (itemId != -1)
-        {
-            inventory.AddItem(itemId, amount);
+            inventory.AddItem(items[i].Item1, items[i].Item2);
         }
     }
 

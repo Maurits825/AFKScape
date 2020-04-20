@@ -25,7 +25,7 @@ namespace Tests
         [Test]
         public void LevelsTest()
         {
-            Database.LoadLevels();
+            Database.LoadExperienceTable();
             Assert.AreEqual(64, MainController.getLevel(407015));
             Assert.AreEqual(99, MainController.getLevel(13034431));
             Assert.AreEqual(125, MainController.getLevel(171077457));
