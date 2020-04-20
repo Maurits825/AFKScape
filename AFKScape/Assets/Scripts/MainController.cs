@@ -8,7 +8,7 @@ public class MainController : MonoBehaviour
 {
     public Dictionary<string, Skill> skillsClasses = new Dictionary<string, Skill>();
     private Skill selectedSkill;
-    private int selectedTrainingMethodInd = 0;
+    public int selectedTrainingMethodInd = 0;
     private bool isTrainingMethodSelected = false;
 
     private readonly int inventorySlots = 28;
@@ -33,9 +33,7 @@ public class MainController : MonoBehaviour
         EventManager.Instance.onTrainingMethodClicked += SetTrainingMethod;
 
         InitStatic();
-        InitSkillsDict();
-
-        //TODO foreach (skill in skillsClasses) EventManager.levelup ? for ui lvls and total lvl
+        initSkillClasses();
     }
 
     // Update is called once per frame
@@ -45,6 +43,28 @@ public class MainController : MonoBehaviour
         {
             MainGameLoop(selectedSkill.trainingMethods[selectedTrainingMethodInd], selectedSkill, Time.deltaTime);
         }
+    }
+
+    public void initSkillClasses()
+    {
+        //combat training not included
+        skillsClasses.Add("Agility", new Agility());
+        skillsClasses.Add("Construction", new Construction());
+        skillsClasses.Add("Cooking", new Cooking());
+        skillsClasses.Add("Crafting", new Crafting());
+        skillsClasses.Add("Farming", new Farming());
+        skillsClasses.Add("Firemaking", new Firemaking());
+        skillsClasses.Add("Fishing", new Fishing()); //these will need to be singleton classes, will basic skills need a special class?
+        skillsClasses.Add("Fletching", new Fletching());
+        skillsClasses.Add("Herblore", new Herblore());
+        skillsClasses.Add("Hunter", new Hunter());
+        skillsClasses.Add("Mining", new Mining());
+        skillsClasses.Add("Prayer", new Prayer());
+        skillsClasses.Add("Runecraft", new Runecraft());
+        skillsClasses.Add("Smithing", new Smithing());
+        skillsClasses.Add("Thieving", new Thieving());
+        skillsClasses.Add("Woodcutting", new Woodcutting()); //some skills can have all the functionality included in skill class
+        //TODO foreach (skill in skillsClasses) EventManager.levelup ? for ui lvls and total lvl
     }
 
     public static int getLevel(int xp)
@@ -57,6 +77,53 @@ public class MainController : MonoBehaviour
             }
         }
         return maxLvl;
+    }
+
+    public bool LevelRequirement(List<LevelRequirement> Levelrequirement)
+    {
+        for (int i = 0; i < Levelrequirement.Count; i++)
+        {
+            string skillName = Levelrequirement[i].skillName;
+            if (skillsClasses[skillName].boostedLevel < Levelrequirement[i].levelReq)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public bool ItemRequirement(List<long> itemIds)
+    {
+        for (int i = 0; i < itemIds.Count; i++)
+        {
+            if (!inventory.Contains(itemIds[i]))
+            {
+                return false;
+            }
+        }
+        return true;
+    }//TODO add general list check
+
+    public bool QuestRequirement(List<int> questIds)
+    {
+        return true;
+    }
+
+    public bool CheckRequirement(TrainingMethod trainingMethod) //TODO implement quest requirements
+    {
+        if (!LevelRequirement(trainingMethod.requirements.levelRequirements))
+        {
+            return false; //requirement was not met and returns
+        }
+        if (!ItemRequirement(trainingMethod.requirements.itemIDs))
+        {
+            return false;
+        }
+        if (!QuestRequirement(trainingMethod.requirements.questIDs))
+        {
+            return false;
+        }
+        return true;
     }
 
     public void OnSkillSelected(string skillName)
@@ -72,9 +139,14 @@ public class MainController : MonoBehaviour
     {
         //TODO check reqs
         selectedTrainingMethodInd = i;
-        isTrainingMethodSelected = true;
 
-        dropTableDict = DropTableManager.CreateDropTableDictionary(selectedSkill.trainingMethods[selectedTrainingMethodInd].dropTables);
+        if (CheckRequirement(selectedSkill.trainingMethods[selectedTrainingMethodInd]))
+        {
+            isTrainingMethodSelected = true;
+			dropTableDict = DropTableManager.CreateDropTableDictionary(selectedSkill.trainingMethods[selectedTrainingMethodInd].dropTables);
+        } else {
+            isTrainingMethodSelected = false;
+        }
     }
 
     public void InitStatic()

@@ -173,11 +173,11 @@ public class trainingMethodEditor : Editor
                         }
                         if (GUILayout.Button("Add Quest Requirement"))
                         {
-                            trainingMethodAdder.trainingMethods[methodIndex].requirements.quest.Add("");
+                            trainingMethodAdder.trainingMethods[methodIndex].requirements.questIDs.Add(0);
                         }
                         if (GUILayout.Button("Add Item Requirement"))
                         {
-                            trainingMethodAdder.trainingMethods[methodIndex].requirements.items.Add("");
+                            trainingMethodAdder.trainingMethods[methodIndex].requirements.itemIDs.Add(0);
                         }
                         EditorGUILayout.EndHorizontal();
                         EditorGUILayout.PropertyField(method.FindPropertyRelative("requirements"));
