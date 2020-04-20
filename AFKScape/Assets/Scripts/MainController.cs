@@ -20,6 +20,8 @@ public class MainController : MonoBehaviour
     private float actionCount;
     private static int maxLvl = 126; //TODO move somewhere
 
+    private List<(long, int)> itemsBuffer = new List<(long, int)>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,6 +50,7 @@ public class MainController : MonoBehaviour
         skillsClasses.Add("Thieving", new Thieving());
         skillsClasses.Add("Woodcutting", new Woodcutting()); //some skills can have all the functionality included in skill class
         //TODO foreach (skill in skillsClasses) EventManager.levelup ? for ui lvls and total lvl
+        MainGameLoop(skillsClasses["Fishing"].trainingMethods[0], skillsClasses["Fishing"], 50000);
     }
 
     // Update is called once per frame
@@ -77,6 +80,7 @@ public class MainController : MonoBehaviour
         selectedSkill = skillsClasses[skillName];
 
         EventManager.Instance.DrawTrainingMethods(selectedSkill.trainingMethods);
+        EventManager.Instance.XpGained(selectedSkill.xp);
     }
 
     public void SetTrainingMethod(int i)
@@ -90,11 +94,14 @@ public class MainController : MonoBehaviour
     {
         inventory = new Inventory(inventorySlots);
     }
+
     public void MainGameLoop(TrainingMethod trainingMethod, Skill skill, float deltaTime)
     {
         float currentDeltaTime = deltaTime;
         float actionIncrement = skill.GetResourceRate(trainingMethod.baseResourceRate) * currentDeltaTime * timeConstant;
         actionCount += actionIncrement;
+
+        itemsBuffer.Clear();
 
         int actionDone = 0;
         while (actionCount >= 1.0F)
@@ -111,9 +118,7 @@ public class MainController : MonoBehaviour
             // raise xp event? --> eventManager.xpgained
             //if (getlevel(xp) != skill.lvl) --> eventManager.levelup
 
-            List<(long, int)> items = DropTableManager.RollResources(trainingMethod, skill.boostedLevel);
-            AddItemsToInventory(items);
-
+            DropTableManager.RollResources(itemsBuffer, trainingMethod, skill.boostedLevel);
             //TODO remove consumables
 
             
@@ -139,8 +144,9 @@ public class MainController : MonoBehaviour
                 int totalLvl = GetTotalLevel();
                 EventManager.Instance.LevelUp(skill.skillName, skill.currentLevel, totalLvl);
             }
-
         }
+
+        AddItemsToInventory(itemsBuffer);//TODO this will add to bank later
     }
 
     private void AddItemsToInventory(List<(long, int)> items)

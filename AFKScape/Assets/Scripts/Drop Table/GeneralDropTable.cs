@@ -20,6 +20,8 @@ public class GeneralDropTable : DropTable
 
     public override void RollTable(List<(long, int)> itemList)
     {
+        //TODO leave this as is for now in terms of perf
+        //TODO this will change when adding the actual dice sim
         for (int r = 0; r < numRolls; r++)
         {
             for (int i = 0; i < lootItems.Count; i++)
@@ -27,7 +29,7 @@ public class GeneralDropTable : DropTable
                 Loot loot = lootItems[i];
                 if (IsLootDropped(loot.chance, loot.baseChance)) //TODO this is wrong
                 {
-                    int amount = GetAmount(loot.amountMin, loot.amountMax);
+                    int amount = GetAmount(loot.amountMin, loot.amountMax); //TODO look at this, min=max=1 no need to call
                     itemList.Add((loot.id, amount));
                 }
             }
