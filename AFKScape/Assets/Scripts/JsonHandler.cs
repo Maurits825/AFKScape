@@ -58,6 +58,7 @@ public static class JsonHandler
 
     public static void SaveJsonFile(List<TrainingMethod> tMethodList, string selectedSkillName)
     {
+        tMethodList.Sort((x, y) => x.requirements.levelRequirements[0].levelReq.CompareTo(y.requirements.levelRequirements[0].levelReq));
         TrainingMethodList trainingMethodList = new TrainingMethodList
         {
             trainingMethodList = tMethodList
