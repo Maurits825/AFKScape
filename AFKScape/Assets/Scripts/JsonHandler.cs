@@ -17,7 +17,6 @@ public static class JsonHandler
             foreach (TrainingMethod trainingMethod in trainingMethodList.trainingMethodList)
             {
                 trainingMethods.Add(trainingMethod);
-                //inplace sort method. fast and not expensiv
 
                 for (int i = 0; i < trainingMethod.dropTables.Count; i++)
                 {
