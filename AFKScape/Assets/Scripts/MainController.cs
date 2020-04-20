@@ -36,11 +36,6 @@ public class MainController : MonoBehaviour
         InitSkillsDict();
 
         //TODO foreach (skill in skillsClasses) EventManager.levelup ? for ui lvls and total lvl
-
-        //TODO REMOVE!!
-        OnSkillSelected("Fishing");
-        SetTrainingMethod(0);
-        MainGameLoop(skillsClasses["Fishing"].trainingMethods[0], skillsClasses["Fishing"], 20000);
     }
 
     // Update is called once per frame
