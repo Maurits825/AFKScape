@@ -47,11 +47,11 @@ public class DropTable
         lootItems = new List<Loot>() { new Loot(0) };
     }
 
-    public virtual void RollTable(List<(long, int)> items)
+    public virtual void RollTable(Dictionary<long, int> dropTableDict)
     {
     }
 
-    public virtual void RollTable(List<(long, int)> items, int skillLevel) //is this the way to do it?
+    public virtual void RollTable(Dictionary<long, int> dropTableDict, int skillLevel) //is this the way to do it?
     {
     }
 

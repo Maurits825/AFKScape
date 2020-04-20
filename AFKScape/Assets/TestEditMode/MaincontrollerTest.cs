@@ -18,6 +18,9 @@ namespace Tests
             EventManager.setIntance(new EventManager()); //TODO fix warning
             MainController mainController = new MainController(); //TODO fix this warning
             mainController.InitStatic();
+            mainController.InitSkillsDict();
+            mainController.OnSkillSelected("Fishing");
+            mainController.SetTrainingMethod(0);
             mainController.MainGameLoop(fishing.trainingMethods[0], fishing, 86400);
 
             Assert.AreEqual(true, true);

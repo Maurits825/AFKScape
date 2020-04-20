@@ -19,11 +19,11 @@ public class PetDropTable : DropTable
     }
 
 
-    public override void RollTable(List<(long, int)> itemList, int skillLevel)
+    public override void RollTable(Dictionary<long, int> dropTableDict, int skillLevel)
     {
         if (IsPet(lootItems[0].chance, lootItems[0].baseChance, skillLevel))
         {
-            itemList.Add((lootItems[0].id, 1));
+            dropTableDict[lootItems[0].id] += 1;
         }
     }
 

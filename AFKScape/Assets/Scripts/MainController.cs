@@ -20,7 +20,8 @@ public class MainController : MonoBehaviour
     private float actionCount;
     private static int maxLvl = 126; //TODO move somewhere
 
-    private List<(long, int)> itemsBuffer = new List<(long, int)>();
+    private Dictionary<long, int> dropTableDict = new Dictionary<long, int>();
+
 
     // Start is called before the first frame update
     void Start()
@@ -32,25 +33,14 @@ public class MainController : MonoBehaviour
         EventManager.Instance.onTrainingMethodClicked += SetTrainingMethod;
 
         InitStatic();
-        //combat training not included
-        skillsClasses.Add("Agility", new Agility());
-        skillsClasses.Add("Construction", new Construction());
-        skillsClasses.Add("Cooking", new Cooking());
-        skillsClasses.Add("Crafting", new Crafting());
-        skillsClasses.Add("Farming", new Farming());
-        skillsClasses.Add("Firemaking", new Firemaking());
-        skillsClasses.Add("Fishing", new Fishing()); //these will need to be singleton classes, will basic skills need a special class?
-        skillsClasses.Add("Fletching", new Fletching());
-        skillsClasses.Add("Herblore", new Herblore());
-        skillsClasses.Add("Hunter", new Hunter());
-        skillsClasses.Add("Mining", new Mining());
-        skillsClasses.Add("Prayer", new Prayer());
-        skillsClasses.Add("Runecraft", new Runecraft());
-        skillsClasses.Add("Smithing", new Smithing());
-        skillsClasses.Add("Thieving", new Thieving());
-        skillsClasses.Add("Woodcutting", new Woodcutting()); //some skills can have all the functionality included in skill class
+        InitSkillsDict();
+
         //TODO foreach (skill in skillsClasses) EventManager.levelup ? for ui lvls and total lvl
-        MainGameLoop(skillsClasses["Fishing"].trainingMethods[0], skillsClasses["Fishing"], 50000);
+
+        //TODO REMOVE!!
+        OnSkillSelected("Fishing");
+        SetTrainingMethod(0);
+        MainGameLoop(skillsClasses["Fishing"].trainingMethods[0], skillsClasses["Fishing"], 20000);
     }
 
     // Update is called once per frame
@@ -88,6 +78,8 @@ public class MainController : MonoBehaviour
         //TODO check reqs
         selectedTrainingMethodInd = i;
         isTrainingMethodSelected = true;
+
+        dropTableDict = DropTableManager.CreateDropTableDictionary(selectedSkill.trainingMethods[selectedTrainingMethodInd].dropTables);
     }
 
     public void InitStatic()
@@ -95,13 +87,33 @@ public class MainController : MonoBehaviour
         inventory = new Inventory(inventorySlots);
     }
 
+    public void InitSkillsDict()
+    {
+        //combat training not included yet
+        //these will need to be singleton classes
+        skillsClasses.Add("Agility", new Agility());
+        skillsClasses.Add("Construction", new Construction());
+        skillsClasses.Add("Cooking", new Cooking());
+        skillsClasses.Add("Crafting", new Crafting());
+        skillsClasses.Add("Farming", new Farming());
+        skillsClasses.Add("Firemaking", new Firemaking());
+        skillsClasses.Add("Fishing", new Fishing());
+        skillsClasses.Add("Fletching", new Fletching());
+        skillsClasses.Add("Herblore", new Herblore());
+        skillsClasses.Add("Hunter", new Hunter());
+        skillsClasses.Add("Mining", new Mining());
+        skillsClasses.Add("Prayer", new Prayer());
+        skillsClasses.Add("Runecraft", new Runecraft());
+        skillsClasses.Add("Smithing", new Smithing());
+        skillsClasses.Add("Thieving", new Thieving());
+        skillsClasses.Add("Woodcutting", new Woodcutting());
+    }
+
     public void MainGameLoop(TrainingMethod trainingMethod, Skill skill, float deltaTime)
     {
         float currentDeltaTime = deltaTime;
         float actionIncrement = skill.GetResourceRate(trainingMethod.baseResourceRate) * currentDeltaTime * timeConstant;
         actionCount += actionIncrement;
-
-        itemsBuffer.Clear();
 
         int actionDone = 0;
         while (actionCount >= 1.0F)
@@ -118,7 +130,7 @@ public class MainController : MonoBehaviour
             // raise xp event? --> eventManager.xpgained
             //if (getlevel(xp) != skill.lvl) --> eventManager.levelup
 
-            DropTableManager.RollResources(itemsBuffer, trainingMethod, skill.boostedLevel);
+            DropTableManager.RollResources(dropTableDict, trainingMethod, skill.boostedLevel);
             //TODO remove consumables
 
             
@@ -146,14 +158,15 @@ public class MainController : MonoBehaviour
             }
         }
 
-        AddItemsToInventory(itemsBuffer);//TODO this will add to bank later
+        AddItemsToInventory(dropTableDict);//TODO this will add to bank later
     }
 
-    private void AddItemsToInventory(List<(long, int)> items)
+    private void AddItemsToInventory(Dictionary<long, int> items)
     {
-        for (int i = 0; i < items.Count; i++)
+        foreach (long id in items.Keys.ToList())
         {
-            inventory.AddItem(items[i].Item1, items[i].Item2);
+            inventory.AddItem(id, items[id]);
+            items[id] = 0;
         }
     }
 

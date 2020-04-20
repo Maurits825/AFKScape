@@ -8,6 +8,11 @@ namespace Tests
 {
     public class DropTableTest
     {
+        [SetUp]
+        public void Setup()
+        {
+        }
+
         [Test]
         public void TestGeneralDropTable()
         {
@@ -16,10 +21,15 @@ namespace Tests
             DropTable.Loot loot = new DropTable.Loot(itemId);
             generalDropTable.lootItems[0] = loot;
 
-            List<(long, int)> items = new List<(long, int)>();
-            generalDropTable.RollTable(items);
+            List<DropTable> dropTables = new List<DropTable>
+            {
+                generalDropTable
+            };
 
-            Assert.AreEqual(itemId, items[0].Item1);
+            Dictionary<long, int> dropTableDict = DropTableManager.CreateDropTableDictionary(dropTables);
+            generalDropTable.RollTable(dropTableDict);
+
+            Assert.AreEqual(1, dropTableDict[itemId]);
         }
 
         [Test]
@@ -34,21 +44,18 @@ namespace Tests
             clueDropTable.lootItems[0] = loot;
 
             int fishLevel = 1;
-
             int iterations = 1000;
 
-            //TODO look at this ut
-            Dictionary<long, int> cluesInv = new Dictionary<long, int>() {
-                { 2677, 0 },
-                { 2801, 0 },
-                { 2722, 0 },
-                { 12073, 0 },
-                { 23182, 0 }};
+            List<DropTable> dropTables = new List<DropTable>
+            {
+                clueDropTable
+            };
 
-            List<(long, int)> items = new List<(long, int)>();
+            Dictionary<long, int> dropTableDict = DropTableManager.CreateDropTableDictionary(dropTables);
             for (int i = 0; i < iterations; i++)
             {
-                clueDropTable.RollTable(items, fishLevel);
+                //TODO this works because the fishing class has clue table
+                clueDropTable.RollTable(dropTableDict, fishLevel);
             }
 
             Assert.IsTrue(true);
@@ -57,29 +64,30 @@ namespace Tests
         [Test]
         public void TestPetDropTable()
         {
+            long heronId = 13320;
             PetDropTable petDropTable = new PetDropTable();
             DropTable.Loot loot = new DropTable.Loot(0)
             {
                 baseChance = 2501, //with lvl 100 = 1/1 chance
-                id = 13320 // heron
+                id = heronId
             };
             petDropTable.lootItems[0] = loot;
 
             int fishLvl = 100;
-
             int iterations = 10;
-            int petNum = 0;
-            List<(long, int)> items = new List<(long, int)>();
+
+            List<DropTable> dropTables = new List<DropTable>
+            {
+                petDropTable
+            };
+
+            Dictionary<long, int> dropTableDict = DropTableManager.CreateDropTableDictionary(dropTables);
             for (int i = 0; i < iterations; i++)
             {
-                petDropTable.RollTable(items, fishLvl);
-                if (items[i].Item1 != -1)
-                {
-                    petNum++;
-                }
+                petDropTable.RollTable(dropTableDict, fishLvl);
             }
 
-            Assert.AreEqual(iterations, petNum);
+            Assert.AreEqual(iterations, dropTableDict[heronId]);
         }
     }
 }
