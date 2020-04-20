@@ -22,7 +22,6 @@ public class MainController : MonoBehaviour
 
     private Dictionary<long, int> dropTableDict = new Dictionary<long, int>();
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +32,7 @@ public class MainController : MonoBehaviour
         EventManager.Instance.onTrainingMethodClicked += SetTrainingMethod;
 
         InitStatic();
-        initSkillClasses();
+        InitSkillClasses();
     }
 
     // Update is called once per frame
@@ -45,7 +44,7 @@ public class MainController : MonoBehaviour
         }
     }
 
-    public void initSkillClasses()
+    public void InitSkillClasses()
     {
         //combat training not included
         skillsClasses.Add("Agility", new Agility());
@@ -143,7 +142,7 @@ public class MainController : MonoBehaviour
         if (CheckRequirement(selectedSkill.trainingMethods[selectedTrainingMethodInd]))
         {
             isTrainingMethodSelected = true;
-			dropTableDict = DropTableManager.CreateDropTableDictionary(selectedSkill.trainingMethods[selectedTrainingMethodInd].dropTables);
+            dropTableDict = DropTableManager.CreateDropTableDictionary(selectedSkill.trainingMethods[selectedTrainingMethodInd].dropTables);
         } else {
             isTrainingMethodSelected = false;
         }
@@ -152,28 +151,6 @@ public class MainController : MonoBehaviour
     public void InitStatic()
     {
         inventory = new Inventory(inventorySlots);
-    }
-
-    public void InitSkillsDict()
-    {
-        //combat training not included yet
-        //these will need to be singleton classes
-        skillsClasses.Add("Agility", new Agility());
-        skillsClasses.Add("Construction", new Construction());
-        skillsClasses.Add("Cooking", new Cooking());
-        skillsClasses.Add("Crafting", new Crafting());
-        skillsClasses.Add("Farming", new Farming());
-        skillsClasses.Add("Firemaking", new Firemaking());
-        skillsClasses.Add("Fishing", new Fishing());
-        skillsClasses.Add("Fletching", new Fletching());
-        skillsClasses.Add("Herblore", new Herblore());
-        skillsClasses.Add("Hunter", new Hunter());
-        skillsClasses.Add("Mining", new Mining());
-        skillsClasses.Add("Prayer", new Prayer());
-        skillsClasses.Add("Runecraft", new Runecraft());
-        skillsClasses.Add("Smithing", new Smithing());
-        skillsClasses.Add("Thieving", new Thieving());
-        skillsClasses.Add("Woodcutting", new Woodcutting());
     }
 
     public void MainGameLoop(TrainingMethod trainingMethod, Skill skill, float deltaTime)
@@ -203,7 +180,7 @@ public class MainController : MonoBehaviour
             
             if (skill.xp >= skill.xpNextLvl)
             {
-                int newLvl = getLevel(skill.xp);
+                int newLvl = GetLevel(skill.xp);
                 skill.xpNextLvl = Database.experienceTable[newLvl];
                 float deltaTimePerAction = currentDeltaTime / actionIncrement;
                 float timePassed = actionDone * deltaTimePerAction;

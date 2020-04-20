@@ -8,11 +8,6 @@ namespace Tests
 {
     public class DropTableTest
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
         [Test]
         public void TestGeneralDropTable()
         {
@@ -54,7 +49,6 @@ namespace Tests
             Dictionary<long, int> dropTableDict = DropTableManager.CreateDropTableDictionary(dropTables);
             for (int i = 0; i < iterations; i++)
             {
-                //TODO this works because the fishing class has clue table
                 clueDropTable.RollTable(dropTableDict, fishLevel);
             }
 
