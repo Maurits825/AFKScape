@@ -5,7 +5,16 @@ using UnityEngine;
 [Serializable]
 public class ClueDropTable : DropTable
 {
-    private static Dictionary<int, int[]> clueChances = new Dictionary<int, int[]>();
+    public static readonly List<(int, int[])> clueChances = new List<(int, int[])>
+        {
+            (2677, new int[] { 4, 10 }),
+            (2801, new int[] { 3, 10 }),
+            (2722, new int[] { 2, 10 }),
+            (12073, new int[] { 1, 10 })
+        };
+
+    private static readonly int clueCount = 4;
+    public static readonly long beginnerClueId = 23182;
 
     public ClueDropTable() : base("Clue")
     {
@@ -19,28 +28,14 @@ public class ClueDropTable : DropTable
         lootItems = dropTable.lootItems;
     }
 
-    static ClueDropTable()
+    public override void RollTable(Dictionary<long, int> dropTableDict, int skillLevel)
     {
-        clueChances.Add(2677, new int[] { 4, 10 });
-        clueChances.Add(2801, new int[] { 3, 10 });
-        clueChances.Add(2722, new int[] { 2, 10 });
-        clueChances.Add(12073, new int[] { 1, 10 });
-    }
-
-    public override (long, int) RollTable(int skillLevel)
-    {
-        long itemId = -1;
-        int amount = 0;
-
         long clueId = GetClue(lootItems[0].chance, lootItems[0].baseChance, skillLevel);
 
         if (clueId != -1)
         {
-            itemId = clueId;
-            amount = 1;
+            dropTableDict[clueId] += 1;
         }
-
-        return (itemId, amount);
     }
 
     private long GetClue(int chance, int baseChance, int skillLevel)
@@ -53,11 +48,11 @@ public class ClueDropTable : DropTable
 
         if (IsLootDropped(actualChance, actualBaseChance))
         {
-            foreach (KeyValuePair<int, int[]> clue in clueChances)
+            for (int i = 0; i < clueCount; i++)
             {
-                if (IsLootDropped(clue.Value[0], clue.Value[1]))
+                if (IsLootDropped(clueChances[i].Item2[0], clueChances[i].Item2[1]))
                 {
-                    return clue.Key;
+                    return clueChances[i].Item1;
                 }
             }
         }
@@ -65,7 +60,7 @@ public class ClueDropTable : DropTable
         //roll beginner clue seperatly
         if (IsLootDropped(1, 1000))
         {
-            return 23182; //beginner clue id
+            return beginnerClueId; //beginner clue id
         }
 
         return clueId;

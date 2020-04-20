@@ -10,7 +10,7 @@ public static class Database
     public static Dictionary<long, Item> items = new Dictionary<long, Item>();
     public static Dictionary<int, string> quest = new Dictionary<int, string>();
 
-    public static List<int> skillLevels;
+    public static List<int> experienceTable;
 
     [Serializable]
     private struct JsonHelper
@@ -23,7 +23,7 @@ public static class Database
         LoadSkills();
         LoadItems();
         LoadQuests();
-        LoadLevels();
+        LoadExperienceTable();
     }
 
     public static void LoadSkills()
@@ -44,9 +44,9 @@ public static class Database
         }
     }
 
-    public static void LoadLevels()
+    public static void LoadExperienceTable()
     {
-        skillLevels = JsonHandler.getSkillLevels();
+        experienceTable = JsonHandler.getSkillLevels();
     }
 
     public static void LoadQuests()
