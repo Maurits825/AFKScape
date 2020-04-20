@@ -67,7 +67,7 @@ public class MainController : MonoBehaviour
         //TODO foreach (skill in skillsClasses) EventManager.levelup ? for ui lvls and total lvl
     }
 
-    public static int getLevel(int xp)
+    public static int GetLevel(int xp)
     {
         for (int i = 0; i < Database.experienceTable.Count; i++)
         {
