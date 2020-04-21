@@ -14,8 +14,6 @@ public class trainingMethodEditor : Editor
 
     bool JSONLoaded = false;
 
-    string newResource;
-
     void OnEnable()
     {
         trainingMethod = serializedObject.FindProperty("trainingMethods");
@@ -29,11 +27,11 @@ public class trainingMethodEditor : Editor
 
         if (GUILayout.Button("Load Skills"))
         {
-            JsonHandler.LoadSkills();
+            Database.LoadSkills();
         }
 
-        selectedSkillInd = EditorGUILayout.Popup("Select Skill:", selectedSkillInd, JsonHandler.skillNames);
-        selectedSkillName = JsonHandler.skillNames[selectedSkillInd];
+        selectedSkillInd = EditorGUILayout.Popup("Select Skill:", selectedSkillInd, Database.skillNames);
+        selectedSkillName = Database.skillNames[selectedSkillInd];
         if (selectedSkillInd != selectedSkillIndPrev)
         {
             JSONLoaded = false;

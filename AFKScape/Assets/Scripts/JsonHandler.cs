@@ -7,13 +7,6 @@ using UnityEditor;
 public static class JsonHandler
 {
 
-    public static string[] skillNames = new string[23];
-
-    public static Dictionary<long, Item> items = new Dictionary<long, Item>();
-    public static Dictionary<int, string> quest = new Dictionary<int, string>();
-
-    public static List<int> experienceTable;
-
     public static List<TrainingMethod> GetTrainingMethods(string skillName)
     {
         List<TrainingMethod> trainingMethods = new List<TrainingMethod>();
@@ -70,40 +63,17 @@ public static class JsonHandler
         public List<string> data;
     }
 
-    public static void LoadAll()
-    {
-        LoadSkills();
-        LoadItems();
-        LoadQuests();
-        LoadExperienceTable();
-    }
-
-    public static void LoadSkills()
+    public static string[] GetLoadedSkills()
     {
         TextAsset JsonString = Resources.Load<TextAsset>("JSON/Skills");
         JsonHelper jsonHelperSkills = JsonUtility.FromJson<JsonHelper>(JsonString.text);
-        skillNames = jsonHelperSkills.data.ToArray();
+        return jsonHelperSkills.data.ToArray();
     }
 
-    public static void LoadItems()
+    public static ItemList GetLoadedItems()
     {
         TextAsset JsonString = Resources.Load<TextAsset>(string.Concat("JSON/", "Items"));
-        ItemList itemList = JsonUtility.FromJson<ItemList>(JsonString.text);
-
-        foreach (Item item in itemList.itemList)
-        {
-            items.Add(item.id, item);
-        }
-    }
-
-    public static void LoadExperienceTable()
-    {
-        experienceTable = GetSkillLevels();
-    }
-
-    public static void LoadQuests()
-    {
-
+        return JsonUtility.FromJson<ItemList>(JsonString.text);
     }
 
     public static void SaveJsonFile(List<TrainingMethod> tMethodList, string selectedSkillName)

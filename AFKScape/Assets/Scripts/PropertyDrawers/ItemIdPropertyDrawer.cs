@@ -28,7 +28,7 @@ public class ItemIdPropertyDrawer : PropertyDrawer
         string itemName;
         try
         {
-            itemName = JsonHandler.items[property.intValue].name;
+            itemName = Database.items[property.intValue].name;
         }
         catch (KeyNotFoundException)
         {

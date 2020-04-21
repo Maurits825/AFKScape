@@ -12,7 +12,7 @@ namespace Tests
         [Test]
         public void MainGameLoopTest()
         {
-            JsonHandler.LoadExperienceTable();
+            Database.LoadExperienceTable();
             Fishing fishing = new Fishing();
 
             EventManager.setIntance(new EventManager()); //TODO fix warning
@@ -29,7 +29,7 @@ namespace Tests
         [Test]
         public void LevelsTest()
         {
-            JsonHandler.LoadExperienceTable();
+            Database.LoadExperienceTable();
             Assert.AreEqual(63, MainController.GetLevel(407014));
             Assert.AreEqual(64, MainController.GetLevel(407015));
             Assert.AreEqual(64, MainController.GetLevel(407016));

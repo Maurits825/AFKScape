@@ -53,8 +53,8 @@ public class MainControllerEditor : Editor
         EditorGUILayout.Space(10);
 
         EditorGUILayout.LabelField("Experience", EditorStyles.boldLabel);
-        selectedSkillInd = EditorGUILayout.Popup("Select Skill:", selectedSkillInd, JsonHandler.skillNames);
-        skillName = JsonHandler.skillNames[selectedSkillInd];
+        selectedSkillInd = EditorGUILayout.Popup("Select Skill:", selectedSkillInd, Database.skillNames);
+        skillName = Database.skillNames[selectedSkillInd];
         experience = EditorGUILayout.IntField("Experience:", experience);
 
         if (GUILayout.Button("Add xp"))

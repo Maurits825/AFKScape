@@ -16,7 +16,7 @@ public class ItemLookupEditor : Editor
     {
         EditorGUILayout.HelpBox("Search Database for items", MessageType.Info);
         ItemLookup itemLookup = (ItemLookup)target;
-        if (JsonHandler.items.Count == 0)
+        if (Database.items.Count == 0)
         {
             status = "Empty Database";
         }
@@ -27,7 +27,7 @@ public class ItemLookupEditor : Editor
 
         if (GUILayout.Button("Load Items"))
         {
-            JsonHandler.LoadItems();
+            Database.LoadItems();
         }
 
         EditorGUILayout.LabelField("Status: " + status, EditorStyles.boldLabel);

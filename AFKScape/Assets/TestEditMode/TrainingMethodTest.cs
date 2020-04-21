@@ -14,7 +14,7 @@ namespace Tests
         [SetUp]
         public void Setup()
         {
-            JsonHandler.LoadExperienceTable();
+            Database.LoadExperienceTable();
             skillsClasses.Clear();
             skillsClasses.Add("Agility", new Agility());
             skillsClasses.Add("Construction", new Construction());

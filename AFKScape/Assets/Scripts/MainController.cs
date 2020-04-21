@@ -26,7 +26,7 @@ public class MainController : MonoBehaviour
     void Start()
     {
         //TODO order of these? well skills now depends on database
-        JsonHandler.LoadAll();
+        Database.LoadAll();
 
         EventManager.Instance.onSkillClicked += OnSkillSelected;
         EventManager.Instance.onTrainingMethodClicked += SetTrainingMethod;
@@ -68,9 +68,9 @@ public class MainController : MonoBehaviour
 
     public static int GetLevel(int xp)
     {
-        for (int i = 0; i < JsonHandler.experienceTable.Count; i++)
+        for (int i = 0; i < Database.experienceTable.Count; i++)
         {
-            if (xp < JsonHandler.experienceTable[i])
+            if (xp < Database.experienceTable[i])
             {
                 return i;
             }
@@ -177,11 +177,10 @@ public class MainController : MonoBehaviour
             DropTableManager.RollResources(dropTableDict, trainingMethod, skill.boostedLevel);
             //TODO remove consumables
 
-            
             if (skill.xp >= skill.xpNextLvl)
             {
                 int newLvl = GetLevel(skill.xp);
-                skill.xpNextLvl = JsonHandler.experienceTable[newLvl];
+                skill.xpNextLvl = Database.experienceTable[newLvl];
                 float deltaTimePerAction = currentDeltaTime / actionIncrement;
                 float timePassed = actionDone * deltaTimePerAction;
                 float newDeltaTime = currentDeltaTime - timePassed;
