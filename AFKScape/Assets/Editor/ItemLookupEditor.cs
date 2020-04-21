@@ -78,8 +78,6 @@ public class ItemLookupEditor : Editor
 
                     EditorGUILayout.LabelField("ID: " + item.Item1.ToString());
                     EditorGUILayout.EndVertical();
-
-
                     EditorGUILayout.Space(3);
                 }
             }
