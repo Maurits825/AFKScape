@@ -17,6 +17,7 @@ namespace Tests
 
         public void Setup()
         {
+            EventManager.setIntance(new EventManager());
             inventory = new Inventory(inventorySlots);
             inventory.AddItem(heronId, 1);
             inventory.AddItem(heronId, 1);
