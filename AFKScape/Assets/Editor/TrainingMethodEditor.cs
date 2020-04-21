@@ -19,11 +19,11 @@ public class trainingMethodEditor : Editor
     string newResource;
 
     public static Dictionary<string, List<long>> generalItems = new Dictionary<string, List<long>>
-        {
-            {"template", new List<long>() { 0 } },
-            { "Mining", new List<long>() { 1265, 1267, 1269, 1271, 1273, 1275, 11920, 12297, 12797, 13243, 13244, 20014, 23276, 23677, 23680, 23682 } },
-            { "Woodcutting", new List<long>() { 1349, 1351, 1353, 1355, 1357, 1359, 1361, 6739, 13242, 13241, 20011, 23279, 23673, 23675 } }
-        };
+    {
+        {"template", new List<long>() { 0 } },
+        { "Mining", new List<long>() { 1265, 1267, 1269, 1271, 1273, 1275, 11920, 12297, 12797, 13243, 13244, 20014, 23276, 23677, 23680, 23682 } },
+        { "Woodcutting", new List<long>() { 1349, 1351, 1353, 1355, 1357, 1359, 1361, 6739, 13242, 13241, 20011, 23279, 23673, 23675 } }
+    };
 
     void OnEnable()
     {
