@@ -1,2 +1,5 @@
 language: csharp
-solution: AFKScape/AFKScape.sln
+solution: ./AFKScape/AFKScape.sln
+
+script:
+    - ls
