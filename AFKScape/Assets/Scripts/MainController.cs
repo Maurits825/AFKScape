@@ -104,6 +104,22 @@ public class MainController : MonoBehaviour
         return true;
     }//TODO add general list check
 
+    public bool GeneralItemRequirement(List<long> generalItemIds)
+    {
+        if (generalItemIds.Count == 0)
+        {
+            return true;
+        }
+        for (int i = 0; i < generalItemIds.Count; i++)
+        {
+            if (inventory.Contains(generalItemIds[i]))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public bool QuestRequirement(List<int> questIds)
     {
         return true;
@@ -120,6 +136,10 @@ public class MainController : MonoBehaviour
             return false;
         }
         if (!QuestRequirement(trainingMethod.requirements.questIds))
+        {
+            return false;
+        }
+        if (!GeneralItemRequirement(trainingMethod.requirements.generalSkillItems))
         {
             return false;
         }
