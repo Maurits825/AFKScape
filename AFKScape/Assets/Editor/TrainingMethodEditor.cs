@@ -20,7 +20,7 @@ public class trainingMethodEditor : Editor
 
     public static Dictionary<string, List<long>> generalItems = new Dictionary<string, List<long>>
         {
-            { "Mining", new List<long>() { 5, 4 } }
+            { "Mining", new List<long>() { 1265, 1267, 1269, 1271, 1273, 1275, 11920, 12297, 12797, 13243, 13244, 20014, 23276, 23677, 23680, 23682 } }
         };
 
     void OnEnable()

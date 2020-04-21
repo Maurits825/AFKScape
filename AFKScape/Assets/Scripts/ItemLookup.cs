@@ -11,6 +11,10 @@ public class ItemLookup : MonoBehaviour
     }
 
     public FilterType filterType;
+
+    [ItemId]
+    public List<long> idList = new List<long>();
+
     public List<(long, string, string)> GetItemId(string itemName)
     {
         List<(long, string, string)> itemList = new List<(long, string, string)>();

@@ -11,12 +11,16 @@ public class ItemLookupEditor : Editor
     string status;
 
     List<(long, string, string)> itemList = new List<(long, string, string)>();
-
+    
     SerializedProperty filterType;
+    SerializedProperty idList;
+
+    bool asButton = false;
 
     void OnEnable()
     {
         filterType = serializedObject.FindProperty("filterType");
+        idList = serializedObject.FindProperty("idList");
     }
 
     public override void OnInspectorGUI()
@@ -42,6 +46,8 @@ public class ItemLookupEditor : Editor
         itemName = EditorGUILayout.TextField("Name:", itemName);
         EditorGUILayout.PropertyField(filterType);
 
+        asButton = EditorGUILayout.Toggle("As buttons", asButton);
+        
         if (GUILayout.Button("Get ID"))
         {
             itemList = itemLookup.GetItemId(itemName);
@@ -49,20 +55,48 @@ public class ItemLookupEditor : Editor
 
         if (itemList.Count > 0)
         {
-            foreach ((long, string, string) item in itemList)
+            if (asButton)
             {
-                EditorGUILayout.BeginVertical("box");
-                EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField("Name: " + item.Item2);
-                EditorGUILayout.LabelField("Extra info: " + item.Item3);
-                EditorGUILayout.EndHorizontal();
-
-                EditorGUILayout.LabelField("ID: " + item.Item1.ToString());
-                EditorGUILayout.EndVertical();
-
-
-                EditorGUILayout.Space(3);
+                foreach ((long, string, string) item in itemList)
+                {
+                    if (GUILayout.Button("Name: " + item.Item2 + ", ID: " + item.Item1.ToString()))
+                    {
+                        itemLookup.idList.Add(item.Item1);
+                    }
+                    EditorGUILayout.Space(3);
+                }
             }
+            else
+            {
+                foreach ((long, string, string) item in itemList)
+                {
+                    EditorGUILayout.BeginVertical("box");
+                    EditorGUILayout.BeginHorizontal();
+                    EditorGUILayout.LabelField("Name: " + item.Item2);
+                    EditorGUILayout.LabelField("Extra info: " + item.Item3);
+                    EditorGUILayout.EndHorizontal();
+
+                    EditorGUILayout.LabelField("ID: " + item.Item1.ToString());
+                    EditorGUILayout.EndVertical();
+
+
+                    EditorGUILayout.Space(3);
+                }
+            }
+        }
+
+        if (asButton)
+        {
+            if (GUILayout.Button("Print"))
+            {
+                string toPrint = "";
+                for (int i = 0; i < itemLookup.idList.Count; i++)
+                {
+                    toPrint += ", " + itemLookup.idList[i];
+                }
+                Debug.Log(toPrint);
+            }
+            EditorGUILayout.PropertyField(idList);
         }
         serializedObject.ApplyModifiedProperties();
     }
