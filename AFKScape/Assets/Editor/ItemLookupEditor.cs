@@ -12,6 +12,13 @@ public class ItemLookupEditor : Editor
 
     List<(long, string, string)> itemList = new List<(long, string, string)>();
 
+    SerializedProperty filterType;
+
+    void OnEnable()
+    {
+        filterType = serializedObject.FindProperty("filterType");
+    }
+
     public override void OnInspectorGUI()
     {
         EditorGUILayout.HelpBox("Search Database for items", MessageType.Info);
@@ -33,10 +40,11 @@ public class ItemLookupEditor : Editor
         EditorGUILayout.LabelField("Status: " + status, EditorStyles.boldLabel);
 
         itemName = EditorGUILayout.TextField("Name:", itemName);
+        EditorGUILayout.PropertyField(filterType);
 
         if (GUILayout.Button("Get ID"))
         {
-            itemList = ItemLookup.GetItemId(itemName);
+            itemList = itemLookup.GetItemId(itemName);
         }
 
         if (itemList.Count > 0)
@@ -56,5 +64,6 @@ public class ItemLookupEditor : Editor
                 EditorGUILayout.Space(3);
             }
         }
+        serializedObject.ApplyModifiedProperties();
     }
 }

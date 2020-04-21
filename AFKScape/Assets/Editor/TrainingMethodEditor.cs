@@ -18,6 +18,11 @@ public class trainingMethodEditor : Editor
 
     string newResource;
 
+    public static Dictionary<string, List<long>> generalItems = new Dictionary<string, List<long>>
+        {
+            { "Mining", new List<long>() { 5, 4 } }
+        };
+
     void OnEnable()
     {
         trainingMethod = serializedObject.FindProperty("trainingMethods");
@@ -222,6 +227,5 @@ public class trainingMethodEditor : Editor
             trainingMethodAdder.SaveJsonFile(selectedSkillName);
 
         }
-            
     }
 }
