@@ -43,12 +43,14 @@ namespace Tests
         [Test]
         public void RequirementTest()
         {
+            Database.LoadExperienceTable();
             Mining mining = new Mining();
             Cooking cooking = new Cooking();
             MainController mainController = new MainController(); //TODO fix this warning
             mainController.InitSkillClasses();
             Assert.AreEqual(false, mainController.CheckRequirement(mining.trainingMethods[0]));
             MainController.inventory.AddItem(1267,1);
+            Assert.AreEqual(true, MainController.inventory.Contains(1267));
             Assert.AreEqual(true,mainController.CheckRequirement(mining.trainingMethods[0]));
             Assert.AreEqual(true, mainController.CheckRequirement(cooking.trainingMethods[0]));
             Assert.AreEqual(false, mainController.CheckRequirement(cooking.trainingMethods[1]));
