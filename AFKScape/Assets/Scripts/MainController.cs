@@ -33,6 +33,7 @@ public class MainController : MonoBehaviour
 
         InitStatic();
         InitSkillClasses();
+        EventManager.Instance.LevelUp("Fishing", 1, GetTotalLevel());
     }
 
     // Update is called once per frame
@@ -216,7 +217,7 @@ public class MainController : MonoBehaviour
     public int GetTotalLevel()
     {
         int totalLvl = 0;
-        foreach  (Skill skill in skillsClasses.Values) //This returns a count of 16 even though theres 17 skills implemented.
+        foreach  (Skill skill in skillsClasses.Values)
         {
             totalLvl = totalLvl + skill.currentLevel;
         }

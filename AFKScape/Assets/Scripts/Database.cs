@@ -20,12 +20,6 @@ public static class Database
         LoadExperienceTable();
     }
 
-    [Serializable]
-    private struct JsonHelper
-    {
-        public List<string> data;
-    }
-
     public static void LoadSkills()
     {
         skillNames = JsonHandler.GetLoadedSkills();
