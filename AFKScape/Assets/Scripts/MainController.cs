@@ -20,17 +20,20 @@ public class MainController : MonoBehaviour
     private float actionCount;
     private static int maxLvl = 126; //TODO move somewhere
 
+    private Dictionary<long, int> dropTableDict = new Dictionary<long, int>();
+
     // Start is called before the first frame update
     void Start()
     {
-        //TODO order of these?
+        //TODO order of these? well skills now depends on database
         Database.LoadAll();
 
         EventManager.Instance.onSkillClicked += OnSkillSelected;
         EventManager.Instance.onTrainingMethodClicked += SetTrainingMethod;
 
         InitStatic();
-        initSkillClasses();
+        InitSkillClasses();
+        EventManager.Instance.LevelUp("Fishing", 1, GetTotalLevel()); //TODO fix this to update total level at start
     }
 
     // Update is called once per frame
@@ -42,7 +45,7 @@ public class MainController : MonoBehaviour
         }
     }
 
-    public void initSkillClasses()
+    public void InitSkillClasses()
     {
         //combat training not included
         skillsClasses.Add("Agility", new Agility());
@@ -64,11 +67,11 @@ public class MainController : MonoBehaviour
         //TODO foreach (skill in skillsClasses) EventManager.levelup ? for ui lvls and total lvl
     }
 
-    public static int getLevel(int xp)
+    public static int GetLevel(int xp)
     {
-        for (int i = 0; i < Database.skillLevels.Count; i++)
+        for (int i = 0; i < Database.experienceTable.Count; i++)
         {
-            if (xp < Database.skillLevels[i])
+            if (xp < Database.experienceTable[i])
             {
                 return i;
             }
@@ -124,11 +127,11 @@ public class MainController : MonoBehaviour
         {
             return false; //requirement was not met and returns
         }
-        if (!ItemRequirement(trainingMethod.requirements.itemIDs))
+        if (!ItemRequirement(trainingMethod.requirements.itemIds))
         {
             return false;
         }
-        if (!QuestRequirement(trainingMethod.requirements.questIDs))
+        if (!QuestRequirement(trainingMethod.requirements.questIds))
         {
             return false;
         }
@@ -145,15 +148,18 @@ public class MainController : MonoBehaviour
         selectedSkill = skillsClasses[skillName];
 
         EventManager.Instance.DrawTrainingMethods(selectedSkill.trainingMethods);
+        EventManager.Instance.XpGained(selectedSkill.xp);
     }
 
     public void SetTrainingMethod(int i)
     {
         //TODO check reqs
         selectedTrainingMethodInd = i;
+
         if (CheckRequirement(selectedSkill.trainingMethods[selectedTrainingMethodInd]))
         {
             isTrainingMethodSelected = true;
+            dropTableDict = DropTableManager.CreateDropTableDictionary(selectedSkill.trainingMethods[selectedTrainingMethodInd].dropTables);
         } else {
             isTrainingMethodSelected = false;
         }
@@ -163,6 +169,7 @@ public class MainController : MonoBehaviour
     {
         inventory = new Inventory(inventorySlots);
     }
+
     public void MainGameLoop(TrainingMethod trainingMethod, Skill skill, float deltaTime)
     {
         float currentDeltaTime = deltaTime;
@@ -184,13 +191,13 @@ public class MainController : MonoBehaviour
             // raise xp event? --> eventManager.xpgained
             //if (getlevel(xp) != skill.lvl) --> eventManager.levelup
 
-            RollResources(trainingMethod, skill);
+            DropTableManager.RollResources(dropTableDict, trainingMethod, skill.boostedLevel);
             //TODO remove consumables
 
-            int newLvl = getLevel(skill.xp);
-
-            if (newLvl != skill.currentLevel)
+            if (skill.xp >= skill.xpNextLvl)
             {
+                int newLvl = GetLevel(skill.xp);
+                skill.xpNextLvl = Database.experienceTable[newLvl];
                 float deltaTimePerAction = currentDeltaTime / actionIncrement;
                 float timePassed = actionDone * deltaTimePerAction;
                 float newDeltaTime = currentDeltaTime - timePassed;
@@ -209,52 +216,21 @@ public class MainController : MonoBehaviour
                 int totalLvl = GetTotalLevel();
                 EventManager.Instance.LevelUp(skill.skillName, skill.currentLevel, totalLvl);
             }
-
         }
+
+        AddItemsToInventory(dropTableDict);//TODO this will add to bank later
     }
 
-    //TODO move this to drop table manager, this is droptable repsonsiblity to handle this
-    //TODO have one entry point on DropTableManager: List<(long, int)> = trainingMethod.dropTableManager.roll()
-    private void RollResources(TrainingMethod trainingMethod, Skill skill)
+    private void AddItemsToInventory(Dictionary<long, int> items)
     {
-        List<(long, int)> itemList;
-
-        foreach (GeneralDropTable generalTable in trainingMethod.dropTables.OfType<GeneralDropTable>())
+        foreach (long id in items.Keys.ToList())
         {
-            itemList = generalTable.RollTable();
-            if (itemList.Count > 0)
-            {
-                foreach ((long, int) item in itemList)
-                {
-                    inventory.AddItem(item.Item1, item.Item2);
-                }
-            }
-        }
-
-        long itemId = -1;
-        int amount = 0;
-        foreach (ClueDropTable clueDropTable in trainingMethod.dropTables.OfType<ClueDropTable>())
-        {
-            (itemId, amount) = clueDropTable.RollTable(skill.boostedLevel);
-        }
-
-        if (itemId != -1)
-        {
-            inventory.AddItem(itemId, amount);
-        }
-
-        foreach (PetDropTable petDropTable in trainingMethod.dropTables.OfType<PetDropTable>())
-        {
-            (itemId, amount) = petDropTable.RollTable(skill.boostedLevel);
-        }
-
-        if (itemId != -1)
-        {
-            inventory.AddItem(itemId, amount);
+            inventory.AddItem(id, items[id]);
+            items[id] = 0;
         }
     }
 
-    private int GetTotalLevel()
+    public int GetTotalLevel()
     {
         int totalLvl = 0;
         foreach  (Skill skill in skillsClasses.Values)

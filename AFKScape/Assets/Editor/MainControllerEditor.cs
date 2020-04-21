@@ -65,7 +65,10 @@ public class MainControllerEditor : Editor
             //sim events
             EventManager.Instance.SkillClicked(skillName);
             EventManager.Instance.XpGained(skill.xp);
-            //TODO doesnt auto update lvl and total lvl
+            int newLvl = MainController.GetLevel(skill.xp);
+            skill.currentLevel = newLvl;
+            int totalLvl = mainController.GetTotalLevel();
+            EventManager.Instance.LevelUp(skill.skillName, skill.currentLevel, totalLvl);
         }
     }
 }

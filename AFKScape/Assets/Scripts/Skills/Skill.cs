@@ -9,17 +9,19 @@ public abstract class Skill
     public float xpFloat = 0;
     public int currentLevel = 1;
     public int boostedLevel = 1;
+    public int xpNextLvl = 0;
 
     public List<TrainingMethod> trainingMethods = new List<TrainingMethod>();
 
     public Skill(string name)
     {
-        skillName = name;      
+        skillName = name;
+        xpNextLvl = Database.experienceTable[1]; //TODO could hardcode 83 here if loading sync issues
     }
 
     public void populateTrainingMethods(string skillName)
     {
-        trainingMethods = JsonHandler.getTrainingMethods(skillName);
+        trainingMethods = JsonHandler.GetTrainingMethods(skillName);
     }
 
     //included here the actualXprate? this is calculated using basexprate and lvl, items, perks...

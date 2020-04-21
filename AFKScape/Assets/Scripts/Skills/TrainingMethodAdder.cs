@@ -11,7 +11,7 @@ public class TrainingMethodAdder : MonoBehaviour
 
     public void LoadJsonFile(string selectedSkillName)
     {
-        trainingMethods = JsonHandler.getTrainingMethods(selectedSkillName);
+        trainingMethods = JsonHandler.GetTrainingMethods(selectedSkillName);
     }
 
     public void SaveJsonFile(string selectedSkillName)

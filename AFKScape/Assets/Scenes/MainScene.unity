@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4903,7 +4903,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 535688372}
   m_HandleRect: {fileID: 535688371}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -7305,6 +7305,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 185a65c1007af8f42be834eaf50c38fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  filterType: 0
+  idList: 
 --- !u!1001 &1283089636
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9045,9 +9047,9 @@ MonoBehaviour:
       levelRequirements:
       - skillName: Mining
         levelReq: 1
-      questIDs: 
-      itemIDs: f304000000000000
-      generalSkillItems: 
+      questIds: 
+      itemIds: 
+      generalSkillItems: f104000000000000f304000000000000f504000000000000f704000000000000f904000000000000fb04000000000000902e0000000000000930000000000000fd31000000000000bb33000000000000bc330000000000002e4e000000000000ec5a0000000000007d5c000000000000805c000000000000825c000000000000
 --- !u!4 &1537179034
 Transform:
   m_ObjectHideFlags: 0
@@ -9074,6 +9076,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 185a65c1007af8f42be834eaf50c38fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  filterType: 1
+  idList: 4505000000000000470500000000000049050000000000004b050000000000004d050000000000004f050000000000005105000000000000531a000000000000ba33000000000000b9330000000000002b4e000000000000ef5a000000000000795c0000000000007b5c000000000000
 --- !u!1001 &1538207084
 PrefabInstance:
   m_ObjectHideFlags: 0

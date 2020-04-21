@@ -14,6 +14,7 @@ namespace Tests
         [SetUp]
         public void Setup()
         {
+            Database.LoadExperienceTable();
             skillsClasses.Clear();
             skillsClasses.Add("Agility", new Agility());
             skillsClasses.Add("Construction", new Construction());
@@ -56,12 +57,14 @@ namespace Tests
                         foreach (ClueDropTable cluetable in method.dropTables.OfType<ClueDropTable>())
                         {
                             Assert.Greater(cluetable.lootItems[0].baseChance, 0);
+                            Assert.AreEqual(1, cluetable.lootItems.Count);
                         }
 
                         foreach (PetDropTable petTable in method.dropTables.OfType<PetDropTable>())
                         {
                             Assert.Greater(petTable.lootItems[0].id, 0);
                             Assert.Greater(petTable.lootItems[0].baseChance, 0);
+                            Assert.AreEqual(1, petTable.lootItems.Count);
                         }
                     }
 
