@@ -106,11 +106,15 @@ public class MainController : MonoBehaviour
 
     public bool GeneralItemRequirement(List<long> generalItemIds)
     {
+        if (generalItemIds.Count == 0)
+        {
+            return true;
+        }
         for (int i = 0; i < generalItemIds.Count; i++)
         {
-            if (!inventory.Contains(generalItemIds[i]))
+            if (inventory.Contains(generalItemIds[i]))
             {
-                return false;
+                return true;
             }
         }
         return false;
