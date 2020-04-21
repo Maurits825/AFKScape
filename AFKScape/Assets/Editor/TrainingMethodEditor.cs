@@ -11,6 +11,8 @@ public class trainingMethodEditor : Editor
     public List<bool> isTrainMethodSelected;
     int selectedSkillIndPrev = 0;
     int selectedSkillInd = 0;
+    int skillReqInd = 0;
+    string skillReq;
 
     bool JSONLoaded = false;
 
@@ -78,10 +80,6 @@ public class trainingMethodEditor : Editor
 
                     if (isTrainMethodSelected[methodIndex])
                     {
-                        //This will be the main place to change/add/remove properties
-                        //for example if the lootable becomes a class, would need to include children
-                        EditorGUI.indentLevel++;
-
                         EditorGUILayout.BeginHorizontal();
                         EditorGUILayout.PropertyField(method.FindPropertyRelative("name"));
                         EditorGUILayout.LabelField("Xp rate: " + trainingMethodAdder.trainingMethods[methodIndex].baseXpRate);
@@ -96,7 +94,7 @@ public class trainingMethodEditor : Editor
                         EditorGUILayout.EndHorizontal();
 
                         EditorGUILayout.Space(10);
-
+                        EditorGUILayout.LabelField("DropTables:", EditorStyles.boldLabel);
                         EditorGUILayout.BeginHorizontal();
                         if (GUILayout.Button("Add General"))
                         {
@@ -112,6 +110,7 @@ public class trainingMethodEditor : Editor
                         }
                         EditorGUILayout.EndHorizontal();
 
+                        EditorGUI.indentLevel++;
                         //EditorGUILayout.PropertyField(method.FindPropertyRelative("dropTables"));
                         SerializedProperty dropTables = method.FindPropertyRelative("dropTables");
                         int tableIndex = 0;
@@ -164,24 +163,48 @@ public class trainingMethodEditor : Editor
 
                             tableIndex++;
                         }
-
-                        EditorGUILayout.Space(10);
-                        EditorGUILayout.BeginHorizontal();
-                        if (GUILayout.Button("Add Level Requirement"))
-                        {
-                            trainingMethodAdder.trainingMethods[methodIndex].requirements.levelRequirements.Add(new LevelRequirement());
-                        }
-                        if (GUILayout.Button("Add Quest Requirement"))
-                        {
-                            trainingMethodAdder.trainingMethods[methodIndex].requirements.questIDs.Add(0);
-                        }
-                        if (GUILayout.Button("Add Item Requirement"))
-                        {
-                            trainingMethodAdder.trainingMethods[methodIndex].requirements.itemIDs.Add(0);
-                        }
-                        EditorGUILayout.EndHorizontal();
-                        EditorGUILayout.PropertyField(method.FindPropertyRelative("requirements"));
                         EditorGUI.indentLevel--;
+                        EditorGUILayout.Space(10);
+                        EditorGUILayout.LabelField("Requirements:", EditorStyles.boldLabel);
+                        EditorGUILayout.BeginHorizontal();
+                        if (GUILayout.Button("Add Level Req"))
+                        {
+                            trainingMethodAdder.trainingMethods[methodIndex].requirements.levelRequirements.Add(new LevelRequirement(skillReq, 1));
+                        }
+                        skillReqInd = EditorGUILayout.Popup("Select Skill:", skillReqInd, Database.skillNames, GUILayout.ExpandWidth(true));
+                        skillReq = Database.skillNames[skillReqInd];
+                        EditorGUILayout.EndHorizontal();
+
+                        EditorGUILayout.BeginHorizontal();
+                        if (GUILayout.Button("Add Quest Req"))
+                        {
+                            trainingMethodAdder.trainingMethods[methodIndex].requirements.questIds.Add(0);
+                        }
+                        EditorGUILayout.LabelField("placeholder");
+                        EditorGUILayout.EndHorizontal();
+
+                        EditorGUILayout.BeginHorizontal();
+                        if (GUILayout.Button("Add Item Req"))
+                        {
+                            trainingMethodAdder.trainingMethods[methodIndex].requirements.itemIds.Add(0);
+                        }
+                        EditorGUILayout.LabelField("placeholder");
+                        EditorGUILayout.EndHorizontal();
+
+                        EditorGUI.indentLevel++;
+                        SerializedProperty requirements = method.FindPropertyRelative("requirements");
+                        EditorGUILayout.PropertyField(requirements, false);
+                        if (requirements.isExpanded)
+                        {
+                            EditorGUI.indentLevel++;
+                            EditorGUILayout.PropertyField(requirements.FindPropertyRelative("levelRequirements"));
+                            EditorGUILayout.PropertyField(requirements.FindPropertyRelative("questIds"));
+                            EditorGUILayout.PropertyField(requirements.FindPropertyRelative("itemIds"));
+                            EditorGUILayout.PropertyField(requirements.FindPropertyRelative("generalSkillItems"));
+                            EditorGUI.indentLevel--;
+                        }
+                        EditorGUI.indentLevel--;
+
                     }
                     methodIndex++;
 
