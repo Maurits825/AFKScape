@@ -33,7 +33,7 @@ public class MainController : MonoBehaviour
 
         InitStatic();
         InitSkillClasses();
-        EventManager.Instance.LevelUp("Fishing", 1, GetTotalLevel());
+        EventManager.Instance.LevelUp("Fishing", 1, GetTotalLevel()); //TODO fix this to update total level at start
     }
 
     // Update is called once per frame
