@@ -115,11 +115,11 @@ public class MainController : MonoBehaviour
         {
             return false; //requirement was not met and returns
         }
-        if (!ItemRequirement(trainingMethod.requirements.itemIDs))
+        if (!ItemRequirement(trainingMethod.requirements.itemIds))
         {
             return false;
         }
-        if (!QuestRequirement(trainingMethod.requirements.questIDs))
+        if (!QuestRequirement(trainingMethod.requirements.questIds))
         {
             return false;
         }
