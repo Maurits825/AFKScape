@@ -21,7 +21,7 @@ public abstract class Skill
 
     public void populateTrainingMethods(string skillName)
     {
-        trainingMethods = JsonHandler.getTrainingMethods(skillName);
+        trainingMethods = JsonHandler.GetTrainingMethods(skillName);
     }
 
     //included here the actualXprate? this is calculated using basexprate and lvl, items, perks...

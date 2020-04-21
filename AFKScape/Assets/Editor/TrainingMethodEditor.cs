@@ -14,8 +14,6 @@ public class trainingMethodEditor : Editor
 
     bool JSONLoaded = false;
 
-    string newResource;
-
     void OnEnable()
     {
         trainingMethod = serializedObject.FindProperty("trainingMethods");
