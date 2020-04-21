@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1708136380904134061}
   - component: {fileID: 1708136380904134050}
   m_Layer: 5
-  m_Name: Skills_grid
+  m_Name: skill_grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56,7 +56,7 @@ MonoBehaviour:
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 1
-  m_CellSize: {x: 251.875, y: 130}
+  m_CellSize: {x: 203.4375, y: 105}
   m_Spacing: {x: 5, y: 5}
   m_Constraint: 1
   m_ConstraintCount: 3
