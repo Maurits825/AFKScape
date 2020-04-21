@@ -6,7 +6,8 @@ using System.IO;
 using UnityEditor;
 public static class JsonHandler
 {
-    public static List<TrainingMethod> getTrainingMethods(string skillName)
+
+    public static List<TrainingMethod> GetTrainingMethods(string skillName)
     {
         List<TrainingMethod> trainingMethods = new List<TrainingMethod>();
         TextAsset trainingMethodsJsonFile = Resources.Load<TextAsset>(string.Concat("JSON/TrainingMethods/", skillName));
@@ -49,11 +50,30 @@ public static class JsonHandler
         public List<int> levels;
     }
 
-    public static List<int> getSkillLevels()
+    public static List<int> GetSkillLevels()
     {
         TextAsset skillLevelsJsonFile = Resources.Load<TextAsset>("JSON/Levels");
         SkillLevelList levels = JsonUtility.FromJson<SkillLevelList>(skillLevelsJsonFile.text);
         return levels.levels;
+    }
+
+    [Serializable]
+    private struct JsonHelper
+    {
+        public List<string> data;
+    }
+
+    public static string[] GetLoadedSkills()
+    {
+        TextAsset JsonString = Resources.Load<TextAsset>("JSON/Skills");
+        JsonHelper jsonHelperSkills = JsonUtility.FromJson<JsonHelper>(JsonString.text);
+        return jsonHelperSkills.data.ToArray();
+    }
+
+    public static ItemList GetLoadedItems()
+    {
+        TextAsset JsonString = Resources.Load<TextAsset>(string.Concat("JSON/", "Items"));
+        return JsonUtility.FromJson<ItemList>(JsonString.text);
     }
 
     public static void SaveJsonFile(List<TrainingMethod> tMethodList, string selectedSkillName)

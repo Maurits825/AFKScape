@@ -12,12 +12,6 @@ public static class Database
 
     public static List<int> experienceTable;
 
-    [Serializable]
-    private struct JsonHelper
-    {
-        public List<string> data;
-    }
-
     public static void LoadAll()
     {
         LoadSkills();
@@ -28,15 +22,12 @@ public static class Database
 
     public static void LoadSkills()
     {
-        TextAsset JsonString = Resources.Load<TextAsset>("JSON/Skills");
-        JsonHelper jsonHelperSkills = JsonUtility.FromJson<JsonHelper>(JsonString.text);
-        skillNames = jsonHelperSkills.data.ToArray();
+        skillNames = JsonHandler.GetLoadedSkills();
     }
 
     public static void LoadItems()
     {
-        TextAsset JsonString = Resources.Load<TextAsset>(string.Concat("JSON/", "Items"));
-        ItemList itemList = JsonUtility.FromJson<ItemList>(JsonString.text);
+        ItemList itemList = JsonHandler.GetLoadedItems();
 
         foreach (Item item in itemList.itemList)
         {
@@ -46,7 +37,7 @@ public static class Database
 
     public static void LoadExperienceTable()
     {
-        experienceTable = JsonHandler.getSkillLevels();
+        experienceTable = JsonHandler.GetSkillLevels();
     }
 
     public static void LoadQuests()

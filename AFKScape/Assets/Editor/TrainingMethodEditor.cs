@@ -16,8 +16,6 @@ public class trainingMethodEditor : Editor
 
     bool JSONLoaded = false;
 
-    string newResource;
-
     public static Dictionary<string, List<long>> generalItems = new Dictionary<string, List<long>>
     {
         {"template", new List<long>() { 0 } },

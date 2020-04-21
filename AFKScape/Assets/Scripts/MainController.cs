@@ -33,6 +33,7 @@ public class MainController : MonoBehaviour
 
         InitStatic();
         InitSkillClasses();
+        EventManager.Instance.LevelUp("Fishing", 1, GetTotalLevel()); //TODO fix this to update total level at start
     }
 
     // Update is called once per frame
@@ -177,7 +178,6 @@ public class MainController : MonoBehaviour
             DropTableManager.RollResources(dropTableDict, trainingMethod, skill.boostedLevel);
             //TODO remove consumables
 
-            
             if (skill.xp >= skill.xpNextLvl)
             {
                 int newLvl = GetLevel(skill.xp);
@@ -214,7 +214,7 @@ public class MainController : MonoBehaviour
         }
     }
 
-    private int GetTotalLevel()
+    public int GetTotalLevel()
     {
         int totalLvl = 0;
         foreach  (Skill skill in skillsClasses.Values)
