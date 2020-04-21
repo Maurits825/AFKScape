@@ -29,11 +29,11 @@ public class trainingMethodEditor : Editor
 
         if (GUILayout.Button("Load Skills"))
         {
-            Database.LoadSkills();
+            JsonHandler.LoadSkills();
         }
 
-        selectedSkillInd = EditorGUILayout.Popup("Select Skill:", selectedSkillInd, Database.skillNames);
-        selectedSkillName = Database.skillNames[selectedSkillInd];
+        selectedSkillInd = EditorGUILayout.Popup("Select Skill:", selectedSkillInd, JsonHandler.skillNames);
+        selectedSkillName = JsonHandler.skillNames[selectedSkillInd];
         if (selectedSkillInd != selectedSkillIndPrev)
         {
             JSONLoaded = false;

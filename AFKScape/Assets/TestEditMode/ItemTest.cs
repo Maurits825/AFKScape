@@ -14,10 +14,10 @@ namespace Tests
         [Test]
         public void TestItemLoad()
         {
-            Database.items.Clear();
-            Database.LoadItems();
+            JsonHandler.items.Clear();
+            JsonHandler.LoadItems();
             long id = 15000;
-            Assert.AreEqual(id, Database.items[id].id);
+            Assert.AreEqual(id, JsonHandler.items[id].id);
         }
 
         [Test]

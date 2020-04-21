@@ -27,7 +27,7 @@ public class InventoryUI : MonoBehaviour
         }
         else
         {
-            inventoryText[slotIndex].text = string.Concat(Database.items[id].name, "\n", amount.ToString());
+            inventoryText[slotIndex].text = string.Concat(JsonHandler.items[id].name, "\n", amount.ToString());
         }
         
     }

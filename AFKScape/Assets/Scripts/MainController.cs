@@ -26,7 +26,7 @@ public class MainController : MonoBehaviour
     void Start()
     {
         //TODO order of these? well skills now depends on database
-        Database.LoadAll();
+        JsonHandler.LoadAll();
 
         EventManager.Instance.onSkillClicked += OnSkillSelected;
         EventManager.Instance.onTrainingMethodClicked += SetTrainingMethod;
@@ -68,9 +68,9 @@ public class MainController : MonoBehaviour
 
     public static int GetLevel(int xp)
     {
-        for (int i = 0; i < Database.experienceTable.Count; i++)
+        for (int i = 0; i < JsonHandler.experienceTable.Count; i++)
         {
-            if (xp < Database.experienceTable[i])
+            if (xp < JsonHandler.experienceTable[i])
             {
                 return i;
             }
@@ -181,7 +181,7 @@ public class MainController : MonoBehaviour
             if (skill.xp >= skill.xpNextLvl)
             {
                 int newLvl = GetLevel(skill.xp);
-                skill.xpNextLvl = Database.experienceTable[newLvl];
+                skill.xpNextLvl = JsonHandler.experienceTable[newLvl];
                 float deltaTimePerAction = currentDeltaTime / actionIncrement;
                 float timePassed = actionDone * deltaTimePerAction;
                 float newDeltaTime = currentDeltaTime - timePassed;
@@ -214,10 +214,10 @@ public class MainController : MonoBehaviour
         }
     }
 
-    private int GetTotalLevel()
+    public int GetTotalLevel()
     {
         int totalLvl = 0;
-        foreach  (Skill skill in skillsClasses.Values)
+        foreach  (Skill skill in skillsClasses.Values) //This returns a count of 16 even though theres 17 skills implemented.
         {
             totalLvl = totalLvl + skill.currentLevel;
         }

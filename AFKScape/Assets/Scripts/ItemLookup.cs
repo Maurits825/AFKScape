@@ -7,7 +7,7 @@ public class ItemLookup : MonoBehaviour
     public static List<(long, string, string)> GetItemId(string itemName)
     {
         List<(long, string, string)> itemList = new List<(long, string, string)>();
-        foreach (KeyValuePair<long, Item> item in Database.items)
+        foreach (KeyValuePair<long, Item> item in JsonHandler.items)
         {
             if (item.Value.name.IndexOf(itemName, System.StringComparison.OrdinalIgnoreCase) >= 0)
             {

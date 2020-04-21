@@ -53,8 +53,8 @@ public class MainControllerEditor : Editor
         EditorGUILayout.Space(10);
 
         EditorGUILayout.LabelField("Experience", EditorStyles.boldLabel);
-        selectedSkillInd = EditorGUILayout.Popup("Select Skill:", selectedSkillInd, Database.skillNames);
-        skillName = Database.skillNames[selectedSkillInd];
+        selectedSkillInd = EditorGUILayout.Popup("Select Skill:", selectedSkillInd, JsonHandler.skillNames);
+        skillName = JsonHandler.skillNames[selectedSkillInd];
         experience = EditorGUILayout.IntField("Experience:", experience);
 
         if (GUILayout.Button("Add xp"))
@@ -65,7 +65,10 @@ public class MainControllerEditor : Editor
             //sim events
             EventManager.Instance.SkillClicked(skillName);
             EventManager.Instance.XpGained(skill.xp);
-            //TODO doesnt auto update lvl and total lvl
+            int newLvl = MainController.GetLevel(skill.xp);
+            skill.currentLevel = newLvl;
+            int totalLvl = mainController.GetTotalLevel();
+            EventManager.Instance.LevelUp(skill.skillName, skill.currentLevel, totalLvl);
         }
     }
 }

@@ -16,12 +16,12 @@ public abstract class Skill
     public Skill(string name)
     {
         skillName = name;
-        xpNextLvl = Database.experienceTable[1]; //TODO could hardcode 83 here if loading sync issues
+        xpNextLvl = JsonHandler.experienceTable[1]; //TODO could hardcode 83 here if loading sync issues
     }
 
     public void populateTrainingMethods(string skillName)
     {
-        trainingMethods = JsonHandler.getTrainingMethods(skillName);
+        trainingMethods = JsonHandler.GetTrainingMethods(skillName);
     }
 
     //included here the actualXprate? this is calculated using basexprate and lvl, items, perks...
