@@ -137,19 +137,15 @@ public class MainController : MonoBehaviour
         {
             return false;
         }
-        if (!QuestRequirement(trainingMethod.requirements.questIds))
+        if (!QuestRequirement(trainingMethod.requirements.questIds))//TODO implement quest requirement check
         {
             return false;
         }
-<<<<<<< Updated upstream
         if (!GeneralItemRequirement(trainingMethod.requirements.generalSkillItems))
-=======
-        if (!QuestRequirement(trainingMethod.requirements.questIDs))//TODO implement quest requirements
         {
             return false;
         }
         if (selectedSkill == previousSkill && lastSelectedTrainingMethodInd == selectedTrainingMethodInd) //checks if current training method was clicked again and stops
->>>>>>> Stashed changes
         {
             return false;
         }
