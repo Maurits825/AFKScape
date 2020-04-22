@@ -65,4 +65,11 @@ public class EventManager : MonoBehaviour
         onItemChanged?.Invoke(id, amount, slotInd);
     }
 
+    //---- Tabs ---
+    public event Action<int> onTabClicked;
+    public void TabClicked(int tabInd)
+    {
+        onTabClicked?.Invoke(tabInd);
+    }
+
 }

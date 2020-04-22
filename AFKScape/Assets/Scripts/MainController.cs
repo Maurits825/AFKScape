@@ -30,6 +30,7 @@ public class MainController : MonoBehaviour
 
         EventManager.Instance.onSkillClicked += OnSkillSelected;
         EventManager.Instance.onTrainingMethodClicked += SetTrainingMethod;
+        EventManager.Instance.onTabClicked += OnTabClicked;
 
         InitStatic();
         InitSkillClasses();
@@ -167,6 +168,11 @@ public class MainController : MonoBehaviour
         } else {
             isTrainingMethodSelected = false;
         }
+    }
+
+    private void OnTabClicked(int tabIndex)
+    {
+        isTrainingMethodSelected = false;
     }
 
     public void InitStatic()
