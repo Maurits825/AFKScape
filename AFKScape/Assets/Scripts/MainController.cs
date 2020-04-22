@@ -8,7 +8,9 @@ public class MainController : MonoBehaviour
 {
     public Dictionary<string, Skill> skillsClasses = new Dictionary<string, Skill>();
     private Skill selectedSkill;
+    private Skill previousSkill;
     public int selectedTrainingMethodInd = 0;
+    private int lastSelectedTrainingMethodInd = -1;
     private bool isTrainingMethodSelected = false;
 
     private readonly int inventorySlots = 28;
@@ -125,7 +127,7 @@ public class MainController : MonoBehaviour
         return true;
     }
 
-    public bool CheckRequirement(TrainingMethod trainingMethod) //TODO implement quest requirements
+    public bool CheckRequirement(TrainingMethod trainingMethod)
     {
         if (!LevelRequirement(trainingMethod.requirements.levelRequirements))
         {
@@ -139,7 +141,15 @@ public class MainController : MonoBehaviour
         {
             return false;
         }
+<<<<<<< Updated upstream
         if (!GeneralItemRequirement(trainingMethod.requirements.generalSkillItems))
+=======
+        if (!QuestRequirement(trainingMethod.requirements.questIDs))//TODO implement quest requirements
+        {
+            return false;
+        }
+        if (selectedSkill == previousSkill && lastSelectedTrainingMethodInd == selectedTrainingMethodInd) //checks if current training method was clicked again and stops
+>>>>>>> Stashed changes
         {
             return false;
         }
@@ -157,14 +167,16 @@ public class MainController : MonoBehaviour
 
     public void SetTrainingMethod(int i)
     {
-        //TODO check reqs
         selectedTrainingMethodInd = i;
 
         if (CheckRequirement(selectedSkill.trainingMethods[selectedTrainingMethodInd]))
         {
             isTrainingMethodSelected = true;
+            lastSelectedTrainingMethodInd = selectedTrainingMethodInd;
+            previousSkill = selectedSkill;
             dropTableDict = DropTableManager.CreateDropTableDictionary(selectedSkill.trainingMethods[selectedTrainingMethodInd].dropTables);
         } else {
+            lastSelectedTrainingMethodInd = -1;
             isTrainingMethodSelected = false;
         }
     }
