@@ -27,7 +27,7 @@ public class GeneralDropTable : DropTable
             for (int i = 0; i < lootItems.Count; i++)
             {
                 Loot loot = lootItems[i];
-                if (IsLootDropped(loot.chance, loot.baseChance)) //TODO this is wrong
+                if (IsLootDropped(loot.chance, loot.baseChance)) //TODO this is wrong, well it works for tertiary type drops
                 {
                     int amount = GetAmount(loot.amountMin, loot.amountMax); //TODO look at this, min=max=1 no need to call
                     dropTableDict[loot.id] += amount;
