@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using UnityEditor;
+
 public static class JsonHandler
 {
-
     public static List<TrainingMethod> GetTrainingMethods(string skillName)
     {
         List<TrainingMethod> trainingMethods = new List<TrainingMethod>();
@@ -76,6 +76,12 @@ public static class JsonHandler
         return JsonUtility.FromJson<ItemList>(JsonString.text);
     }
 
+    public static MonsterDropTable GetMonster(string monsterName)
+    {
+        TextAsset monsterDropTableJsonFile = Resources.Load<TextAsset>(string.Concat("JSON/MonsterDropTable/", monsterName));
+        return JsonUtility.FromJson<MonsterDropTable>(monsterDropTableJsonFile.text);
+    }
+
     public static void SaveJsonFile(List<TrainingMethod> tMethodList, string selectedSkillName)
     {
         tMethodList.Sort((x, y) => x.requirements.levelRequirements[0].levelReq.CompareTo(y.requirements.levelRequirements[0].levelReq));
@@ -88,6 +94,15 @@ public static class JsonHandler
 
         //TODO better way for path?
         File.WriteAllText(string.Concat(Application.dataPath, "/Resources/JSON/TrainingMethods/", selectedSkillName, ".json"), JSONString);
+        AssetDatabase.Refresh();
+    }
+
+    public static void SaveJsonFile(MonsterDropTable monsterDropTable, string monsterName)
+    {
+        string JSONString = JsonUtility.ToJson(monsterDropTable);
+
+        //TODO better way for path?
+        File.WriteAllText(string.Concat(Application.dataPath, "/Resources/JSON/MonsterDropTable/", monsterName, ".json"), JSONString);
         AssetDatabase.Refresh();
     }
 }

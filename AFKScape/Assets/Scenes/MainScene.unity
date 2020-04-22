@@ -2446,13 +2446,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterDropTable:
-    diceDropTable:
-    - name: 
-      tableType: 3
-      numRolls: 0
-      lootItems: []
-    indexMapping: 00000000
+    rolls: 0
     baseChance: 1
+    indexMapping: 
+    diceDropTable: []
 --- !u!4 &441445172
 Transform:
   m_ObjectHideFlags: 0
