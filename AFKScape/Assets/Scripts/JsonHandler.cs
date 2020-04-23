@@ -82,6 +82,12 @@ public static class JsonHandler
         return JsonUtility.FromJson<MonsterDropTable>(monsterDropTableJsonFile.text);
     }
 
+    public static DiceDropTable GetDiceDropTable()
+    {
+        TextAsset dropTableJsonFile = Resources.Load<TextAsset>("JSON/MonsterDropTable/temp");
+        return JsonUtility.FromJson<DiceDropTable>(dropTableJsonFile.text);
+    }
+
     public static void SaveJsonFile(List<TrainingMethod> tMethodList, string selectedSkillName)
     {
         tMethodList.Sort((x, y) => x.requirements.levelRequirements[0].levelReq.CompareTo(y.requirements.levelRequirements[0].levelReq));
@@ -103,6 +109,15 @@ public static class JsonHandler
 
         //TODO better way for path?
         File.WriteAllText(string.Concat(Application.dataPath, "/Resources/JSON/MonsterDropTable/", monsterName, ".json"), JSONString);
+        AssetDatabase.Refresh();
+    }
+
+    public static void SaveJsonFile(DiceDropTable diceDropTable, string name)
+    {
+        string JSONString = JsonUtility.ToJson(diceDropTable);
+
+        //TODO better way for path?
+        File.WriteAllText(string.Concat(Application.dataPath, "/Resources/JSON/MonsterDropTable/", name, ".json"), JSONString);
         AssetDatabase.Refresh();
     }
 }

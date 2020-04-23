@@ -6,6 +6,8 @@ using UnityEngine;
 [Serializable]
 public class DiceDropTable : DropTable
 {
+    public List<Loot> lootList;
+
     public DiceDropTable() : base("Dice")
     {
         tableType = DropTableType.Dice;
@@ -20,14 +22,14 @@ public class DiceDropTable : DropTable
         public int amountMin;
         public int amountMax;
 
-        public Tuple<int, int> indexRange;
+        public int indexMapping;
 
         public Loot(long idNum)
         {
             id = idNum;
             amountMin = 1;
             amountMax = 1;
-            indexRange = new Tuple<int, int>(0, 0);
+            indexMapping = 0;
         }
     }
 

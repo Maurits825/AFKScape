@@ -3,6 +3,7 @@ import requests
 import re
 from osrsbox import items_api
 import numpy as np
+import json
 
 
 class ItemDrop:
@@ -56,7 +57,12 @@ def get_drop_table(url):
         except KeyError:
             pass
         else:
-            if table_headers[header_ind] != "Rare_drop_table" and table_headers[header_ind] != "Tertiary":
+            #TODO input args, tilte isnted of id?
+            if (table_headers[header_ind] != "Rare_drop_table" and
+                    table_headers[header_ind] != "Tertiary" and
+                    table_headers[header_ind] != "Unique_drop_table" and
+                    table_headers[header_ind] != "Mutagens" and
+                    table_headers[header_ind] != "100%_drops"):
                 for row in data_frame.itertuples():
                     item_name = row.Item
 
@@ -85,17 +91,41 @@ def create_json(drops):
     actual_chance = []
     base_chances = []
     ids = []
+    #todo this is only zulrah
+
+    json_data = dict()
+    json_data["name"] = "general"
+    json_data["tableType"] = 3
+    json_data["numRolls"] = 2
+    json_data["lootList"] = []
+
     for drop in drops:
         actual_chance.append(drop.actual_chance)
         base_chances.append(drop.base_chance)
-        ids.append(all_db_items.lookup_by_item_name(drop.name))
+        ids.append(all_db_items.lookup_by_item_name(drop.name).id)
 
     actual_chance_arr = np.array(actual_chance).astype(np.int)
     base_chance_arr = np.array(base_chances).astype(np.int)
 
     lcm = np.lcm.reduce(base_chance_arr)
-    scaled_chances = actual_chance_arr * (lcm / base_chance_arr)
-    a=5
+    base_chance = int(lcm)
+    scaled_chances = (actual_chance_arr * (lcm / base_chance_arr))
+
+    #todo test this here or ut?
+    index_mapping = 0 #final value of this would be like 238/248, meaning 10/248 is unique
+    for i, drop in enumerate(drops):
+        index_mapping = index_mapping + scaled_chances[i]
+        loot_list = dict()
+        loot_list["id"] = ids[i]
+        loot_list["amountMin"] = drop.amount_min
+        loot_list["amountMax"] = drop.amount_max
+        loot_list["indexMapping"] = index_mapping
+
+        json_data["lootList"].append(loot_list)
+
+    out_file_name = r"..\..\AFKScape\Assets\Resources\JSON\MonsterDropTable/temp.json"
+    with open(out_file_name, "w", newline="\n") as out_file:
+        json.dump(json_data, out_file, indent=4)
 
 
 drop_list = get_drop_table(r"https://oldschool.runescape.wiki/w/Zulrah")
