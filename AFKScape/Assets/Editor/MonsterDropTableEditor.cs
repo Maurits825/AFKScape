@@ -14,13 +14,8 @@ public class MonsterDropTableEditor : Editor
 
     private string monsterName;
 
-    int tableDepth;
-
-    int index = 0;
-
     void OnEnable()
     {
-        tableDepth = 0;
         monsterDropTableHandler = serializedObject.FindProperty("monsterDropTableHandler");
         generalDropTables = monsterDropTableHandler.FindPropertyRelative("generalDropTables");
     }
