@@ -41,6 +41,7 @@ public class MonsterDropTableHandler : MonsterDropTable
                     else
                     {
                         monsterDropTables[i % basicLootCount].RollTable(dropTableDict);
+                        break;
                     }
                 }
             }

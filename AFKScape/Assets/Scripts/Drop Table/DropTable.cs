@@ -16,7 +16,6 @@ public class DropTable
         General,
         Clue,
         Pet,
-        Dice,
     }
 
     [Serializable]
