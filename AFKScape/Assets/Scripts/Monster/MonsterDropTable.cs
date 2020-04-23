@@ -6,31 +6,45 @@ using UnityEngine;
 [Serializable]
 public class MonsterDropTable
 {
-    public int rolls;
+    public string name;
     public int baseChance;
     public List<int> indexMapping;
+    public List<BasicLoot> basicLoots;
 
-    public List<DiceDropTable> diceDropTable;
+    [Serializable]
+    public struct BasicLoot
+    {
+        [ItemId]
+        public long id;
+
+        public int amountMin;
+        public int amountMax;
+    }
 
     public MonsterDropTable()
     {
-        diceDropTable = new List<DiceDropTable>();
         indexMapping = new List<int>();
-        baseChance = 1;
+        basicLoots = new List<BasicLoot>();
     }
 
-    public void RollTable(Dictionary<long, int> dropTableDict)
+    public int GetAmount(int amountMin, int amountMax)
     {
-        for (int r = 0; r < rolls; r++)
-        {
-            int index = UnityEngine.Random.Range(1, baseChance);
+        return UnityEngine.Random.Range(amountMin, amountMax);
+    }
 
-            for (int i = 0; i < indexMapping.Count; i++)
+    public void AddLoot(Dictionary<long, int> dropTableDict, BasicLoot loot)
+    {
+        int amount = GetAmount(loot.amountMin, loot.amountMax);
+        dropTableDict[loot.id] += amount;
+    }
+    public virtual void RollTable(Dictionary<long, int> dropTableDict)
+    {
+        int index = UnityEngine.Random.Range(1, baseChance);
+        for (int i = 0; i < indexMapping.Count; i++)
+        {
+            if (index > indexMapping[i])
             {
-                if (index > indexMapping[i])
-                {
-                    diceDropTable[i].RollTable(dropTableDict);
-                }
+                AddLoot(dropTableDict, basicLoots[i]);
             }
         }
     }

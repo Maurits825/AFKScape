@@ -76,16 +76,16 @@ public static class JsonHandler
         return JsonUtility.FromJson<ItemList>(JsonString.text);
     }
 
-    public static MonsterDropTable GetMonster(string monsterName)
+    public static MonsterDropTableHandler GetMonster(string monsterName)
     {
         TextAsset monsterDropTableJsonFile = Resources.Load<TextAsset>(string.Concat("JSON/MonsterDropTable/", monsterName));
-        return JsonUtility.FromJson<MonsterDropTable>(monsterDropTableJsonFile.text);
+        return JsonUtility.FromJson<MonsterDropTableHandler>(monsterDropTableJsonFile.text);
     }
 
-    public static DiceDropTable GetDiceDropTable()
+    public static MonsterDropTable GetDropTable()
     {
         TextAsset dropTableJsonFile = Resources.Load<TextAsset>("JSON/MonsterDropTable/temp");
-        return JsonUtility.FromJson<DiceDropTable>(dropTableJsonFile.text);
+        return JsonUtility.FromJson<MonsterDropTable>(dropTableJsonFile.text);
     }
 
     public static void SaveJsonFile(List<TrainingMethod> tMethodList, string selectedSkillName)
@@ -103,7 +103,7 @@ public static class JsonHandler
         AssetDatabase.Refresh();
     }
 
-    public static void SaveJsonFile(MonsterDropTable monsterDropTable, string monsterName)
+    public static void SaveJsonFile(MonsterDropTableHandler monsterDropTable, string monsterName)
     {
         string JSONString = JsonUtility.ToJson(monsterDropTable);
 

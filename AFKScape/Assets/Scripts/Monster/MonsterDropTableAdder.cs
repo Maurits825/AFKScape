@@ -4,6 +4,5 @@ using UnityEngine;
 
 public class MonsterDropTableAdder : MonoBehaviour
 {
-    public MonsterDropTable monsterDropTable = new MonsterDropTable();
-
+    public MonsterDropTableHandler monsterDropTableHandler = new MonsterDropTableHandler();
 }

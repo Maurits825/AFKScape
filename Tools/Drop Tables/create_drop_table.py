@@ -91,13 +91,11 @@ def create_json(drops):
     actual_chance = []
     base_chances = []
     ids = []
-    #todo this is only zulrah
 
     json_data = dict()
     json_data["name"] = "general"
-    json_data["tableType"] = 3
-    json_data["numRolls"] = 2
-    json_data["lootList"] = []
+    json_data["indexMapping"] = []
+    json_data["basicLoots"] = []
 
     for drop in drops:
         actual_chance.append(drop.actual_chance)
@@ -109,19 +107,21 @@ def create_json(drops):
 
     lcm = np.lcm.reduce(base_chance_arr)
     base_chance = int(lcm)
+    json_data["baseChance"] = base_chance
     scaled_chances = (actual_chance_arr * (lcm / base_chance_arr))
 
     #todo test this here or ut?
     index_mapping = 0 #final value of this would be like 238/248, meaning 10/248 is unique
     for i, drop in enumerate(drops):
         index_mapping = index_mapping + scaled_chances[i]
-        loot_list = dict()
-        loot_list["id"] = ids[i]
-        loot_list["amountMin"] = drop.amount_min
-        loot_list["amountMax"] = drop.amount_max
-        loot_list["indexMapping"] = index_mapping
 
-        json_data["lootList"].append(loot_list)
+        basic_loot = dict()
+        basic_loot["id"] = ids[i]
+        basic_loot["amountMin"] = drop.amount_min
+        basic_loot["amountMax"] = drop.amount_max
+        json_data["basicLoots"].append(basic_loot)
+
+        json_data["indexMapping"].append(index_mapping)
 
     out_file_name = r"..\..\AFKScape\Assets\Resources\JSON\MonsterDropTable/temp.json"
     with open(out_file_name, "w", newline="\n") as out_file:
