@@ -129,6 +129,6 @@ def create_json(drops):
 
 
 drop_list = get_drop_table(r"https://oldschool.runescape.wiki/w/Zulrah")
-#print_parsed_data(drop_list)
+print_parsed_data(drop_list)
 create_json(drop_list)
 #print(item_drop_list)

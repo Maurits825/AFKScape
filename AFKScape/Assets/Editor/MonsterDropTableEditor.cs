@@ -2,17 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEditorInternal;
 
 [CustomEditor(typeof(MonsterDropTableAdder))]
 public class MonsterDropTableEditor : Editor
 {
     SerializedProperty monsterDropTable;
+    SerializedProperty diceDropTable;
     DiceDropTable tempDiceDropTable;
-
+    
     private string monsterName;
+
+    ReorderableList reorderableList;
+
     void OnEnable()
     {
         monsterDropTable = serializedObject.FindProperty("monsterDropTable");
+        diceDropTable = serializedObject.FindProperty("monsterDropTable.diceDropTable");
+
+        reorderableList = new ReorderableList(serializedObject, diceDropTable, true, true, true, true);
+
+        reorderableList.drawHeaderCallback = DrawHeader;
     }
 
     public override void OnInspectorGUI()
@@ -32,6 +42,8 @@ public class MonsterDropTableEditor : Editor
         EditorGUILayout.PropertyField(monsterDropTable.FindPropertyRelative("rolls"));
         EditorGUILayout.PropertyField(monsterDropTable.FindPropertyRelative("baseChance"));
         EditorGUILayout.PropertyField(monsterDropTable.FindPropertyRelative("indexMapping")); //TODO custom?
+
+        reorderableList.DoLayoutList();
 
         EditorGUILayout.BeginHorizontal();
         if (GUILayout.Button("Add Emtpy Table"))
@@ -72,15 +84,11 @@ public class MonsterDropTableEditor : Editor
             JsonHandler.SaveJsonFile(monsterDropTableAdder.monsterDropTable, monsterName);
 
         }
+    }
 
-        if (GUILayout.Button("Clear"))
-        {
-            monsterDropTableAdder.monsterDropTable.diceDropTable.Clear();
-        }
-
-        if (GUILayout.Button("Test Save"))
-        {
-            JsonHandler.SaveJsonFile(monsterDropTableAdder.monsterDropTable.diceDropTable[0], "tempTest");
-        }
+    void DrawHeader(Rect rect)
+    {
+        string name = "Re-order drop tables";
+        EditorGUI.LabelField(rect, name);
     }
 }
