@@ -9,6 +9,6 @@ public class Monster
     string name;
     //other stuff
 
-    private MonsterDropTable monsterDropTable;
-    
+    public MonsterDropTableHandler monsterDropTableHandler;
+
 }

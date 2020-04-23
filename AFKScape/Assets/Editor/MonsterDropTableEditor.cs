@@ -8,7 +8,7 @@ using UnityEditorInternal;
 public class MonsterDropTableEditor : Editor
 {
     SerializedProperty monsterDropTableHandler;
-    SerializedProperty generalDropTable;
+    SerializedProperty generalDropTables;
 
     MonsterDropTable tempDiceDropTable;
 
@@ -26,7 +26,7 @@ public class MonsterDropTableEditor : Editor
     {
         tableDepth = 0;
         monsterDropTableHandler = serializedObject.FindProperty("monsterDropTableHandler");
-        generalDropTable = monsterDropTableHandler.FindPropertyRelative("generalDropTable");
+        generalDropTables = monsterDropTableHandler.FindPropertyRelative("generalDropTables");
         //diceDropTable = serializedObject.FindProperty("monsterDropTable.diceDropTable");
 
         //reorderableList = new ReorderableList(serializedObject, diceDropTable, true, true, true, true);
@@ -52,13 +52,28 @@ public class MonsterDropTableEditor : Editor
         EditorGUILayout.Space(10);
 
         EditorGUILayout.LabelField("100% Drop and Tertiary", EditorStyles.boldLabel);
+        if (GUILayout.Button("Add"))
+        {
+            monsterDropTableAdder.monsterDropTableHandler.generalDropTables.Add(new GeneralDropTable());
+        }
         EditorGUI.indentLevel++;
-        EditorGUILayout.PropertyField(generalDropTable, false);
-        if (generalDropTable.isExpanded)
+        EditorGUILayout.PropertyField(generalDropTables, false);
+        if (generalDropTables.isExpanded)
         {
             EditorGUI.indentLevel++;
-            EditorGUILayout.PropertyField(generalDropTable.FindPropertyRelative("lootItems"));
+            foreach (SerializedProperty table in generalDropTables)
+            {
+                EditorGUILayout.PropertyField(table, false);
+                if (table.isExpanded)
+                {
+                    EditorGUI.indentLevel++;
+                    EditorGUILayout.PropertyField(table.FindPropertyRelative("numRolls"));
+                    EditorGUILayout.PropertyField(table.FindPropertyRelative("lootItems"));
+                    EditorGUI.indentLevel--;
+                }
+            }
             EditorGUI.indentLevel--;
+
         }
         EditorGUI.indentLevel--;
 
