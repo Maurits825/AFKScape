@@ -111,13 +111,4 @@ public static class JsonHandler
         File.WriteAllText(string.Concat(Application.dataPath, "/Resources/JSON/MonsterDropTable/", monsterName, ".json"), JSONString);
         AssetDatabase.Refresh();
     }
-
-    public static void SaveJsonFile(DiceDropTable diceDropTable, string name)
-    {
-        string JSONString = JsonUtility.ToJson(diceDropTable);
-
-        //TODO better way for path?
-        File.WriteAllText(string.Concat(Application.dataPath, "/Resources/JSON/MonsterDropTable/", name, ".json"), JSONString);
-        AssetDatabase.Refresh();
-    }
 }
