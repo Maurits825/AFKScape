@@ -50,6 +50,12 @@ public class MainController : MonoBehaviour
     {
         //combat training not included
         skillsClasses.Add("Agility", new Agility());
+        skillsClasses.Add("Attack", new Attack());
+        skillsClasses.Add("Strength", new Strength());
+        skillsClasses.Add("Defence", new Defence());
+        skillsClasses.Add("Magic", new Magic());
+        skillsClasses.Add("Hitpoints", new Hitpoints());
+        skillsClasses.Add("Ranged", new Ranged());
         skillsClasses.Add("Construction", new Construction());
         skillsClasses.Add("Cooking", new Cooking());
         skillsClasses.Add("Crafting", new Crafting());
