@@ -12,9 +12,19 @@ public class MainControllerEditor : Editor
     string skillName;
     int selectedSkillInd;
     int experience;
+    int level;
 
     float timeConstantGain;
-
+    int lvl99 = 13034431;
+    List<string> combatSkills = new List<string>()
+    {
+        "Attack",
+        "Strength",
+        "Defence",
+        "Ranged",
+        "Magic",
+        "Hitpoints"
+    };
     public override void OnInspectorGUI()
     {
         MainController mainController = (MainController)target;
@@ -69,6 +79,84 @@ public class MainControllerEditor : Editor
             skill.currentLevel = newLvl;
             int totalLvl = mainController.GetTotalLevel();
             EventManager.Instance.LevelUp(skill.skillName, skill.currentLevel, totalLvl);
+        }
+
+        EditorGUILayout.Space(10);
+
+        EditorGUILayout.LabelField("Max Combat", EditorStyles.boldLabel);
+        if (GUILayout.Button("Max combat"))
+        {
+            foreach (string skills in combatSkills)
+            {
+                Skill skill = mainController.skillsClasses[skills];
+                skill.xpFloat = lvl99;
+
+                // sim events
+                EventManager.Instance.SkillClicked(skills);
+                EventManager.Instance.XpGained(skill.xp);
+                int newLvl = MainController.GetLevel(skill.xp);
+                skill.currentLevel = newLvl;
+                int totalLvl = mainController.GetTotalLevel();
+                EventManager.Instance.LevelUp(skill.skillName, skill.currentLevel, totalLvl);
+            }
+        }
+
+        EditorGUILayout.Space(10);
+
+        EditorGUILayout.LabelField("Max level in skill", EditorStyles.boldLabel);
+        selectedSkillInd = EditorGUILayout.Popup("Select Skill:", selectedSkillInd, Database.skillNames);
+        skillName = Database.skillNames[selectedSkillInd];
+        level = EditorGUILayout.IntField("Level:", level);
+        if (GUILayout.Button("Level # in skill"))
+        {
+            Skill skill = mainController.skillsClasses[skillName];
+            skill.xpFloat = Database.experienceTable[level-1];
+
+            EventManager.Instance.SkillClicked(skillName);
+            EventManager.Instance.XpGained(skill.xp);
+            int newLvl = MainController.GetLevel(skill.xp);
+            skill.currentLevel = newLvl;
+            int totalLvl = mainController.GetTotalLevel();
+            EventManager.Instance.LevelUp(skill.skillName, skill.currentLevel, totalLvl);
+        }
+
+        EditorGUILayout.Space(10);
+
+        EditorGUILayout.LabelField("Max Level", EditorStyles.boldLabel);
+        if (GUILayout.Button("Max Level"))
+        {
+            foreach (string skills in mainController.skillsClasses.Keys)
+            {
+                Skill skill = mainController.skillsClasses[skills];
+                skill.xpFloat = lvl99;
+
+                // sim events
+                EventManager.Instance.SkillClicked(skills);
+                EventManager.Instance.XpGained(skill.xp);
+                int newLvl = MainController.GetLevel(skill.xp);
+                skill.currentLevel = newLvl;
+                int totalLvl = mainController.GetTotalLevel();
+                EventManager.Instance.LevelUp(skill.skillName, skill.currentLevel, totalLvl);
+            }
+        }
+
+        EditorGUILayout.Space(10);
+
+        if (GUILayout.Button("Reset Levels"))
+        {
+            foreach (string skills in mainController.skillsClasses.Keys)
+            {
+                Skill skill = mainController.skillsClasses[skills];
+                skill.xpFloat = 0;
+
+                // sim events
+                EventManager.Instance.SkillClicked(skills);
+                EventManager.Instance.XpGained(skill.xp);
+                int newLvl = MainController.GetLevel(skill.xp);
+                skill.currentLevel = newLvl;
+                int totalLvl = mainController.GetTotalLevel();
+                EventManager.Instance.LevelUp(skill.skillName, skill.currentLevel, totalLvl);
+            }
         }
     }
 }
