@@ -6,9 +6,15 @@ public class Monster
 {
     //stats from database
     int id;
-    string name;
+    public string name;
     //other stuff
 
     public MonsterDropTableHandler monsterDropTableHandler;
+
+    public Monster(string mName)
+    {
+        name = mName;
+        monsterDropTableHandler = JsonHandler.GetMonster(name);
+    }
 
 }

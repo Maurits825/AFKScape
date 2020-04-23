@@ -18,28 +18,29 @@ public class MonsterDropTableHandler : MonsterDropTable
 
     public override void RollTable(Dictionary<long, int> dropTableDict)
     {
+        //roll general items individually, roll is handled in the table
+        for (int i = 0; i < generalDropTables.Count; i++)
+        {
+            generalDropTables[i].RollTable(dropTableDict);
+        }
+
         for (int r = 0; r < rolls; r++)
         {
-            //roll general items individually
-            for (int i = 0; i < generalDropTables.Count; i++)
-            {
-                generalDropTables[i].RollTable(dropTableDict);
-            }
-            
             int index = UnityEngine.Random.Range(1, baseChance);
-            int tableCount = monsterDropTables.Count;
+            int basicLootCount = basicLoots.Count;
 
             for (int i = 0; i < indexMapping.Count; i++)
             {
-                if (index > indexMapping[i])
+                if (index < indexMapping[i])
                 {
-                    if (i < tableCount)
+                    if (i < basicLootCount)
                     {
                         AddLoot(dropTableDict, basicLoots[i]);
+                        break;
                     }
                     else
                     {
-                        monsterDropTables[i % tableCount].RollTable(dropTableDict);
+                        monsterDropTables[i % basicLootCount].RollTable(dropTableDict);
                     }
                 }
             }
@@ -49,18 +50,28 @@ public class MonsterDropTableHandler : MonsterDropTable
     public Dictionary<long, int> CreateDropTableDictionary()
     {
         Dictionary<long, int> dropTableDict = new Dictionary<long, int>();
+
+        foreach (BasicLoot basicLoot in basicLoots)
+        {
+            dropTableDict[basicLoot.id] = 0;
+        }
+
         foreach (MonsterDropTable table in monsterDropTables)
         {
             foreach (BasicLoot basicLoot in table.basicLoots)
             {
-                dropTableDict.Add(basicLoot.id, 0);
+                dropTableDict[basicLoot.id] = 0;
             }
         }
 
         foreach (GeneralDropTable table in generalDropTables)
         {
-
+            foreach (DropTable.Loot loot in table.lootItems)
+            {
+                dropTableDict[loot.id] = 0;
+            }
         }
+
         return dropTableDict;
     }
 }
