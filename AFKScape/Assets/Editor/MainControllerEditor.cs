@@ -25,9 +25,12 @@ public class MainControllerEditor : Editor
         "Magic",
         "Hitpoints"
     };
+
+    MainController mainController;
+
     public override void OnInspectorGUI()
     {
-        MainController mainController = (MainController)target;
+        mainController = (MainController)target;
 
         EditorGUILayout.LabelField("Constants", EditorStyles.boldLabel);
         timeConstantGain = EditorGUILayout.Slider("Gain (log scale)", timeConstantGain, 1, 5);
@@ -72,13 +75,7 @@ public class MainControllerEditor : Editor
             Skill skill = mainController.skillsClasses[skillName];
             skill.xpFloat += experience;
 
-            //sim events
-            EventManager.Instance.SkillClicked(skillName);
-            EventManager.Instance.XpGained(skill.xp);
-            int newLvl = MainController.GetLevel(skill.xp);
-            skill.currentLevel = newLvl;
-            int totalLvl = mainController.GetTotalLevel();
-            EventManager.Instance.LevelUp(skill.skillName, skill.currentLevel, totalLvl);
+            SimEvents(skill, skillName);
         }
 
         EditorGUILayout.Space(10);
@@ -91,13 +88,7 @@ public class MainControllerEditor : Editor
                 Skill skill = mainController.skillsClasses[skills];
                 skill.xpFloat = lvl99;
 
-                // sim events
-                EventManager.Instance.SkillClicked(skills);
-                EventManager.Instance.XpGained(skill.xp);
-                int newLvl = MainController.GetLevel(skill.xp);
-                skill.currentLevel = newLvl;
-                int totalLvl = mainController.GetTotalLevel();
-                EventManager.Instance.LevelUp(skill.skillName, skill.currentLevel, totalLvl);
+                SimEvents(skill, skills);
             }
         }
 
@@ -112,12 +103,7 @@ public class MainControllerEditor : Editor
             Skill skill = mainController.skillsClasses[skillName];
             skill.xpFloat = Database.experienceTable[level-1];
 
-            EventManager.Instance.SkillClicked(skillName);
-            EventManager.Instance.XpGained(skill.xp);
-            int newLvl = MainController.GetLevel(skill.xp);
-            skill.currentLevel = newLvl;
-            int totalLvl = mainController.GetTotalLevel();
-            EventManager.Instance.LevelUp(skill.skillName, skill.currentLevel, totalLvl);
+            SimEvents(skill, skillName);
         }
 
         EditorGUILayout.Space(10);
@@ -130,13 +116,7 @@ public class MainControllerEditor : Editor
                 Skill skill = mainController.skillsClasses[skills];
                 skill.xpFloat = lvl99;
 
-                // sim events
-                EventManager.Instance.SkillClicked(skills);
-                EventManager.Instance.XpGained(skill.xp);
-                int newLvl = MainController.GetLevel(skill.xp);
-                skill.currentLevel = newLvl;
-                int totalLvl = mainController.GetTotalLevel();
-                EventManager.Instance.LevelUp(skill.skillName, skill.currentLevel, totalLvl);
+                SimEvents(skill, skills);
             }
         }
 
@@ -149,14 +129,18 @@ public class MainControllerEditor : Editor
                 Skill skill = mainController.skillsClasses[skills];
                 skill.xpFloat = 0;
 
-                // sim events
-                EventManager.Instance.SkillClicked(skills);
-                EventManager.Instance.XpGained(skill.xp);
-                int newLvl = MainController.GetLevel(skill.xp);
-                skill.currentLevel = newLvl;
-                int totalLvl = mainController.GetTotalLevel();
-                EventManager.Instance.LevelUp(skill.skillName, skill.currentLevel, totalLvl);
+                SimEvents(skill, skills);
             }
         }
+    }
+
+    private void SimEvents(Skill skill, string skillName)
+    {
+        EventManager.Instance.SkillClicked(skillName);
+        EventManager.Instance.XpGained(skill.xp);
+        int newLvl = MainController.GetLevel(skill.xp);
+        skill.currentLevel = newLvl;
+        int totalLvl = mainController.GetTotalLevel();
+        EventManager.Instance.LevelUp(skill.skillName, skill.currentLevel, totalLvl);
     }
 }
