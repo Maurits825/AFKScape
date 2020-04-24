@@ -66,10 +66,16 @@ public class EventManager : MonoBehaviour
     }
 
     //---- Tabs ---
-    public event Action<int> onTabClicked;
-    public void TabClicked(int tabInd)
+    public event Action<int> onMainTabClicked;
+    public void MainTabClicked(int tabInd)
     {
-        onTabClicked?.Invoke(tabInd);
+        onMainTabClicked?.Invoke(tabInd);
+    }
+
+    public event Action<int> onPlayerTabClicked;
+    public void PlayerTabClicked(int tabInd)
+    {
+        onPlayerTabClicked?.Invoke(tabInd);
     }
 
 }

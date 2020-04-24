@@ -52,7 +52,7 @@ public class TabGroup : MonoBehaviour
         button.background.color = tabActive;
 
         int index = button.transform.GetSiblingIndex();
-        EventManager.Instance.TabClicked(index);
+        RaiseEvents(index);
 
         for (int i = 0; i < objectsToSwap.Count; i++)
         {
@@ -65,6 +65,11 @@ public class TabGroup : MonoBehaviour
                 objectsToSwap[i].SetActive(false);
             }
         }
+    }
+
+    public virtual void RaiseEvents(int index)
+    {
+
     }
 
     public void ResetTabs()
