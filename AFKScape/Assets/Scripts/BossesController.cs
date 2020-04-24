@@ -6,6 +6,7 @@ using System.Linq;
 public class BossesController : MonoBehaviour
 {
     Monster Zulrah;
+    Monster Vorkath;
 
     public static Inventory inventory = new Inventory(28);
     private Dictionary<long, int> dropTableDict = new Dictionary<long, int>();
@@ -14,6 +15,7 @@ public class BossesController : MonoBehaviour
     void Start()
     {
         Zulrah = new Monster("Zulrah");
+        Vorkath = new Monster("Vorkath");
     }
 
     // Update is called once per frame
@@ -22,10 +24,17 @@ public class BossesController : MonoBehaviour
         //KillTest();
     }
 
-    public void KillTest()
+    public void ZulrahKillTest()
     {
         dropTableDict = Zulrah.monsterDropTableHandler.CreateDropTableDictionary();
         Zulrah.monsterDropTableHandler.RollTable(dropTableDict);
+        AddItemsToInventory(dropTableDict);
+    }
+
+    public void VorkathKillTest()
+    {
+        dropTableDict = Vorkath.monsterDropTableHandler.CreateDropTableDictionary();
+        Vorkath.monsterDropTableHandler.RollTable(dropTableDict);
         AddItemsToInventory(dropTableDict);
     }
 

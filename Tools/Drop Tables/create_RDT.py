@@ -4,7 +4,8 @@ import re
 from osrsbox import items_api
 import numpy as np
 import json
-import click
+
+nothing_added = False
 
 
 class ItemDrop:
@@ -16,13 +17,10 @@ class ItemDrop:
         self.base_chance = base_chance
 
 
-def format_table_header(raw, start, end):
-    start_i = raw.index(start)+1
-    if end:
-        end_i = raw.index(end)+1
-    else:
-        end_i = -1
-    return raw[start_i:end_i]
+def format_table_header(raw):
+    start = raw.index("Runes_and_ammunition")
+    end = raw.index("Mega-rare_drop_table")
+    return raw[start:end+1]
 
 
 def get_rarity(raw):
@@ -40,7 +38,7 @@ def print_parsed_data(drops):
               ", " + str(drop.actual_chance) + "/" + str(drop.base_chance))
 
 
-def get_data_frames(url, start="Drops", end="Tertiary"):
+def get_data_frames(url):
     header = {
         "User-Agent": "Mozilla/5.0"
     }
@@ -49,50 +47,61 @@ def get_data_frames(url, start="Drops", end="Tertiary"):
 
     table_pattern = re.compile(r'class="mw-headline" id="(.*?)"')
     table_headers_raw = table_pattern.findall(req.text)
-    if start == "all":
-        table_headers = table_headers_raw
-    else:
-        table_headers = format_table_header(table_headers_raw, start, end)
+    table_headers = format_table_header(table_headers_raw)
 
     return pd.read_html(req.text), table_headers
 
 
-def process_data_frame(frame, item_drop_list):
+def process_data_frame(frame, item_drop_list, header, ind):
     for row in frame.itertuples():
         item_name = row.Item
+        if item_name == "Mega-rare drop table":
+            continue
 
-        quantity = str(row.Quantity).replace(',', '')
-        amounts = re.findall(r'([0-9]+)', str(quantity))
+        amounts = re.findall(r'([0-9]+)', str(row.Quantity))
         if len(amounts) == 1:
             min_amount = amounts[0]
             max_amount = amounts[0]
         elif len(amounts) == 2:
             min_amount = amounts[0]
-            max_amount = amounts[1]
+            if amounts[1] == '0':
+                max_amount = amounts[0]
+            else:
+                max_amount = amounts[1]
         elif item_name == "Nothing":
-            item_name = "Coins"
             min_amount = 0
             max_amount = 0
-        else:
-            a = 5
 
+        global nothing_added
         chance, base = get_rarity(row.Rarity)
+        if header[ind] == 'Gem_drop_table':
+            chance = int(chance) * 20
+            base = int(base) * 128
+
+        if item_name == "Rune spear":
+            chance = 124
+            base = 16384
+        elif item_name == "Shield left half":
+            chance = 62
+            base = 16384
+        elif item_name == "Dragon spear":
+            chance = 45
+            base = 16384
+        elif item_name == "Nothing":
+            if nothing_added:
+                continue
+            else:
+                nothing_added = True
+                item_name = "Coins"
+                chance = 2972
+                base = 16384
+
         item_drop_list.append(ItemDrop(item_name, min_amount, max_amount, chance, base))
 
 
-def check_table_header(header, exclude):
-    for header_exclude in exclude:
-        if header == header_exclude:
-            return False
-    return True
-
-
-def get_drop_table(url, exclude):
+def get_drop_table(url):
     dfs, table_headers = get_data_frames(url)
 
-    default_exclude = ["Rare_drop_table", "Tertiary", "Unique_drop_table", "Unique_drop_table",
-                       "Mutagens", "100%", "100%_drops"]
-    all_exclude = default_exclude + exclude
     item_drop_list = []
     header_ind = 0
     for data_frame in dfs:
@@ -101,15 +110,15 @@ def get_drop_table(url, exclude):
         except KeyError:
             pass
         else:
-            if check_table_header(table_headers[header_ind], all_exclude):
-                process_data_frame(data_frame, item_drop_list)
+            if table_headers[header_ind] != "Subtables":
+                process_data_frame(data_frame, item_drop_list, table_headers, header_ind)
             header_ind = header_ind + 1
 
     return item_drop_list
 
 
-def get_single_table(url, table_id, start_table):
-    dfs, table_headers = get_data_frames(url, start_table, None)
+def get_single_table(url, table_id):
+    dfs, table_headers = get_data_frames(url)
     item_drop_list = []
     header_ind = 0
     for data_frame in dfs:
@@ -133,8 +142,9 @@ def create_json(drops):
     ids = []
 
     json_data = dict()
-    json_data["name"] = "general"
+    json_data["name"] = "Rare drop Table"
     json_data["indexMapping"] = []
+    json_data["basicLoots"] = []
 
     for drop in drops:
         actual_chance.append(drop.actual_chance)
@@ -149,7 +159,6 @@ def create_json(drops):
     json_data["baseChance"] = base_chance
     scaled_chances = (actual_chance_arr * (lcm / base_chance_arr))
 
-    json_data["basicLoots"] = []
     index_mapping = 0
     for i, drop in enumerate(drops):
         index_mapping = index_mapping + scaled_chances[i]
@@ -162,33 +171,11 @@ def create_json(drops):
 
         json_data["indexMapping"].append(index_mapping)
 
-    out_file_name = r"./temp.json"
+    out_file_name = r"..\..\AFKScape\Assets\Resources\JSON\MonsterDropTable/rdt.json"
     with open(out_file_name, "w", newline="\n") as out_file:
         json.dump(json_data, out_file, indent=4)
 
 
-@click.command()
-@click.option('--name', '-b', help='Name of wiki page')
-@click.option('--exclude', '-e', help='Exclude table', multiple=True)
-@click.option('--boss_or_single', default="boss", help='Boss drop table or single table')
-@click.option('--table_name', '-t', help='Table name of single table')
-@click.option('--start_table', '-s', help='Start table (exclusive)')
-def json_from_boss(name, exclude, boss_or_single, table_name, start_table):
-    url = r"https://oldschool.runescape.wiki/w/" + name
-    if boss_or_single == "boss":
-        drop_list = get_drop_table(url, list(exclude))
-    elif boss_or_single == "single":
-        drop_list = get_single_table(url, table_name, start_table)
-    else:
-        raise ValueError
-    print_parsed_data(drop_list)
-    create_json(drop_list)
-
-
-if __name__ == '__main__':
-    json_from_boss()
-
-
-#drop_list = get_drop_table(r"https://oldschool.runescape.wiki/w/Zulrah")
-#print_parsed_data(drop_list)
-#create_json(drop_list)
+drop_list = get_drop_table(r"https://oldschool.runescape.wiki/w/Rare_drop_table")
+print_parsed_data(drop_list)
+create_json(drop_list)

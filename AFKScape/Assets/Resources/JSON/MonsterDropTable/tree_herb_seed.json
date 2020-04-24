@@ -1,0 +1,104 @@
+{
+    "name": "Tree-herb seed table",
+    "indexMapping": [
+        15.0,
+        29.0,
+        40.0,
+        50.0,
+        60.0,
+        69.0,
+        78.0,
+        87.0,
+        96.0,
+        103.0,
+        109.0,
+        114.0,
+        118.0,
+        121.0,
+        123.0,
+        125.0
+    ],
+    "baseChance": 125,
+    "basicLoots": [
+        {
+            "id": 5295,
+            "amountMin": "1",
+            "amountMax": "1"
+        },
+        {
+            "id": 5300,
+            "amountMin": "1",
+            "amountMax": "1"
+        },
+        {
+            "id": 5304,
+            "amountMin": "1",
+            "amountMax": "1"
+        },
+        {
+            "id": 5143,
+            "amountMin": "15",
+            "amountMax": "15"
+        },
+        {
+            "id": 5115,
+            "amountMin": "1",
+            "amountMax": "1"
+        },
+        {
+            "id": 21488,
+            "amountMin": "1",
+            "amountMax": "1"
+        },
+        {
+            "id": 5119,
+            "amountMin": "1",
+            "amountMax": "1"
+        },
+        {
+            "id": 21486,
+            "amountMin": "1",
+            "amountMax": "1"
+        },
+        {
+            "id": 5107,
+            "amountMin": "1",
+            "amountMax": "1"
+        },
+        {
+            "id": 5248,
+            "amountMin": "1",
+            "amountMax": "1"
+        },
+        {
+            "id": 5123,
+            "amountMin": "1",
+            "amountMax": "1"
+        },
+        {
+            "id": 5252,
+            "amountMin": "1",
+            "amountMax": "1"
+        },
+        {
+            "id": 5127,
+            "amountMin": "1",
+            "amountMax": "1"
+        },
+        {
+            "id": 22877,
+            "amountMin": "1",
+            "amountMax": "1"
+        },
+        {
+            "id": 22869,
+            "amountMin": "1",
+            "amountMax": "1"
+        },
+        {
+            "id": 22871,
+            "amountMin": "1",
+            "amountMax": "1"
+        }
+    ]
+}

@@ -10,7 +10,7 @@ public class MonsterDropTableEditor : Editor
     SerializedProperty monsterDropTableHandler;
     SerializedProperty generalDropTables;
 
-    MonsterDropTable tempDiceDropTable;
+    MonsterDropTable tempDropTable;
 
     private string monsterName;
 
@@ -51,6 +51,7 @@ public class MonsterDropTableEditor : Editor
                 if (table.isExpanded)
                 {
                     EditorGUI.indentLevel++;
+                    EditorGUILayout.PropertyField(table.FindPropertyRelative("name"));
                     EditorGUILayout.PropertyField(table.FindPropertyRelative("numRolls"));
                     EditorGUILayout.PropertyField(table.FindPropertyRelative("lootItems"));
                     EditorGUI.indentLevel--;
@@ -71,10 +72,10 @@ public class MonsterDropTableEditor : Editor
 
         if (GUILayout.Button("Add basic loot and index map"))
         {
-            tempDiceDropTable = JsonHandler.GetDropTable();
-            monsterDropTableAdder.monsterDropTableHandler.basicLoots = tempDiceDropTable.basicLoots;
-            monsterDropTableAdder.monsterDropTableHandler.indexMapping = tempDiceDropTable.indexMapping;
-            monsterDropTableAdder.monsterDropTableHandler.baseChance = tempDiceDropTable.baseChance;
+            tempDropTable = JsonHandler.GetDropTable("temp");
+            monsterDropTableAdder.monsterDropTableHandler.basicLoots = tempDropTable.basicLoots;
+            monsterDropTableAdder.monsterDropTableHandler.indexMapping = tempDropTable.indexMapping;
+            monsterDropTableAdder.monsterDropTableHandler.baseChance = tempDropTable.baseChance;
         }
 
         EditorGUI.indentLevel++;
@@ -83,6 +84,20 @@ public class MonsterDropTableEditor : Editor
 
         EditorGUILayout.LabelField("Other tables", EditorStyles.boldLabel);
         EditorGUI.indentLevel++;
+        if (GUILayout.Button("Add RDT"))
+        {
+            tempDropTable = JsonHandler.GetDropTable("rdt");
+            monsterDropTableAdder.monsterDropTableHandler.monsterDropTables.Add(tempDropTable);
+        }
+        if (GUILayout.Button("Add Tree-Herb Seed Table"))
+        {
+            tempDropTable = JsonHandler.GetDropTable("tree_herb_seed");
+            monsterDropTableAdder.monsterDropTableHandler.monsterDropTables.Add(tempDropTable);
+        }
+        if (GUILayout.Button("Add Custom"))
+        {
+            monsterDropTableAdder.monsterDropTableHandler.monsterDropTables.Add(new MonsterDropTable());
+        }
         EditorGUILayout.PropertyField(monsterDropTableHandler.FindPropertyRelative("monsterDropTables"));
         EditorGUI.indentLevel--;
       
