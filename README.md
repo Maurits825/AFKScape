@@ -6,3 +6,13 @@ Imagine not juicing
 
 ## About
 :rocket: no xp waste :rocket:
+
+## Built with
+* [Unity](https://unity.com/) - Development Platform
+
+## Authors
+* **Maurits VDS** - *Main Owner*
+* **Robin H aka Panda** - *Apprentice*
+
+## Acknowledgements
+* The reader of this
