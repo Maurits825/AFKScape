@@ -22,10 +22,6 @@ namespace Tests
             {
                 Assert.Greater(loot.id, 0);
                 Assert.Greater(loot.amountMin, 0);
-                if (loot.amountMax == 0)
-                {
-                    int a = 5;
-                }
                 Assert.Greater(loot.amountMax, 0);
             }
 
