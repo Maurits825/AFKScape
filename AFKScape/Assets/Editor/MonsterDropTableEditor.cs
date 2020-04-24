@@ -51,6 +51,7 @@ public class MonsterDropTableEditor : Editor
                 if (table.isExpanded)
                 {
                     EditorGUI.indentLevel++;
+                    EditorGUILayout.PropertyField(table.FindPropertyRelative("name"));
                     EditorGUILayout.PropertyField(table.FindPropertyRelative("numRolls"));
                     EditorGUILayout.PropertyField(table.FindPropertyRelative("lootItems"));
                     EditorGUI.indentLevel--;
@@ -87,6 +88,15 @@ public class MonsterDropTableEditor : Editor
         {
             tempDropTable = JsonHandler.GetDropTable("rdt");
             monsterDropTableAdder.monsterDropTableHandler.monsterDropTables.Add(tempDropTable);
+        }
+        if (GUILayout.Button("Add Tree-Herb Seed Table"))
+        {
+            tempDropTable = JsonHandler.GetDropTable("tree_herb_seed");
+            monsterDropTableAdder.monsterDropTableHandler.monsterDropTables.Add(tempDropTable);
+        }
+        if (GUILayout.Button("Add Custom"))
+        {
+            monsterDropTableAdder.monsterDropTableHandler.monsterDropTables.Add(new MonsterDropTable());
         }
         EditorGUILayout.PropertyField(monsterDropTableHandler.FindPropertyRelative("monsterDropTables"));
         EditorGUI.indentLevel--;
