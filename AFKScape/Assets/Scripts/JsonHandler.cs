@@ -82,9 +82,9 @@ public static class JsonHandler
         return JsonUtility.FromJson<MonsterDropTableHandler>(monsterDropTableJsonFile.text);
     }
 
-    public static MonsterDropTable GetDropTable()
+    public static MonsterDropTable GetDropTable(string name)
     {
-        TextAsset dropTableJsonFile = Resources.Load<TextAsset>("JSON/MonsterDropTable/temp");
+        TextAsset dropTableJsonFile = Resources.Load<TextAsset>(string.Concat("JSON/MonsterDropTable/", name));
         return JsonUtility.FromJson<MonsterDropTable>(dropTableJsonFile.text);
     }
 

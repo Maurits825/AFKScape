@@ -42,9 +42,10 @@ public class MonsterDropTable
         int index = UnityEngine.Random.Range(1, baseChance);
         for (int i = 0; i < indexMapping.Count; i++)
         {
-            if (index > indexMapping[i])
+            if (index < indexMapping[i])
             {
                 AddLoot(dropTableDict, basicLoots[i]);
+                break;
             }
         }
     }
