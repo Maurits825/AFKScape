@@ -53,6 +53,8 @@ def get_data_frames(url):
 def process_data_frame(frame, item_drop_list):
     for row in frame.itertuples():
         item_name = row.Item
+        if item_name == "Flax":
+            continue
 
         amounts = re.findall(r'([0-9]+)', str(row.Quantity))
         if len(amounts) == 1:
