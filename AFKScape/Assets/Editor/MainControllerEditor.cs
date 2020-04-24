@@ -132,12 +132,29 @@ public class MainControllerEditor : Editor
                 SimEvents(skill, skills);
             }
         }
+
+        EditorGUILayout.Space(10);
+
+        if (GUILayout.Button("Save Game"))
+        {
+            SaveHandler saveHandler = new SaveHandler();
+            saveHandler.SaveGame();
+        }
+
+        EditorGUILayout.Space(10);
+
+        if (GUILayout.Button("Load Game"))
+        {
+            SaveHandler saveHandler = new SaveHandler();
+            saveHandler.LoadGame();
+        }
     }
 
     private void SimEvents(Skill skill, string skillName)
     {
         EventManager.Instance.SkillClicked(skillName);
         EventManager.Instance.XpGained(skill.xp);
+        skill.xpNextLvl = Database.experienceTable[1];
         int newLvl = MainController.GetLevel(skill.xp);
         skill.currentLevel = newLvl;
         int totalLvl = mainController.GetTotalLevel();
