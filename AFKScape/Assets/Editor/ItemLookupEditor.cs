@@ -53,7 +53,6 @@ public class ItemLookupEditor : Editor
         asButton = EditorGUILayout.Toggle("As buttons", asButton);
         maxResults = EditorGUILayout.IntSlider("Limit results: ", maxResults, 5, 100);
 
-
         if (GUILayout.Button("Get ID"))
         {
             itemList = itemLookup.GetItemId(itemName);
