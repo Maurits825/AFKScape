@@ -30,7 +30,7 @@ public class MainController : MonoBehaviour
 
         EventManager.Instance.onSkillClicked += OnSkillSelected;
         EventManager.Instance.onTrainingMethodClicked += SetTrainingMethod;
-        EventManager.Instance.onTabClicked += OnTabClicked;
+        EventManager.Instance.onMainTabClicked += OnTabClicked;
 
         InitStatic();
         InitSkillClasses();
