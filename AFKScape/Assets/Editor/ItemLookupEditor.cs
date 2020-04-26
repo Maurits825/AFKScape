@@ -16,11 +16,15 @@ public class ItemLookupEditor : Editor
     SerializedProperty idList;
 
     bool asButton = false;
+    int maxResults;
+    int resultCount;
 
     void OnEnable()
     {
         filterType = serializedObject.FindProperty("filterType");
         idList = serializedObject.FindProperty("idList");
+        maxResults = 10;
+        resultCount = 0;
     }
 
     public override void OnInspectorGUI()
@@ -47,7 +51,9 @@ public class ItemLookupEditor : Editor
         EditorGUILayout.PropertyField(filterType);
 
         asButton = EditorGUILayout.Toggle("As buttons", asButton);
-        
+        maxResults = EditorGUILayout.IntSlider("Limit results: ", maxResults, 5, 100);
+
+
         if (GUILayout.Button("Get ID"))
         {
             itemList = itemLookup.GetItemId(itemName);
@@ -55,30 +61,33 @@ public class ItemLookupEditor : Editor
 
         if (itemList.Count > 0)
         {
-            if (asButton)
+            resultCount = 0;
+            foreach ((long, string, string) item in itemList)
             {
-                foreach ((long, string, string) item in itemList)
-                {
-                    if (GUILayout.Button("Name: " + item.Item2 + ", ID: " + item.Item1.ToString()))
-                    {
-                        itemLookup.idList.Add(item.Item1);
-                    }
-                    EditorGUILayout.Space(3);
-                }
-            }
-            else
-            {
-                foreach ((long, string, string) item in itemList)
+                if (resultCount < maxResults)
                 {
                     EditorGUILayout.BeginVertical("box");
                     EditorGUILayout.BeginHorizontal();
-                    EditorGUILayout.LabelField("Name: " + item.Item2);
-                    EditorGUILayout.LabelField("Extra info: " + item.Item3);
+                    EditorGUILayout.LabelField("Name: " + item.Item2, GUILayout.ExpandWidth(true), GUILayout.MinWidth(50));
+                    EditorGUILayout.LabelField("Extra info: " + item.Item3, GUILayout.ExpandWidth(true), GUILayout.MinWidth(50));
+
+                    if (asButton)
+                    {
+                        if (GUILayout.Button("Add", GUILayout.ExpandWidth(true), GUILayout.MinWidth(50)))
+                        {
+                            itemLookup.idList.Add(item.Item1);
+                        }
+                        EditorGUILayout.Space(3);
+                    }
+
+                    GUILayout.Box(Resources.Load<Texture>("Icons/" + item.Item1.ToString()));
                     EditorGUILayout.EndHorizontal();
 
                     EditorGUILayout.LabelField("ID: " + item.Item1.ToString());
                     EditorGUILayout.EndVertical();
                     EditorGUILayout.Space(3);
+
+                    resultCount++;
                 }
             }
         }
