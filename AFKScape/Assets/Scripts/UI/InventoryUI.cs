@@ -7,14 +7,24 @@ public class InventoryUI : MonoBehaviour
 {
     public GameObject inventoryPanel;
     private Dictionary<int, Text> inventoryText = new Dictionary<int, Text>();
+    private Dictionary<int, Image> inventoryImage = new Dictionary<int, Image>();
 
     public void InitUI()
     {
         Text[] invTexts = inventoryPanel.GetComponentsInChildren<Text>();
+        Image[] invImages = inventoryPanel.GetComponentsInChildren<Image>();
+
         int slot = 0;
         foreach (Text invText in invTexts)
         {
             inventoryText.Add(slot, invText);
+            slot++;
+        }
+
+        slot = 0;
+        foreach (Image invImage in invImages)
+        {
+            inventoryImage.Add(slot, invImage);
             slot++;
         }
     }
@@ -27,7 +37,8 @@ public class InventoryUI : MonoBehaviour
         }
         else
         {
-            inventoryText[slotIndex].text = string.Concat(Database.items[id].name, "\n", amount.ToString());
+            inventoryText[slotIndex].text = amount.ToString();
+            inventoryImage[slotIndex].sprite = Resources.Load<Sprite>("Icons/" + id.ToString());
         }
         
     }
