@@ -10812,90 +10812,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trainingMethods:
-  - name: Shrimp
-    xpPerResource: 30
-    baseResourceRate: 1166
+  - name: Tin ore
+    xpPerResource: 17.5
+    baseResourceRate: 200
     consumables: []
     dropTables:
+    - name: Pet
+      tableType: 2
+      numRolls: 1
+      lootItems:
+      - id: 13321
+        amountMin: 1
+        amountMax: 1
+        chance: 1
+        baseChance: 741600
+    - name: Clue
+      tableType: 1
+      numRolls: 1
+      lootItems:
+      - id: 0
+        amountMin: 1
+        amountMax: 1
+        chance: 1
+        baseChance: 741600
     - name: General
       tableType: 0
       numRolls: 1
       lootItems:
-      - id: 315
+      - id: 438
         amountMin: 1
         amountMax: 1
         chance: 1
         baseChance: 1
     requirements:
       levelRequirements:
-      - skillName: Cooking
+      - skillName: Mining
         levelReq: 1
       questIds: 
       itemIds: 
-      generalSkillItems: 
-  - name: Trout
-    xpPerResource: 70
-    baseResourceRate: 1214
-    consumables: []
-    dropTables:
-    - name: General
-      tableType: 0
-      numRolls: 1
-      lootItems:
-      - id: 333
-        amountMin: 1
-        amountMax: 1
-        chance: 1
-        baseChance: 1
-    requirements:
-      levelRequirements:
-      - skillName: Cooking
-        levelReq: 15
-      questIds: 
-      itemIds: 
-      generalSkillItems: 
-  - name: Karambwan
-    xpPerResource: 190
-    baseResourceRate: 4200
-    consumables: []
-    dropTables:
-    - name: General
-      tableType: 0
-      numRolls: 1
-      lootItems:
-      - id: 3144
-        amountMin: 1
-        amountMax: 1
-        chance: 1
-        baseChance: 1
-    requirements:
-      levelRequirements:
-      - skillName: Cooking
-        levelReq: 30
-      questIds: 
-      itemIds: 
-      generalSkillItems: 
-  - name: Salmon
-    xpPerResource: 90
-    baseResourceRate: 666
-    consumables: []
-    dropTables:
-    - name: General
-      tableType: 0
-      numRolls: 1
-      lootItems:
-      - id: 329
-        amountMin: 1
-        amountMax: 1
-        chance: 1
-        baseChance: 1
-    requirements:
-      levelRequirements:
-      - skillName: Cooking
-        levelReq: 25
-      questIds: 
-      itemIds: 
-      generalSkillItems: 
+      generalSkillItems: f104000000000000f304000000000000f504000000000000f704000000000000f904000000000000fb04000000000000902e0000000000000930000000000000fd31000000000000bb33000000000000bc330000000000002e4e000000000000ec5a0000000000007d5c000000000000805c000000000000825c000000000000
 --- !u!4 &1537179034
 Transform:
   m_ObjectHideFlags: 0
@@ -12955,6 +12910,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8357514445423542047, guid: 39063523f3d1a2540b3790f112cef81e,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 04d55319eb8443f458044077b96863e9,
+        type: 3}
+    - target: {fileID: 8969773038257908475, guid: 39063523f3d1a2540b3790f112cef81e,
+        type: 3}
+      propertyPath: m_Text
+      value: 9999
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39063523f3d1a2540b3790f112cef81e, type: 3}
