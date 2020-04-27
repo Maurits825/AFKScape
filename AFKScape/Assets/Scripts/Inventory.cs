@@ -2,6 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public class ItemSlot
+{
+    public int amount;
+    public int slotIndex;
+
+    public ItemSlot(int num, int idx)
+    {
+        amount = num;
+        slotIndex = idx;
+    }
+}
+
 public class Inventory
 {
     public Dictionary<long, ItemSlot> items = new Dictionary<long, ItemSlot>(); //id and amount, add slot num here?
@@ -10,17 +22,7 @@ public class Inventory
     private int usedSlots = 0;
     private int totalSlots;
 
-    public class ItemSlot
-    {
-        public int amount;
-        public int slotIndex;
-
-        public ItemSlot(int num, int idx)
-        {
-            amount = num;
-            slotIndex = idx;
-        }
-    }
+    
 
     public Inventory(int slots)
     {
