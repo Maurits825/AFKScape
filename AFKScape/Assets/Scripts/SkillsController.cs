@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 
 public class SkillsController
 {
@@ -119,7 +118,7 @@ public class SkillsController
             }
         }
 
-        AddItemsToInventory(dropTableDict);//TODO this will add to bank later
+        inventory.AddMultipleItems(dropTableDict);//TODO this will add to bank later
     }
 
     public static int GetLevel(int xp)
@@ -240,15 +239,5 @@ public class SkillsController
     private void OnTabClicked(int tabIndex)
     {
         isTrainingMethodSelected = false;
-    }
-
-    //TODO move this to bank/inv/utility
-    private void AddItemsToInventory(Dictionary<long, int> items)
-    {
-        foreach (long id in items.Keys.ToList())
-        {
-            inventory.AddItem(id, items[id]);
-            items[id] = 0;
-        }
     }
 }

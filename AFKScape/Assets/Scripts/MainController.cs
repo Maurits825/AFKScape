@@ -25,10 +25,8 @@ public class MainController : MonoBehaviour
     //all class "singleton" instances, make static?
     public SkillsController skillsController;
 
-    public EventManager eventManager;
-
-    private readonly int inventorySlots = 28;
     public Inventory inventory;
+    public Bank bank;
 
     
     // Start is called before the first frame update
@@ -37,7 +35,7 @@ public class MainController : MonoBehaviour
         SetInstances();
         Database.LoadAll();
 
-        eventManager.onMainTabClicked += OnTabClicked;
+        EventManager.Instance.onMainTabClicked += OnTabClicked;
 
         //call init on all classes
         skillsController.Initialize(inventory);
@@ -84,7 +82,8 @@ public class MainController : MonoBehaviour
     private void SetInstances()
     {
         skillsController = new SkillsController();
-        inventory = new Inventory(inventorySlots);
+        inventory = new Inventory();
+        bank = new Bank();
     }
 
     private void OnTabClicked(int index)

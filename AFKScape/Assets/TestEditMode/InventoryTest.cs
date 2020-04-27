@@ -14,11 +14,10 @@ namespace Tests
         private long dragonMedId = 1149;
 
         [SetUp]
-
         public void Setup()
         {
             EventManager.setIntance(new EventManager());
-            inventory = new Inventory(inventorySlots);
+            inventory = new Inventory();
             inventory.AddItem(heronId, 1);
             inventory.AddItem(heronId, 1);
             inventory.AddItem(dragonMedId, 8);

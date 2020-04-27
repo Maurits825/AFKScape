@@ -8,7 +8,7 @@ public class BossesController : MonoBehaviour
     Monster Zulrah;
     Monster Vorkath;
 
-    public static Inventory inventory = new Inventory(28);
+    public static Inventory inventory = new Inventory();
     private Dictionary<long, int> dropTableDict = new Dictionary<long, int>();
 
     // Start is called before the first frame update
@@ -28,26 +28,13 @@ public class BossesController : MonoBehaviour
     {
         dropTableDict = Zulrah.monsterDropTableHandler.CreateDropTableDictionary();
         Zulrah.monsterDropTableHandler.RollTable(dropTableDict);
-        AddItemsToInventory(dropTableDict);
+        inventory.AddMultipleItems(dropTableDict);
     }
 
     public void VorkathKillTest()
     {
         dropTableDict = Vorkath.monsterDropTableHandler.CreateDropTableDictionary();
         Vorkath.monsterDropTableHandler.RollTable(dropTableDict);
-        AddItemsToInventory(dropTableDict);
-    }
-
-    //TODO this can be move to inv?
-    private void AddItemsToInventory(Dictionary<long, int> items)
-    {
-        foreach (long id in items.Keys.ToList())
-        {
-            if (items[id] > 0)
-            {
-                inventory.AddItem(id, items[id]);
-                items[id] = 0;
-            }
-        }
+        inventory.AddMultipleItems(dropTableDict);
     }
 }

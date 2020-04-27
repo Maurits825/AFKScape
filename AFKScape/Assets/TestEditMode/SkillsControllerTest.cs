@@ -16,7 +16,7 @@ namespace Tests
         {
             Database.LoadExperienceTable();
             skillsController = new SkillsController();
-            inventory = new Inventory(28);
+            inventory = new Inventory();
             skillsController.Initialize(inventory);
         }
 

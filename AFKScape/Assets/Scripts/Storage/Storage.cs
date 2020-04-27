@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class ItemSlot
 {
@@ -14,18 +15,13 @@ public class ItemSlot
     }
 }
 
-public class Inventory
+public class Storage
 {
-    public Dictionary<long, ItemSlot> items = new Dictionary<long, ItemSlot>(); //id and amount, add slot num here?
+    public Dictionary<long, ItemSlot> items = new Dictionary<long, ItemSlot>();
 
-    private int nextAvailableSlot = 0; //TODO handle this better
+    private int nextAvailableSlot = 0;
     private int usedSlots = 0;
-    private int totalSlots;
-
-    public Inventory(int slots)
-    {
-        totalSlots = slots;
-    }
+    public int totalSlots;
 
     public bool Contains(long id)
     {
@@ -59,7 +55,19 @@ public class Inventory
         }
 
         return addedItem;
-            
+
+    }
+
+    public void AddMultipleItems(Dictionary<long, int> items)
+    {
+        foreach (long id in items.Keys.ToList())
+        {
+            if (items[id] > 0)
+            {
+                AddItem(id, items[id]);
+                items[id] = 0;
+            }
+        }
     }
 
     public bool RemoveItem(long id, int amount)
@@ -87,7 +95,7 @@ public class Inventory
 
         return removedItem;
     }
-    
+
     public void RemoveAll()
     {
         List<long> ids = new List<long>();
