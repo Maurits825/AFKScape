@@ -16,10 +16,12 @@ public class SkillsController
     private Dictionary<long, int> dropTableDict = new Dictionary<long, int>();
 
     private Inventory inventory;
+    private Bank bank;
 
-    public void Initialize(Inventory inv)
+    public void Initialize(Inventory inventory, Bank bank)
     {
-        inventory = inv;
+        this.inventory = inventory;
+        this.bank = bank;
 
         InitSkillClasses();
         SubscribeEvents();
@@ -118,7 +120,7 @@ public class SkillsController
             }
         }
 
-        inventory.AddMultipleItems(dropTableDict);//TODO this will add to bank later
+        bank.AddMultipleItems(dropTableDict);//TODO this will add to bank later
     }
 
     public static int GetLevel(int xp)

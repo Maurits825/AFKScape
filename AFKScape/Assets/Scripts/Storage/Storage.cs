@@ -51,7 +51,7 @@ public class Storage
 
         if (addedItem)
         {
-            EventManager.Instance.ItemChanged(id, items[id].amount, items[id].slotIndex);
+            RaiseItemChangedEvent(id, items[id].amount, items[id].slotIndex);
         }
 
         return addedItem;
@@ -79,7 +79,7 @@ public class Storage
             items[id].amount -= amount;
             removedItem = true;
 
-            EventManager.Instance.ItemChanged(id, items[id].amount, items[id].slotIndex);
+            RaiseItemChangedEvent(id, items[id].amount, items[id].slotIndex);
 
             if (items[id].amount <= 0)
             {
@@ -110,5 +110,9 @@ public class Storage
         {
             RemoveItem(ids[i], amounts[i]);
         }
+    }
+
+    public virtual void RaiseItemChangedEvent(long id, int amount, int slotIndex)
+    {
     }
 }

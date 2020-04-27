@@ -38,7 +38,7 @@ public class MainController : MonoBehaviour
         EventManager.Instance.onMainTabClicked += OnTabClicked;
 
         //call init on all classes
-        skillsController.Initialize(inventory);
+        skillsController.Initialize(inventory, bank);
 
         //default tab is skills
         gameState = States.Skills;

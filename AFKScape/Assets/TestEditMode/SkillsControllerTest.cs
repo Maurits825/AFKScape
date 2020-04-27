@@ -10,14 +10,18 @@ namespace Tests
     {
         private SkillsController skillsController;
         private Inventory inventory;
+        private Bank bank;
 
         [SetUp]
         public void SetUp()
         {
+            EventManager.setIntance(new EventManager());
             Database.LoadExperienceTable();
             skillsController = new SkillsController();
             inventory = new Inventory();
-            skillsController.Initialize(inventory);
+            bank = new Bank();
+
+            skillsController.Initialize(inventory, bank);
         }
 
         // A Test behaves as an ordinary method
