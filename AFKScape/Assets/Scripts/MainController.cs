@@ -24,6 +24,7 @@ public class MainController : MonoBehaviour
 
     //all class "singleton" instances, make static?
     public SkillsController skillsController;
+    public BossesController bossesController;
 
     public Inventory inventory;
     public Bank bank;
@@ -39,6 +40,7 @@ public class MainController : MonoBehaviour
 
         //call init on all classes
         skillsController.Initialize(inventory, bank);
+        bossesController.Initialize(inventory, bank);
 
         //default tab is skills
         gameState = States.Skills;
@@ -63,6 +65,7 @@ public class MainController : MonoBehaviour
                 break;
 
             case States.Bosses:
+                bossesController.Operate();
                 break;
 
             case States.Raids:
@@ -82,6 +85,8 @@ public class MainController : MonoBehaviour
     private void SetInstances()
     {
         skillsController = new SkillsController();
+        bossesController = new BossesController();
+
         inventory = new Inventory();
         bank = new Bank();
     }

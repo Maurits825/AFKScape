@@ -29,6 +29,7 @@ public class EventManager : MonoBehaviour
     }
     #endregion
 
+    //---- Skills ----
     public event Action<string> onSkillClicked;
     public void SkillClicked(string skillName)
     {
@@ -59,6 +60,14 @@ public class EventManager : MonoBehaviour
         onXpGained?.Invoke(xp);
     }
 
+    //---- Bosses ----
+    public event Action<string> onBossClicked;
+    public void BossClicked(string bossName)
+    {
+        onBossClicked?.Invoke(bossName);
+    }
+
+
     //---- Storage ----
     public event Action<long, int, int> onItemChanged;
     public void ItemChanged(long id, int amount, int slotInd)
@@ -72,7 +81,7 @@ public class EventManager : MonoBehaviour
         onBankItemAdded?.Invoke(id, amount, slotInd);
     }
 
-    //---- Tabs ---
+    //---- Tabs ----
     public event Action<int> onMainTabClicked;
     public void MainTabClicked(int tabInd)
     {
