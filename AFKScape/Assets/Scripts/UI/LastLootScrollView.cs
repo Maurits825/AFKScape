@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LastLootScrollView
+public class LastLootScrollView : MonoBehaviour
 {
     [SerializeField]
-    private GameObject slotPrefab;
+    //private GameObject slotPrefab;
 
-    private List<GameObject> slotList;
+    //private List<GameObject> slotList;
 
     // Start is called before the first frame update
     void Start()

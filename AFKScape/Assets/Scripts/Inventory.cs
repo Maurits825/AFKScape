@@ -22,8 +22,6 @@ public class Inventory
     private int usedSlots = 0;
     private int totalSlots;
 
-    
-
     public Inventory(int slots)
     {
         totalSlots = slots;
