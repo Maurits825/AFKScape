@@ -112,6 +112,7 @@ public class Storage
         }
     }
 
+    //TODO add event for add and remove item, will be needed when withdrawing and deposit items.
     public virtual void RaiseItemChangedEvent(long id, int amount, int slotIndex)
     {
     }

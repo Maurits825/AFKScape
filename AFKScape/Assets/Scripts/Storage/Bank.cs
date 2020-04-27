@@ -8,4 +8,9 @@ public class Bank : Storage
     {
         totalSlots = 5000;
     }
+
+    public override void RaiseItemChangedEvent(long id, int amount, int slotIndex)
+    {
+        EventManager.Instance.BankItemAdded(id, amount, slotIndex);
+    }
 }

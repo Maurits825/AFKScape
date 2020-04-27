@@ -59,10 +59,17 @@ public class EventManager : MonoBehaviour
         onXpGained?.Invoke(xp);
     }
 
+    //---- Storage ----
     public event Action<long, int, int> onItemChanged;
     public void ItemChanged(long id, int amount, int slotInd)
     {
         onItemChanged?.Invoke(id, amount, slotInd);
+    }
+
+    public event Action<long, int, int> onBankItemAdded;
+    public void BankItemAdded(long id, int amount, int slotInd)
+    {
+        onBankItemAdded?.Invoke(id, amount, slotInd);
     }
 
     //---- Tabs ---
