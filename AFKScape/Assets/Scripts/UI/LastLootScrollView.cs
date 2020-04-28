@@ -1,38 +1,39 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LastLootScrollView : MonoBehaviour
 {
     [SerializeField]
-    //private GameObject slotPrefab;
+    private GameObject slotPrefab;
+    [SerializeField]
+    private Transform slotListParent;
 
-    //private List<GameObject> slotList;
+    private int itemCount = 0;
+    private int slotIndex = 0;
+    private List<GameObject> slotsObjecs = new List<GameObject>();
+    private Dictionary<long, Text> bankText = new Dictionary<long, Text>();
+    private Dictionary<long, Image> bankImage = new Dictionary<long, Image>();
 
-    // Start is called before the first frame update
     void Start()
     {
-        //EventManager.Instance.onDrawTrainingMethods += CreateTrainingMethodButtons;
-        //onNewItemReceived/onNewItemAdded += updateamount/updateUI
+        EventManager.Instance.onBankItemAdded += UpdateLastLootUI;
     }
 
-    //void update ui(int id, int amount, ind slotIndex)
-    //from inventory ui
-    //...Text[slotIndex] = id.ToString
-    //...Image = load(id.ToString)
-
-    void CreateLootPlaceHodlers(Dictionary<long, ItemSlot> items)
+    void UpdateLastLootUI(long id, int amount, int _)
     {
-        //foreach item in items
-        //instantiate slotPrefab
-        //add slot to list
-        //then we can update with slotList[index].text?
-        //or imageList.add(slot.image) or something
-    }
+        if (!bankText.ContainsKey(id))
+        {
+            GameObject slot = Instantiate(slotPrefab) as GameObject;
+            slot.transform.SetParent(slotListParent, false);
+            slotsObjecs.Add(slot);
+            bankText.Add(id, slot.GetComponentInChildren<Text>());
+            bankImage.Add(id, slot.GetComponentInChildren<Image>());
+            itemCount++;
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        bankText[id].text = amount.ToString();
+        bankImage[id].sprite = Resources.Load<Sprite>("Icons/" + id.ToString());
     }
 }
