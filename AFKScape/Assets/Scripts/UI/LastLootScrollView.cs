@@ -10,8 +10,6 @@ public class LastLootScrollView : MonoBehaviour
     [SerializeField]
     private Transform slotListParent;
 
-    private int itemCount = 0;
-    private int slotIndex = 0;
     private List<GameObject> slotsObjects = new List<GameObject>();
     private Dictionary<long, Text> bankText = new Dictionary<long, Text>();
     private Dictionary<long, Image> bankImage = new Dictionary<long, Image>();
@@ -32,7 +30,6 @@ public class LastLootScrollView : MonoBehaviour
             slotsObjects.Add(slot);
             bankText.Add(id, slot.GetComponentInChildren<Text>());
             bankImage.Add(id, slot.GetComponentInChildren<Image>());
-            itemCount++;
         }
 
         bankText[id].text = amount.ToString();

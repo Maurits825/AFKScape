@@ -230,6 +230,7 @@ public class SkillsController
         if (CheckRequirement(selectedSkill.trainingMethods[selectedTrainingMethodInd]))
         {
             isTrainingMethodSelected = true;
+            actionCount = 0;
             dropTableDict = DropTableManager.CreateDropTableDictionary(selectedSkill.trainingMethods[selectedTrainingMethodInd].dropTables);
         }
         else
