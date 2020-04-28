@@ -3,51 +3,67 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class BossesController : MonoBehaviour
+public class BossesController
 {
-    Monster Zulrah;
-    Monster Vorkath;
+    public Dictionary<string, Monster> bossesClasses = new Dictionary<string, Monster>();
 
-    public static Inventory inventory = new Inventory(28);
     private Dictionary<long, int> dropTableDict = new Dictionary<long, int>();
 
-    // Start is called before the first frame update
-    void Start()
+    private Inventory inventory;
+    private Bank bank;
+
+    private string selectedBossName;
+   
+    public void Initialize(Inventory inventory, Bank bank)
     {
-        Zulrah = new Monster("Zulrah");
-        Vorkath = new Monster("Vorkath");
+        this.inventory = inventory;
+        this.bank = bank;
+
+        SubscribeEvents();
+        InitMonsterClasses();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Operate()
     {
-        //KillTest();
+        if (!string.IsNullOrEmpty(selectedBossName))
+        {
+            bossesClasses[selectedBossName].monsterDropTableHandler.RollTable(dropTableDict);
+            bank.AddMultipleItems(dropTableDict);
+        }
     }
 
+    public void InitMonsterClasses()
+    {
+        //TODO is there a better way to add/manage these
+        //could use monster id
+        //TODO also this could be different, there could be a specific Zulrah class
+        bossesClasses.Add("Zulrah", new Monster("Zulrah"));
+        bossesClasses.Add("Vorkath", new Monster("Vorkath"));
+    }
+
+    public void SubscribeEvents()
+    {
+        EventManager.Instance.onBossClicked += OnBossSelected;
+    }
+
+    public void OnBossSelected(string bossName)
+    {
+        selectedBossName= bossName;
+        dropTableDict = bossesClasses[selectedBossName].monsterDropTableHandler.CreateDropTableDictionary();
+    }
+
+    /*
     public void ZulrahKillTest()
     {
         dropTableDict = Zulrah.monsterDropTableHandler.CreateDropTableDictionary();
         Zulrah.monsterDropTableHandler.RollTable(dropTableDict);
-        AddItemsToInventory(dropTableDict);
+        inventory.AddMultipleItems(dropTableDict);
     }
 
     public void VorkathKillTest()
     {
         dropTableDict = Vorkath.monsterDropTableHandler.CreateDropTableDictionary();
         Vorkath.monsterDropTableHandler.RollTable(dropTableDict);
-        AddItemsToInventory(dropTableDict);
-    }
-
-    //TODO this can be move to inv?
-    private void AddItemsToInventory(Dictionary<long, int> items)
-    {
-        foreach (long id in items.Keys.ToList())
-        {
-            if (items[id] > 0)
-            {
-                inventory.AddItem(id, items[id]);
-                items[id] = 0;
-            }
-        }
-    }
+        inventory.AddMultipleItems(dropTableDict);
+    }*/
 }

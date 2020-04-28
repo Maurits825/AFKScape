@@ -27,14 +27,16 @@ public class MainControllerEditor : Editor
     };
 
     MainController mainController;
+    SkillsController skillsController;
 
     public override void OnInspectorGUI()
     {
         mainController = (MainController)target;
+        skillsController = mainController.skillsController;
 
         EditorGUILayout.LabelField("Constants", EditorStyles.boldLabel);
         timeConstantGain = EditorGUILayout.Slider("Gain (log scale)", timeConstantGain, 1, 5);
-        mainController.timeConstant = (1.0F / (60.0F * 60.0F)) * Mathf.Pow(10, timeConstantGain);
+        MainController.timeConstant = (1.0F / (60.0F * 60.0F)) * Mathf.Pow(10, timeConstantGain);
 
         EditorGUILayout.Space(10);
 
@@ -45,7 +47,7 @@ public class MainControllerEditor : Editor
         id = EditorGUILayout.LongField("ID:", id);
         if (GUILayout.Button("Add item"))
         {
-            MainController.inventory.AddItem(id, amount);
+            mainController.inventory.AddItem(id, amount);
         }
         EditorGUILayout.EndVertical();
 
@@ -53,14 +55,14 @@ public class MainControllerEditor : Editor
         amount = EditorGUILayout.IntField("Amount:", amount);
         if (GUILayout.Button("Remove item"))
         {
-            MainController.inventory.RemoveItem(id, amount);
+            mainController.inventory.RemoveItem(id, amount);
         }
         EditorGUILayout.EndVertical();
         EditorGUILayout.EndHorizontal();
 
         if (GUILayout.Button("Remove all"))
         {
-            MainController.inventory.RemoveAll();
+            mainController.inventory.RemoveAll();
         }
 
         EditorGUILayout.Space(10);
@@ -72,7 +74,7 @@ public class MainControllerEditor : Editor
 
         if (GUILayout.Button("Add xp"))
         {
-            Skill skill = mainController.skillsClasses[skillName];
+            Skill skill = skillsController.skillsClasses[skillName];
             skill.xpFloat += experience;
 
             SimEvents(skill, skillName);
@@ -85,7 +87,7 @@ public class MainControllerEditor : Editor
         {
             foreach (string skills in combatSkills)
             {
-                Skill skill = mainController.skillsClasses[skills];
+                Skill skill = skillsController.skillsClasses[skills];
                 skill.xpFloat = lvl99;
 
                 SimEvents(skill, skills);
@@ -94,13 +96,13 @@ public class MainControllerEditor : Editor
 
         EditorGUILayout.Space(10);
 
-        EditorGUILayout.LabelField("Max level in skill", EditorStyles.boldLabel);
+        EditorGUILayout.LabelField("Set level in skill", EditorStyles.boldLabel);
         selectedSkillInd = EditorGUILayout.Popup("Select Skill:", selectedSkillInd, Database.skillNames);
         skillName = Database.skillNames[selectedSkillInd];
         level = EditorGUILayout.IntField("Level:", level);
         if (GUILayout.Button("Level # in skill"))
         {
-            Skill skill = mainController.skillsClasses[skillName];
+            Skill skill = skillsController.skillsClasses[skillName];
             skill.xpFloat = Database.experienceTable[level-1];
 
             SimEvents(skill, skillName);
@@ -111,9 +113,9 @@ public class MainControllerEditor : Editor
         EditorGUILayout.LabelField("Max Level", EditorStyles.boldLabel);
         if (GUILayout.Button("Max Level"))
         {
-            foreach (string skills in mainController.skillsClasses.Keys)
+            foreach (string skills in skillsController.skillsClasses.Keys)
             {
-                Skill skill = mainController.skillsClasses[skills];
+                Skill skill = skillsController.skillsClasses[skills];
                 skill.xpFloat = lvl99;
 
                 SimEvents(skill, skills);
@@ -124,9 +126,9 @@ public class MainControllerEditor : Editor
 
         if (GUILayout.Button("Reset Levels"))
         {
-            foreach (string skills in mainController.skillsClasses.Keys)
+            foreach (string skills in skillsController.skillsClasses.Keys)
             {
-                Skill skill = mainController.skillsClasses[skills];
+                Skill skill = skillsController.skillsClasses[skills];
                 skill.xpFloat = 0;
 
                 SimEvents(skill, skills);
@@ -138,9 +140,9 @@ public class MainControllerEditor : Editor
     {
         EventManager.Instance.SkillClicked(skillName);
         EventManager.Instance.XpGained(skill.xp);
-        int newLvl = MainController.GetLevel(skill.xp);
+        int newLvl = SkillsController.GetLevel(skill.xp);
         skill.currentLevel = newLvl;
-        int totalLvl = mainController.GetTotalLevel();
+        int totalLvl = skillsController.GetTotalLevel();
         EventManager.Instance.LevelUp(skill.skillName, skill.currentLevel, totalLvl);
     }
 }

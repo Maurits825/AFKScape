@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
-    public GameObject inventoryPanel;
+    public GameObject inventoryPanel; //TODO this can just be this.?
+    //TODO could use list?
     private Dictionary<int, Text> inventoryText = new Dictionary<int, Text>();
     private Dictionary<int, Image> inventoryImage = new Dictionary<int, Image>();
 
