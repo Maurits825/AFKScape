@@ -24,11 +24,16 @@ public class BankUI : MonoBehaviour
     {
         if (slotIndex >= itemCount)
         {
-            //item is not in the bank, create new icon
-            GameObject slot = Instantiate(slotPrefab) as GameObject;
-            slot.transform.SetParent(slotListParent, false);
-            bankText.Add(slot.GetComponentInChildren<Text>());
-            bankImage.Add(slot.GetComponentInChildren<Image>());
+            //TODO put this into function or something
+            GameObject slotObject = Instantiate(slotPrefab) as GameObject;
+            slotObject.transform.SetParent(slotListParent, false);
+
+            Slot slot = slotObject.GetComponent<Slot>();
+            slot.SetItemName(Database.items[id].name);
+            
+            bankText.Add(slot.amountText);
+            bankImage.Add(slot.iconImage);
+
             itemCount++;
         }
 
