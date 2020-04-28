@@ -197,18 +197,22 @@ public class SkillsController
     {
         if (!LevelRequirement(trainingMethod.requirements.levelRequirements))
         {
+            EventManager.Instance.ShowPopUpMsg("Need lvl x");
             return false;
         }
         if (!ItemRequirement(trainingMethod.requirements.itemIds))
         {
+            EventManager.Instance.ShowPopUpMsg("Need item x");
             return false;
         }
         if (!QuestRequirement(trainingMethod.requirements.questIds))
         {
+            EventManager.Instance.ShowPopUpMsg("Need quest x");
             return false;
         }
         if (!GeneralItemRequirement(trainingMethod.requirements.generalSkillItems))
         {
+            EventManager.Instance.ShowPopUpMsg("Need some kind of x item");
             return false;
         }
         return true;

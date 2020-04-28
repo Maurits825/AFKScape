@@ -94,4 +94,10 @@ public class EventManager : MonoBehaviour
         onPlayerTabClicked?.Invoke(tabInd);
     }
 
+    //---- Popup ----
+    public event Action<string> onShowPopUpMsg;
+    public void ShowPopUpMsg(string msg)
+    {
+        onShowPopUpMsg?.Invoke(msg);
+    }
 }
