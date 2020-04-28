@@ -12,13 +12,15 @@ public class LastLootScrollView : MonoBehaviour
 
     private int itemCount = 0;
     private int slotIndex = 0;
-    private List<GameObject> slotsObjecs = new List<GameObject>();
+    private List<GameObject> slotsObjects = new List<GameObject>();
     private Dictionary<long, Text> bankText = new Dictionary<long, Text>();
     private Dictionary<long, Image> bankImage = new Dictionary<long, Image>();
 
     void Start()
     {
         EventManager.Instance.onBankItemAdded += UpdateLastLootUI;
+        EventManager.Instance.onBossClicked += ClearLastLootUI;
+        EventManager.Instance.onSkillClicked += ClearLastLootUI;
     }
 
     void UpdateLastLootUI(long id, int amount, int _)
@@ -27,7 +29,7 @@ public class LastLootScrollView : MonoBehaviour
         {
             GameObject slot = Instantiate(slotPrefab) as GameObject;
             slot.transform.SetParent(slotListParent, false);
-            slotsObjecs.Add(slot);
+            slotsObjects.Add(slot);
             bankText.Add(id, slot.GetComponentInChildren<Text>());
             bankImage.Add(id, slot.GetComponentInChildren<Image>());
             itemCount++;
@@ -35,5 +37,22 @@ public class LastLootScrollView : MonoBehaviour
 
         bankText[id].text = amount.ToString();
         bankImage[id].sprite = Resources.Load<Sprite>("Icons/" + id.ToString());
+    }
+
+    //TODO when to call?
+    //TODO should only be cleared when a "clear" button pressed
+    void ClearLastLootUI(string _)
+    {
+        if (slotsObjects.Count > 0)
+        {
+            foreach (GameObject slot in slotsObjects)
+            {
+                Destroy(slot);
+            }
+
+            slotsObjects.Clear();
+            bankText.Clear();
+            bankImage.Clear();
+        }
     }
 }
