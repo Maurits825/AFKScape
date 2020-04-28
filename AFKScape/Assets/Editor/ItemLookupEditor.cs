@@ -34,15 +34,14 @@ public class ItemLookupEditor : Editor
         if (Database.items.Count == 0)
         {
             status = "Empty Database";
+            if (GUILayout.Button("Load Items"))
+            {
+                Database.LoadItems();
+            }
         }
         else
         {
             status = "Database Loaded";
-        }
-
-        if (GUILayout.Button("Load Items"))
-        {
-            Database.LoadItems();
         }
 
         EditorGUILayout.LabelField("Status: " + status, EditorStyles.boldLabel);
