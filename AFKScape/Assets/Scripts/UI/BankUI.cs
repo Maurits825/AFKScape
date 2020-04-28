@@ -7,6 +7,8 @@ public class BankUI : MonoBehaviour
 {
     [SerializeField]
     private GameObject slotPrefab;
+    [SerializeField]
+    private Transform slotListParent;
 
     private int itemCount = 0;
     private List<Text> bankText = new List<Text>();
@@ -15,6 +17,7 @@ public class BankUI : MonoBehaviour
     void Start()
     {
         EventManager.Instance.onBankItemAdded += UpdateBankUI;
+        gameObject.SetActive(false);
     }
 
     void UpdateBankUI(long id, int amount, int slotIndex)
@@ -23,7 +26,7 @@ public class BankUI : MonoBehaviour
         {
             //item is not in the bank, create new icon
             GameObject slot = Instantiate(slotPrefab) as GameObject;
-            slot.transform.SetParent(transform, false);
+            slot.transform.SetParent(slotListParent, false);
             bankText.Add(slot.GetComponentInChildren<Text>());
             bankImage.Add(slot.GetComponentInChildren<Image>());
             itemCount++;
