@@ -25,11 +25,15 @@ public class LastLootScrollView : MonoBehaviour
     {
         if (!bankText.ContainsKey(id))
         {
-            GameObject slot = Instantiate(slotPrefab) as GameObject;
-            slot.transform.SetParent(slotListParent, false);
-            slotsObjects.Add(slot);
-            bankText.Add(id, slot.GetComponentInChildren<Text>());
-            bankImage.Add(id, slot.GetComponentInChildren<Image>());
+            GameObject slotObject = Instantiate(slotPrefab) as GameObject;
+            slotObject.transform.SetParent(slotListParent, false);
+            slotsObjects.Add(slotObject);
+
+            Slot slot = slotObject.GetComponent<Slot>();
+            slot.SetItemName(Database.items[id].name);
+
+            bankText.Add(id, slot.amountText);
+            bankImage.Add(id, slot.iconImage);
         }
 
         bankText[id].text = amount.ToString();
@@ -37,7 +41,7 @@ public class LastLootScrollView : MonoBehaviour
     }
 
     //TODO when to call?
-    //TODO should only be cleared when a "clear" button pressed
+    //TODO should only be cleared when a "clear" button pressed?
     void ClearLastLootUI(string _)
     {
         if (slotsObjects.Count > 0)

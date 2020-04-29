@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+
 public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public Text amountText;
@@ -17,7 +18,10 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private bool isOver;
 
     private static readonly float yPosoffset = -65.0F;
-    private static float textHeight = 50; //TODO idk how to get this dynamically
+
+    Rect textRect;
+    private float textHeight = 0;
+    private float textWidth = 0;
     
     void Start()
     {
@@ -28,9 +32,19 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     void Update()
     {
+        if (textHeight == 0)
+        {
+            Rect textRect = toolTipObject.GetComponent<RectTransform>().rect;
+            textHeight = textRect.height;
+            textWidth = textRect.width;
+        }
+
         if (isOver)
         {
-            toolTipTransform.position = new Vector3(Input.mousePosition.x, Mathf.Clamp(Input.mousePosition.y + yPosoffset, 0.0F + textHeight/2.0F, Screen.height), 1.0F);
+            toolTipTransform.position = new Vector3(
+                Mathf.Clamp(Input.mousePosition.x, 0.0F, Screen.width - textWidth),
+                Mathf.Clamp(Input.mousePosition.y + yPosoffset, 0.0F + textHeight/2.0F, Screen.height),
+                0.0F);
         }
     }
 
