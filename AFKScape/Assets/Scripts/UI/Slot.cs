@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
     public Text amountText;
     public Image iconImage;
@@ -17,6 +17,8 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private Transform toolTipTransform;
     private bool isOver;
 
+    private CanvasGroup canvasGroup;
+
     private static readonly float yPosoffset = -65.0F;
 
     Rect textRect;
@@ -25,6 +27,8 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     
     void Start()
     {
+        canvasGroup = gameObject.GetComponent<CanvasGroup>();
+
         toolTipObject.SetActive(false);
         toolTipTransform = toolTipObject.transform;
         isOver = false;
@@ -53,6 +57,27 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         toolTipText.text = itemName;
     }
 
+    public void SetSlotActive(bool activate)
+    {
+        if (canvasGroup == null)
+        {
+            canvasGroup = gameObject.GetComponent<CanvasGroup>();
+        }
+
+        if (activate)
+        {
+            canvasGroup.interactable = true;
+            canvasGroup.alpha = 1;
+            canvasGroup.blocksRaycasts = true;
+        }
+        else
+        {
+            canvasGroup.interactable = false;
+            canvasGroup.alpha = 0;
+            canvasGroup.blocksRaycasts = false;
+        }
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         toolTipObject.SetActive(true);
@@ -63,5 +88,20 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         toolTipObject.SetActive(false);
         isOver = false;
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        gameObject.transform.position = eventData.position;
+    }
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        ;
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        ;
     }
 }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 491972891584927929}
   - component: {fileID: 491972891584927931}
   - component: {fileID: 1704176809501529448}
+  - component: {fileID: 1572899825536378814}
   m_Layer: 5
   m_Name: Slot
   m_TagString: Untagged
@@ -64,6 +65,18 @@ MonoBehaviour:
   iconImage: {fileID: 8357514445423542047}
   toolTipText: {fileID: 6594057572310342397}
   toolTipObject: {fileID: 7316631992871390460}
+--- !u!225 &1572899825536378814
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 491972891584927928}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &3230132679009982737
 GameObject:
   m_ObjectHideFlags: 0

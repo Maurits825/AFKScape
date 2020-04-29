@@ -19,7 +19,7 @@ public class Storage
 {
     public Dictionary<long, ItemSlot> items = new Dictionary<long, ItemSlot>();
 
-    private int nextAvailableSlot = 0;
+    private int nextAvailableSlot = 0; //TODO look at this, is it redudant?
     private int usedSlots = 0;
     public int totalSlots;
 
