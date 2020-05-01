@@ -69,10 +69,7 @@ public class InventoryUI : MonoBehaviour, IDropHandler
             inventoryImage.Add(id, slot.iconImage);
 
             isUsed[nextAvailableSlot] = true;
-            do
-            {
-                nextAvailableSlot++;
-            } while (isUsed[nextAvailableSlot]);
+            UpdateNextAvailableSlot();
         }
 
         inventoryText[id].text = amount.ToString();
@@ -90,6 +87,27 @@ public class InventoryUI : MonoBehaviour, IDropHandler
 
         itemDropped.SetSiblingIndex(indexDropped);
         toSwap.SetSiblingIndex(indexToSwap);
+
+        LayoutRebuilder.MarkLayoutForRebuild(slotListParent.GetComponent<RectTransform>());
+
+        bool temp = isUsed[indexDropped];
+        isUsed[indexDropped] = isUsed[indexToSwap];
+        isUsed[indexToSwap] = temp;
+
+        GameObject tempObj = slotsObjects[indexDropped];
+        slotsObjects[indexDropped] = slotsObjects[indexToSwap];
+        slotsObjects[indexToSwap] = tempObj;
+
+        UpdateNextAvailableSlot();
+    }
+
+    private void UpdateNextAvailableSlot()
+    {
+        nextAvailableSlot = 0;
+        while (isUsed[nextAvailableSlot] && nextAvailableSlot < (isUsed.Count - 1))
+        {
+            nextAvailableSlot++;
+        }
     }
 
     private int GetGridLinearIndex(float x, float y)

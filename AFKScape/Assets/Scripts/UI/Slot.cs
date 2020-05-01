@@ -14,6 +14,13 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
     [SerializeField]
     private GameObject toolTipObject;
 
+    private Transform parentTransform;
+    private Rect parentRect;
+    private float yMin;
+    private float yMax;
+    private float xMin;
+    private float xMax;
+
     private Transform toolTipTransform;
     private bool isOver;
 
@@ -21,13 +28,24 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
 
     private static readonly float yPosoffset = -65.0F;
 
-    Rect textRect;
     private float textHeight = 0;
     private float textWidth = 0;
+
+    private Vector2 mouseOffset = Vector2.zero;
+
+    private Vector2 initPos;
     
     void Start()
     {
         canvasGroup = gameObject.GetComponent<CanvasGroup>();
+
+        parentTransform = transform.parent.gameObject.transform;
+        parentRect = transform.parent.GetComponent<RectTransform>().rect;
+        GridLayoutGroup gridLayoutGroup = GetComponentInParent<GridLayoutGroup>();
+        xMin = parentTransform.position.x - parentRect.width/2 + gridLayoutGroup.cellSize.x/2;
+        xMax = parentTransform.position.x + parentRect.width/2 - gridLayoutGroup.cellSize.x/2;
+        yMin = parentTransform.position.y - parentRect.height/2 + gridLayoutGroup.cellSize.y/2;
+        yMax = parentTransform.position.y + parentRect.height/2 - gridLayoutGroup.cellSize.y/2;
 
         toolTipObject.SetActive(false);
         toolTipTransform = toolTipObject.transform;
@@ -67,13 +85,13 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
         if (activate)
         {
             canvasGroup.interactable = true;
-            canvasGroup.alpha = 1;
+            canvasGroup.alpha = 1F;
             canvasGroup.blocksRaycasts = true;
         }
         else
         {
             canvasGroup.interactable = false;
-            canvasGroup.alpha = 0;
+            canvasGroup.alpha = 0F;
             canvasGroup.blocksRaycasts = false;
         }
     }
@@ -92,16 +110,28 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
 
     public void OnDrag(PointerEventData eventData)
     {
-        gameObject.transform.position = eventData.position;
+        Vector2 pos = eventData.position + mouseOffset;
+        initPos = gameObject.transform.position;
+        transform.position = new Vector2(Mathf.Clamp(pos.x, xMin, xMax), Mathf.Clamp(pos.y, yMin, yMax));
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        ;
+        canvasGroup.alpha = 0.6F;
+        mouseOffset = (Vector2)transform.position - eventData.position;
+        canvasGroup.blocksRaycasts = false;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        ;
+        Vector2 mousePos = eventData.position;
+        if (mousePos.x > xMax || mousePos.x < xMin || mousePos.y > yMax || mousePos.y < yMin)
+        {
+            gameObject.transform.position = initPos;
+        }
+        canvasGroup.alpha = 1F;
+        canvasGroup.blocksRaycasts = true;
+
+        LayoutRebuilder.MarkLayoutForRebuild(parentTransform.GetComponent<RectTransform>());
     }
 }

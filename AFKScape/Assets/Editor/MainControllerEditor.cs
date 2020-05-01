@@ -60,6 +60,20 @@ public class MainControllerEditor : Editor
         EditorGUILayout.EndVertical();
         EditorGUILayout.EndHorizontal();
 
+        if (GUILayout.Button("Fill random"))
+        {
+            for (int i = 0; i < 28; i++)
+            {
+                int idRand = Random.Range(1, 20000);
+                while (!Database.items.ContainsKey(idRand))
+                {
+                    idRand++;
+                }
+                int amountRand = Random.Range(1, 100);
+                mainController.inventory.AddItem(idRand, amountRand);
+            }
+        }
+
         if (GUILayout.Button("Remove all"))
         {
             mainController.inventory.RemoveAll();
