@@ -3,21 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class ItemSlot
-{
-    public int amount;
-    public int slotIndex;
-
-    public ItemSlot(int num, int idx)
-    {
-        amount = num;
-        slotIndex = idx;
-    }
-}
-
 public class Storage
 {
-    public Dictionary<long, ItemSlot> items = new Dictionary<long, ItemSlot>();
+    public Dictionary<long, int> items = new Dictionary<long, int>();
 
     private int usedSlots = 0;
     public int totalSlots;
@@ -33,12 +21,12 @@ public class Storage
 
         if (items.ContainsKey(id))
         {
-            items[id].amount += amount;
+            items[id] += amount;
             addedItem = true;
         }
         else if (usedSlots < totalSlots)
         {
-            items.Add(id, new ItemSlot(amount, usedSlots));
+            items.Add(id, amount);
             usedSlots++;
             addedItem = true;
         }
@@ -49,7 +37,7 @@ public class Storage
 
         if (addedItem)
         {
-            RaiseItemChangedEvent(id, items[id].amount, items[id].slotIndex);
+            RaiseItemChangedEvent(id, items[id]);
         }
 
         return addedItem;
@@ -74,12 +62,12 @@ public class Storage
 
         if (items.ContainsKey(id))
         {
-            items[id].amount -= amount;
+            items[id] -= amount;
             removedItem = true;
 
-            RaiseItemChangedEvent(id, items[id].amount, items[id].slotIndex);
+            RaiseItemChangedEvent(id, items[id]);
 
-            if (items[id].amount <= 0)
+            if (items[id] <= 0)
             {
                 items.Remove(id);
                 usedSlots--;
@@ -97,10 +85,10 @@ public class Storage
     {
         List<long> ids = new List<long>();
         List<int> amounts = new List<int>();
-        foreach (KeyValuePair<long, ItemSlot> item in items)
+        foreach (KeyValuePair<long, int> item in items)
         {
             ids.Add(item.Key);
-            amounts.Add(item.Value.amount);
+            amounts.Add(item.Value);
         }
 
         for (int i = 0; i < ids.Count; i++)
@@ -110,7 +98,7 @@ public class Storage
     }
 
     //TODO add event for add and remove item, will be needed when withdrawing and deposit items.
-    public virtual void RaiseItemChangedEvent(long id, int amount, int slotIndex)
+    public virtual void RaiseItemChangedEvent(long id, int amount)
     {
     }
 }

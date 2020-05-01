@@ -57,7 +57,7 @@ public class InventoryUI : MonoBehaviour, IDropHandler
         }
     }
 
-    private void UpdateInventoryUI(long id, int amount, int slotIndex)
+    private void UpdateInventoryUI(long id, int amount)
     {
         if (!inventoryText.ContainsKey(id))
         {

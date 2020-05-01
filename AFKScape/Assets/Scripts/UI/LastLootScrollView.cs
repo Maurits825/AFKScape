@@ -11,8 +11,8 @@ public class LastLootScrollView : MonoBehaviour
     private Transform slotListParent;
 
     private List<GameObject> slotsObjects = new List<GameObject>();
-    private Dictionary<long, Text> bankText = new Dictionary<long, Text>();
-    private Dictionary<long, Image> bankImage = new Dictionary<long, Image>();
+    private Dictionary<long, Text> lastLootText = new Dictionary<long, Text>();
+    private Dictionary<long, Image> lastLootImage = new Dictionary<long, Image>();
 
     void Start()
     {
@@ -21,9 +21,9 @@ public class LastLootScrollView : MonoBehaviour
         EventManager.Instance.onSkillClicked += ClearLastLootUI;
     }
 
-    void UpdateLastLootUI(long id, int amount, int _)
+    void UpdateLastLootUI(long id, int amount)
     {
-        if (!bankText.ContainsKey(id))
+        if (!lastLootText.ContainsKey(id))
         {
             GameObject slotObject = Instantiate(slotPrefab) as GameObject;
             slotObject.transform.SetParent(slotListParent, false);
@@ -32,12 +32,12 @@ public class LastLootScrollView : MonoBehaviour
             Slot slot = slotObject.GetComponent<Slot>();
             slot.SetItemName(Database.items[id].name);
 
-            bankText.Add(id, slot.amountText);
-            bankImage.Add(id, slot.iconImage);
+            lastLootText.Add(id, slot.amountText);
+            lastLootImage.Add(id, slot.iconImage);
         }
 
-        bankText[id].text = amount.ToString();
-        bankImage[id].sprite = Resources.Load<Sprite>("Icons/" + id.ToString());
+        lastLootText[id].text = amount.ToString();
+        lastLootImage[id].sprite = Resources.Load<Sprite>("Icons/" + id.ToString());
     }
 
     //TODO when to call?
@@ -52,8 +52,8 @@ public class LastLootScrollView : MonoBehaviour
             }
 
             slotsObjects.Clear();
-            bankText.Clear();
-            bankImage.Clear();
+            lastLootText.Clear();
+            lastLootImage.Clear();
         }
     }
 }

@@ -11,18 +11,18 @@ public class BankUI : MonoBehaviour
     private Transform slotListParent;
 
     private int itemCount = 0;
-    private List<Text> bankText = new List<Text>();
-    private List<Image> bankImage = new List<Image>();
- 
+    private Dictionary<long, Text> bankText = new Dictionary<long, Text>();
+    private Dictionary<long, Image> bankImage = new Dictionary<long, Image>();
+
     void Start()
     {
         EventManager.Instance.onBankItemAdded += UpdateBankUI;
         gameObject.SetActive(false);
     }
 
-    void UpdateBankUI(long id, int amount, int slotIndex)
+    void UpdateBankUI(long id, int amount)
     {
-        if (slotIndex >= itemCount)
+        if (!bankText.ContainsKey(id))
         {
             //TODO put this into function or something
             GameObject slotObject = Instantiate(slotPrefab) as GameObject;
@@ -31,14 +31,14 @@ public class BankUI : MonoBehaviour
             Slot slot = slotObject.GetComponent<Slot>();
             slot.SetItemName(Database.items[id].name);
             
-            bankText.Add(slot.amountText);
-            bankImage.Add(slot.iconImage);
+            bankText.Add(id, slot.amountText);
+            bankImage.Add(id, slot.iconImage);
 
             itemCount++;
         }
 
         //TODO handle 0 amount, remove icon
-        bankText[slotIndex].text = amount.ToString();
-        bankImage[slotIndex].sprite = Resources.Load<Sprite>("Icons/" + id.ToString());
+        bankText[id].text = amount.ToString();
+        bankImage[id].sprite = Resources.Load<Sprite>("Icons/" + id.ToString());
     }
 }

@@ -9,9 +9,9 @@ public class Inventory : Storage
         totalSlots = 28;
     }
 
-    public override void RaiseItemChangedEvent(long id, int amount, int slotIndex)
+    public override void RaiseItemChangedEvent(long id, int amount)
     {
-        EventManager.Instance.ItemChanged(id, amount, slotIndex);
+        EventManager.Instance.ItemChanged(id, amount);
     }
 
 }
