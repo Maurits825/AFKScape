@@ -14,6 +14,15 @@ public class MainControllerEditor : Editor
     int experience;
     int level;
 
+    enum StorageType
+    {
+        Bank,
+        Inventory,
+    }
+
+    StorageType storageType;
+    Storage storageRef;
+
     float timeConstantGain;
     int lvl99 = 13034431;
     List<string> combatSkills = new List<string>()
@@ -40,14 +49,30 @@ public class MainControllerEditor : Editor
 
         EditorGUILayout.Space(10);
 
-        EditorGUILayout.LabelField("Inventory", EditorStyles.boldLabel);
+        EditorGUILayout.BeginHorizontal();
+        EditorGUILayout.LabelField("Inventory / Bank", EditorStyles.boldLabel);
+        storageType = (StorageType)EditorGUILayout.EnumPopup(storageType);
+        EditorGUILayout.EndHorizontal();
+
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.BeginVertical();
+
+        switch (storageType)
+        {
+            case StorageType.Bank:
+                storageRef = mainController.bank;
+                break;
+            case StorageType.Inventory:
+                storageRef = mainController.inventory;
+                break;
+            default:
+                break;
+        }
 
         id = EditorGUILayout.LongField("ID:", id);
         if (GUILayout.Button("Add item"))
         {
-            mainController.inventory.AddItem(id, amount);
+            storageRef.AddItem(id, amount);
         }
         EditorGUILayout.EndVertical();
 
@@ -55,7 +80,7 @@ public class MainControllerEditor : Editor
         amount = EditorGUILayout.IntField("Amount:", amount);
         if (GUILayout.Button("Remove item"))
         {
-            mainController.inventory.RemoveItem(id, amount);
+            storageRef.RemoveItem(id, amount);
         }
         EditorGUILayout.EndVertical();
         EditorGUILayout.EndHorizontal();
@@ -70,13 +95,13 @@ public class MainControllerEditor : Editor
                     idRand++;
                 }
                 int amountRand = Random.Range(1, 100);
-                mainController.inventory.AddItem(idRand, amountRand);
+                storageRef.AddItem(idRand, amountRand);
             }
         }
 
         if (GUILayout.Button("Remove all"))
         {
-            mainController.inventory.RemoveAll();
+            storageRef.RemoveAll();
         }
 
         EditorGUILayout.Space(10);

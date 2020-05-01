@@ -77,6 +77,16 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
         toolTipText.text = itemName;
     }
 
+    public void SetAlpha(float value)
+    {
+        if (canvasGroup == null)
+        {
+            canvasGroup = gameObject.GetComponent<CanvasGroup>();
+        }
+
+        canvasGroup.alpha = value;
+    }
+
     public void SetSlotActive(bool activate)
     {
         if (canvasGroup == null)
