@@ -9,6 +9,8 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
     public Text amountText;
     public Image iconImage;
 
+    public bool isDraggable = false;
+
     [SerializeField]
     private Text toolTipText;
     [SerializeField]
@@ -110,28 +112,37 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
 
     public void OnDrag(PointerEventData eventData)
     {
-        Vector2 pos = eventData.position + mouseOffset;
-        initPos = gameObject.transform.position;
-        transform.position = new Vector2(Mathf.Clamp(pos.x, xMin, xMax), Mathf.Clamp(pos.y, yMin, yMax));
+        if (isDraggable)
+        {
+            Vector2 pos = eventData.position + mouseOffset;
+            initPos = gameObject.transform.position;
+            transform.position = new Vector2(Mathf.Clamp(pos.x, xMin, xMax), Mathf.Clamp(pos.y, yMin, yMax));
+        }
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        canvasGroup.alpha = 0.6F;
-        mouseOffset = (Vector2)transform.position - eventData.position;
-        canvasGroup.blocksRaycasts = false;
+        if (isDraggable)
+        {
+            canvasGroup.alpha = 0.6F;
+            mouseOffset = (Vector2)transform.position - eventData.position;
+            canvasGroup.blocksRaycasts = false;
+        }
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Vector2 mousePos = eventData.position;
-        if (mousePos.x > xMax || mousePos.x < xMin || mousePos.y > yMax || mousePos.y < yMin)
+        if (isDraggable)
         {
-            gameObject.transform.position = initPos;
-        }
-        canvasGroup.alpha = 1F;
-        canvasGroup.blocksRaycasts = true;
+            Vector2 mousePos = eventData.position;
+            if (mousePos.x > xMax || mousePos.x < xMin || mousePos.y > yMax || mousePos.y < yMin)
+            {
+                gameObject.transform.position = initPos;
+            }
+            canvasGroup.alpha = 1F;
+            canvasGroup.blocksRaycasts = true;
 
-        LayoutRebuilder.MarkLayoutForRebuild(parentTransform.GetComponent<RectTransform>());
+            LayoutRebuilder.MarkLayoutForRebuild(parentTransform.GetComponent<RectTransform>());
+        }
     }
 }

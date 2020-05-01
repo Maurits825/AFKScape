@@ -63,6 +63,7 @@ public class InventoryUI : MonoBehaviour, IDropHandler
         {
             Slot slot = slotsObjects[nextAvailableSlot].GetComponent<Slot>();
             slot.SetItemName(Database.items[id].name);
+            slot.isDraggable = true;
             slot.SetSlotActive(true);
 
             inventoryText.Add(id, slot.amountText);
