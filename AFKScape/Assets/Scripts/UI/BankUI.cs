@@ -20,7 +20,7 @@ public class BankUI : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    void UpdateBankUI(long id, int amount)
+    void UpdateBankUI(long id, int amount, int amountDiff)
     {
         if (!bankText.ContainsKey(id))
         {

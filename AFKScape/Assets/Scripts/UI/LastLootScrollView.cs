@@ -21,7 +21,7 @@ public class LastLootScrollView : MonoBehaviour
         EventManager.Instance.onSkillClicked += ClearLastLootUI;
     }
 
-    void UpdateLastLootUI(long id, int amount)
+    void UpdateLastLootUI(long id, int amount, int amountDiff)
     {
         if (!lastLootText.ContainsKey(id))
         {
@@ -36,7 +36,7 @@ public class LastLootScrollView : MonoBehaviour
             lastLootImage.Add(id, slot.iconImage);
         }
 
-        lastLootText[id].text = amount.ToString();
+        lastLootText[id].text = amountDiff.ToString();
         lastLootImage[id].sprite = Resources.Load<Sprite>("Icons/" + id.ToString());
     }
 

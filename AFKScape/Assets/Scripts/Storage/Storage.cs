@@ -37,7 +37,7 @@ public class Storage
 
         if (addedItem)
         {
-            RaiseItemChangedEvent(id, items[id]);
+            RaiseItemAddedEvent(id, items[id], amount);
         }
 
         return addedItem;
@@ -62,12 +62,22 @@ public class Storage
 
         if (items.ContainsKey(id))
         {
-            items[id] -= amount;
+            int amountRemoved;
+            if (amount > items[id])
+            {
+                items[id] = 0;
+                amountRemoved = items[id];
+            }
+            else
+            {
+                items[id] -= amount;
+                amountRemoved = amount;
+            }
+
             removedItem = true;
+            RaiseItemRemovedEvent(id, items[id], amountRemoved);
 
-            RaiseItemChangedEvent(id, items[id]);
-
-            if (items[id] <= 0)
+            if (items[id] == 0)
             {
                 items.Remove(id);
                 usedSlots--;
@@ -97,8 +107,12 @@ public class Storage
         }
     }
 
-    //TODO add event for add and remove item, will be needed when withdrawing and deposit items.
-    public virtual void RaiseItemChangedEvent(long id, int amount)
+    //TODO dont really need two events?
+    public virtual void RaiseItemAddedEvent(long id, int amount, int amounDiff)
+    {
+    }
+
+    public virtual void RaiseItemRemovedEvent(long id, int amount, int amounDiff)
     {
     }
 }

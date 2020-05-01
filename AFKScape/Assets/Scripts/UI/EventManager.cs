@@ -68,17 +68,30 @@ public class EventManager : MonoBehaviour
     }
 
 
-    //---- Storage ----
-    public event Action<long, int> onItemChanged;
-    public void ItemChanged(long id, int amount)
+    //---- Inventory ----
+    public event Action<long, int> onInvItemAdded;
+    public void InvItemAdded(long id, int amount)
     {
-        onItemChanged?.Invoke(id, amount);
+        onInvItemAdded?.Invoke(id, amount);
     }
 
-    public event Action<long, int> onBankItemAdded;
-    public void BankItemAdded(long id, int amount)
+    public event Action<long, int> onInvItemRemoved;
+    public void InvItemRemoved(long id, int amount)
     {
-        onBankItemAdded?.Invoke(id, amount);
+        onInvItemRemoved?.Invoke(id, amount);
+    }
+
+    //---- Bank ----
+    public event Action<long, int, int> onBankItemAdded;
+    public void BankItemAdded(long id, int amount, int amounDiff)
+    {
+        onBankItemAdded?.Invoke(id, amount, amounDiff);
+    }
+
+    public event Action<long, int, int> onBankItemRemoved;
+    public void BankItemRemoved(long id, int amount, int amounDiff)
+    {
+        onBankItemRemoved?.Invoke(id, amount, amounDiff);
     }
 
     //---- Tabs ----

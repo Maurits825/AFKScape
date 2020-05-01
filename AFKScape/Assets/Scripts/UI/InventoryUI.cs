@@ -19,11 +19,13 @@ public class InventoryUI : MonoBehaviour, IDropHandler
     private Transform inventoryTransform;
     private Rect inventoryRect;
 
+    //TODO simplify this mess?
     private int nextAvailableSlot = 0;
-    private List<GameObject> slotsObjects = new List<GameObject>();
+    private List<Slot> slots = new List<Slot>();
     private Dictionary<long, Text> inventoryText = new Dictionary<long, Text>();
     private Dictionary<long, Image> inventoryImage = new Dictionary<long, Image>();
-    private Dictionary<long, int> slotIndexes = new Dictionary<long, int>();
+    private Dictionary<long, int> idIndex = new Dictionary<long, int>();
+    private Dictionary<int, long> indexId = new Dictionary<int, long>();
     private List<bool> isUsed = new List<bool>();
 
     void Awake()
@@ -39,7 +41,8 @@ public class InventoryUI : MonoBehaviour, IDropHandler
     // Start is called before the first frame update
     void Start()
     {
-        EventManager.Instance.onItemChanged += UpdateInventoryUI;
+        EventManager.Instance.onInvItemAdded += InventoryItemAdded;
+        EventManager.Instance.onInvItemRemoved += InventoryItemRemoved;
         InitUI();
     }
 
@@ -49,32 +52,62 @@ public class InventoryUI : MonoBehaviour, IDropHandler
         {
             GameObject slotObject = Instantiate(slotPrefab) as GameObject;
             slotObject.transform.SetParent(slotListParent, false);
-            slotsObjects.Add(slotObject);
+
             Slot slot = slotObject.GetComponent<Slot>();
             slot.SetSlotActive(false);
+            slot.isDraggable = true;
+            slots.Add(slot);
 
+            indexId[i] = 0;
             isUsed.Add(false);
         }
     }
 
-    private void UpdateInventoryUI(long id, int amount)
+    private void InventoryItemAdded(long id, int amount)
     {
-        if (!inventoryText.ContainsKey(id))
+        if (amount > 0)
         {
-            Slot slot = slotsObjects[nextAvailableSlot].GetComponent<Slot>();
-            slot.SetItemName(Database.items[id].name);
-            slot.isDraggable = true;
-            slot.SetSlotActive(true);
+            if (!inventoryText.ContainsKey(id))
+            {
+                Slot slot = slots[nextAvailableSlot];
+                slot.SetItemName(Database.items[id].name);
+                slot.SetSlotActive(true);
 
-            inventoryText.Add(id, slot.amountText);
-            inventoryImage.Add(id, slot.iconImage);
+                inventoryText.Add(id, slot.amountText);
+                inventoryImage.Add(id, slot.iconImage);
 
-            isUsed[nextAvailableSlot] = true;
-            UpdateNextAvailableSlot();
+                isUsed[nextAvailableSlot] = true;
+                idIndex[id] = nextAvailableSlot;
+                indexId[nextAvailableSlot] = id;
+
+                UpdateNextAvailableSlot();
+            }
+
+            inventoryText[id].text = amount.ToString();
+            inventoryImage[id].sprite = Resources.Load<Sprite>("Icons/" + id.ToString());
         }
+    }
 
-        inventoryText[id].text = amount.ToString();
-        inventoryImage[id].sprite = Resources.Load<Sprite>("Icons/" + id.ToString());
+    public void InventoryItemRemoved(long id, int amount)
+    {
+        if (inventoryText.ContainsKey(id))
+        {
+            if (amount == 0)
+            {
+                int index = idIndex[id];
+                Slot slot = slots[index];
+                slot.SetSlotActive(false);
+
+                isUsed[index] = false;
+
+                UpdateNextAvailableSlot();
+            }
+            else
+            {
+                inventoryText[id].text = amount.ToString();
+                inventoryImage[id].sprite = Resources.Load<Sprite>("Icons/" + id.ToString());
+            }
+        }
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -91,13 +124,12 @@ public class InventoryUI : MonoBehaviour, IDropHandler
 
         LayoutRebuilder.MarkLayoutForRebuild(slotListParent.GetComponent<RectTransform>());
 
-        bool temp = isUsed[indexDropped];
-        isUsed[indexDropped] = isUsed[indexToSwap];
-        isUsed[indexToSwap] = temp;
+        (isUsed[indexDropped], isUsed[indexToSwap]) = (isUsed[indexToSwap], isUsed[indexDropped]);
+        (slots[indexDropped], slots[indexToSwap]) = (slots[indexToSwap], slots[indexDropped]);
 
-        GameObject tempObj = slotsObjects[indexDropped];
-        slotsObjects[indexDropped] = slotsObjects[indexToSwap];
-        slotsObjects[indexToSwap] = tempObj;
+        (indexId[indexDropped], indexId[indexToSwap]) = (indexId[indexToSwap], indexId[indexDropped]);
+        idIndex[indexId[indexDropped]] = indexDropped;
+        idIndex[indexId[indexToSwap]] = indexToSwap;
 
         UpdateNextAvailableSlot();
     }
