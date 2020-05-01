@@ -236,6 +236,7 @@ public class SkillsController
             isTrainingMethodSelected = true;
             actionCount = 0;
             dropTableDict = DropTableManager.CreateDropTableDictionary(selectedSkill.trainingMethods[selectedTrainingMethodInd].dropTables);
+            EventManager.Instance.SkillingStarted();
         }
         else
         {

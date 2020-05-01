@@ -7182,6 +7182,7 @@ GameObject:
   - component: {fileID: 1108205962}
   - component: {fileID: 1108205964}
   - component: {fileID: 1108205963}
+  - component: {fileID: 1108205965}
   m_Layer: 5
   m_Name: SkillsPage
   m_TagString: Untagged
@@ -7247,6 +7248,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1108205961}
   m_CullTransparentMesh: 0
+--- !u!114 &1108205965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1108205961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdd8cec46404900409f058390bea7e66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  status: {fileID: 372755118}
+  currentXp: {fileID: 1084064464}
+  trainingMethodPanel: {fileID: 1047368936}
 --- !u!1001 &1150022002
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12197,8 +12213,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelTextParent: {fileID: 767983788}
   levelButtonParent: {fileID: 716405202}
-  status: {fileID: 372755118}
-  currentXp: {fileID: 1084064464}
 --- !u!114 &1832939066
 MonoBehaviour:
   m_ObjectHideFlags: 0

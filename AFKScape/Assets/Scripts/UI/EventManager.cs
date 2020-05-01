@@ -60,6 +60,12 @@ public class EventManager : MonoBehaviour
         onXpGained?.Invoke(xp);
     }
 
+    public event Action OnSkillingStarted;
+    public void SkillingStarted()
+    {
+        OnSkillingStarted?.Invoke();
+    }
+
     //---- Bosses ----
     public event Action<string> onBossClicked;
     public void BossClicked(string bossName)
