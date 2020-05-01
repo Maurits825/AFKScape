@@ -5,23 +5,18 @@ using UnityEngine.UI;
 
 public class ProgressBar : MonoBehaviour
 {
-    public int minimum;
-    public int maximum;
-    public int current;
     public Image mask;
     public Image fill;
     public Image icon;
     public Color barColor;
 
+    private int minimum;
+    private int maximum;
+
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        gameObject.SetActive(false);
     }
 
     public void SetIcon(string iconName)
@@ -29,7 +24,13 @@ public class ProgressBar : MonoBehaviour
         icon.sprite = Resources.Load<Sprite>(iconName);
     }
 
-    private void GetCurrentFill()
+    public void InitProgressBar(int min, int max)
+    {
+        minimum = min;
+        maximum = max;
+    }
+
+    public void UpdateProgressBar(int current)
     {
         float currentOffset = current - minimum;
         float maximumOffset = maximum - minimum;

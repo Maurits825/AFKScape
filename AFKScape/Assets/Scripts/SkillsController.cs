@@ -224,6 +224,7 @@ public class SkillsController
         selectedSkill = skillsClasses[skillName];
 
         EventManager.Instance.DrawTrainingMethods(selectedSkill.trainingMethods);
+        EventManager.Instance.DrawProgressBar(selectedSkill);
         EventManager.Instance.XpGained(selectedSkill.xp);
     }
 

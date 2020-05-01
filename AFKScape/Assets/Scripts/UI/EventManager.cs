@@ -66,6 +66,13 @@ public class EventManager : MonoBehaviour
         OnSkillingStarted?.Invoke();
     }
 
+    public event Action<Skill> OnDrawProgressBar;
+    public void DrawProgressBar(Skill skill)
+    {
+        OnDrawProgressBar?.Invoke(skill);
+    }
+
+
     //---- Bosses ----
     public event Action<string> OnBossClicked;
     public void BossClicked(string bossName)

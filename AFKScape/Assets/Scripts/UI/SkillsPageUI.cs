@@ -9,33 +9,51 @@ public class SkillsPageUI : MonoBehaviour
     public Text currentXp;
 
     public GameObject trainingMethodPanel;
+    public GameObject progressBar;
+    private ProgressBar skillProgressbar;
 
     // Start is called before the first frame update
     void Start()
     {
-        EventManager.Instance.OnSkillClicked += UpdateSkillSelected;
+        skillProgressbar = progressBar.GetComponent<ProgressBar>();
+
+        EventManager.Instance.OnSkillClicked += OnSkillClicked;
         EventManager.Instance.OnXpGained += UpdateXp;
-        EventManager.Instance.OnSkillingStarted += HideTrainingMethodPanel;
-        EventManager.Instance.OnSkillClicked += ShowTrainingMethodPanel;
+        EventManager.Instance.OnSkillingStarted += OnSkillingStarted;
+        EventManager.Instance.OnDrawProgressBar += DrawProgressBar;
+        EventManager.Instance.OnLevelUp += OnLevelUp;
     }
 
-    private void UpdateSkillSelected(string skillName)
+    private void OnSkillClicked(string skillName)
     {
         status.text = skillName;
+
+        trainingMethodPanel.SetActive(true);
+    }
+
+    private void DrawProgressBar(Skill skill)
+    {
+        skillProgressbar.SetIcon("SkillIcons/" + skill.skillName + "_icon_large");
+        int lvl = skill.currentLevel;
+        skillProgressbar.InitProgressBar(Database.experienceTable[lvl - 1], Database.experienceTable[lvl]);
+        skillProgressbar.UpdateProgressBar(skill.xp);
+        progressBar.SetActive(true);
     }
 
     private void UpdateXp(int xp)
     {
         currentXp.text = xp.ToString();
+        skillProgressbar.UpdateProgressBar(xp);
     }
 
-    private void HideTrainingMethodPanel()
+    private void OnLevelUp(string skillName, int lvl, int totalLvl)
+    {
+        skillProgressbar.InitProgressBar(Database.experienceTable[lvl - 1], Database.experienceTable[lvl]);
+        skillProgressbar.UpdateProgressBar(Database.experienceTable[lvl - 1]);
+    }
+
+    private void OnSkillingStarted()
     {
         trainingMethodPanel.SetActive(false);
-    }
-
-    private void ShowTrainingMethodPanel(string _)
-    {
-        trainingMethodPanel.SetActive(true);
     }
 }
