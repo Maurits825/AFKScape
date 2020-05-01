@@ -10,7 +10,7 @@ public class PlayerUI : MonoBehaviour
     {
         playerUi = gameObject;
         playerUi.SetActive(true);
-        EventManager.Instance.onMainTabClicked += ShowHidePlayerUI;
+        EventManager.Instance.OnMainTabClicked += ShowHidePlayerUI;
     }
 
     // Update is called once per frame

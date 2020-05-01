@@ -24,6 +24,11 @@ public class ProgressBar : MonoBehaviour
     {
     }
 
+    public void SetIcon(string iconName)
+    {
+        icon.sprite = Resources.Load<Sprite>(iconName);
+    }
+
     private void GetCurrentFill()
     {
         float currentOffset = current - minimum;

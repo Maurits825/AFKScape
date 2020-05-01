@@ -13,10 +13,10 @@ public class SkillsPageUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        EventManager.Instance.onSkillClicked += UpdateSkillSelected;
-        EventManager.Instance.onXpGained += UpdateXp;
+        EventManager.Instance.OnSkillClicked += UpdateSkillSelected;
+        EventManager.Instance.OnXpGained += UpdateXp;
         EventManager.Instance.OnSkillingStarted += HideTrainingMethodPanel;
-        EventManager.Instance.onSkillClicked += ShowTrainingMethodPanel;
+        EventManager.Instance.OnSkillClicked += ShowTrainingMethodPanel;
     }
 
     private void UpdateSkillSelected(string skillName)

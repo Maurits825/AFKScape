@@ -67,9 +67,9 @@ public class SkillsController
 
     public void SubscribeEvents()
     {
-        EventManager.Instance.onSkillClicked += OnSkillSelected;
-        EventManager.Instance.onTrainingMethodClicked += SetTrainingMethod;
-        EventManager.Instance.onMainTabClicked += OnTabClicked;
+        EventManager.Instance.OnSkillClicked += OnSkillSelected;
+        EventManager.Instance.OnTrainingMethodClicked += SetTrainingMethod;
+        EventManager.Instance.OnMainTabClicked += OnTabClicked;
     }
 
     public void MainGameLoop(TrainingMethod trainingMethod, Skill skill, float deltaTime)

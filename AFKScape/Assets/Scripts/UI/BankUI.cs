@@ -17,8 +17,8 @@ public class BankUI : MonoBehaviour
 
     void Start()
     {
-        EventManager.Instance.onBankItemAdded += BankItemAdded;
-        EventManager.Instance.onBankItemRemoved += BankItemRemoved;
+        EventManager.Instance.OnBankItemAdded += BankItemAdded;
+        EventManager.Instance.OnBankItemRemoved += BankItemRemoved;
         gameObject.SetActive(false);
     }
 

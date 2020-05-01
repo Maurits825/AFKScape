@@ -41,8 +41,8 @@ public class InventoryUI : MonoBehaviour, IDropHandler
     // Start is called before the first frame update
     void Start()
     {
-        EventManager.Instance.onInvItemAdded += InventoryItemAdded;
-        EventManager.Instance.onInvItemRemoved += InventoryItemRemoved;
+        EventManager.Instance.OnInvItemAdded += InventoryItemAdded;
+        EventManager.Instance.OnInvItemRemoved += InventoryItemRemoved;
         InitUI();
     }
 

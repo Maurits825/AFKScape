@@ -17,9 +17,9 @@ public class LastLootScrollView : MonoBehaviour
 
     void Start()
     {
-        EventManager.Instance.onBankItemAdded += UpdateLastLootUI;
-        EventManager.Instance.onBossClicked += ClearLastLootUI;
-        EventManager.Instance.onSkillClicked += ClearLastLootUI;
+        EventManager.Instance.OnBankItemAdded += UpdateLastLootUI;
+        EventManager.Instance.OnBossClicked += ClearLastLootUI;
+        EventManager.Instance.OnSkillClicked += ClearLastLootUI;
     }
 
     void UpdateLastLootUI(long id, int amount, int amountDiff)

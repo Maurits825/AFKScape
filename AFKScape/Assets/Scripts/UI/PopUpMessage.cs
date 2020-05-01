@@ -10,7 +10,7 @@ public class PopUpMessage : MonoBehaviour
 
     void Start()
     {
-        EventManager.Instance.onShowPopUpMsg += ShowMessage;
+        EventManager.Instance.OnShowPopUpMsg += ShowMessage;
         gameObject.SetActive(false);
     }
     

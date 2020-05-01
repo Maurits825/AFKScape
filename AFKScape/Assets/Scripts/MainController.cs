@@ -36,7 +36,7 @@ public class MainController : MonoBehaviour
         SetInstances();
         Database.LoadAll();
 
-        EventManager.Instance.onMainTabClicked += OnTabClicked;
+        EventManager.Instance.OnMainTabClicked += OnTabClicked;
 
         //call init on all classes
         skillsController.Initialize(inventory, bank);

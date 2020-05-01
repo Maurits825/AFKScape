@@ -34,7 +34,7 @@ public class SkillUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        EventManager.Instance.onLevelUp += UpdateUISkill;
+        EventManager.Instance.OnLevelUp += UpdateUISkill;
         InitUI();
     }
 }

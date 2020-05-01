@@ -12,7 +12,7 @@ public class TrainingMethodScrollView : MonoBehaviour
     void Start()
     {
         buttonGameObjects = new List<GameObject>();
-        EventManager.Instance.onDrawTrainingMethods += CreateTrainingMethodButtons;
+        EventManager.Instance.OnDrawTrainingMethods += CreateTrainingMethodButtons;
     }
 
     public void CreateTrainingMethodButtons(List<TrainingMethod> trainingMethodList)
