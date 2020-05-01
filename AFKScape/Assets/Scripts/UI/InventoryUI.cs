@@ -98,8 +98,10 @@ public class InventoryUI : MonoBehaviour, IDropHandler
                 Slot slot = slots[index];
                 slot.SetSlotActive(false);
 
-                isUsed[index] = false;
+                inventoryText.Remove(id);
+                inventoryImage.Remove(id);
 
+                isUsed[index] = false;
                 UpdateNextAvailableSlot();
             }
             else

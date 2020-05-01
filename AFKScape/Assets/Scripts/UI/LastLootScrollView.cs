@@ -11,6 +11,7 @@ public class LastLootScrollView : MonoBehaviour
     private Transform slotListParent;
 
     private List<GameObject> slotsObjects = new List<GameObject>();
+    private Dictionary<long, int> lastLootAmount = new Dictionary<long, int>();
     private Dictionary<long, Text> lastLootText = new Dictionary<long, Text>();
     private Dictionary<long, Image> lastLootImage = new Dictionary<long, Image>();
 
@@ -34,9 +35,11 @@ public class LastLootScrollView : MonoBehaviour
 
             lastLootText.Add(id, slot.amountText);
             lastLootImage.Add(id, slot.iconImage);
+            lastLootAmount.Add(id, 0);
         }
 
-        lastLootText[id].text = amountDiff.ToString();
+        lastLootAmount[id] += amountDiff;
+        lastLootText[id].text = lastLootAmount[id].ToString();
         lastLootImage[id].sprite = Resources.Load<Sprite>("Icons/" + id.ToString());
     }
 
@@ -54,6 +57,7 @@ public class LastLootScrollView : MonoBehaviour
             slotsObjects.Clear();
             lastLootText.Clear();
             lastLootImage.Clear();
+            lastLootAmount.Clear();
         }
     }
 }
