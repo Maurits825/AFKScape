@@ -101,9 +101,7 @@ public class SkillsController
                 int newLvl = GetLevel(skill.xp);
                 skill.xpNextLvl = Database.experienceTable[newLvl];
                 float deltaTimePerAction = currentDeltaTime / actionIncrement;
-                float timePassed = actionDone * deltaTimePerAction;
-                float newDeltaTime = currentDeltaTime - timePassed;
-                currentDeltaTime = newDeltaTime;
+                currentDeltaTime = actionCount * deltaTimePerAction;
                 actionDone = 0;
 
                 skill.currentLevel = newLvl;
@@ -112,8 +110,8 @@ public class SkillsController
                     skill.boostedLevel = skill.currentLevel;
                 }
 
-                actionIncrement = skill.GetResourceRate(trainingMethod.baseResourceRate) * newDeltaTime * MainController.timeConstant;
-                actionCount += actionIncrement;
+                actionIncrement = skill.GetResourceRate(trainingMethod.baseResourceRate) * currentDeltaTime * MainController.timeConstant;
+                actionCount = actionIncrement;
 
                 int totalLvl = GetTotalLevel();
                 EventManager.Instance.LevelUp(skill.skillName, skill.currentLevel, totalLvl);

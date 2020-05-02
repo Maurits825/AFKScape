@@ -12,6 +12,8 @@ public class SkillsPageUI : MonoBehaviour
     public GameObject progressBar;
     private ProgressBar skillProgressbar;
 
+    private int lastXp;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,12 +46,14 @@ public class SkillsPageUI : MonoBehaviour
     {
         currentXp.text = xp.ToString();
         skillProgressbar.UpdateProgressBar(xp);
+
+        lastXp = xp;
     }
 
     private void OnLevelUp(string skillName, int lvl, int totalLvl)
     {
         skillProgressbar.InitProgressBar(Database.experienceTable[lvl - 1], Database.experienceTable[lvl]);
-        skillProgressbar.UpdateProgressBar(Database.experienceTable[lvl - 1]);
+        skillProgressbar.UpdateProgressBar(lastXp);
     }
 
     private void OnSkillingStarted()

@@ -1660,9 +1660,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f63a96b023c02e468de6f0d595a36e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimum: 0
-  maximum: 100
-  current: 70
   mask: {fileID: 702232836}
   fill: {fileID: 702232836}
   icon: {fileID: 141369332}
@@ -1680,7 +1677,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7264151, g: 0.6072788, b: 0.33922213, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
