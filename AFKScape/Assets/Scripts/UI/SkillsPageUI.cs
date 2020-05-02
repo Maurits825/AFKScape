@@ -10,7 +10,10 @@ public class SkillsPageUI : MonoBehaviour
 
     public GameObject trainingMethodPanel;
     public GameObject progressBar;
+    public GameObject xpDropObj;
+
     private ProgressBar skillProgressbar;
+    private XpDrop xpDrop;
 
     private int lastXp;
 
@@ -18,6 +21,7 @@ public class SkillsPageUI : MonoBehaviour
     void Start()
     {
         skillProgressbar = progressBar.GetComponent<ProgressBar>();
+        xpDrop = xpDropObj.GetComponent<XpDrop>();
 
         EventManager.Instance.OnSkillClicked += OnSkillClicked;
         EventManager.Instance.OnXpGained += UpdateXp;
@@ -40,6 +44,8 @@ public class SkillsPageUI : MonoBehaviour
         skillProgressbar.InitProgressBar(Database.experienceTable[lvl - 1], Database.experienceTable[lvl]);
         skillProgressbar.UpdateProgressBar(skill.xp);
         progressBar.SetActive(true);
+
+        xpDrop.StartXpDrop("SkillIcons/" + skill.skillName + "_icon_large", 50);
     }
 
     private void UpdateXp(int xp)
