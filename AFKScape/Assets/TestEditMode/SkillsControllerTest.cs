@@ -30,10 +30,12 @@ namespace Tests
         {
             Fishing fishing = new Fishing();
 
-            skillsController.OnSkillSelected("Fishing");
+            skillsController.SkillButtonClicked("Fishing");
             skillsController.SetTrainingMethod(0);
 
-            skillsController.MainGameLoop(fishing.trainingMethods[0], fishing, 86400);
+            int days = 5;
+            int seconds = days * 86400;
+            skillsController.MainGameLoop(fishing.trainingMethods[0], fishing, seconds);
 
             Assert.AreEqual(true, true);
         }

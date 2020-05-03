@@ -67,9 +67,9 @@ public class SkillsController
 
     public void SubscribeEvents()
     {
-        EventManager.Instance.onSkillClicked += OnSkillSelected;
-        EventManager.Instance.onTrainingMethodClicked += SetTrainingMethod;
-        EventManager.Instance.onMainTabClicked += OnTabClicked;
+        EventManager.Instance.OnSkillButtonClicked += SkillButtonClicked;
+        EventManager.Instance.OnTrainingMethodClicked += SetTrainingMethod;
+        EventManager.Instance.OnMainTabClicked += OnTabClicked;
     }
 
     public void MainGameLoop(TrainingMethod trainingMethod, Skill skill, float deltaTime)
@@ -101,9 +101,7 @@ public class SkillsController
                 int newLvl = GetLevel(skill.xp);
                 skill.xpNextLvl = Database.experienceTable[newLvl];
                 float deltaTimePerAction = currentDeltaTime / actionIncrement;
-                float timePassed = actionDone * deltaTimePerAction;
-                float newDeltaTime = currentDeltaTime - timePassed;
-                currentDeltaTime = newDeltaTime;
+                currentDeltaTime = actionCount * deltaTimePerAction;
                 actionDone = 0;
 
                 skill.currentLevel = newLvl;
@@ -112,8 +110,8 @@ public class SkillsController
                     skill.boostedLevel = skill.currentLevel;
                 }
 
-                actionIncrement = skill.GetResourceRate(trainingMethod.baseResourceRate) * newDeltaTime * MainController.timeConstant;
-                actionCount += actionIncrement;
+                actionIncrement = skill.GetResourceRate(trainingMethod.baseResourceRate) * currentDeltaTime * MainController.timeConstant;
+                actionCount = actionIncrement;
 
                 int totalLvl = GetTotalLevel();
                 EventManager.Instance.LevelUp(skill.skillName, skill.currentLevel, totalLvl);
@@ -218,13 +216,13 @@ public class SkillsController
         return true;
     }
 
-    public void OnSkillSelected(string skillName)
+    public void SkillButtonClicked(string skillName)
     {
         isTrainingMethodSelected = false;
         selectedSkill = skillsClasses[skillName];
 
+        EventManager.Instance.SkillSelected(selectedSkill);
         EventManager.Instance.DrawTrainingMethods(selectedSkill.trainingMethods);
-        EventManager.Instance.XpGained(selectedSkill.xp);
     }
 
     public void SetTrainingMethod(int index)
@@ -236,6 +234,7 @@ public class SkillsController
             isTrainingMethodSelected = true;
             actionCount = 0;
             dropTableDict = DropTableManager.CreateDropTableDictionary(selectedSkill.trainingMethods[selectedTrainingMethodInd].dropTables);
+            EventManager.Instance.SkillingStarted();
         }
         else
         {

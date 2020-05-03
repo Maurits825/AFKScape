@@ -11,29 +11,53 @@ public class BankUI : MonoBehaviour
     private Transform slotListParent;
 
     private int itemCount = 0;
-    private List<Text> bankText = new List<Text>();
-    private List<Image> bankImage = new List<Image>();
- 
+    private Dictionary<long, Slot> slots = new Dictionary<long, Slot>();
+    private Dictionary<long, Text> bankText = new Dictionary<long, Text>();
+    private Dictionary<long, Image> bankImage = new Dictionary<long, Image>();
+
     void Start()
     {
-        EventManager.Instance.onBankItemAdded += UpdateBankUI;
+        EventManager.Instance.OnBankItemAdded += BankItemAdded;
+        EventManager.Instance.OnBankItemRemoved += BankItemRemoved;
         gameObject.SetActive(false);
     }
 
-    void UpdateBankUI(long id, int amount, int slotIndex)
+    void BankItemAdded(long id, int amount, int amountDiff)
     {
-        if (slotIndex >= itemCount)
+        if (amount > 0)
         {
-            //item is not in the bank, create new icon
-            GameObject slot = Instantiate(slotPrefab) as GameObject;
-            slot.transform.SetParent(slotListParent, false);
-            bankText.Add(slot.GetComponentInChildren<Text>());
-            bankImage.Add(slot.GetComponentInChildren<Image>());
-            itemCount++;
-        }
+            if (!bankText.ContainsKey(id))
+            {
+                //TODO put this into function or something
+                GameObject slotObject = Instantiate(slotPrefab) as GameObject;
+                slotObject.transform.SetParent(slotListParent, false);
 
-        //TODO handle 0 amount, remove icon
-        bankText[slotIndex].text = amount.ToString();
-        bankImage[slotIndex].sprite = Resources.Load<Sprite>("Icons/" + id.ToString());
+                Slot slot = slotObject.GetComponent<Slot>();
+                slot.SetItemName(Database.items[id].name);
+                slots.Add(id, slot);
+
+                bankText.Add(id, slot.amountText);
+                bankImage.Add(id, slot.iconImage);
+
+                itemCount++;
+            }
+
+            bankText[id].text = amount.ToString();
+            bankImage[id].sprite = Resources.Load<Sprite>("Icons/" + id.ToString());
+        }
+    }
+
+    public void BankItemRemoved(long id, int amount,  int amountDiff)
+    {
+        if (bankText.ContainsKey(id))
+        {
+            bankText[id].text = amount.ToString();
+            bankImage[id].sprite = Resources.Load<Sprite>("Icons/" + id.ToString());
+
+            if (amount == 0)
+            {
+                slots[id].SetAlpha(0.6F);
+            }
+        }
     }
 }

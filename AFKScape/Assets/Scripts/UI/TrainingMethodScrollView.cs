@@ -4,15 +4,17 @@ using UnityEngine;
 using UnityEngine.UI;
 public class TrainingMethodScrollView : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject buttonPrefab;
+    public GameObject buttonPrefab;
+    public Transform buttonListParent;
 
     private List<GameObject> buttonGameObjects;
     // Start is called before the first frame update
     void Start()
     {
         buttonGameObjects = new List<GameObject>();
-        EventManager.Instance.onDrawTrainingMethods += CreateTrainingMethodButtons;
+        EventManager.Instance.OnDrawTrainingMethods += CreateTrainingMethodButtons;
+
+        gameObject.SetActive(false);
     }
 
     public void CreateTrainingMethodButtons(List<TrainingMethod> trainingMethodList)
@@ -39,7 +41,7 @@ public class TrainingMethodScrollView : MonoBehaviour
             trainingMethodButton.SetText(trainingMethod.requirements.levelRequirements[0].levelReq, trainingMethod.name);
             trainingMethodButton.SetIndex(index);
 
-            button.transform.SetParent(transform, false);
+            button.transform.SetParent(buttonListParent, false);
 
             button.GetComponent<Button>().onClick.AddListener(() => EventManager.Instance.TrainingMethodClicked(trainingMethodButton.index));
             index++;

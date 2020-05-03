@@ -43,7 +43,7 @@ public class BossesController
 
     public void SubscribeEvents()
     {
-        EventManager.Instance.onBossClicked += OnBossSelected;
+        EventManager.Instance.OnBossClicked += OnBossSelected;
     }
 
     public void OnBossSelected(string bossName)

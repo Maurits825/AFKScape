@@ -30,74 +30,99 @@ public class EventManager : MonoBehaviour
     #endregion
 
     //---- Skills ----
-    public event Action<string> onSkillClicked;
-    public void SkillClicked(string skillName)
+    public event Action<string> OnSkillButtonClicked;
+    public void SkillButtonClicked(string skillName)
     {
-        onSkillClicked?.Invoke(skillName);
+        OnSkillButtonClicked?.Invoke(skillName);
     }
 
-    public event Action<List<TrainingMethod>> onDrawTrainingMethods;
+    public event Action<Skill> OnSkillSelected;
+    public void SkillSelected(Skill skill)
+    {
+        OnSkillSelected?.Invoke(skill);
+    }
+
+    public event Action<List<TrainingMethod>> OnDrawTrainingMethods;
     public void DrawTrainingMethods(List<TrainingMethod> trainingMethods)
     {
-        onDrawTrainingMethods?.Invoke(trainingMethods);
+        OnDrawTrainingMethods?.Invoke(trainingMethods);
     }
 
-    public event Action<int> onTrainingMethodClicked;
+    public event Action<int> OnTrainingMethodClicked;
     public void TrainingMethodClicked(int index)
     {
-        onTrainingMethodClicked?.Invoke(index);
+        OnTrainingMethodClicked?.Invoke(index);
     }
 
-    public event Action<string, int, int> onLevelUp;
+    public event Action<string, int, int> OnLevelUp;
     public void LevelUp(string skillName, int lvl, int totalLvl)
     {
-        onLevelUp?.Invoke(skillName, lvl, totalLvl);
+        OnLevelUp?.Invoke(skillName, lvl, totalLvl);
     }
 
-    public event Action<int> onXpGained;
+    public event Action<int> OnXpGained;
     public void XpGained(int xp)
     {
-        onXpGained?.Invoke(xp);
+        OnXpGained?.Invoke(xp);
+    }
+
+    public event Action OnSkillingStarted;
+    public void SkillingStarted()
+    {
+        OnSkillingStarted?.Invoke();
     }
 
     //---- Bosses ----
-    public event Action<string> onBossClicked;
+    public event Action<string> OnBossClicked;
     public void BossClicked(string bossName)
     {
-        onBossClicked?.Invoke(bossName);
+        OnBossClicked?.Invoke(bossName);
     }
 
 
-    //---- Storage ----
-    public event Action<long, int, int> onItemChanged;
-    public void ItemChanged(long id, int amount, int slotInd)
+    //---- Inventory ----
+    public event Action<long, int> OnInvItemAdded;
+    public void InvItemAdded(long id, int amount)
     {
-        onItemChanged?.Invoke(id, amount, slotInd);
+        OnInvItemAdded?.Invoke(id, amount);
     }
 
-    public event Action<long, int, int> onBankItemAdded;
-    public void BankItemAdded(long id, int amount, int slotInd)
+    public event Action<long, int> OnInvItemRemoved;
+    public void InvItemRemoved(long id, int amount)
     {
-        onBankItemAdded?.Invoke(id, amount, slotInd);
+        OnInvItemRemoved?.Invoke(id, amount);
+    }
+
+    //---- Bank ----
+    public event Action<long, int, int> OnBankItemAdded;
+    public void BankItemAdded(long id, int amount, int amounDiff)
+    {
+        OnBankItemAdded?.Invoke(id, amount, amounDiff);
+    }
+
+    public event Action<long, int, int> OnBankItemRemoved;
+    public void BankItemRemoved(long id, int amount, int amounDiff)
+    {
+        OnBankItemRemoved?.Invoke(id, amount, amounDiff);
     }
 
     //---- Tabs ----
-    public event Action<int> onMainTabClicked;
+    public event Action<int> OnMainTabClicked;
     public void MainTabClicked(int tabInd)
     {
-        onMainTabClicked?.Invoke(tabInd);
+        OnMainTabClicked?.Invoke(tabInd);
     }
 
-    public event Action<int> onPlayerTabClicked;
+    public event Action<int> OnPlayerTabClicked;
     public void PlayerTabClicked(int tabInd)
     {
-        onPlayerTabClicked?.Invoke(tabInd);
+        OnPlayerTabClicked?.Invoke(tabInd);
     }
 
     //---- Popup ----
-    public event Action<string> onShowPopUpMsg;
+    public event Action<string> OnShowPopUpMsg;
     public void ShowPopUpMsg(string msg)
     {
-        onShowPopUpMsg?.Invoke(msg);
+        OnShowPopUpMsg?.Invoke(msg);
     }
 }

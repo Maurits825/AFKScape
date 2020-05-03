@@ -14,6 +14,15 @@ public class MainControllerEditor : Editor
     int experience;
     int level;
 
+    enum StorageType
+    {
+        Bank,
+        Inventory,
+    }
+
+    StorageType storageType;
+    Storage storageRef;
+
     float timeConstantGain;
     int lvl99 = 13034431;
     List<string> combatSkills = new List<string>()
@@ -40,14 +49,30 @@ public class MainControllerEditor : Editor
 
         EditorGUILayout.Space(10);
 
-        EditorGUILayout.LabelField("Inventory", EditorStyles.boldLabel);
+        EditorGUILayout.BeginHorizontal();
+        EditorGUILayout.LabelField("Inventory / Bank", EditorStyles.boldLabel);
+        storageType = (StorageType)EditorGUILayout.EnumPopup(storageType);
+        EditorGUILayout.EndHorizontal();
+
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.BeginVertical();
+
+        switch (storageType)
+        {
+            case StorageType.Bank:
+                storageRef = mainController.bank;
+                break;
+            case StorageType.Inventory:
+                storageRef = mainController.inventory;
+                break;
+            default:
+                break;
+        }
 
         id = EditorGUILayout.LongField("ID:", id);
         if (GUILayout.Button("Add item"))
         {
-            mainController.inventory.AddItem(id, amount);
+            storageRef.AddItem(id, amount);
         }
         EditorGUILayout.EndVertical();
 
@@ -55,14 +80,28 @@ public class MainControllerEditor : Editor
         amount = EditorGUILayout.IntField("Amount:", amount);
         if (GUILayout.Button("Remove item"))
         {
-            mainController.inventory.RemoveItem(id, amount);
+            storageRef.RemoveItem(id, amount);
         }
         EditorGUILayout.EndVertical();
         EditorGUILayout.EndHorizontal();
 
+        if (GUILayout.Button("Fill random"))
+        {
+            for (int i = 0; i < 28; i++)
+            {
+                int idRand = Random.Range(1, 20000);
+                while (!Database.items.ContainsKey(idRand))
+                {
+                    idRand++;
+                }
+                int amountRand = Random.Range(1, 100);
+                storageRef.AddItem(idRand, amountRand);
+            }
+        }
+
         if (GUILayout.Button("Remove all"))
         {
-            mainController.inventory.RemoveAll();
+            storageRef.RemoveAll();
         }
 
         EditorGUILayout.Space(10);
@@ -130,6 +169,7 @@ public class MainControllerEditor : Editor
             {
                 Skill skill = skillsController.skillsClasses[skills];
                 skill.xpFloat = 0;
+                skill.boostedLevel = 1;
 
                 SimEvents(skill, skills);
             }
@@ -138,10 +178,14 @@ public class MainControllerEditor : Editor
 
     private void SimEvents(Skill skill, string skillName)
     {
-        EventManager.Instance.SkillClicked(skillName);
+        EventManager.Instance.SkillButtonClicked(skillName);
         EventManager.Instance.XpGained(skill.xp);
         int newLvl = SkillsController.GetLevel(skill.xp);
         skill.currentLevel = newLvl;
+        if (skill.boostedLevel < skill.currentLevel)
+        {
+            skill.boostedLevel = skill.currentLevel;
+        }
         int totalLvl = skillsController.GetTotalLevel();
         EventManager.Instance.LevelUp(skill.skillName, skill.currentLevel, totalLvl);
     }
