@@ -57,6 +57,11 @@ public class ItemLookupEditor : Editor
             itemList = itemLookup.GetItemId(itemName);
         }
 
+        if (Event.current.keyCode == (KeyCode.Return))
+        {
+            itemList = itemLookup.GetItemId(itemName);
+        }
+
         if (itemList.Count > 0)
         {
             resultCount = 0;
