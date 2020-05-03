@@ -177,7 +177,7 @@ public class MainControllerEditor : Editor
 
     private void SimEvents(Skill skill, string skillName)
     {
-        EventManager.Instance.SkillClicked(skillName);
+        EventManager.Instance.SkillButtonClicked(skillName);
         EventManager.Instance.XpGained(skill.xp);
         int newLvl = SkillsController.GetLevel(skill.xp);
         skill.currentLevel = newLvl;

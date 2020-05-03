@@ -30,10 +30,16 @@ public class EventManager : MonoBehaviour
     #endregion
 
     //---- Skills ----
-    public event Action<string> OnSkillClicked;
-    public void SkillClicked(string skillName)
+    public event Action<string> OnSkillButtonClicked;
+    public void SkillButtonClicked(string skillName)
     {
-        OnSkillClicked?.Invoke(skillName);
+        OnSkillButtonClicked?.Invoke(skillName);
+    }
+
+    public event Action<Skill> OnSkillSelected;
+    public void SkillSelected(Skill skill)
+    {
+        OnSkillSelected?.Invoke(skill);
     }
 
     public event Action<List<TrainingMethod>> OnDrawTrainingMethods;
@@ -65,13 +71,6 @@ public class EventManager : MonoBehaviour
     {
         OnSkillingStarted?.Invoke();
     }
-
-    public event Action<Skill> OnDrawProgressBar;
-    public void DrawProgressBar(Skill skill)
-    {
-        OnDrawProgressBar?.Invoke(skill);
-    }
-
 
     //---- Bosses ----
     public event Action<string> OnBossClicked;

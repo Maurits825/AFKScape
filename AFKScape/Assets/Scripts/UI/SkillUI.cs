@@ -21,7 +21,7 @@ public class SkillUI : MonoBehaviour
         Button[] lvlButtons = levelButtonParent.GetComponentsInChildren<Button>();
         foreach (Button button in lvlButtons)
         {
-            button.onClick.AddListener(() => EventManager.Instance.SkillClicked(button.name));
+            button.onClick.AddListener(() => EventManager.Instance.SkillButtonClicked(button.name));
         }
     }
 

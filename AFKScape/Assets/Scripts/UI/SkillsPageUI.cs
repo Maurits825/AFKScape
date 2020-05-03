@@ -17,41 +17,48 @@ public class SkillsPageUI : MonoBehaviour
 
     private int lastXp;
 
+    private string skillIconName;
+
     // Start is called before the first frame update
     void Start()
     {
         skillProgressbar = progressBar.GetComponent<ProgressBar>();
         xpDrop = xpDropObj.GetComponent<XpDrop>();
 
-        EventManager.Instance.OnSkillClicked += OnSkillClicked;
+        EventManager.Instance.OnSkillSelected += SkillSelected;
+
         EventManager.Instance.OnXpGained += UpdateXp;
         EventManager.Instance.OnSkillingStarted += OnSkillingStarted;
-        EventManager.Instance.OnDrawProgressBar += DrawProgressBar;
         EventManager.Instance.OnLevelUp += OnLevelUp;
     }
 
-    private void OnSkillClicked(string skillName)
+    private void SkillSelected(Skill skill)
     {
-        status.text = skillName;
+        status.text = skill.skillName;
 
         trainingMethodPanel.SetActive(true);
+
+        DrawProgressBar(skill);
+
+        currentXp.text = skill.xp.ToString();
+        lastXp = skill.xp;
     }
 
     private void DrawProgressBar(Skill skill)
     {
-        skillProgressbar.SetIcon("SkillIcons/" + skill.skillName + "_icon_large");
+        skillIconName = "SkillIcons/" + skill.skillName + "_icon_large";
+        skillProgressbar.SetIcon(skillIconName);
         int lvl = skill.currentLevel;
         skillProgressbar.InitProgressBar(Database.experienceTable[lvl - 1], Database.experienceTable[lvl]);
         skillProgressbar.UpdateProgressBar(skill.xp);
         progressBar.SetActive(true);
-
-        xpDrop.StartXpDrop("SkillIcons/" + skill.skillName + "_icon_large", 50);
     }
 
     private void UpdateXp(int xp)
     {
         currentXp.text = xp.ToString();
         skillProgressbar.UpdateProgressBar(xp);
+        xpDrop.StartXpDrop(skillIconName, xp - lastXp);
 
         lastXp = xp;
     }

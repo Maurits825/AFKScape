@@ -30,7 +30,7 @@ namespace Tests
         {
             Fishing fishing = new Fishing();
 
-            skillsController.OnSkillSelected("Fishing");
+            skillsController.SkillButtonClicked("Fishing");
             skillsController.SetTrainingMethod(0);
 
             int days = 5;

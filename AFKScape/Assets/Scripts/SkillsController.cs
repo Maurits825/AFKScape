@@ -67,7 +67,7 @@ public class SkillsController
 
     public void SubscribeEvents()
     {
-        EventManager.Instance.OnSkillClicked += OnSkillSelected;
+        EventManager.Instance.OnSkillButtonClicked += SkillButtonClicked;
         EventManager.Instance.OnTrainingMethodClicked += SetTrainingMethod;
         EventManager.Instance.OnMainTabClicked += OnTabClicked;
     }
@@ -216,14 +216,13 @@ public class SkillsController
         return true;
     }
 
-    public void OnSkillSelected(string skillName)
+    public void SkillButtonClicked(string skillName)
     {
         isTrainingMethodSelected = false;
         selectedSkill = skillsClasses[skillName];
 
+        EventManager.Instance.SkillSelected(selectedSkill);
         EventManager.Instance.DrawTrainingMethods(selectedSkill.trainingMethods);
-        EventManager.Instance.DrawProgressBar(selectedSkill);
-        EventManager.Instance.XpGained(selectedSkill.xp);
     }
 
     public void SetTrainingMethod(int index)
