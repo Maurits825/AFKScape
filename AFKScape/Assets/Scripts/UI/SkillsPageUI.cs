@@ -11,6 +11,7 @@ public class SkillsPageUI : MonoBehaviour
     public GameObject trainingMethodPanel;
     public GameObject progressBar;
     public GameObject xpDropObj;
+    public GameObject animationObj;
 
     private ProgressBar skillProgressbar;
     private XpDrop xpDrop;
@@ -25,8 +26,12 @@ public class SkillsPageUI : MonoBehaviour
         skillProgressbar = progressBar.GetComponent<ProgressBar>();
         xpDrop = xpDropObj.GetComponent<XpDrop>();
 
-        EventManager.Instance.OnSkillSelected += SkillSelected;
+        currentXp.text = "";
+        status.text = "";
 
+        animationObj.SetActive(false);
+
+        EventManager.Instance.OnSkillSelected += SkillSelected;
         EventManager.Instance.OnXpGained += UpdateXp;
         EventManager.Instance.OnSkillingStarted += OnSkillingStarted;
         EventManager.Instance.OnLevelUp += OnLevelUp;
@@ -37,6 +42,7 @@ public class SkillsPageUI : MonoBehaviour
         status.text = skill.skillName;
 
         trainingMethodPanel.SetActive(true);
+        animationObj.SetActive(false);
 
         DrawProgressBar(skill);
 
@@ -72,5 +78,6 @@ public class SkillsPageUI : MonoBehaviour
     private void OnSkillingStarted()
     {
         trainingMethodPanel.SetActive(false);
+        animationObj.SetActive(true);
     }
 }
