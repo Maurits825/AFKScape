@@ -73,6 +73,11 @@ public class ItemLookupEditor : Editor
                     EditorGUILayout.BeginHorizontal();
                     EditorGUILayout.LabelField("Name: " + item.Item2, GUILayout.ExpandWidth(true), GUILayout.MinWidth(50));
                     EditorGUILayout.LabelField("Extra info: " + item.Item3, GUILayout.ExpandWidth(true), GUILayout.MinWidth(50));
+                    
+                    if (GUILayout.Button("Copy ID", GUILayout.ExpandWidth(true), GUILayout.MinWidth(50)))
+                    {
+                        EditorGUIUtility.systemCopyBuffer = item.Item1.ToString();
+                    }
 
                     if (asButton)
                     {
