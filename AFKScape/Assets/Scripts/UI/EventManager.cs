@@ -3,29 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class EventManager : MonoBehaviour
+public class EventManager
 {
     #region Singleton
-    private static EventManager _instance;
-    public static EventManager Instance { get { return _instance; } }
+    public static EventManager Instance { get; private set; }
 
-    
     //TODO this is just silly
-    public static void setIntance(EventManager inst)
+    public static void SetIntance(EventManager inst)
     { 
-        _instance = inst;
-    }
-
-    private void Awake()
-    {
-        if (_instance != null && _instance != this)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            _instance = this;
-        }
+        Instance = inst;
     }
     #endregion
 

@@ -8,7 +8,6 @@ public class SkillUI : MonoBehaviour
     public GameObject levelTextParent;
     public GameObject levelButtonParent;
     private Dictionary<string, Text> levelTexts = new Dictionary<string, Text>();
-    private Dictionary<string, Text> levelButtons = new Dictionary<string, Text>();
 
     public void InitUI()
     {

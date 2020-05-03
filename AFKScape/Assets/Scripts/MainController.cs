@@ -29,7 +29,11 @@ public class MainController : MonoBehaviour
     public Inventory inventory;
     public Bank bank;
 
-    
+    void Awake()
+    {
+        EventManager.SetIntance(new EventManager());
+    }
+
     // Start is called before the first frame update
     void Start()
     {
