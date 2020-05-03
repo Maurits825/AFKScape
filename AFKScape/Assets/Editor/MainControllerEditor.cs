@@ -169,6 +169,7 @@ public class MainControllerEditor : Editor
             {
                 Skill skill = skillsController.skillsClasses[skills];
                 skill.xpFloat = 0;
+                skill.boostedLevel = 1;
 
                 SimEvents(skill, skills);
             }
@@ -181,6 +182,10 @@ public class MainControllerEditor : Editor
         EventManager.Instance.XpGained(skill.xp);
         int newLvl = SkillsController.GetLevel(skill.xp);
         skill.currentLevel = newLvl;
+        if (skill.boostedLevel < skill.currentLevel)
+        {
+            skill.boostedLevel = skill.currentLevel;
+        }
         int totalLvl = skillsController.GetTotalLevel();
         EventManager.Instance.LevelUp(skill.skillName, skill.currentLevel, totalLvl);
     }
