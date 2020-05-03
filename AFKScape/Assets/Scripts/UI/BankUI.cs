@@ -5,12 +5,9 @@ using UnityEngine.UI;
 
 public class BankUI : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject slotPrefab;
-    [SerializeField]
-    private Transform slotListParent;
+    public GameObject slotPrefab;
+    public Transform slotListParent;
 
-    private int itemCount = 0;
     private Dictionary<long, Slot> slots = new Dictionary<long, Slot>();
     private Dictionary<long, Text> bankText = new Dictionary<long, Text>();
     private Dictionary<long, Image> bankImage = new Dictionary<long, Image>();
@@ -38,8 +35,6 @@ public class BankUI : MonoBehaviour
 
                 bankText.Add(id, slot.amountText);
                 bankImage.Add(id, slot.iconImage);
-
-                itemCount++;
             }
 
             bankText[id].text = amount.ToString();

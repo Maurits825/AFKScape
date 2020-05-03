@@ -44,6 +44,7 @@ public static class JsonHandler
 
         return trainingMethods;
     }
+
     [Serializable]
     public class SkillLevelList
     {
@@ -58,7 +59,7 @@ public static class JsonHandler
     }
 
     [Serializable]
-    private struct JsonHelper
+    public class JsonHelper
     {
         public List<string> data;
     }

@@ -5,10 +5,8 @@ using UnityEngine.UI;
 
 public class LastLootScrollView : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject slotPrefab;
-    [SerializeField]
-    private Transform slotListParent;
+    public GameObject slotPrefab;
+    public Transform slotListParent;
 
     private List<GameObject> slotsObjects = new List<GameObject>();
     private Dictionary<long, int> lastLootAmount = new Dictionary<long, int>();

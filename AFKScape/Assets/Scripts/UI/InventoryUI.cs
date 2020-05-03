@@ -9,10 +9,8 @@ public class InventoryUI : MonoBehaviour, IDropHandler
     private const int NUMCOLS = 4;
     private const int NUMROWS = 7;
 
-    [SerializeField]
-    private GameObject slotPrefab;
-    [SerializeField]
-    private Transform slotListParent;
+    public GameObject slotPrefab;
+    public Transform slotListParent;
 
     private float widthOffset;
     private float heightOffset;
@@ -150,8 +148,8 @@ public class InventoryUI : MonoBehaviour, IDropHandler
         float localX = x - inventoryTransform.position.x + (inventoryRect.width / 2);
         float localY = y - inventoryTransform.position.y + (inventoryRect.height / 2);
 
-        int indX = 0;
-        int indY = 0;
+        int indX;
+        int indY;
 
         if (localX <= widthOffset)
         {
