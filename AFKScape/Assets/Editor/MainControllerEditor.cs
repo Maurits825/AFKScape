@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System.Numerics;
 
 [CustomEditor(typeof(MainController))]
 public class MainControllerEditor : Editor
@@ -22,6 +23,16 @@ public class MainControllerEditor : Editor
 
     StorageType storageType;
     Storage storageRef;
+
+    enum ValueMultiplier
+    {
+        Ones,
+        K,
+        M,
+        B,
+        T,
+    }
+    ValueMultiplier valueMultiplier;
 
     float timeConstantGain;
     int lvl99 = 13034431;
@@ -54,9 +65,6 @@ public class MainControllerEditor : Editor
         storageType = (StorageType)EditorGUILayout.EnumPopup(storageType);
         EditorGUILayout.EndHorizontal();
 
-        EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.BeginVertical();
-
         switch (storageType)
         {
             case StorageType.Bank:
@@ -69,20 +77,26 @@ public class MainControllerEditor : Editor
                 break;
         }
 
-        id = EditorGUILayout.LongField("ID:", id);
+        EditorGUILayout.BeginHorizontal();
+
+        EditorGUILayout.BeginVertical();
+        EditorGUIUtility.labelWidth = 80;
+        id = EditorGUILayout.LongField("ID:", id, GUILayout.ExpandWidth(true), GUILayout.MinWidth(100));
         if (GUILayout.Button("Add item"))
         {
-            storageRef.AddItem(id, amount);
+            storageRef.AddItem(id, GetActualAmount(amount));
         }
         EditorGUILayout.EndVertical();
 
         EditorGUILayout.BeginVertical();
-        amount = EditorGUILayout.IntField("Amount:", amount);
+        amount = EditorGUILayout.IntField("Amount:", amount, GUILayout.ExpandWidth(true), GUILayout.MinWidth(100));
         if (GUILayout.Button("Remove item"))
         {
-            storageRef.RemoveItem(id, amount);
+            storageRef.RemoveItem(id, GetActualAmount(amount));
         }
+        EditorGUIUtility.labelWidth = 0;
         EditorGUILayout.EndVertical();
+        valueMultiplier = (ValueMultiplier)EditorGUILayout.EnumPopup(valueMultiplier, GUILayout.Width(50));
         EditorGUILayout.EndHorizontal();
 
         if (GUILayout.Button("Fill random"))
@@ -188,5 +202,33 @@ public class MainControllerEditor : Editor
         }
         int totalLvl = skillsController.GetTotalLevel();
         EventManager.Instance.LevelUp(skill.skillName, skill.currentLevel, totalLvl);
+    }
+
+    private BigInteger GetActualAmount(int amount)
+    {
+        BigInteger actualAmount;
+        switch (valueMultiplier)
+        {
+            case ValueMultiplier.Ones:
+                actualAmount = amount;
+                break;
+            case ValueMultiplier.K:
+                actualAmount = BigInteger.Multiply(amount, 1_000);
+                break;
+            case ValueMultiplier.M:
+                actualAmount = BigInteger.Multiply(amount, 1_000_000);
+                break;
+            case ValueMultiplier.B:
+                actualAmount = BigInteger.Multiply(amount, 1_000_000_000);
+                break;
+            case ValueMultiplier.T:
+                actualAmount = BigInteger.Multiply(amount, 1_000_000_000_000);
+                break;
+            default:
+                actualAmount = amount;
+                break;
+        }
+
+        return actualAmount;
     }
 }

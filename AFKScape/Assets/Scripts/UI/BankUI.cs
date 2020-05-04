@@ -38,7 +38,7 @@ public class BankUI : MonoBehaviour
                 bankImage.Add(id, slot.iconImage);
             }
 
-            bankText[id].text = amount.ToString();
+            (bankText[id].text, bankText[id].color) = UtilityUI.FormatNumber(amount);
             bankImage[id].sprite = Resources.Load<Sprite>("Icons/" + id.ToString());
         }
     }

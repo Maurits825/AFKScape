@@ -38,7 +38,7 @@ public class LastLootScrollView : MonoBehaviour
         }
 
         lastLootAmount[id] += amountDiff;
-        lastLootText[id].text = lastLootAmount[id].ToString();
+        (lastLootText[id].text, lastLootText[id].color) = UtilityUI.FormatNumber(lastLootAmount[id]);
         lastLootImage[id].sprite = Resources.Load<Sprite>("Icons/" + id.ToString());
     }
 
