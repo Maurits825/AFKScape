@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Numerics;
 
 [Serializable]
 public class PetDropTable : DropTable
@@ -19,7 +20,7 @@ public class PetDropTable : DropTable
     }
 
 
-    public override void RollTable(Dictionary<long, int> dropTableDict, int skillLevel)
+    public override void RollTable(Dictionary<long, BigInteger> dropTableDict, int skillLevel)
     {
         if (IsPet(lootItems[0].chance, lootItems[0].baseChance, skillLevel))
         {

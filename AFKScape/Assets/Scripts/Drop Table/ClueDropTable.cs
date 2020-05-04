@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 
 [Serializable]
@@ -28,7 +29,7 @@ public class ClueDropTable : DropTable
         lootItems = dropTable.lootItems;
     }
 
-    public override void RollTable(Dictionary<long, int> dropTableDict, int skillLevel)
+    public override void RollTable(Dictionary<long, BigInteger> dropTableDict, int skillLevel)
     {
         long clueId = GetClue(lootItems[0].chance, lootItems[0].baseChance, skillLevel);
 

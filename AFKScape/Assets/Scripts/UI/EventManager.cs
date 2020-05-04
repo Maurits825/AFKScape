@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Numerics;
 
 public class EventManager
 {
@@ -67,27 +68,27 @@ public class EventManager
 
 
     //---- Inventory ----
-    public event Action<long, int> OnInvItemAdded;
-    public void InvItemAdded(long id, int amount)
+    public event Action<long, BigInteger> OnInvItemAdded;
+    public void InvItemAdded(long id, BigInteger amount)
     {
         OnInvItemAdded?.Invoke(id, amount);
     }
 
-    public event Action<long, int> OnInvItemRemoved;
-    public void InvItemRemoved(long id, int amount)
+    public event Action<long, BigInteger> OnInvItemRemoved;
+    public void InvItemRemoved(long id, BigInteger amount)
     {
         OnInvItemRemoved?.Invoke(id, amount);
     }
 
     //---- Bank ----
-    public event Action<long, int, int> OnBankItemAdded;
-    public void BankItemAdded(long id, int amount, int amounDiff)
+    public event Action<long, BigInteger, BigInteger> OnBankItemAdded;
+    public void BankItemAdded(long id, BigInteger amount, BigInteger amounDiff)
     {
         OnBankItemAdded?.Invoke(id, amount, amounDiff);
     }
 
-    public event Action<long, int, int> OnBankItemRemoved;
-    public void BankItemRemoved(long id, int amount, int amounDiff)
+    public event Action<long, BigInteger, BigInteger> OnBankItemRemoved;
+    public void BankItemRemoved(long id, BigInteger amount, BigInteger amounDiff)
     {
         OnBankItemRemoved?.Invoke(id, amount, amounDiff);
     }

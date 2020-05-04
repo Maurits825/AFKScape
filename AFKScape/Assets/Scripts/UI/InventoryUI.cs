@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -61,7 +62,7 @@ public class InventoryUI : MonoBehaviour, IDropHandler
         }
     }
 
-    private void InventoryItemAdded(long id, int amount)
+    private void InventoryItemAdded(long id, BigInteger amount)
     {
         if (amount > 0)
         {
@@ -81,12 +82,12 @@ public class InventoryUI : MonoBehaviour, IDropHandler
                 UpdateNextAvailableSlot();
             }
 
-            inventoryText[id].text = amount.ToString();
+            (inventoryText[id].text, inventoryText[id].color) = UtilityUI.FormatNumber(amount);
             inventoryImage[id].sprite = Resources.Load<Sprite>("Icons/" + id.ToString());
         }
     }
 
-    public void InventoryItemRemoved(long id, int amount)
+    public void InventoryItemRemoved(long id, BigInteger amount)
     {
         if (inventoryText.ContainsKey(id))
         {
@@ -112,7 +113,7 @@ public class InventoryUI : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
-        Vector2 pos = eventData.position;
+        UnityEngine.Vector2 pos = eventData.position;
         int indexDropped = GetGridLinearIndex(pos.x, pos.y);
 
         Transform toSwap = slotListParent.GetChild(indexDropped);

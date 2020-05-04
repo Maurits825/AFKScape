@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,7 +20,7 @@ public class BankUI : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    void BankItemAdded(long id, int amount, int amountDiff)
+    void BankItemAdded(long id, BigInteger amount, BigInteger _)
     {
         if (amount > 0)
         {
@@ -42,7 +43,7 @@ public class BankUI : MonoBehaviour
         }
     }
 
-    public void BankItemRemoved(long id, int amount,  int amountDiff)
+    public void BankItemRemoved(long id, BigInteger amount, BigInteger _)
     {
         if (bankText.ContainsKey(id))
         {

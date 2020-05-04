@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System.Numerics;
 
 public class Storage
 {
-    public Dictionary<long, int> items = new Dictionary<long, int>();
+    public Dictionary<long, BigInteger> items = new Dictionary<long, BigInteger>();
 
     private int usedSlots = 0;
     public int totalSlots;
@@ -15,7 +16,7 @@ public class Storage
         return items.ContainsKey(id);
     }
 
-    public bool AddItem(long id, int amount)
+    public bool AddItem(long id, BigInteger amount)
     {
         bool addedItem;
 
@@ -44,7 +45,7 @@ public class Storage
 
     }
 
-    public void AddMultipleItems(Dictionary<long, int> items)
+    public void AddMultipleItems(Dictionary<long, BigInteger> items)
     {
         foreach (long id in items.Keys.ToList())
         {
@@ -56,13 +57,13 @@ public class Storage
         }
     }
 
-    public bool RemoveItem(long id, int amount)
+    public bool RemoveItem(long id, BigInteger amount)
     {
         bool removedItem;
 
         if (items.ContainsKey(id))
         {
-            int amountRemoved;
+            BigInteger amountRemoved;
             if (amount > items[id])
             {
                 items[id] = 0;
@@ -94,8 +95,8 @@ public class Storage
     public void RemoveAll()
     {
         List<long> ids = new List<long>();
-        List<int> amounts = new List<int>();
-        foreach (KeyValuePair<long, int> item in items)
+        List<BigInteger> amounts = new List<BigInteger>();
+        foreach (KeyValuePair<long, BigInteger> item in items)
         {
             ids.Add(item.Key);
             amounts.Add(item.Value);
@@ -108,11 +109,11 @@ public class Storage
     }
 
     //TODO dont really need two events?
-    public virtual void RaiseItemAddedEvent(long id, int amount, int amounDiff)
+    public virtual void RaiseItemAddedEvent(long id, BigInteger amount, BigInteger amounDiff)
     {
     }
 
-    public virtual void RaiseItemRemovedEvent(long id, int amount, int amounDiff)
+    public virtual void RaiseItemRemovedEvent(long id, BigInteger amount, BigInteger amounDiff)
     {
     }
 }

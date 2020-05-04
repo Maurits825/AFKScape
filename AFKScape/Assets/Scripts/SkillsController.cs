@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 
 public class SkillsController
@@ -13,7 +14,7 @@ public class SkillsController
 
     private static int maxLvl = 126;
 
-    private Dictionary<long, int> dropTableDict = new Dictionary<long, int>();
+    private Dictionary<long, BigInteger> dropTableDict = new Dictionary<long, BigInteger>();
 
     private Inventory inventory;
     private Bank bank;

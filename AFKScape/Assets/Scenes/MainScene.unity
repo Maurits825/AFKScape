@@ -8710,7 +8710,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 185a65c1007af8f42be834eaf50c38fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  filterType: 0
+  filterType: 1
   idList: 
 --- !u!1001 &1313384148
 PrefabInstance:

@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System.Numerics;
 
 public class BossesController
 {
     public Dictionary<string, Monster> bossesClasses = new Dictionary<string, Monster>();
 
-    private Dictionary<long, int> dropTableDict = new Dictionary<long, int>();
+    private Dictionary<long, BigInteger> dropTableDict = new Dictionary<long, BigInteger>();
 
     private Inventory inventory;
     private Bank bank;

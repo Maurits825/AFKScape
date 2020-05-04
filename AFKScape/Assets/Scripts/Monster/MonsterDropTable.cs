@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 
 [Serializable]
@@ -32,12 +33,12 @@ public class MonsterDropTable
         return UnityEngine.Random.Range(amountMin, amountMax);
     }
 
-    public void AddLoot(Dictionary<long, int> dropTableDict, BasicLoot loot)
+    public void AddLoot(Dictionary<long, BigInteger> dropTableDict, BasicLoot loot)
     {
         int amount = GetAmount(loot.amountMin, loot.amountMax);
         dropTableDict[loot.id] += amount;
     }
-    public virtual void RollTable(Dictionary<long, int> dropTableDict)
+    public virtual void RollTable(Dictionary<long, BigInteger> dropTableDict)
     {
         int index = UnityEngine.Random.Range(1, baseChance);
         for (int i = 0; i < indexMapping.Count; i++)
