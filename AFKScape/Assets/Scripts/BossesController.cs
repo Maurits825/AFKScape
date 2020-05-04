@@ -22,6 +22,8 @@ public class BossesController
 
         SubscribeEvents();
         InitMonsterClasses();
+
+        OnBossSelected("Zulrah");
     }
 
     public void Operate()
@@ -49,7 +51,7 @@ public class BossesController
 
     public void OnBossSelected(string bossName)
     {
-        selectedBossName= bossName;
+        selectedBossName = bossName;
         dropTableDict = bossesClasses[selectedBossName].monsterDropTableHandler.CreateDropTableDictionary();
     }
 
