@@ -49,6 +49,7 @@ public class trainingMethodEditor : Editor
         if (GUILayout.Button("Load JSON"))
         {
             trainingMethodAdder.LoadJsonFile(selectedSkillName);
+            serializedObject.Update();
             selectedSkillIndPrev = selectedSkillInd;
             JSONLoaded = true;
 
