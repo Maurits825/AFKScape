@@ -35,7 +35,7 @@ namespace Tests
 
             int days = 5;
             int seconds = days * 86400;
-            skillsController.MainGameLoop(fishing.trainingMethods[0], fishing, seconds);
+            skillsController.SkillGameLoop(fishing.trainingMethods[0], fishing, seconds);
 
             Assert.AreEqual(true, true);
         }

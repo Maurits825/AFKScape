@@ -15,7 +15,9 @@ public class BossesController
     private Bank bank;
 
     private string selectedBossName;
-   
+
+    private float actionCount;
+
     public void Initialize(Inventory inventory, Bank bank)
     {
         this.inventory = inventory;
@@ -29,11 +31,31 @@ public class BossesController
     {
         if (!string.IsNullOrEmpty(selectedBossName))
         {
+            BossGameLoop(currentMonster, Time.deltaTime);
+        }
+    }
+
+    public void BossGameLoop(Monster monster, float deltaTime)
+    {
+        //float kcRate = monster.GetKillCountRate(); //TODO
+        float kcRate = 10000;
+        float currentDeltaTime = deltaTime;
+        float actionIncrement = kcRate * currentDeltaTime * MainController.timeConstant;
+        actionCount += actionIncrement;
+
+        int actionDone = 0;
+        while (actionCount >= 1.0F)
+        {
+            //lvl up cmbt skills?
+            actionCount -= 1.0F;
+            actionDone++;
+
             currentMonster.monsterDropTableHandler.RollTable(dropTableDict);
             currentMonster.killCount++;
             EventManager.Instance.BossKilled(currentMonster.killCount);
-            bank.AddMultipleItems(dropTableDict);
         }
+
+        bank.AddMultipleItems(dropTableDict);
     }
 
     public void InitMonsterClasses()
@@ -53,10 +75,10 @@ public class BossesController
     public void OnBossSelected(string bossName)
     {
         selectedBossName = bossName;
-        currentMonster = bossesClasses[selectedBossName];
-
+        
         if (!string.IsNullOrEmpty(selectedBossName))
         {
+            currentMonster = bossesClasses[selectedBossName];
             dropTableDict = currentMonster.monsterDropTableHandler.CreateDropTableDictionary();
         }
     }
