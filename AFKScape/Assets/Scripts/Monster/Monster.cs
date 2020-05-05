@@ -21,13 +21,17 @@ public class Monster
     public void GetDropTableHandler(string name)
     {
         monsterDropTableHandler = JsonHandler.GetMonsterDropTableHandler(name);
-
+        /*
         if (monsterDropTableHandler.preMadeTables.Count != 0)
         {
-            foreach (string tableName in monsterDropTableHandler.preMadeTables)
+            foreach ((string,int) tableInfo in monsterDropTableHandler.preMadeTables)
             {
-                monsterDropTableHandler.monsterDropTables.Add(JsonHandler.GetMonsterDropTable(tableName));
+                MonsterDropTable table = JsonHandler.GetMonsterDropTable(tableInfo.Item1);
+                table.weight = tableInfo.Item2;
+                monsterDropTableHandler.monsterDropTables.Add(table);
             }
-        }
+        }*/
+
+        monsterDropTableHandler.SetTotalLootCount();
     }
 }

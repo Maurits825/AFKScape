@@ -2,16 +2,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using UnityEditor;
 using UnityEngine;
 
 [Serializable]
 public class MonsterDropTableHandler : MonsterDropTable
 {
     public int rolls;
+
     public List<GeneralDropTable> generalDropTables; //will include 100% drops and tertiary, they are all rolled individually
     public List<MonsterDropTable> monsterDropTables;
 
-    public List<string> preMadeTables;
+    public List<TableInfo> preMadeTables;
+
+    [Serializable]
+    public struct TableInfo
+    {
+        public string name;
+        public int weight;
+
+        public TableInfo(string n, int w)
+        {
+            name = n;
+            weight = w;
+        }
+    }
+
+    public int totalBasicLootCount;
 
     public MonsterDropTableHandler()
     {
@@ -32,16 +49,22 @@ public class MonsterDropTableHandler : MonsterDropTable
             int index = UnityEngine.Random.Range(1, baseChance);
             int basicLootCount = basicLoots.Count;
 
-            for (int i = 0; i < indexMapping.Count; i++)
+            int weightSum = 0;
+            for (int i = 0; i < totalBasicLootCount; i++)
             {
-                if (index < indexMapping[i])
+                if (i < basicLootCount)
                 {
-                    if (i < basicLootCount)
+                    weightSum += basicLoots[i].weight;
+                    if (index <= weightSum)
                     {
                         AddLoot(dropTableDict, basicLoots[i]);
                         break;
                     }
-                    else
+                }
+                else
+                {
+                    weightSum += monsterDropTables[i % basicLootCount].weight;
+                    if (index <= weightSum)
                     {
                         monsterDropTables[i % basicLootCount].RollTable(dropTableDict);
                         break;
@@ -77,5 +100,10 @@ public class MonsterDropTableHandler : MonsterDropTable
         }
 
         return dropTableDict;
+    }
+
+    public void SetTotalLootCount()
+    {
+        totalBasicLootCount = basicLoots.Count + monsterDropTables.Count;
     }
 }

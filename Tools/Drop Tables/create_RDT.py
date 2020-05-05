@@ -79,13 +79,19 @@ def process_data_frame(frame, item_drop_list, header, ind):
             base = int(base) * 128
 
         if item_name == "Rune spear":
-            chance = 124
+            chance = 121  # 121.25
             base = 16384
         elif item_name == "Shield left half":
-            chance = 62
+            chance = 62  # 60.625
             base = 16384
         elif item_name == "Dragon spear":
-            chance = 45
+            chance = 45  # 45.46875
+            base = 16384
+        elif item_name == "Chaos talisman":
+            chance = 30
+            base = 16384
+        elif item_name == "Nature talisman":
+            chance = 30
             base = 16384
         elif item_name == "Nothing":
             if nothing_added:
@@ -143,7 +149,7 @@ def create_json(drops):
 
     json_data = dict()
     json_data["name"] = "Rare drop Table"
-    json_data["indexMapping"] = []
+    #json_data["indexMapping"] = []
 
     for drop in drops:
         actual_chance.append(drop.actual_chance)
@@ -166,11 +172,12 @@ def create_json(drops):
 
         basic_loot = dict()
         basic_loot["id"] = ids[i]
+        basic_loot["weight"] = scaled_chances[i]
         basic_loot["amountMin"] = drop.amount_min
         basic_loot["amountMax"] = drop.amount_max
         json_data["basicLoots"].append(basic_loot)
 
-        json_data["indexMapping"].append(index_mapping)
+        #json_data["indexMapping"].append(index_mapping)
 
     out_file_name = r"./rare_drop_table.json"
     with open(out_file_name, "w", newline="\n") as out_file:

@@ -9,6 +9,33 @@ namespace Tests
 {
     public class MonsterDropTableJsonTest
     {
+        private int GetWeightSum(MonsterDropTableHandler handler)
+        {
+            int weightSum = 0;
+            foreach (MonsterDropTable.BasicLoot loot in handler.basicLoots)
+            {
+                weightSum += loot.weight;
+            }
+
+            foreach (MonsterDropTable table in handler.monsterDropTables)
+            {
+                weightSum += table.weight;
+            }
+
+            return weightSum;
+        }
+
+        private int GetWeightSum(List<MonsterDropTable.BasicLoot> basicLoots)
+        {
+            int weightSum = 0;
+            foreach (MonsterDropTable.BasicLoot loot in basicLoots)
+            {
+                weightSum += loot.weight;
+            }
+
+            return weightSum;
+        }
+
         [Test]
         public void AllMonsterDropTableJsonTest()
         {
@@ -18,12 +45,11 @@ namespace Tests
             foreach (Monster monster in bossesController.bossesClasses.Values)
             {
                 int baseChance = monster.monsterDropTableHandler.baseChance;
-                int lastIndex = monster.monsterDropTableHandler.indexMapping.Last();
-                Assert.AreEqual(baseChance, lastIndex);
+                int totalWeight = GetWeightSum(monster.monsterDropTableHandler);
+                Assert.AreEqual(baseChance, totalWeight);
 
-                int indexMapCount = monster.monsterDropTableHandler.indexMapping.Count;
                 int lootAndTableCount = monster.monsterDropTableHandler.basicLoots.Count + monster.monsterDropTableHandler.monsterDropTables.Count;
-                Assert.AreEqual(indexMapCount, lootAndTableCount);
+                Assert.AreEqual(lootAndTableCount, monster.monsterDropTableHandler.totalBasicLootCount);
 
                 foreach (MonsterDropTable.BasicLoot loot in monster.monsterDropTableHandler.basicLoots)
                 {
@@ -46,13 +72,12 @@ namespace Tests
                 }
 
                 foreach (MonsterDropTable monsterDropTable in monster.monsterDropTableHandler.monsterDropTables)
-                {
+                { 
                     baseChance = monsterDropTable.baseChance;
-                    lastIndex = monsterDropTable.indexMapping.Last();
-                    Assert.AreEqual(baseChance, lastIndex);
+                    totalWeight = GetWeightSum(monsterDropTable.basicLoots);
+                    Assert.AreEqual(baseChance, totalWeight);
 
                     Assert.Greater(monsterDropTable.baseChance, 0);
-                    Assert.AreEqual(monsterDropTable.indexMapping.Count, monsterDropTable.basicLoots.Count);
                     foreach (MonsterDropTable.BasicLoot item in monsterDropTable.basicLoots)
                     {
                         Assert.Greater(item.id, 0);
@@ -68,11 +93,10 @@ namespace Tests
         {
             MonsterDropTable monsterDropTable = JsonHandler.GetMonsterDropTable("rare_drop_table");
             int baseChance = monsterDropTable.baseChance;
-            int lastIndex = monsterDropTable.indexMapping.Last();
+            int totalWeight = GetWeightSum(monsterDropTable.basicLoots);
 
             //TODO rounding issues...
-            Assert.LessOrEqual(Mathf.Abs(lastIndex - baseChance), 150);
-
+            Assert.AreEqual(totalWeight, totalWeight);
             Assert.Greater(monsterDropTable.baseChance, 0);
 
             foreach (MonsterDropTable.BasicLoot item in monsterDropTable.basicLoots)
@@ -86,9 +110,9 @@ namespace Tests
         {
             MonsterDropTable monsterDropTable = JsonHandler.GetMonsterDropTable("tree_herb_seed");
             int baseChance = monsterDropTable.baseChance;
-            int lastIndex = monsterDropTable.indexMapping.Last();
+            int totalWeight = GetWeightSum(monsterDropTable.basicLoots);
 
-            Assert.AreEqual(lastIndex, baseChance);
+            Assert.AreEqual(totalWeight, totalWeight);
             Assert.Greater(monsterDropTable.baseChance, 0);
 
             foreach (MonsterDropTable.BasicLoot item in monsterDropTable.basicLoots)

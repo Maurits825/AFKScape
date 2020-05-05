@@ -134,7 +134,7 @@ def create_json(drops):
 
     json_data = dict()
     json_data["name"] = "general"
-    json_data["indexMapping"] = []
+    #json_data["indexMapping"] = []
 
     for drop in drops:
         actual_chance.append(drop.actual_chance)
@@ -156,11 +156,12 @@ def create_json(drops):
 
         basic_loot = dict()
         basic_loot["id"] = ids[i]
+        basic_loot["weight"] = scaled_chances[i]
         basic_loot["amountMin"] = drop.amount_min
         basic_loot["amountMax"] = drop.amount_max
         json_data["basicLoots"].append(basic_loot)
 
-        json_data["indexMapping"].append(index_mapping)
+        #json_data["indexMapping"].append(index_mapping)
 
     out_file_name = r"./temp.json"
     with open(out_file_name, "w", newline="\n") as out_file:

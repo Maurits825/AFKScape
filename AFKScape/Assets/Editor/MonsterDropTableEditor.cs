@@ -91,15 +91,11 @@ public class MonsterDropTableEditor : Editor
 
             EditorGUILayout.LabelField("General Loot", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(monsterDropTableHandler.FindPropertyRelative("baseChance"));
-            EditorGUI.indentLevel++;
-            EditorGUILayout.PropertyField(monsterDropTableHandler.FindPropertyRelative("indexMapping"));
-            EditorGUI.indentLevel--;
 
-            if (GUILayout.Button("Add basic loot and index map"))
+            if (GUILayout.Button("Add Loot from temp.json"))
             {
                 tempDropTable = JsonHandler.GetMonsterDropTable("temp");
                 monsterDropTableAdder.monsterDropTableHandler.basicLoots = tempDropTable.basicLoots;
-                monsterDropTableAdder.monsterDropTableHandler.indexMapping = tempDropTable.indexMapping;
                 monsterDropTableAdder.monsterDropTableHandler.baseChance = tempDropTable.baseChance;
             }
 
@@ -111,11 +107,11 @@ public class MonsterDropTableEditor : Editor
             EditorGUI.indentLevel++;
             if (GUILayout.Button("Add Rare Drop Table"))
             {
-                monsterDropTableAdder.monsterDropTableHandler.preMadeTables.Add("rare_drop_table");
+                monsterDropTableAdder.monsterDropTableHandler.preMadeTables.Add(new MonsterDropTableHandler.TableInfo("rare_drop_table", 0));
             }
             if (GUILayout.Button("Add Tree-Herb Seed Table"))
             {
-                monsterDropTableAdder.monsterDropTableHandler.preMadeTables.Add("tree_herb_seed");
+                //monsterDropTableAdder.monsterDropTableHandler.preMadeTables.Add(("tree_herb_seed", 0));
             }
             if (GUILayout.Button("Add Custom"))
             {
@@ -123,7 +119,9 @@ public class MonsterDropTableEditor : Editor
             }
             EditorGUILayout.PropertyField(monsterDropTableHandler.FindPropertyRelative("monsterDropTables"));
 
-            EditorGUILayout.PropertyField(monsterDropTableHandler.FindPropertyRelative("preMadeTables"));
+            SerializedProperty preMadeTables = monsterDropTableHandler.FindPropertyRelative("preMadeTables");
+            EditorGUILayout.PropertyField(preMadeTables);
+
             EditorGUI.indentLevel--;
 
             EditorGUI.indentLevel--;
