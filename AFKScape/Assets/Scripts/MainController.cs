@@ -32,14 +32,14 @@ public class MainController : MonoBehaviour
     void Awake()
     {
         EventManager.SetIntance(new EventManager());
+        Database.LoadAll();
     }
 
     // Start is called before the first frame update
     void Start()
     {
         SetInstances();
-        Database.LoadAll();
-
+       
         EventManager.Instance.OnMainTabClicked += OnTabClicked;
 
         //call init on all classes

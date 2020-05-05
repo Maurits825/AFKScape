@@ -77,6 +77,13 @@ public static class JsonHandler
         return JsonUtility.FromJson<ItemList>(JsonString.text);
     }
 
+    public static List<string> GetBossesNames()
+    {
+        TextAsset JsonString = Resources.Load<TextAsset>("JSON/Bosses");
+        JsonHelper jsonHelperBosses = JsonUtility.FromJson<JsonHelper>(JsonString.text);
+        return jsonHelperBosses.data;
+    }
+
     public static MonsterDropTableHandler GetMonster(string monsterName)
     {
         TextAsset monsterDropTableJsonFile = Resources.Load<TextAsset>(string.Concat("JSON/MonsterDropTable/", monsterName));

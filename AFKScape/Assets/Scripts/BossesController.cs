@@ -22,8 +22,6 @@ public class BossesController
 
         SubscribeEvents();
         InitMonsterClasses();
-
-        OnBossSelected("Zulrah");
     }
 
     public void Operate()
@@ -54,19 +52,4 @@ public class BossesController
         selectedBossName = bossName;
         dropTableDict = bossesClasses[selectedBossName].monsterDropTableHandler.CreateDropTableDictionary();
     }
-
-    /*
-    public void ZulrahKillTest()
-    {
-        dropTableDict = Zulrah.monsterDropTableHandler.CreateDropTableDictionary();
-        Zulrah.monsterDropTableHandler.RollTable(dropTableDict);
-        inventory.AddMultipleItems(dropTableDict);
-    }
-
-    public void VorkathKillTest()
-    {
-        dropTableDict = Vorkath.monsterDropTableHandler.CreateDropTableDictionary();
-        Vorkath.monsterDropTableHandler.RollTable(dropTableDict);
-        inventory.AddMultipleItems(dropTableDict);
-    }*/
 }

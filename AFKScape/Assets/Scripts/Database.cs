@@ -6,6 +6,7 @@ using System;
 public static class Database
 {
     public static string[] skillNames = new string[23];
+    public static List<string> bossesNames = new List<string>();
 
     public static Dictionary<long, Item> items = new Dictionary<long, Item>();
     public static Dictionary<int, string> quest = new Dictionary<int, string>();
@@ -18,6 +19,7 @@ public static class Database
         LoadItems();
         LoadQuests();
         LoadExperienceTable();
+        LoadBosses();
     }
 
     public static void LoadSkills()
@@ -43,6 +45,11 @@ public static class Database
     public static void LoadQuests()
     {
 
+    }
+
+    public static void LoadBosses()
+    {
+        bossesNames = JsonHandler.GetBossesNames();
     }
 
 }
