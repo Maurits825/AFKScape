@@ -1,18 +1,52 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BossesPageUI : MonoBehaviour
 {
+    public GameObject BossSelectionPanel;
+    public GameObject animationObj;
+    public Button newBossButton;
+
+    public Text status;
+    public Text killCountText;
+
+    private BossSelectionScrollView bossSelectionScrollView;
+
+    void Awake()
+    {
+        bossSelectionScrollView = BossSelectionPanel.GetComponent<BossSelectionScrollView>();
+    }
     // Start is called before the first frame update
     void Start()
     {
-        
+        EventManager.Instance.OnBossClicked += BossClicked;
+        EventManager.Instance.OnBossKilled += BossKilled;
+
+        newBossButton.onClick.AddListener(() => EventManager.Instance.BossClicked(null));
+
+        status.text = string.Empty;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void BossClicked(string bossName)
     {
+        if (string.IsNullOrEmpty(bossName))
+        {
+            BossSelectionPanel.SetActive(true);
+            animationObj.SetActive(false);
+        }
+        else
+        {
+            BossSelectionPanel.SetActive(false);
+            animationObj.SetActive(true);
+        }
         
+        status.text = bossName;
+    }
+
+    private void BossKilled(int killCount)
+    {
+        killCountText.text = "Kill Count: " + killCount.ToString();
     }
 }

@@ -7,6 +7,7 @@ using System.Numerics;
 public class BossesController
 {
     public Dictionary<string, Monster> bossesClasses = new Dictionary<string, Monster>();
+    private Monster currentMonster;
 
     private Dictionary<long, BigInteger> dropTableDict = new Dictionary<long, BigInteger>();
 
@@ -28,7 +29,9 @@ public class BossesController
     {
         if (!string.IsNullOrEmpty(selectedBossName))
         {
-            bossesClasses[selectedBossName].monsterDropTableHandler.RollTable(dropTableDict);
+            currentMonster.monsterDropTableHandler.RollTable(dropTableDict);
+            currentMonster.killCount++;
+            EventManager.Instance.BossKilled(currentMonster.killCount);
             bank.AddMultipleItems(dropTableDict);
         }
     }
@@ -50,6 +53,11 @@ public class BossesController
     public void OnBossSelected(string bossName)
     {
         selectedBossName = bossName;
-        dropTableDict = bossesClasses[selectedBossName].monsterDropTableHandler.CreateDropTableDictionary();
+        currentMonster = bossesClasses[selectedBossName];
+
+        if (!string.IsNullOrEmpty(selectedBossName))
+        {
+            dropTableDict = currentMonster.monsterDropTableHandler.CreateDropTableDictionary();
+        }
     }
 }

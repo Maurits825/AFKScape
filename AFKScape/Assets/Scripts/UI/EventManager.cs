@@ -66,6 +66,12 @@ public class EventManager
         OnBossClicked?.Invoke(bossName);
     }
 
+    public event Action<int> OnBossKilled;
+    public void BossKilled(int killCount)
+    {
+        OnBossKilled?.Invoke(killCount);
+    }
+
 
     //---- Inventory ----
     public event Action<long, BigInteger> OnInvItemAdded;

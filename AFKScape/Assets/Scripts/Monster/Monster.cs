@@ -7,14 +7,15 @@ public class Monster
     //stats from database
     int id;
     public string name;
-    //other stuff
+
+    public int killCount;
 
     public MonsterDropTableHandler monsterDropTableHandler;
 
     public Monster(string mName)
     {
         name = mName;
+        killCount = 0;
         monsterDropTableHandler = JsonHandler.GetMonster(name);
     }
-
 }
