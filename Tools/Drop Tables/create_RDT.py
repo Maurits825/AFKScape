@@ -144,7 +144,6 @@ def create_json(drops):
     json_data = dict()
     json_data["name"] = "Rare drop Table"
     json_data["indexMapping"] = []
-    json_data["basicLoots"] = []
 
     for drop in drops:
         actual_chance.append(drop.actual_chance)
@@ -159,6 +158,8 @@ def create_json(drops):
     json_data["baseChance"] = base_chance
     scaled_chances = (actual_chance_arr * (lcm / base_chance_arr))
 
+    json_data["basicLoots"] = []
+
     index_mapping = 0
     for i, drop in enumerate(drops):
         index_mapping = index_mapping + scaled_chances[i]
@@ -171,7 +172,7 @@ def create_json(drops):
 
         json_data["indexMapping"].append(index_mapping)
 
-    out_file_name = r"..\..\AFKScape\Assets\Resources\JSON\MonsterDropTable/rdt.json"
+    out_file_name = r"./rare_drop_table.json"
     with open(out_file_name, "w", newline="\n") as out_file:
         json.dump(json_data, out_file, indent=4)
 
