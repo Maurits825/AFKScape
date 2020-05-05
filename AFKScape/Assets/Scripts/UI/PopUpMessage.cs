@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 public class PopUpMessage : MonoBehaviour
 {
-    [SerializeField]
-    private Text textObject;
+    public Text textObject;
 
     void Start()
     {

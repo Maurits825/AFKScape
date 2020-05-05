@@ -11,10 +11,8 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
 
     public bool isDraggable = false;
 
-    [SerializeField]
-    private Text toolTipText;
-    [SerializeField]
-    private GameObject toolTipObject;
+    public Text toolTipText;
+    public GameObject toolTipObject;
 
     private Transform parentTransform;
     private Rect parentRect;

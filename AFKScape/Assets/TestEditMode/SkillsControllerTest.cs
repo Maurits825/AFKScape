@@ -15,7 +15,7 @@ namespace Tests
         [SetUp]
         public void SetUp()
         {
-            EventManager.setIntance(new EventManager());
+            EventManager.SetIntance(new EventManager());
             Database.LoadExperienceTable();
             skillsController = new SkillsController();
             inventory = new Inventory();

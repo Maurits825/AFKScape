@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Numerics;
 
 [Serializable]
 public class GeneralDropTable : DropTable
@@ -18,7 +19,7 @@ public class GeneralDropTable : DropTable
         lootItems = dropTable.lootItems;
     }
 
-    public override void RollTable(Dictionary<long, int> dropTableDict)
+    public override void RollTable(Dictionary<long, BigInteger> dropTableDict)
     {
         //TODO leave this as is for now in terms of perf
         //TODO this will change when adding the actual dice sim

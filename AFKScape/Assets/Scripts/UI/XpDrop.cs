@@ -9,8 +9,6 @@ public class XpDrop : MonoBehaviour
     public Image icon;
     public GameObject xpDropObj;
 
-    private List<GameObject> xpDropObjs = new List<GameObject>();
-    private float heightOffset;
     private Vector3 startPos;
     private Vector3 target;
     private float speed = 170;
@@ -28,7 +26,7 @@ public class XpDrop : MonoBehaviour
     {
         float xpDropheight = xpDropObj.GetComponent<RectTransform>().rect.height;
         float areaHeight = GetComponent<RectTransform>().rect.height;
-        target = new Vector3(0, areaHeight + heightOffset, 0);
+        target = new Vector3(0, areaHeight/2 + xpDropheight/2, 0);
         startPos = new Vector3(0, 0 - areaHeight/2 - xpDropheight/2, 0);
         xpCummulative = 0;
 

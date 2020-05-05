@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 
 [Serializable]
@@ -16,7 +17,7 @@ public class MonsterDropTableHandler : MonsterDropTable
         monsterDropTables = new List<MonsterDropTable>();
     }
 
-    public override void RollTable(Dictionary<long, int> dropTableDict)
+    public override void RollTable(Dictionary<long, BigInteger> dropTableDict)
     {
         //roll general items individually, roll is handled in the table
         for (int i = 0; i < generalDropTables.Count; i++)
@@ -48,9 +49,9 @@ public class MonsterDropTableHandler : MonsterDropTable
         }
     }
 
-    public Dictionary<long, int> CreateDropTableDictionary()
+    public Dictionary<long, BigInteger> CreateDropTableDictionary()
     {
-        Dictionary<long, int> dropTableDict = new Dictionary<long, int>();
+        Dictionary<long, BigInteger> dropTableDict = new Dictionary<long, BigInteger>();
 
         foreach (BasicLoot basicLoot in basicLoots)
         {

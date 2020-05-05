@@ -1,16 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BankUI : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject slotPrefab;
-    [SerializeField]
-    private Transform slotListParent;
+    public GameObject slotPrefab;
+    public Transform slotListParent;
 
-    private int itemCount = 0;
     private Dictionary<long, Slot> slots = new Dictionary<long, Slot>();
     private Dictionary<long, Text> bankText = new Dictionary<long, Text>();
     private Dictionary<long, Image> bankImage = new Dictionary<long, Image>();
@@ -22,7 +20,7 @@ public class BankUI : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    void BankItemAdded(long id, int amount, int amountDiff)
+    void BankItemAdded(long id, BigInteger amount, BigInteger _)
     {
         if (amount > 0)
         {
@@ -38,16 +36,14 @@ public class BankUI : MonoBehaviour
 
                 bankText.Add(id, slot.amountText);
                 bankImage.Add(id, slot.iconImage);
-
-                itemCount++;
             }
 
-            bankText[id].text = amount.ToString();
+            (bankText[id].text, bankText[id].color) = UtilityUI.FormatNumber(amount);
             bankImage[id].sprite = Resources.Load<Sprite>("Icons/" + id.ToString());
         }
     }
 
-    public void BankItemRemoved(long id, int amount,  int amountDiff)
+    public void BankItemRemoved(long id, BigInteger amount, BigInteger _)
     {
         if (bankText.ContainsKey(id))
         {

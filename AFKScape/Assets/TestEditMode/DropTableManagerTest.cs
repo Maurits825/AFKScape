@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -14,7 +15,7 @@ namespace Tests
             int boostedLvl = 50;
             long id = 500;
 
-            Dictionary<long, int> dropTableDict;
+            Dictionary<long, BigInteger> dropTableDict;
 
             TrainingMethod trainingMethod = new TrainingMethod();
             trainingMethod.dropTables.Add(new GeneralDropTable());
@@ -23,12 +24,12 @@ namespace Tests
 
             dropTableDict = DropTableManager.CreateDropTableDictionary(trainingMethod.dropTables);
             DropTableManager.RollResources(dropTableDict, trainingMethod, boostedLvl);
-            Assert.AreEqual(1, dropTableDict[id]);
+            Assert.AreEqual((BigInteger)1, dropTableDict[id]);
 
             trainingMethod.dropTables[0].numRolls = 2;
             dropTableDict = DropTableManager.CreateDropTableDictionary(trainingMethod.dropTables);
             DropTableManager.RollResources(dropTableDict, trainingMethod, boostedLvl);
-            Assert.AreEqual(2, dropTableDict[id]);
+            Assert.AreEqual((BigInteger)2, dropTableDict[id]);
         }
     }
 }

@@ -57,6 +57,11 @@ public class ItemLookupEditor : Editor
             itemList = itemLookup.GetItemId(itemName);
         }
 
+        if (Event.current.keyCode == (KeyCode.Return))
+        {
+            itemList = itemLookup.GetItemId(itemName);
+        }
+
         if (itemList.Count > 0)
         {
             resultCount = 0;
@@ -68,6 +73,11 @@ public class ItemLookupEditor : Editor
                     EditorGUILayout.BeginHorizontal();
                     EditorGUILayout.LabelField("Name: " + item.Item2, GUILayout.ExpandWidth(true), GUILayout.MinWidth(50));
                     EditorGUILayout.LabelField("Extra info: " + item.Item3, GUILayout.ExpandWidth(true), GUILayout.MinWidth(50));
+                    
+                    if (GUILayout.Button("Copy ID", GUILayout.ExpandWidth(true), GUILayout.MinWidth(50)))
+                    {
+                        EditorGUIUtility.systemCopyBuffer = item.Item1.ToString();
+                    }
 
                     if (asButton)
                     {

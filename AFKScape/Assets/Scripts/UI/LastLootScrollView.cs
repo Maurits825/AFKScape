@@ -1,17 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class LastLootScrollView : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject slotPrefab;
-    [SerializeField]
-    private Transform slotListParent;
+    public GameObject slotPrefab;
+    public Transform slotListParent;
 
     private List<GameObject> slotsObjects = new List<GameObject>();
-    private Dictionary<long, int> lastLootAmount = new Dictionary<long, int>();
+    private Dictionary<long, BigInteger> lastLootAmount = new Dictionary<long, BigInteger>();
     private Dictionary<long, Text> lastLootText = new Dictionary<long, Text>();
     private Dictionary<long, Image> lastLootImage = new Dictionary<long, Image>();
 
@@ -22,7 +21,7 @@ public class LastLootScrollView : MonoBehaviour
         EventManager.Instance.OnSkillButtonClicked += ClearLastLootUI;
     }
 
-    void UpdateLastLootUI(long id, int amount, int amountDiff)
+    void UpdateLastLootUI(long id, BigInteger _, BigInteger amountDiff)
     {
         if (!lastLootText.ContainsKey(id))
         {
@@ -39,7 +38,7 @@ public class LastLootScrollView : MonoBehaviour
         }
 
         lastLootAmount[id] += amountDiff;
-        lastLootText[id].text = lastLootAmount[id].ToString();
+        (lastLootText[id].text, lastLootText[id].color) = UtilityUI.FormatNumber(lastLootAmount[id]);
         lastLootImage[id].sprite = Resources.Load<Sprite>("Icons/" + id.ToString());
     }
 

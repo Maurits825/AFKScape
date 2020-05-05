@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 
 //TODO will be used later for specific drop table mechanics, (cerberus and zulrah)
 public class DropTableManager
 {
-    public static void RollResources(Dictionary<long, int> dropTableDict, TrainingMethod trainingMethod, int boostedLvl)
+    public static void RollResources(Dictionary<long, BigInteger> dropTableDict, TrainingMethod trainingMethod, int boostedLvl)
     {
         List<DropTable> dropTables = trainingMethod.dropTables; //TODO is this better or slower?
         for (int i = 0; i < dropTables.Count; i++)
@@ -30,9 +31,9 @@ public class DropTableManager
         }
     }
 
-    public static Dictionary<long, int> CreateDropTableDictionary(List<DropTable> dropTables)
+    public static Dictionary<long, BigInteger> CreateDropTableDictionary(List<DropTable> dropTables)
     {
-        Dictionary<long, int> dropTableDict = new Dictionary<long, int>();
+        Dictionary<long, BigInteger> dropTableDict = new Dictionary<long, BigInteger>();
         foreach (DropTable dropTable in dropTables)
         {
             if (dropTable.tableType == DropTable.DropTableType.Clue)
