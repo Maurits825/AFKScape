@@ -63,8 +63,8 @@ public class BossesController
         //TODO is there a better way to add/manage these
         //could use monster id
         //TODO also this could be different, there could be a specific Zulrah class
-        bossesClasses.Add("Zulrah", new Monster("Zulrah"));
-        bossesClasses.Add("Vorkath", new Monster("Vorkath"));
+        bossesClasses.Add("Zulrah", new Zulrah());
+        bossesClasses.Add("Vorkath", new Vorkath());
     }
 
     public void SubscribeEvents()

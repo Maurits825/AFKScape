@@ -11,6 +11,8 @@ public class MonsterDropTableHandler : MonsterDropTable
     public List<GeneralDropTable> generalDropTables; //will include 100% drops and tertiary, they are all rolled individually
     public List<MonsterDropTable> monsterDropTables;
 
+    public List<string> preMadeTables;
+
     public MonsterDropTableHandler()
     {
         generalDropTables = new List<GeneralDropTable>();

@@ -6,16 +6,28 @@ public class Monster
 {
     //stats from database
     int id;
-    public string name;
+    public string bossName;
 
     public int killCount;
 
     public MonsterDropTableHandler monsterDropTableHandler;
 
-    public Monster(string mName)
+    public Monster(string name)
     {
-        name = mName;
-        killCount = 0;
-        monsterDropTableHandler = JsonHandler.GetMonster(name);
+        bossName = name;
+        killCount = 0;        
+    }
+
+    public void GetDropTableHandler(string name)
+    {
+        monsterDropTableHandler = JsonHandler.GetMonsterDropTableHandler(name);
+
+        if (monsterDropTableHandler.preMadeTables.Count != 0)
+        {
+            foreach (string tableName in monsterDropTableHandler.preMadeTables)
+            {
+                monsterDropTableHandler.monsterDropTables.Add(JsonHandler.GetMonsterDropTable(tableName));
+            }
+        }
     }
 }

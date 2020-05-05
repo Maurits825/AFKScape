@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEditorInternal;
+using System.Data;
 
 [CustomEditor(typeof(MonsterDropTableAdder))]
 public class MonsterDropTableEditor : Editor
@@ -34,7 +35,11 @@ public class MonsterDropTableEditor : Editor
         }
 
         monsterInd = EditorGUILayout.Popup("Select Boss:", monsterInd, Database.bossesNames.ToArray());
-        monsterName = Database.bossesNames[monsterInd];
+        if (Database.bossesNames.Count != 0)
+        {
+            monsterName = Database.bossesNames[monsterInd];
+        }
+
         if (monsterInd != prevMonsterInd)
         {
             JSONLoaded = false;
@@ -42,7 +47,7 @@ public class MonsterDropTableEditor : Editor
 
         if (GUILayout.Button("Load JSON"))
         {
-            monsterDropTableAdder.monsterDropTableHandler = JsonHandler.GetMonster(monsterName);
+            monsterDropTableAdder.monsterDropTableHandler = JsonHandler.GetMonsterDropTableHandler(monsterName);
             serializedObject.Update();
             prevMonsterInd = monsterInd;
             JSONLoaded = true;
@@ -92,7 +97,7 @@ public class MonsterDropTableEditor : Editor
 
             if (GUILayout.Button("Add basic loot and index map"))
             {
-                tempDropTable = JsonHandler.GetDropTable("temp");
+                tempDropTable = JsonHandler.GetMonsterDropTable("temp");
                 monsterDropTableAdder.monsterDropTableHandler.basicLoots = tempDropTable.basicLoots;
                 monsterDropTableAdder.monsterDropTableHandler.indexMapping = tempDropTable.indexMapping;
                 monsterDropTableAdder.monsterDropTableHandler.baseChance = tempDropTable.baseChance;
@@ -104,21 +109,21 @@ public class MonsterDropTableEditor : Editor
 
             EditorGUILayout.LabelField("Other tables", EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
-            if (GUILayout.Button("Add RDT"))
+            if (GUILayout.Button("Add Rare Drop Table"))
             {
-                tempDropTable = JsonHandler.GetDropTable("rdt");
-                monsterDropTableAdder.monsterDropTableHandler.monsterDropTables.Add(tempDropTable);
+                monsterDropTableAdder.monsterDropTableHandler.preMadeTables.Add("rare_drop_table");
             }
             if (GUILayout.Button("Add Tree-Herb Seed Table"))
             {
-                tempDropTable = JsonHandler.GetDropTable("tree_herb_seed");
-                monsterDropTableAdder.monsterDropTableHandler.monsterDropTables.Add(tempDropTable);
+                monsterDropTableAdder.monsterDropTableHandler.preMadeTables.Add("tree_herb_seed");
             }
             if (GUILayout.Button("Add Custom"))
             {
                 monsterDropTableAdder.monsterDropTableHandler.monsterDropTables.Add(new MonsterDropTable());
             }
             EditorGUILayout.PropertyField(monsterDropTableHandler.FindPropertyRelative("monsterDropTables"));
+
+            EditorGUILayout.PropertyField(monsterDropTableHandler.FindPropertyRelative("preMadeTables"));
             EditorGUI.indentLevel--;
 
             EditorGUI.indentLevel--;
