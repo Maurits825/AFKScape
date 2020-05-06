@@ -90,7 +90,13 @@ namespace Tests
             Dictionary<long, float> expectedRate = new Dictionary<long, float>();
             expectedRate[22006] = 1 / 5000.0F;
             expectedRate[1305] = 4 / 150.0F;
-            expectedRate[5300] = 1 / 112.3F;
+
+            expectedRate[5300] = 2 / 112.3F;
+            expectedRate[5118] = 2 / 625.0F;
+            expectedRate[22924] = 2 / 3125.0F;
+
+            expectedRate[1621] = 2 / 1536.0F;
+            expectedRate[830] = 10 / 24576.0F;
 
             int iterations = 1_000_000;
             for (int i = 0; i < iterations; i++)
