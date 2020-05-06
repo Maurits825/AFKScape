@@ -44,6 +44,7 @@ namespace Tests
 
             foreach (Monster monster in bossesController.bossesClasses.Values)
             {
+                Debug.Log(monster.bossName);
                 int baseChance = monster.monsterDropTableHandler.baseChance;
                 int totalWeight = GetWeightSum(monster.monsterDropTableHandler);
                 Assert.AreEqual(baseChance, totalWeight);
@@ -81,8 +82,11 @@ namespace Tests
                     foreach (MonsterDropTable.BasicLoot item in monsterDropTable.basicLoots)
                     {
                         Assert.Greater(item.id, 0);
-                        Assert.Greater(item.amountMin, 0);
-                        Assert.Greater(item.amountMax, 0);
+                        if (item.amountMax != 0)
+                        {
+                            Assert.Greater(item.amountMin, 0);
+                            Assert.Greater(item.amountMax, 0);
+                        }
                     }
                 }
             }
