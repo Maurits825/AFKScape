@@ -36,7 +36,7 @@ public class MonsterDropTableHandler : MonsterDropTable
         monsterDropTables = new List<MonsterDropTable>();
     }
 
-    public override void RollTable(Dictionary<long, BigInteger> dropTableDict)
+    public override bool RollTable(Dictionary<long, BigInteger> dropTableDict)
     {
         //roll general items individually, roll is handled in the table
         for (int i = 0; i < generalDropTables.Count; i++)
@@ -46,60 +46,41 @@ public class MonsterDropTableHandler : MonsterDropTable
 
         for (int r = 0; r < rolls; r++)
         {
-            int index = UnityEngine.Random.Range(1, baseChance);
-            int basicLootCount = basicLoots.Count;
-
-            int weightSum = 0;
-            for (int i = 0; i < totalBasicLootCount; i++)
-            {
-                if (i < basicLootCount)
-                {
-                    weightSum += basicLoots[i].weight;
-                    if (index <= weightSum)
-                    {
-                        AddLoot(dropTableDict, basicLoots[i]);
-                        break;
-                    }
-                }
-                else
-                {
-                    weightSum += monsterDropTables[i % basicLootCount].weight;
-                    if (index <= weightSum)
-                    {
-                        monsterDropTables[i % basicLootCount].RollTable(dropTableDict);
-                        break;
-                    }
-                }
-            }
+            RollBasic(dropTableDict);
         }
+
+        return true;
     }
 
-    public Dictionary<long, BigInteger> CreateDropTableDictionary()
+    public bool RollBasic(Dictionary<long, BigInteger> dropTableDict)
     {
-        Dictionary<long, BigInteger> dropTableDict = new Dictionary<long, BigInteger>();
+        int index = UnityEngine.Random.Range(1, baseChance);
+        int basicLootCount = basicLoots.Count;
 
-        foreach (BasicLoot basicLoot in basicLoots)
+        int weightSum = 0;
+        for (int i = 0; i < totalBasicLootCount; i++)
         {
-            dropTableDict[basicLoot.id] = 0;
-        }
-
-        foreach (MonsterDropTable table in monsterDropTables)
-        {
-            foreach (BasicLoot basicLoot in table.basicLoots)
+            if (i < basicLootCount)
             {
-                dropTableDict[basicLoot.id] = 0;
+                weightSum += basicLoots[i].weight;
+                if (index <= weightSum)
+                {
+                    AddLoot(dropTableDict, basicLoots[i]);
+                    return true;
+                }
+            }
+            else
+            {
+                weightSum += monsterDropTables[i % basicLootCount].weight;
+                if (index <= weightSum)
+                {
+                    monsterDropTables[i % basicLootCount].RollTable(dropTableDict);
+                    return true;
+                }
             }
         }
 
-        foreach (GeneralDropTable table in generalDropTables)
-        {
-            foreach (DropTable.Loot loot in table.lootItems)
-            {
-                dropTableDict[loot.id] = 0;
-            }
-        }
-
-        return dropTableDict;
+        return false;
     }
 
     public void SetTotalLootCount()

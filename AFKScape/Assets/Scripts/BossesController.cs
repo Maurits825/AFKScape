@@ -50,7 +50,7 @@ public class BossesController
             actionCount -= 1.0F;
             actionDone++;
 
-            currentMonster.monsterDropTableHandler.RollTable(dropTableDict);
+            currentMonster.KillBoss(dropTableDict);
             currentMonster.killCount++;
             EventManager.Instance.BossKilled(currentMonster.killCount);
         }
@@ -79,7 +79,7 @@ public class BossesController
         if (!string.IsNullOrEmpty(selectedBossName))
         {
             currentMonster = bossesClasses[selectedBossName];
-            dropTableDict = currentMonster.monsterDropTableHandler.CreateDropTableDictionary();
+            dropTableDict = currentMonster.GetDropTableDict();
         }
     }
 }
