@@ -59,7 +59,7 @@ public class MonsterDropTableHandler : MonsterDropTable
 
     public bool RollBasic(Dictionary<long, BigInteger> dropTableDict)
     {
-        int index = UnityEngine.Random.Range(1, baseChance);
+        int index = UnityEngine.Random.Range(1, baseChance + 1);
         int basicLootCount = basicLoots.Count;
 
         int weightSum = 0;
