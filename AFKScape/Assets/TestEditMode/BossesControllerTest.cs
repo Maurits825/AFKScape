@@ -17,6 +17,10 @@ namespace Tests
         public void OneTimeSetup()
         {
             Database.LoadBosses();
+            if (Database.items.Count != 0)
+            {
+                Database.items.Clear();
+            }
             Database.LoadItems();
         }
 
@@ -82,10 +86,13 @@ namespace Tests
             Dictionary<long, BigInteger> dropTableDict = monster.GetDropTableDict();
 
             Dictionary<long, float> expectedRate = new Dictionary<long, float>();
-            expectedRate[12921] = 1/4000.0F;
-            expectedRate[1391] = (2 * 10 * 10)/ 248.0F;
-            expectedRate[13200] = 1/6553.0F;
-            expectedRate[12922] = 1/512.0F;
+            expectedRate[12921] = 1 / 4000.0F;
+            expectedRate[1391] = (2 * 10 * 10) / 248.0F;
+            expectedRate[13200] = 1 / 6553.0F;
+            expectedRate[12922] = 1 / 512.0F;
+
+            expectedRate[2366] = 2 / 7446.93F;
+            expectedRate[1617] = 2 / 11286.76F;
 
             int iterations = 1_000_000;
             for (int i = 0; i < iterations; i++)
@@ -129,7 +136,5 @@ namespace Tests
                 Assert.IsTrue(CheckThreshold(simRate, expectedRate[id]), Database.items[id].name);
             }
         }
-
-
     }
 }
