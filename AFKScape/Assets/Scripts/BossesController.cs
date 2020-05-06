@@ -50,9 +50,9 @@ public class BossesController
             actionCount -= 1.0F;
             actionDone++;
 
-            currentMonster.KillBoss(dropTableDict);
-            currentMonster.killCount++;
-            EventManager.Instance.BossKilled(currentMonster.killCount);
+            monster.KillBoss(dropTableDict);
+            monster.killCount++;
+            EventManager.Instance.BossKilled(monster.killCount);
         }
 
         bank.AddMultipleItems(dropTableDict);

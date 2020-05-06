@@ -62,10 +62,10 @@ public class Zulrah : Monster
 
     public override void KillBoss(Dictionary<long, BigInteger> dropTableDict)
     {
+        monsterDropTableHandler.RollGeneral(dropTableDict);
+
         for (int r = 0; r < monsterDropTableHandler.rolls; r++)
         {
-            monsterDropTableHandler.RollGeneral(dropTableDict);
-            
             if (!uniqueDropTable.Roll(dropTableDict))
             {
                 monsterDropTableHandler.RollBasic(dropTableDict);

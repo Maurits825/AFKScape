@@ -55,13 +55,16 @@ public class Monster
             }
         }
 
-        if (extraTables != null || extraTables.Count != 0)
+        if (extraTables != null)
         {
-            foreach (MonsterDropTable table in extraTables)
+            if (extraTables.Count != 0)
             {
-                foreach (MonsterDropTable.BasicLoot basicLoot in table.basicLoots)
+                foreach (MonsterDropTable table in extraTables)
                 {
-                    dropTableDict[basicLoot.id] = 0;
+                    foreach (MonsterDropTable.BasicLoot basicLoot in table.basicLoots)
+                    {
+                        dropTableDict[basicLoot.id] = 0;
+                    }
                 }
             }
         }
