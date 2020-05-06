@@ -46,6 +46,25 @@ namespace Tests
         }
 
         [Test]
+        public void UnityEngineRandomRangeTest()
+        {
+            int iterations = 1_000_000;
+            int value;
+            int baseChance = 5;
+            int count = 0;
+            for (int i = 0; i < iterations; i++)
+            {
+                value = UnityEngine.Random.Range(1, baseChance);
+                if (value == baseChance)
+                {
+                    count++;
+                }
+            }
+
+            Assert.AreEqual(0, count);
+        }
+
+        [Test]
         public void BossGameLoopTest()
         {
             Monster monster = bossesController.bossesClasses["Zulrah"];

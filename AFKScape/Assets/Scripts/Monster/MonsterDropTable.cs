@@ -31,7 +31,7 @@ public class MonsterDropTable
 
     public int GetAmount(int amountMin, int amountMax)
     {
-        return UnityEngine.Random.Range(amountMin, amountMax);
+        return UnityEngine.Random.Range(amountMin, amountMax + 1);
     }
 
     public void AddLoot(Dictionary<long, BigInteger> dropTableDict, BasicLoot loot)
@@ -41,7 +41,7 @@ public class MonsterDropTable
     }
     public virtual bool Roll(Dictionary<long, BigInteger> dropTableDict)
     {
-        int index = UnityEngine.Random.Range(1, baseChance);
+        int index = UnityEngine.Random.Range(1, baseChance + 1);
         int weightSum = 0;
 
         for (int i = 0; i < basicLoots.Count; i++)

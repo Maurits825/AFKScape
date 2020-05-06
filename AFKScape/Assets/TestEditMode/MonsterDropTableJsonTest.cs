@@ -101,8 +101,8 @@ namespace Tests
             int baseChance = monsterDropTable.baseChance;
             int totalWeight = GetWeightSum(monsterDropTable.basicLoots);
 
-            Assert.AreEqual(totalWeight, totalWeight);
-            Assert.Greater(monsterDropTable.baseChance, 0);
+            Assert.AreEqual(baseChance, totalWeight);
+            Assert.Greater(baseChance, 0);
 
             foreach (MonsterDropTable.BasicLoot item in monsterDropTable.basicLoots)
             {
@@ -117,8 +117,8 @@ namespace Tests
             int baseChance = monsterDropTable.baseChance;
             int totalWeight = GetWeightSum(monsterDropTable.basicLoots);
 
-            Assert.AreEqual(totalWeight, totalWeight);
-            Assert.Greater(monsterDropTable.baseChance, 0);
+            Assert.AreEqual(baseChance, totalWeight);
+            Assert.Greater(baseChance, 0);
 
             foreach (MonsterDropTable.BasicLoot item in monsterDropTable.basicLoots)
             {
