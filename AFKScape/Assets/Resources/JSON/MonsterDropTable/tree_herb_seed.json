@@ -1,1 +1,90 @@
-{"name":"Tree-herb seed table","baseChance":125,"indexMapping":[15,29,40,50,60,69,78,87,96,103,109,114,118,121,123,125],"basicLoots":[{"id":5295,"amountMin":1,"amountMax":1},{"id":5300,"amountMin":1,"amountMax":1},{"id":5304,"amountMin":1,"amountMax":1},{"id":5146,"amountMin":15,"amountMax":15},{"id":5118,"amountMin":1,"amountMax":1},{"id":21499,"amountMin":1,"amountMax":1},{"id":5122,"amountMin":1,"amountMax":1},{"id":21495,"amountMin":1,"amountMax":1},{"id":5110,"amountMin":1,"amountMax":1},{"id":5251,"amountMin":1,"amountMax":1},{"id":5126,"amountMin":1,"amountMax":1},{"id":5255,"amountMin":1,"amountMax":1},{"id":5130,"amountMin":1,"amountMax":1},{"id":22904,"amountMin":1,"amountMax":1},{"id":22908,"amountMin":1,"amountMax":1},{"id":22924,"amountMin":1,"amountMax":1}],"rolls":0,"generalDropTables":[],"monsterDropTables":[]}
+{
+    "name": "general",
+    "baseChance": 238,
+    "basicLoots": [
+        {
+            "id": 5296,
+            "weight": 47.0,
+            "amountMin": "1",
+            "amountMax": "1"
+        },
+        {
+            "id": 5297,
+            "weight": 32.0,
+            "amountMin": "1",
+            "amountMax": "1"
+        },
+        {
+            "id": 5275,
+            "weight": 31.0,
+            "amountMin": "1",
+            "amountMax": "1"
+        },
+        {
+            "id": 5298,
+            "weight": 22.0,
+            "amountMin": "1",
+            "amountMax": "1"
+        },
+        {
+            "id": 5106,
+            "weight": 22.0,
+            "amountMin": "1",
+            "amountMax": "1"
+        },
+        {
+            "id": 5267,
+            "weight": 21.0,
+            "amountMin": "1",
+            "amountMax": "1"
+        },
+        {
+            "id": 5299,
+            "weight": 15.0,
+            "amountMin": "1",
+            "amountMax": "1"
+        },
+        {
+            "id": 22900,
+            "weight": 15.0,
+            "amountMin": "1",
+            "amountMax": "1"
+        },
+        {
+            "id": 5300,
+            "weight": 10.0,
+            "amountMin": "1",
+            "amountMax": "1"
+        },
+        {
+            "id": 5301,
+            "weight": 7.0,
+            "amountMin": "1",
+            "amountMax": "1"
+        },
+        {
+            "id": 5302,
+            "weight": 5.0,
+            "amountMin": "1",
+            "amountMax": "1"
+        },
+        {
+            "id": 22896,
+            "weight": 4.0,
+            "amountMin": "3",
+            "amountMax": "3"
+        },
+        {
+            "id": 5303,
+            "weight": 3.0,
+            "amountMin": "1",
+            "amountMax": "1"
+        },
+        {
+            "id": 5304,
+            "weight": 2.0,
+            "amountMin": "1",
+            "amountMax": "1"
+        }
+    ]
+}

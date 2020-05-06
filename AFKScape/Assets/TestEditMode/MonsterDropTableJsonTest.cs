@@ -95,7 +95,6 @@ namespace Tests
             int baseChance = monsterDropTable.baseChance;
             int totalWeight = GetWeightSum(monsterDropTable.basicLoots);
 
-            //TODO rounding issues...
             Assert.AreEqual(totalWeight, totalWeight);
             Assert.Greater(monsterDropTable.baseChance, 0);
 

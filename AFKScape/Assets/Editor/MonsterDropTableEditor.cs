@@ -111,7 +111,7 @@ public class MonsterDropTableEditor : Editor
             }
             if (GUILayout.Button("Add Tree-Herb Seed Table"))
             {
-                //monsterDropTableAdder.monsterDropTableHandler.preMadeTables.Add(("tree_herb_seed", 0));
+                monsterDropTableAdder.monsterDropTableHandler.preMadeTables.Add(new MonsterDropTableHandler.TableInfo("tree_herb_seed", 0));
             }
             if (GUILayout.Button("Add Custom"))
             {

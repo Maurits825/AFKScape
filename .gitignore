@@ -62,3 +62,5 @@ crashlytics-build.properties
 /AFKScape/Assets/InitTestScene*.*
 
 Tools/Drop Tables/*.json
+AFKScape/Assets/Resources/JSON/MonsterDropTable/temp.json
+AFKScape/Assets/Resources/JSON/MonsterDropTable/temp.json.meta

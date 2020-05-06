@@ -143,6 +143,9 @@ def get_single_table(url, table_id):
 def create_json(drops):
     all_db_items = items_api.load()
 
+    with open(r"./stacked_items_link.json") as json_file:
+        stacked_dict = json.load(json_file)
+
     actual_chance = []
     base_chances = []
     ids = []
@@ -171,7 +174,11 @@ def create_json(drops):
         index_mapping = index_mapping + scaled_chances[i]
 
         basic_loot = dict()
-        basic_loot["id"] = ids[i]
+        basic_loot = dict()
+        try:
+            basic_loot["id"] = stacked_dict[str(ids[i])]
+        except KeyError:
+            basic_loot["id"] = ids[i]
         basic_loot["weight"] = scaled_chances[i]
         basic_loot["amountMin"] = drop.amount_min
         basic_loot["amountMax"] = drop.amount_max
