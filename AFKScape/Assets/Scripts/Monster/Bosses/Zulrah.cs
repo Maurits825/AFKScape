@@ -64,7 +64,9 @@ public class Zulrah : Monster
     {
         for (int r = 0; r < monsterDropTableHandler.rolls; r++)
         {
-            if (!uniqueDropTable.RollTable(dropTableDict))
+            monsterDropTableHandler.RollGeneral(dropTableDict);
+            
+            if (!uniqueDropTable.Roll(dropTableDict))
             {
                 monsterDropTableHandler.RollBasic(dropTableDict);
             }

@@ -30,7 +30,7 @@ public class GeneralDropTable : DropTable
                 Loot loot = lootItems[i];
                 //TODO if chance=base=1 no need for rolling
                 //TODO look at this, min=max=1 no need to call getamount
-                if (IsLootDropped(loot.chance, loot.baseChance)) //TODO this is wrong, well it works for tertiary type drops
+                if (IsLootDropped(loot.chance, loot.baseChance))
                 {
                     int amount = GetAmount(loot.amountMin, loot.amountMax); 
                     dropTableDict[loot.id] += amount;

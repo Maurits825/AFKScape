@@ -84,6 +84,6 @@ public class Monster
 
     public virtual void KillBoss(Dictionary<long, BigInteger> dropTableDict)
     {
-        monsterDropTableHandler.RollTable(dropTableDict);
+        monsterDropTableHandler.Roll(dropTableDict);
     }
 }

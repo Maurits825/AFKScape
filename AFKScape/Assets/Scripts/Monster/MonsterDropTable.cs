@@ -39,7 +39,7 @@ public class MonsterDropTable
         int amount = GetAmount(loot.amountMin, loot.amountMax);
         dropTableDict[loot.id] += amount;
     }
-    public virtual bool RollTable(Dictionary<long, BigInteger> dropTableDict)
+    public virtual bool Roll(Dictionary<long, BigInteger> dropTableDict)
     {
         int index = UnityEngine.Random.Range(1, baseChance);
         int weightSum = 0;

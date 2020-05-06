@@ -36,13 +36,9 @@ public class MonsterDropTableHandler : MonsterDropTable
         monsterDropTables = new List<MonsterDropTable>();
     }
 
-    public override bool RollTable(Dictionary<long, BigInteger> dropTableDict)
+    public override bool Roll(Dictionary<long, BigInteger> dropTableDict)
     {
-        //roll general items individually, roll is handled in the table
-        for (int i = 0; i < generalDropTables.Count; i++)
-        {
-            generalDropTables[i].RollTable(dropTableDict);
-        }
+        RollGeneral(dropTableDict);
 
         for (int r = 0; r < rolls; r++)
         {
@@ -50,6 +46,15 @@ public class MonsterDropTableHandler : MonsterDropTable
         }
 
         return true;
+    }
+
+    public void RollGeneral(Dictionary<long, BigInteger> dropTableDict)
+    {
+        //roll general items individually, roll is handled in the table
+        for (int i = 0; i < generalDropTables.Count; i++)
+        {
+            generalDropTables[i].RollTable(dropTableDict);
+        }
     }
 
     public bool RollBasic(Dictionary<long, BigInteger> dropTableDict)
@@ -74,7 +79,7 @@ public class MonsterDropTableHandler : MonsterDropTable
                 weightSum += monsterDropTables[i % basicLootCount].weight;
                 if (index <= weightSum)
                 {
-                    monsterDropTables[i % basicLootCount].RollTable(dropTableDict);
+                    monsterDropTables[i % basicLootCount].Roll(dropTableDict);
                     return true;
                 }
             }
