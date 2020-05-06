@@ -44,7 +44,7 @@ namespace Tests
 
             foreach (Monster monster in bossesController.bossesClasses.Values)
             {
-                Debug.Log(monster.bossName);
+                TestContext.WriteLine("Testing: " + monster.bossName);
                 int baseChance = monster.monsterDropTableHandler.baseChance;
                 int totalWeight = GetWeightSum(monster.monsterDropTableHandler);
                 Assert.AreEqual(baseChance, totalWeight);
@@ -89,6 +89,8 @@ namespace Tests
                         }
                     }
                 }
+
+                TestContext.WriteLine("Passed: " + monster.bossName);
             }
         }
 
