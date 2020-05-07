@@ -2,9 +2,10 @@
 
 # See https://unity3d.com/get-unity/download/archive
 # to get download URLs
+#https://formulae.brew.sh/cask/unity
 UNITY_DOWNLOAD_CACHE="$(pwd)/unity_download_cache"
 UNITY_OSX_PACKAGE_URL="https://download.unity3d.com/download_unity/d4ddf0d95db9/MacEditorInstaller/Unity-2019.3.13f1.pkg"
-UNITY_WINDOWS_TARGET_PACKAGE_URL="https://beta.unity3d.com/download/d4ddf0d95db9/MacEditorTargetInstaller/UnitySetup-Windows-Support-for-Editor-2019.3.13f1.pkg"
+UNITY_WINDOWS_TARGET_PACKAGE_URL="https://netstorage.unity3d.com/unity/84b23722532d/MacEditorTargetInstaller/UnitySetup-Windows-Mono-Support-for-Editor-2019.3.12f1.pkg"
 
 
 # Downloads a file if it does not exist
