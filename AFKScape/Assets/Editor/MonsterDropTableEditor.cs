@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using UnityEditorInternal;
-using System.Data;
 
 [CustomEditor(typeof(MonsterDropTableAdder))]
 public class MonsterDropTableEditor : Editor

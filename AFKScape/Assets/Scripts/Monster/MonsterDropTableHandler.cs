@@ -2,8 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
-using UnityEditor;
-using UnityEngine;
 
 [Serializable]
 public class MonsterDropTableHandler : MonsterDropTable
