@@ -1,5 +1,8 @@
 [![Active](http://img.shields.io/badge/Status-Active-green.svg)](https://github.com/Maurits825/AFKScape) 
 [![Build Status](https://travis-ci.com/Maurits825/AFKScape.svg?token=acwEp1UszjMQRSRycTzp&branch=master)](https://travis-ci.com/Maurits825/AFKScape)
+![GitHub contributors](https://img.shields.io/github/contributors/Maurits825/AFKScape)
+![GitHub last commit](https://img.shields.io/github/last-commit/Maurits825/AFKSCape)
+![GitHub issues](https://img.shields.io/github/issues-raw/Maurits825/AFKSCape)
 
 # AFKScape
 Imagine not juicing
