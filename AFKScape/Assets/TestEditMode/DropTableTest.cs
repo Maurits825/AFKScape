@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -21,10 +22,10 @@ namespace Tests
                 generalDropTable
             };
 
-            Dictionary<long, int> dropTableDict = DropTableManager.CreateDropTableDictionary(dropTables);
+            Dictionary<long, BigInteger> dropTableDict = DropTableManager.CreateDropTableDictionary(dropTables);
             generalDropTable.RollTable(dropTableDict);
 
-            Assert.AreEqual(1, dropTableDict[itemId]);
+            Assert.AreEqual((BigInteger)1, dropTableDict[itemId]);
         }
 
         [Test]
@@ -46,7 +47,7 @@ namespace Tests
                 clueDropTable
             };
 
-            Dictionary<long, int> dropTableDict = DropTableManager.CreateDropTableDictionary(dropTables);
+            Dictionary<long, BigInteger> dropTableDict = DropTableManager.CreateDropTableDictionary(dropTables);
             for (int i = 0; i < iterations; i++)
             {
                 clueDropTable.RollTable(dropTableDict, fishLevel);
@@ -75,13 +76,13 @@ namespace Tests
                 petDropTable
             };
 
-            Dictionary<long, int> dropTableDict = DropTableManager.CreateDropTableDictionary(dropTables);
+            Dictionary<long, BigInteger> dropTableDict = DropTableManager.CreateDropTableDictionary(dropTables);
             for (int i = 0; i < iterations; i++)
             {
                 petDropTable.RollTable(dropTableDict, fishLvl);
             }
 
-            Assert.AreEqual(iterations, dropTableDict[heronId]);
+            Assert.AreEqual((BigInteger)iterations, dropTableDict[heronId]);
         }
     }
 }

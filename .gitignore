@@ -60,3 +60,7 @@ crashlytics-build.properties
 
 # some remaining UTs files, seems to be recurring bug
 /AFKScape/Assets/InitTestScene*.*
+
+Tools/Drop Tables/*.json
+AFKScape/Assets/Resources/JSON/MonsterDropTable/temp.json
+AFKScape/Assets/Resources/JSON/MonsterDropTable/temp.json.meta

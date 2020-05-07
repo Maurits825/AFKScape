@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Numerics;
 
 [Serializable]
 public class GeneralDropTable : DropTable
@@ -18,18 +19,19 @@ public class GeneralDropTable : DropTable
         lootItems = dropTable.lootItems;
     }
 
-    public override void RollTable(Dictionary<long, int> dropTableDict)
+    public override void RollTable(Dictionary<long, BigInteger> dropTableDict)
     {
         //TODO leave this as is for now in terms of perf
-        //TODO this will change when adding the actual dice sim
         for (int r = 0; r < numRolls; r++)
         {
             for (int i = 0; i < lootItems.Count; i++)
             {
                 Loot loot = lootItems[i];
-                if (IsLootDropped(loot.chance, loot.baseChance)) //TODO this is wrong
+                //TODO if chance=base=1 no need for rolling
+                //TODO look at this, min=max=1 no need to call getamount
+                if (IsLootDropped(loot.chance, loot.baseChance))
                 {
-                    int amount = GetAmount(loot.amountMin, loot.amountMax); //TODO look at this, min=max=1 no need to call
+                    int amount = GetAmount(loot.amountMin, loot.amountMax); 
                     dropTableDict[loot.id] += amount;
                 }
             }

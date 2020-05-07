@@ -20,15 +20,17 @@ public struct LevelRequirement
 public class Requirements
 {
     public List<LevelRequirement> levelRequirements;
-    public List<int> questIDs;
-    public List<long> itemIDs;
+    public List<int> questIds;
+    [ItemId]
+    public List<long> itemIds;
+    [ItemId]
     public List<long> generalSkillItems; //Require at least of these items to start skill
 
     public Requirements()
     {
         levelRequirements = new List<LevelRequirement>();
-        questIDs = new List<int>();
-        itemIDs = new List<long>();
+        questIds = new List<int>();
+        itemIds = new List<long>();
         generalSkillItems = new List<long>();
     }
 }

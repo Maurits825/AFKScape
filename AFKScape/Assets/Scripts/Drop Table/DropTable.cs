@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Numerics;
 
 [Serializable]
 public class DropTable
@@ -47,22 +48,22 @@ public class DropTable
         lootItems = new List<Loot>() { new Loot(0) };
     }
 
-    public virtual void RollTable(Dictionary<long, int> dropTableDict)
+    public virtual void RollTable(Dictionary<long, BigInteger> dropTableDict)
     {
     }
 
-    public virtual void RollTable(Dictionary<long, int> dropTableDict, int skillLevel) //is this the way to do it?
+    public virtual void RollTable(Dictionary<long, BigInteger> dropTableDict, int skillLevel) //is this the way to do it?
     {
     }
 
     public int GetAmount(int amountMin, int amountMax)
     {
-        return UnityEngine.Random.Range(amountMin, amountMax);
+        return UnityEngine.Random.Range(amountMin, amountMax + 1);
     }
 
     public bool IsLootDropped(int chance, int baseChance)
     {
-        int num = UnityEngine.Random.Range(1, baseChance);
+        int num = UnityEngine.Random.Range(1, baseChance + 1);
         return (num <= chance);
     }
 }

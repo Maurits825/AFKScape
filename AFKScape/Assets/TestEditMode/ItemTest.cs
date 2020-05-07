@@ -11,6 +11,12 @@ namespace Tests
 
         public static ItemList itemList;
 
+        [OneTimeTearDown]
+        public void Cleanup()
+        {
+            Database.items.Clear();
+        }
+
         [Test]
         public void TestItemLoad()
         {
