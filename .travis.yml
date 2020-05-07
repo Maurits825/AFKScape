@@ -10,14 +10,21 @@ env:
 cache:
   directories:
     - $UNITY_DOWNLOAD_CACHE
+     - /home/travis/.rvm/
 
     
 before_install:
 - chmod a+x ./travis-build/*.sh
 
-install:
-- cat /etc/hosts
-- ./travis-build/install-unity.sh
-
-script:
-- ./travis-build/build.sh
+jobs:
+    - stage "Install Unity"
+    install:
+    - ./travis-build/install-unity.sh
+    
+    - stage "Build"
+    script:
+    - ./travis-build/build.sh
+    
+    - stage "Unit Tests"
+    script:
+    - ./travis-build/run-unit-tests.sh
