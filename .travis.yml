@@ -1,5 +1,8 @@
-language: objective-c
+language: generic
+
+os: osx
 osx_image: xcode11.4
+
 rvm:
 - 2.7
 
@@ -9,11 +12,12 @@ env:
 
 cache:
   directories:
-    - $UNITY_DOWNLOAD_CACHE
-     - /home/travis/.rvm/
+    - unity_download_cache
+    - /home/travis/.rvm/
 
     
 before_install:
+- chmod -R a+rw ./unity_download_cache
 - chmod a+x ./travis-build/*.sh
 
 jobs:
