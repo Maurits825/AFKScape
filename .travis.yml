@@ -6,26 +6,36 @@ osx_image: xcode11.4
 rvm:
 - 2.7
 
-env:
-- TRAVIS_TAG="Deploy-test" PROJECT_NAME="AFKScapePakage" UNITY_PROJECT_PATH="AFKScape" DEPLOY_UNITYPACKAGE="path set in deploy script"
+git:
+  depth: 3
 
 
 cache:
   directories:
     - unity_download_cache
-    - /home/travis/.rvm/
 
     
 before_install:
-    - chmod -R a+rw ./unity_download_cache
-    - chmod a+x ./travis-build/*.sh
+  - chmod -R a+rw ./unity_download_cache
+  - chmod a+x ./travis-build/*.sh
 
 install:
-    - ./travis-build/install-unity.sh
+  - ./travis-build/install-unity.sh
+
+
+stages:
+  - build
+  - tests
 
 
 jobs:
-    include:
-        script:
-        - ./travis-build/build.sh
-        - ./travis-build/run-unit-tests.sh
+  include:
+    - stage: build
+      script: ./travis-build/build.sh
+      
+    - stage: tests
+      script: ./travis-build/run-unit-tests.sh
+
+env:
+    global:
+    - UNITY_PROJECT_PATH="AFKScape"
