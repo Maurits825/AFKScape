@@ -2,7 +2,8 @@
 [![Build Status](https://travis-ci.com/Maurits825/AFKScape.svg?token=acwEp1UszjMQRSRycTzp&branch=master)](https://travis-ci.com/Maurits825/AFKScape)
 [![GitHub contributors](https://img.shields.io/github/contributors/Maurits825/AFKScape)](https://github.com/Maurits825/AFKScape/graphs/contributors) 
 [![GitHub last commit](https://img.shields.io/github/last-commit/Maurits825/AFKSCape)](https://github.com/Maurits825/AFKScape/commits/master) 
-[![GitHub issues](https://img.shields.io/github/issues-raw/Maurits825/AFKSCape)](https://github.com/Maurits825/AFKScape/issues) 
+[![GitHub issues](https://img.shields.io/github/issues-raw/Maurits825/AFKSCape)](https://github.com/Maurits825/AFKScape/issues)
+![GitHub top language](https://img.shields.io/github/languages/top/maurits825/afkscape)
 
 # AFKScape
 Imagine not juicing
