@@ -22,11 +22,10 @@ before_install:
 
 install:
     - ./travis-build/install-unity.sh
- 
+
+
 jobs:
-    include:        
-        - stage: "Build"
-        - script: ./travis-build/build.sh
-        
-        - stage: "Unit Tests"
-        - script: ./travis-build/run-unit-tests.sh
+    include:
+        script:
+        - ./travis-build/build.sh
+        - ./travis-build/run-unit-tests.sh
