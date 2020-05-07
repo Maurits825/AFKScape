@@ -16,3 +16,7 @@ Imagine not juicing
 
 ## Acknowledgements
 * The reader of this
+
+## Useful Links
+* [osrsbox swagger api](https://api.osrsbox.com/swaggerui)
+* [osrs utilities for discord bot](https://github.com/gc/oldschooljs)
