@@ -22,7 +22,6 @@ public class GeneralDropTable : DropTable
     public override void RollTable(Dictionary<long, BigInteger> dropTableDict)
     {
         //TODO leave this as is for now in terms of perf
-        //TODO this will change when adding the actual dice sim
         for (int r = 0; r < numRolls; r++)
         {
             for (int i = 0; i < lootItems.Count; i++)
@@ -30,7 +29,7 @@ public class GeneralDropTable : DropTable
                 Loot loot = lootItems[i];
                 //TODO if chance=base=1 no need for rolling
                 //TODO look at this, min=max=1 no need to call getamount
-                if (IsLootDropped(loot.chance, loot.baseChance)) //TODO this is wrong, well it works for tertiary type drops
+                if (IsLootDropped(loot.chance, loot.baseChance))
                 {
                     int amount = GetAmount(loot.amountMin, loot.amountMax); 
                     dropTableDict[loot.id] += amount;

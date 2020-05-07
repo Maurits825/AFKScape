@@ -33,7 +33,7 @@ public class SkillsController
     {
         if (selectedSkill != null && isTrainingMethodSelected)
         {
-            MainGameLoop(selectedSkill.trainingMethods[selectedTrainingMethodInd], selectedSkill, Time.deltaTime);
+            SkillGameLoop(selectedSkill.trainingMethods[selectedTrainingMethodInd], selectedSkill, Time.deltaTime);
         }
     }
 
@@ -73,7 +73,7 @@ public class SkillsController
         EventManager.Instance.OnMainTabClicked += OnTabClicked;
     }
 
-    public void MainGameLoop(TrainingMethod trainingMethod, Skill skill, float deltaTime)
+    public void SkillGameLoop(TrainingMethod trainingMethod, Skill skill, float deltaTime)
     {
         float currentDeltaTime = deltaTime;
         float actionIncrement = skill.GetResourceRate(trainingMethod.baseResourceRate) * currentDeltaTime * MainController.timeConstant;

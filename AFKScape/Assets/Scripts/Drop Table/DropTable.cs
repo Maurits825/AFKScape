@@ -58,12 +58,12 @@ public class DropTable
 
     public int GetAmount(int amountMin, int amountMax)
     {
-        return UnityEngine.Random.Range(amountMin, amountMax);
+        return UnityEngine.Random.Range(amountMin, amountMax + 1);
     }
 
     public bool IsLootDropped(int chance, int baseChance)
     {
-        int num = UnityEngine.Random.Range(1, baseChance);
+        int num = UnityEngine.Random.Range(1, baseChance + 1);
         return (num <= chance);
     }
 }

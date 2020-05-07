@@ -3,8 +3,8 @@ import requests
 import re
 from osrsbox import items_api
 import numpy as np
-import json
 import click
+import json
 
 
 class ItemDrop:
@@ -128,13 +128,16 @@ def get_single_table(url, table_id, start_table):
 def create_json(drops):
     all_db_items = items_api.load()
 
+    with open(r"./stacked_items_link.json") as json_file:
+        stacked_dict = json.load(json_file)
+
     actual_chance = []
     base_chances = []
     ids = []
 
     json_data = dict()
     json_data["name"] = "general"
-    json_data["indexMapping"] = []
+    #json_data["indexMapping"] = []
 
     for drop in drops:
         actual_chance.append(drop.actual_chance)
@@ -155,12 +158,16 @@ def create_json(drops):
         index_mapping = index_mapping + scaled_chances[i]
 
         basic_loot = dict()
-        basic_loot["id"] = ids[i]
+        try:
+            basic_loot["id"] = stacked_dict[str(ids[i])]
+        except KeyError:
+            basic_loot["id"] = ids[i]
+        basic_loot["weight"] = scaled_chances[i]
         basic_loot["amountMin"] = drop.amount_min
         basic_loot["amountMax"] = drop.amount_max
         json_data["basicLoots"].append(basic_loot)
 
-        json_data["indexMapping"].append(index_mapping)
+        #json_data["indexMapping"].append(index_mapping)
 
     out_file_name = r"./temp.json"
     with open(out_file_name, "w", newline="\n") as out_file:
@@ -170,14 +177,14 @@ def create_json(drops):
 @click.command()
 @click.option('--name', '-b', help='Name of wiki page')
 @click.option('--exclude', '-e', help='Exclude table', multiple=True)
-@click.option('--boss_or_single', default="boss", help='Boss drop table or single table')
+@click.option('--table_type', default="boss", help='Boss drop table or single table')
 @click.option('--table_name', '-t', help='Table name of single table')
-@click.option('--start_table', '-s', help='Start table (exclusive)')
-def json_from_boss(name, exclude, boss_or_single, table_name, start_table):
+@click.option('--start_table', '-s', default="all", help='Start table (exclusive)')
+def json_from_boss(name, exclude, table_type, table_name, start_table):
     url = r"https://oldschool.runescape.wiki/w/" + name
-    if boss_or_single == "boss":
+    if table_type == "boss":
         drop_list = get_drop_table(url, list(exclude))
-    elif boss_or_single == "single":
+    elif table_type == "single":
         drop_list = get_single_table(url, table_name, start_table)
     else:
         raise ValueError

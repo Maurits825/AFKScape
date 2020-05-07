@@ -9,64 +9,48 @@ namespace Tests
 {
     public class MonsterDropTableJsonTest
     {
-        [Test]
-        public void ZulrahDropTableJsonTest()
+        private int GetWeightSum(MonsterDropTableHandler handler)
         {
-            Monster Zulrah = new Monster("Zulrah");
-            int baseChance = Zulrah.monsterDropTableHandler.baseChance;
-            int lastIndex = Zulrah.monsterDropTableHandler.indexMapping.Last();
-
-            foreach (MonsterDropTable.BasicLoot loot in Zulrah.monsterDropTableHandler.basicLoots)
+            int weightSum = 0;
+            foreach (MonsterDropTable.BasicLoot loot in handler.basicLoots)
             {
-                Assert.Greater(loot.id, 0);
-                Assert.Greater(loot.amountMin, 0);
-                Assert.Greater(loot.amountMax, 0);
+                weightSum += loot.weight;
             }
 
-            foreach (GeneralDropTable generalDropTable in Zulrah.monsterDropTableHandler.generalDropTables)
+            foreach (MonsterDropTable table in handler.monsterDropTables)
             {
-                Assert.Greater(generalDropTable.numRolls, 0);
-                foreach (DropTable.Loot item in generalDropTable.lootItems)
-                {
-                    Assert.Greater(item.id, 0);
-                    Assert.Greater(item.amountMin, 0);
-                    Assert.Greater(item.amountMax, 0);
-                    Assert.Greater(item.baseChance, 0);
-                    Assert.Greater(item.chance, 0);
-                }
+                weightSum += table.weight;
             }
 
-            foreach (MonsterDropTable monsterDropTable in Zulrah.monsterDropTableHandler.monsterDropTables)
+            return weightSum;
+        }
+
+        private int GetWeightSum(List<MonsterDropTable.BasicLoot> basicLoots)
+        {
+            int weightSum = 0;
+            foreach (MonsterDropTable.BasicLoot loot in basicLoots)
             {
-                Assert.Greater(monsterDropTable.baseChance, 0);
-                Assert.AreEqual(monsterDropTable.indexMapping.Count, monsterDropTable.basicLoots.Count);
-                foreach (MonsterDropTable.BasicLoot item in monsterDropTable.basicLoots)
-                {
-                    Assert.Greater(item.id, 0);
-                }
+                weightSum += loot.weight;
             }
 
-            //TODO because zulrah
-            Assert.AreEqual(baseChance, lastIndex + 1);
+            return weightSum;
         }
 
         [Test]
         public void AllMonsterDropTableJsonTest()
         {
-            //TODO use list later from bosses controller when its made
-            List<Monster> monsters = new List<Monster>();
-            Monster Vorkath = new Monster("Vorkath");
-            monsters.Add(Vorkath);
+            BossesController bossesController = new BossesController();
+            bossesController.InitMonsterClasses();
 
-            foreach (Monster monster in monsters)
+            foreach (Monster monster in bossesController.bossesClasses.Values)
             {
+                TestContext.WriteLine("Testing: " + monster.bossName);
                 int baseChance = monster.monsterDropTableHandler.baseChance;
-                int lastIndex = monster.monsterDropTableHandler.indexMapping.Last();
-                Assert.AreEqual(baseChance, lastIndex);
+                int totalWeight = GetWeightSum(monster.monsterDropTableHandler);
+                Assert.AreEqual(baseChance, totalWeight);
 
-                int indexMapCount = monster.monsterDropTableHandler.indexMapping.Count;
                 int lootAndTableCount = monster.monsterDropTableHandler.basicLoots.Count + monster.monsterDropTableHandler.monsterDropTables.Count;
-                Assert.AreEqual(indexMapCount, lootAndTableCount);
+                Assert.AreEqual(lootAndTableCount, monster.monsterDropTableHandler.totalBasicLootCount);
 
                 foreach (MonsterDropTable.BasicLoot loot in monster.monsterDropTableHandler.basicLoots)
                 {
@@ -89,28 +73,36 @@ namespace Tests
                 }
 
                 foreach (MonsterDropTable monsterDropTable in monster.monsterDropTableHandler.monsterDropTables)
-                {
+                { 
+                    baseChance = monsterDropTable.baseChance;
+                    totalWeight = GetWeightSum(monsterDropTable.basicLoots);
+                    Assert.AreEqual(baseChance, totalWeight);
+
                     Assert.Greater(monsterDropTable.baseChance, 0);
-                    Assert.AreEqual(monsterDropTable.indexMapping.Count, monsterDropTable.basicLoots.Count);
                     foreach (MonsterDropTable.BasicLoot item in monsterDropTable.basicLoots)
                     {
                         Assert.Greater(item.id, 0);
+                        if (item.amountMax != 0)
+                        {
+                            Assert.Greater(item.amountMin, 0);
+                            Assert.Greater(item.amountMax, 0);
+                        }
                     }
                 }
+
+                TestContext.WriteLine("Passed: " + monster.bossName);
             }
         }
 
         [Test]
         public void RareDropTableTest()
         {
-            MonsterDropTable monsterDropTable = JsonHandler.GetDropTable("rdt");
+            MonsterDropTable monsterDropTable = JsonHandler.GetMonsterDropTable("rare_drop_table");
             int baseChance = monsterDropTable.baseChance;
-            int lastIndex = monsterDropTable.indexMapping.Last();
+            int totalWeight = GetWeightSum(monsterDropTable.basicLoots);
 
-            //TODO rounding issues...
-            Assert.LessOrEqual(Mathf.Abs(lastIndex - baseChance), 150);
-
-            Assert.Greater(monsterDropTable.baseChance, 0);
+            Assert.AreEqual(baseChance, totalWeight);
+            Assert.Greater(baseChance, 0);
 
             foreach (MonsterDropTable.BasicLoot item in monsterDropTable.basicLoots)
             {
@@ -121,12 +113,12 @@ namespace Tests
         [Test]
         public void HerbSeedTableTest()
         {
-            MonsterDropTable monsterDropTable = JsonHandler.GetDropTable("tree_herb_seed");
+            MonsterDropTable monsterDropTable = JsonHandler.GetMonsterDropTable("tree_herb_seed");
             int baseChance = monsterDropTable.baseChance;
-            int lastIndex = monsterDropTable.indexMapping.Last();
+            int totalWeight = GetWeightSum(monsterDropTable.basicLoots);
 
-            Assert.AreEqual(lastIndex, baseChance);
-            Assert.Greater(monsterDropTable.baseChance, 0);
+            Assert.AreEqual(baseChance, totalWeight);
+            Assert.Greater(baseChance, 0);
 
             foreach (MonsterDropTable.BasicLoot item in monsterDropTable.basicLoots)
             {
