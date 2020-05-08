@@ -19,17 +19,17 @@ before_install:
   - chmod -R a+rw ./unity_download_cache
   - chmod a+x ./travis-build/*.sh
 
-install:
-  - ./travis-build/install-unity.sh
-
 
 stages:
+  - "Install Unity"
   - build
   - tests
 
 
 jobs:
   include:
+    - stage: "Install Unity"
+      install: ./travis-build/install-unity.sh
     - stage: build
       script: ./travis-build/build.sh
       
