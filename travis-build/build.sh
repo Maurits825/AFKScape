@@ -11,11 +11,11 @@ ls "$PROJECT_PATH"
 echo "Building project for Windows..."
 mkdir $UNITY_BUILD_DIR
 ${UNITY_PATH} \
-  -batchmode \
-  -nographics \
-  -silent-crashes \
   -logFile \
+  -silent-crashes \
   -projectPath "$PROJECT_PATH" \
   -buildWindows64Player  "$(pwd)/build/win/ci-build.exe" \
+  -batchmode \
+  -noUpm
   -quit \
   | tee "$LOG_FILE"
