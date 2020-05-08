@@ -9,8 +9,11 @@ echo "Items in project path ($PROJECT_PATH):"
 ls "$PROJECT_PATH"
 
 echo "Building project for Windows..."
+echo "Unity path: $UNITY_PATH"
+ls $UNITY_PATH
+
 mkdir $UNITY_BUILD_DIR
-${UNITY_PATH} \
+$UNITY_PATH \
   -logFile \
   -silent-crashes \
   -projectPath "$PROJECT_PATH" \

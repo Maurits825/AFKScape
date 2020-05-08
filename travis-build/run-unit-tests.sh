@@ -1,7 +1,6 @@
 #! /bin/sh
 
 echo "Running editor unit tests for ${UNITY_PROJECT_PATH}"
-echo ${UNITY_PATH} 
 
 ${UNITY_PATH} \
   -silent-crashes \
