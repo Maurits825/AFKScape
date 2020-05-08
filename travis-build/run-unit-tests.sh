@@ -2,7 +2,7 @@
 
 echo "Running editor unit tests for ${UNITY_PROJECT_PATH}"
 
-${UNITY_PATH} \
+/Applications/Unity/Unity.app/Contents/MacOS/Unity \
   -silent-crashes \
   -batchmode \
   -logFile "${TRAVIS_BUILD_DIR}/unity.unittests.log" \

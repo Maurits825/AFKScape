@@ -13,7 +13,7 @@ echo "Unity path: $UNITY_PATH"
 ls $UNITY_PATH
 
 mkdir $UNITY_BUILD_DIR
-$UNITY_PATH \
+/Applications/Unity/Unity.app/Contents/MacOS/Unity \
   -logFile \
   -silent-crashes \
   -projectPath "$PROJECT_PATH" \
