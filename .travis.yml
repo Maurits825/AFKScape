@@ -27,7 +27,10 @@ script:
   - ./travis-build/build.sh
   - ./travis-build/run-unit-tests.sh
 
-
 env:
   global:
-  - UNITY_PROJECT_PATH="AFKScape"
+  - UNITY_NOPROXY="localhost,127.0.0.1"
+  - UNITY_DOWNLOAD_CACHE="${TRAVIS_BUILD_DIR}/unity_download_cache"
+  - UNITY_PROJECT_NAME="UnityProject"
+  - BUILD_PATH="${TRAVIS_BUILD_DIR}/Builds"
+  - DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS="-t DAV"
