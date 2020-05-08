@@ -13,12 +13,4 @@ echo "Unity path: $UNITY_PATH"
 ls $UNITY_PATH
 
 mkdir $UNITY_BUILD_DIR
-/Applications/Unity/Unity.app/Contents/MacOS/Unity \
-  -logFile \
-  -silent-crashes \
-  -projectPath "$PROJECT_PATH" \
-  -buildWindows64Player  "$(pwd)/build/win/ci-build.exe" \
-  -batchmode \
-  -noUpm \
-  -quit \
-  | tee "$LOG_FILE"
+/Applications/Unity/Unity.app/Contents/MacOS/Unity -logFile -silent-crashes -projectPath "$PROJECT_PATH" -buildWindows64Player "$(pwd)/build/win/ci-build.exe" -batchmode -noUpm -quit | tee "$LOG_FILE"
