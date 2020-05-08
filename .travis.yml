@@ -19,23 +19,14 @@ before_install:
   - chmod -R a+rw ./unity_download_cache
   - chmod a+x ./travis-build/*.sh
 
+install:
+  - ./travis-build/install-unity.sh
 
-stages:
-  - "Install Unity"
-  - build
-  - tests
+script:
+  - ./travis-build/build.sh
+  - ./travis-build/run-unit-tests.sh
 
-
-jobs:
-  include:
-    - stage: "Install Unity"
-      install: ./travis-build/install-unity.sh
-    - stage: build
-      script: ./travis-build/build.sh
-      
-    - stage: tests
-      script: ./travis-build/run-unit-tests.sh
 
 env:
-    global:
-    - UNITY_PROJECT_PATH="AFKScape"
+  global:
+  - UNITY_PROJECT_PATH="AFKScape"

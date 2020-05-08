@@ -2,17 +2,15 @@
 
 PROJECT_PATH=$(pwd)/$UNITY_PROJECT_PATH
 UNITY_BUILD_DIR=$(pwd)/Build
+UNITY_PATH="/Applications/Unity/Unity.app/Contents/MacOS/Unity"
 LOG_FILE=$UNITY_BUILD_DIR/unity-win.log
 
-
-ERROR_CODE=0
 echo "Items in project path ($PROJECT_PATH):"
 ls "$PROJECT_PATH"
 
-
 echo "Building project for Windows..."
 mkdir $UNITY_BUILD_DIR
-/Applications/Unity/Unity.app/Contents/MacOS/Unity \
+${UNITY_PATH} \
   -batchmode \
   -nographics \
   -silent-crashes \
@@ -21,17 +19,3 @@ mkdir $UNITY_BUILD_DIR
   -buildWindows64Player  "$(pwd)/build/win/ci-build.exe" \
   -quit \
   | tee "$LOG_FILE"
-  
-if [ $? = 0 ] ; then
-  echo "Building Windows exe completed successfully."
-  ERROR_CODE=0
-else
-  echo "Building Windows exe failed. Exited with $?."
-  ERROR_CODE=1
-fi
-
-#echo 'Build logs:'
-#cat $LOG_FILE
-
-echo "Finishing with code $ERROR_CODE"
-exit $ERROR_CODE
