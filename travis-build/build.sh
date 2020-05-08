@@ -19,6 +19,6 @@ mkdir $UNITY_BUILD_DIR
   -projectPath "$PROJECT_PATH" \
   -buildWindows64Player  "$(pwd)/build/win/ci-build.exe" \
   -batchmode \
-  -noUpm
+  -noUpm \
   -quit \
   | tee "$LOG_FILE"
