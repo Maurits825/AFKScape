@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
-
+#endif
 public class ItemIdAttribute: PropertyAttribute
 {
     public ItemIdAttribute()
@@ -10,7 +11,7 @@ public class ItemIdAttribute: PropertyAttribute
 
     }
 }
-
+#if UNITY_EDITOR
 [CustomPropertyDrawer(typeof(ItemIdAttribute))]
 public class ItemIdPropertyDrawer : PropertyDrawer
 {
@@ -43,4 +44,4 @@ public class ItemIdPropertyDrawer : PropertyDrawer
         EditorGUI.EndProperty();
     }
 }
-
+#endif

@@ -108,7 +108,9 @@ public static class JsonHandler
 
         //TODO better way for path?
         File.WriteAllText(string.Concat(Application.dataPath, "/Resources/JSON/TrainingMethods/", selectedSkillName, ".json"), JSONString);
+#if UNITY_EDITOR
         AssetDatabase.Refresh();
+#endif
     }
 
     public static void SaveJsonFile(MonsterDropTableHandler monsterDropTable, string monsterName)
@@ -117,6 +119,8 @@ public static class JsonHandler
 
         //TODO better way for path?
         File.WriteAllText(string.Concat(Application.dataPath, "/Resources/JSON/MonsterDropTable/", monsterName, ".json"), JSONString);
+#if UNITY_EDITOR
         AssetDatabase.Refresh();
+#endif
     }
 }
