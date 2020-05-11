@@ -99,4 +99,9 @@ public class MainController : MonoBehaviour
     {
         gameState = (States)index;
     }
+
+    public void LoadIconsTest()
+    {
+        Database.LoadIcons();
+    }
 }
