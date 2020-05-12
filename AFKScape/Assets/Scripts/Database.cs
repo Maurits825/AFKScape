@@ -15,8 +15,10 @@ public static class Database
 
     public static List<int> experienceTable;
 
+    private const int numSpriteSheets = 7;
     public static Sprite mySpriteTest;
-    public static int idCount = 0;
+    public static List<Sprite> sprites = new List<Sprite>();
+
 
     public static void LoadAll()
     {
@@ -25,8 +27,6 @@ public static class Database
         LoadQuests();
         LoadExperienceTable();
         LoadBosses();
-        //LoadIcons();
-        //LoadIcon();
     }
 
     public static void LoadSkills()
@@ -59,49 +59,23 @@ public static class Database
         bossesNames = JsonHandler.GetBossesNames();
     }
 
-    public static void LoadIcons()
+    public static IEnumerator LoadIcons()
     {
-        Debug.Log("creating icons list");
-
-        List<string[]> itemPath = new List<string[]>();
-
-        List<string> currentPath = new List<string>();
-        int total = 10000;
-        for (int i = 0; i < total; i++)
+        for (int i = 0; i < numSpriteSheets; i++)
         {
-            if (((i % 1000) == 0) && (i != 0))
+            string spriteSheetPath = "Assets/Textures/Item Icons/spritesheet_" + i.ToString() + ".png";
+            AsyncOperationHandle<IList<Sprite>> handle = Addressables.LoadAssetAsync<IList<Sprite>>(spriteSheetPath);
+            yield return handle;
+            if (handle.Status == AsyncOperationStatus.Succeeded)
             {
-                itemPath.Add(currentPath.ToArray());
-                currentPath.Clear();
+                Debug.Log("Another done");
+                sprites.AddRange(handle.Result);
+                Addressables.Release(handle);
             }
-            currentPath.Add("Assets/Textures/Icons/" + i.ToString() + ".png");
-        }
-
-        Debug.Log("Start to load");
-        for (int i = 0; i < 1; i++)
-        {
-            Addressables.LoadAssetsAsync<Sprite>(itemPath[i], OnSpriteLoaded, Addressables.MergeMode.Union).Completed += LoadSpritesWhenReady;
-        }
-        //AsyncOperationHandle<IList<Sprite>> spriteHandle = Addressables.LoadAssetsAsync<Sprite>(itemPath[0], OnSpriteLoaded, Addressables.MergeMode.Union);
-        //spriteHandle.Completed += LoadSpritesWhenReady;
-    }
-
-    public static void LoadIcon()
-    {
-        AsyncOperationHandle<Sprite> spriteHandle = Addressables.LoadAssetAsync<Sprite>("Assets/Textures/Icons/0.png");
-        spriteHandle.Completed += LoadSpritesWhenReady;
-    }
-
-    private static void OnSpriteLoaded(Sprite sprite)
-    {
-        idCount++;
-        if ((idCount % 100) == 0)
-        {
-            Debug.Log(idCount);
         }
     }
 
-    public static void LoadSpritesWhenReady(AsyncOperationHandle<IList<Sprite>> handleToCheck)
+    public static void LoadSpritesWhenReady(AsyncOperationHandle<IList<IList<Sprite>>> handleToCheck)
     {
         Debug.Log("evt called -- list");
         if (handleToCheck.Status == AsyncOperationStatus.Succeeded)
@@ -111,13 +85,13 @@ public static class Database
         }
     }
 
-    public static void LoadSpritesWhenReady(AsyncOperationHandle<Sprite> handleToCheck)
+    public static void LoadSpritesWhenReady(AsyncOperationHandle<IList<Sprite>> handleToCheck)
     {
         Debug.Log("evt called -- single");
         if (handleToCheck.Status == AsyncOperationStatus.Succeeded)
         {
             Debug.Log("Succeeded -- single");
-            mySpriteTest = handleToCheck.Result;
+            sprites.AddRange(handleToCheck.Result);
         }
     }
 }
