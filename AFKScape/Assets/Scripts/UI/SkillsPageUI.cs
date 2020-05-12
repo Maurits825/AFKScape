@@ -12,7 +12,6 @@ public class SkillsPageUI : MonoBehaviour
     public GameObject progressBar;
     public GameObject xpDropObj;
     public GameObject animationObj;
-    public Slot slotTest;
 
     private ProgressBar skillProgressbar;
     private XpDrop xpDrop;
@@ -49,8 +48,6 @@ public class SkillsPageUI : MonoBehaviour
 
         currentXp.text = skill.xp.ToString();
         lastXp = skill.xp;
-
-        slotTest.iconImage.sprite = Database.sprites[0];
     }
 
     private void DrawProgressBar(Skill skill)

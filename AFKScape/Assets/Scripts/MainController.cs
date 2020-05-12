@@ -32,7 +32,6 @@ public class MainController : MonoBehaviour
     void Awake()
     {
         EventManager.SetIntance(new EventManager());
-        //StartCoroutine(Database.LoadIcons());
         Database.LoadAll();
     }
 
@@ -99,10 +98,5 @@ public class MainController : MonoBehaviour
     private void OnTabClicked(int index)
     {
         gameState = (States)index;
-    }
-
-    public void LoadIconsTest()
-    {
-        Database.LoadIcons();
     }
 }

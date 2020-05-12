@@ -6,7 +6,7 @@ import math
 import os
 from natsort import natsorted
 
-icons_path = r"C:\Users\Maurits\Downloads\icons\items-icons\*.png"
+icons_path = r".\items-icons\*.png"
 icon_glob = glob.glob(icons_path)
 icon_glob = natsorted(icon_glob, key=lambda y: y.lower())
 
