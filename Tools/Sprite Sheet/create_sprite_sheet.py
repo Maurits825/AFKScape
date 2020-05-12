@@ -25,7 +25,7 @@ row = 0
 col = 0
 
 for i in range(total_sheets):
-    final_images.append(np.ones((sprite_sheet_rows_pixels, sprite_sheet_cols_pixels, 4)))
+    final_images.append(np.ones((2048, 2048, 4)))
 
 sheet_index = 0
 for idx, img in enumerate(icon_glob):
@@ -35,11 +35,12 @@ for idx, img in enumerate(icon_glob):
     name = os.path.basename(img)
     item_id = int(name[:-4])
 
-    sheet_index = math.floor(item_id / icons_per_sheet)
-    row, col = (math.floor(item_id / sprite_sheet_cols)) % sprite_sheet_rows, item_id % sprite_sheet_cols
-    row_idx, col_idx = row*height, col*width
+    if np.sum(icon_np) != 0:  # some icons are completely blank
+        sheet_index = math.floor(item_id / icons_per_sheet)
+        row, col = (math.floor(item_id / sprite_sheet_cols)) % sprite_sheet_rows, item_id % sprite_sheet_cols
+        row_idx, col_idx = row*height, col*width
 
-    final_images[sheet_index][row_idx:row_idx+h, col_idx:col_idx+w, :] = icon_np
+        final_images[sheet_index][row_idx:row_idx+h, col_idx:col_idx+w, :] = icon_np
 
     if (idx % 1000) == 0:
         print(idx)
@@ -47,4 +48,3 @@ for idx, img in enumerate(icon_glob):
 
 for idx, sheet in enumerate(final_images):
     matplotlib.image.imsave("spritesheet_" + str(idx+1) + ".png", sheet)
-
