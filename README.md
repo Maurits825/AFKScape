@@ -14,6 +14,16 @@ Imagine not juicing
 ## Built with
 * [Unity](https://unity.com/) - Development Platform
 
+## Development Environment
+### AFKScape
+* `-git clone https://github.com/Maurits825/AFKScape.git`
+* install unity version V or higher with [Unity Hub](https://unity3d.com/get-unity/download)
+* open the project AFKScape with Unity and wait for the assets to import
+* install [Visual Studio IDE](https://visualstudio.microsoft.com/downloads/) (or another IDE) to edit and debug
+### Tools
+* create and activate python virtual env
+* `pip install -r requirements.txt`
+
 ## Authors
 * **Maurits VDS** - *Main Owner*
 * **Robin H aka Panda** - *Apprentice*
