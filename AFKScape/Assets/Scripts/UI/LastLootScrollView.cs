@@ -35,11 +35,12 @@ public class LastLootScrollView : MonoBehaviour
             lastLootText.Add(id, slot.amountText);
             lastLootImage.Add(id, slot.iconImage);
             lastLootAmount.Add(id, 0);
+
+            lastLootImage[id].sprite = Database.sprites[(int)id];
         }
 
         lastLootAmount[id] += amountDiff;
         (lastLootText[id].text, lastLootText[id].color) = UtilityUI.FormatNumber(lastLootAmount[id]);
-        lastLootImage[id].sprite = Resources.Load<Sprite>("Icons/" + id.ToString());
     }
 
     //TODO when to call?

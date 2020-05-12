@@ -37,6 +37,7 @@ public class ItemLookupEditor : Editor
             if (GUILayout.Button("Load Items"))
             {
                 Database.LoadItems();
+                Database.LoadIcons();
             }
         }
         else
@@ -88,7 +89,7 @@ public class ItemLookupEditor : Editor
                         EditorGUILayout.Space(3);
                     }
 
-                    GUILayout.Box(Resources.Load<Texture>("Icons/" + item.Item1.ToString()));
+                    GUILayout.Box(AssetPreview.GetAssetPreview(Database.sprites[(int)item.Item1]));
                     EditorGUILayout.EndHorizontal();
 
                     EditorGUILayout.LabelField("ID: " + item.Item1.ToString());

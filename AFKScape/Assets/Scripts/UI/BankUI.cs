@@ -36,10 +36,10 @@ public class BankUI : MonoBehaviour
 
                 bankText.Add(id, slot.amountText);
                 bankImage.Add(id, slot.iconImage);
+                bankImage[id].sprite = Database.sprites[(int)id];
             }
 
             (bankText[id].text, bankText[id].color) = UtilityUI.FormatNumber(amount);
-            bankImage[id].sprite = Resources.Load<Sprite>("Icons/" + id.ToString());
         }
     }
 
@@ -48,11 +48,11 @@ public class BankUI : MonoBehaviour
         if (bankText.ContainsKey(id))
         {
             bankText[id].text = amount.ToString();
-            bankImage[id].sprite = Resources.Load<Sprite>("Icons/" + id.ToString());
 
             if (amount == 0)
             {
                 slots[id].SetAlpha(0.6F);
+                bankImage[id].sprite = null; //TODO
             }
         }
     }

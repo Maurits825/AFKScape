@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Text.RegularExpressions;
 
 public static class Database
 {
@@ -13,6 +14,9 @@ public static class Database
 
     public static List<int> experienceTable;
 
+    private const int numSpriteSheets = 7;
+    public static List<Sprite> sprites = new List<Sprite>();
+
     public static void LoadAll()
     {
         LoadSkills();
@@ -20,6 +24,7 @@ public static class Database
         LoadQuests();
         LoadExperienceTable();
         LoadBosses();
+        LoadIcons();
     }
 
     public static void LoadSkills()
@@ -52,4 +57,13 @@ public static class Database
         bossesNames = JsonHandler.GetBossesNames();
     }
 
+    public static void LoadIcons()
+    {
+        for (int i = 1; i <= numSpriteSheets; i++)
+        {
+            string spriteSheetPath = "Item Icons/spritesheet_" + i.ToString();
+            Sprite[] spritesSheet = Resources.LoadAll<Sprite>(spriteSheetPath);
+            sprites.AddRange(spritesSheet);
+        }
+    }
 }

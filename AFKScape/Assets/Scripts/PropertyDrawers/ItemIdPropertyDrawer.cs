@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
-
+#endif
 public class ItemIdAttribute: PropertyAttribute
 {
     public ItemIdAttribute()
@@ -10,7 +11,7 @@ public class ItemIdAttribute: PropertyAttribute
 
     }
 }
-
+#if UNITY_EDITOR
 [CustomPropertyDrawer(typeof(ItemIdAttribute))]
 public class ItemIdPropertyDrawer : PropertyDrawer
 {
@@ -39,8 +40,8 @@ public class ItemIdPropertyDrawer : PropertyDrawer
 
         Rect spriteRect = nameRect;
         spriteRect.x = position.width /2;
-        GUI.DrawTexture(spriteRect, Resources.Load<Texture>("Icons/" + property.intValue.ToString()), ScaleMode.ScaleToFit);
+        GUI.DrawTexture(spriteRect, AssetPreview.GetAssetPreview(Database.sprites[property.intValue]), ScaleMode.ScaleToFit);
         EditorGUI.EndProperty();
     }
 }
-
+#endif
