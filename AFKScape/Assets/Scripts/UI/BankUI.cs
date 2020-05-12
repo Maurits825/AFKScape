@@ -52,7 +52,7 @@ public class BankUI : MonoBehaviour
             if (amount == 0)
             {
                 slots[id].SetAlpha(0.6F);
-                //bankImage[id].sprite = null; //TODO
+                bankImage[id].sprite = null; //TODO
             }
         }
     }
