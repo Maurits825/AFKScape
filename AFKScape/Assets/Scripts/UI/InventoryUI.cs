@@ -74,6 +74,7 @@ public class InventoryUI : MonoBehaviour, IDropHandler
 
                 inventoryText.Add(id, slot.amountText);
                 inventoryImage.Add(id, slot.iconImage);
+                inventoryImage[id].sprite = Database.sprites[(int)id];
 
                 isUsed[nextAvailableSlot] = true;
                 idIndex[id] = nextAvailableSlot;
@@ -83,7 +84,6 @@ public class InventoryUI : MonoBehaviour, IDropHandler
             }
 
             (inventoryText[id].text, inventoryText[id].color) = UtilityUI.FormatNumber(amount);
-            inventoryImage[id].sprite = Resources.Load<Sprite>("Icons/" + id.ToString());
         }
     }
 
@@ -97,6 +97,7 @@ public class InventoryUI : MonoBehaviour, IDropHandler
                 Slot slot = slots[index];
                 slot.SetSlotActive(false);
 
+                //inventoryImage[id].sprite = null; //TODO
                 inventoryText.Remove(id);
                 inventoryImage.Remove(id);
 
@@ -106,7 +107,6 @@ public class InventoryUI : MonoBehaviour, IDropHandler
             else
             {
                 inventoryText[id].text = amount.ToString();
-                inventoryImage[id].sprite = Resources.Load<Sprite>("Icons/" + id.ToString());
             }
         }
     }

@@ -40,7 +40,7 @@ public class ItemIdPropertyDrawer : PropertyDrawer
 
         Rect spriteRect = nameRect;
         spriteRect.x = position.width /2;
-        GUI.DrawTexture(spriteRect, Resources.Load<Texture>("Icons/" + property.intValue.ToString()), ScaleMode.ScaleToFit);
+        GUI.DrawTexture(spriteRect, AssetPreview.GetAssetPreview(Database.sprites[property.intValue]), ScaleMode.ScaleToFit);
         EditorGUI.EndProperty();
     }
 }

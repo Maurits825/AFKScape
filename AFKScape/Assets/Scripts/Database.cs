@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using UnityEngine.ResourceManagement.AsyncOperations;
-using UnityEngine.AddressableAssets;
 using System.Text.RegularExpressions;
 
 public static class Database
@@ -17,11 +15,7 @@ public static class Database
     public static List<int> experienceTable;
 
     private const int numSpriteSheets = 7;
-    private static int sheetsLoaded = 0;
-    //TODO check if this duplicates the sprite in memory, shouldnt?
-    private static IList<Sprite>[] loadedSprites = new IList<Sprite>[numSpriteSheets];
     public static List<Sprite> sprites = new List<Sprite>();
-
 
     public static void LoadAll()
     {
@@ -67,33 +61,9 @@ public static class Database
     {
         for (int i = 1; i <= numSpriteSheets; i++)
         {
-            string spriteSheetPath = "Assets/Textures/Item Icons/spritesheet_" + i.ToString() + ".png";
-            AsyncOperationHandle<IList<Sprite>> spriteHandle = Addressables.LoadAssetAsync<IList<Sprite>>(spriteSheetPath);
-            spriteHandle.Completed += SpriteSheetLoaded;
+            string spriteSheetPath = "Item Icons/spritesheet_" + i.ToString();
+            Sprite[] spritesSheet = Resources.LoadAll<Sprite>(spriteSheetPath);
+            sprites.AddRange(spritesSheet);
         }
-    }
-
-    private static void SpriteSheetLoaded(AsyncOperationHandle<IList<Sprite>> handleToCheck)
-    {
-        if (handleToCheck.Status == AsyncOperationStatus.Succeeded)
-        {
-            int index = Int32.Parse(Regex.Match(handleToCheck.Result[0].texture.name, @"\d+").Value);
-            loadedSprites[index - 1] = handleToCheck.Result;
-            sheetsLoaded++;
-
-            if (sheetsLoaded == numSpriteSheets)
-            {
-                LoadSpriteSheets();
-            }
-        }
-    }
-
-    private static void LoadSpriteSheets()
-    {
-        for (int i = 0; i < numSpriteSheets; i++)
-        {
-            sprites.AddRange(loadedSprites[i]);
-        }
-        Debug.Log("Sprites Loaded!");
     }
 }
