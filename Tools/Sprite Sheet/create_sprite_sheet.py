@@ -6,7 +6,7 @@ import math
 import os
 from natsort import natsorted
 
-icons_path = r".\items-icons\*.png"
+icons_path = r"C:\Users\Maurits\Downloads\icons\items-icons\*.png"
 icon_glob = glob.glob(icons_path)
 icon_glob = natsorted(icon_glob, key=lambda y: y.lower())
 
@@ -25,7 +25,7 @@ row = 0
 col = 0
 
 for i in range(total_sheets):
-    final_images.append(np.zeros((sprite_sheet_rows_pixels, sprite_sheet_cols_pixels, 4)))
+    final_images.append(np.ones((sprite_sheet_rows_pixels, sprite_sheet_cols_pixels, 4)))
 
 sheet_index = 0
 for idx, img in enumerate(icon_glob):
@@ -46,5 +46,5 @@ for idx, img in enumerate(icon_glob):
 
 
 for idx, sheet in enumerate(final_images):
-    matplotlib.image.imsave("spritesheet_" + str(idx) + ".png", sheet)
+    matplotlib.image.imsave("spritesheet_" + str(idx+1) + ".png", sheet)
 
