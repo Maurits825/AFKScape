@@ -16,7 +16,12 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 3938275015ef2b04081e45168d4c1b3f
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 40bc7d23d0fe4be478499668b13430f0
+    m_Address: Assets/Textures/Item Icons
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: e980fc25e5cbfb84d9d63cece198414f, type: 2}
   m_SchemaSet:

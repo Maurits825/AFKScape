@@ -50,7 +50,7 @@ public class SkillsPageUI : MonoBehaviour
         currentXp.text = skill.xp.ToString();
         lastXp = skill.xp;
 
-        slotTest.iconImage.sprite = Database.mySpriteTest;
+        slotTest.iconImage.sprite = Database.sprites[0];
     }
 
     private void DrawProgressBar(Skill skill)

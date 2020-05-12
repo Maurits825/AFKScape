@@ -32,6 +32,7 @@ public class MainController : MonoBehaviour
     void Awake()
     {
         EventManager.SetIntance(new EventManager());
+        //StartCoroutine(Database.LoadIcons());
         Database.LoadAll();
     }
 

@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.AddressableAssets;
+using System.Text.RegularExpressions;
 
 public static class Database
 {
@@ -16,7 +17,9 @@ public static class Database
     public static List<int> experienceTable;
 
     private const int numSpriteSheets = 7;
-    public static Sprite mySpriteTest;
+    private static int sheetsLoaded = 0;
+    //TODO check if this duplicates the sprite in memory, shouldnt?
+    private static IList<Sprite>[] loadedSprites = new IList<Sprite>[numSpriteSheets];
     public static List<Sprite> sprites = new List<Sprite>();
 
 
@@ -27,6 +30,7 @@ public static class Database
         LoadQuests();
         LoadExperienceTable();
         LoadBosses();
+        LoadIcons();
     }
 
     public static void LoadSkills()
@@ -59,39 +63,37 @@ public static class Database
         bossesNames = JsonHandler.GetBossesNames();
     }
 
-    public static IEnumerator LoadIcons()
+    public static void LoadIcons()
     {
-        for (int i = 0; i < numSpriteSheets; i++)
+        for (int i = 1; i <= numSpriteSheets; i++)
         {
             string spriteSheetPath = "Assets/Textures/Item Icons/spritesheet_" + i.ToString() + ".png";
-            AsyncOperationHandle<IList<Sprite>> handle = Addressables.LoadAssetAsync<IList<Sprite>>(spriteSheetPath);
-            yield return handle;
-            if (handle.Status == AsyncOperationStatus.Succeeded)
+            AsyncOperationHandle<IList<Sprite>> spriteHandle = Addressables.LoadAssetAsync<IList<Sprite>>(spriteSheetPath);
+            spriteHandle.Completed += SpriteSheetLoaded;
+        }
+    }
+
+    private static void SpriteSheetLoaded(AsyncOperationHandle<IList<Sprite>> handleToCheck)
+    {
+        if (handleToCheck.Status == AsyncOperationStatus.Succeeded)
+        {
+            int index = Int32.Parse(Regex.Match(handleToCheck.Result[0].texture.name, @"\d+").Value);
+            loadedSprites[index - 1] = handleToCheck.Result;
+            sheetsLoaded++;
+
+            if (sheetsLoaded == numSpriteSheets)
             {
-                Debug.Log("Another done");
-                sprites.AddRange(handle.Result);
-                Addressables.Release(handle);
+                LoadSpriteSheets();
             }
         }
     }
 
-    public static void LoadSpritesWhenReady(AsyncOperationHandle<IList<IList<Sprite>>> handleToCheck)
+    private static void LoadSpriteSheets()
     {
-        Debug.Log("evt called -- list");
-        if (handleToCheck.Status == AsyncOperationStatus.Succeeded)
+        for (int i = 0; i < numSpriteSheets; i++)
         {
-            Debug.Log("Succeeded -- list");
-            //mySpriteTest = handleToCheck.Result;
+            sprites.AddRange(loadedSprites[i]);
         }
-    }
-
-    public static void LoadSpritesWhenReady(AsyncOperationHandle<IList<Sprite>> handleToCheck)
-    {
-        Debug.Log("evt called -- single");
-        if (handleToCheck.Status == AsyncOperationStatus.Succeeded)
-        {
-            Debug.Log("Succeeded -- single");
-            sprites.AddRange(handleToCheck.Result);
-        }
+        Debug.Log("Sprites Loaded!");
     }
 }
