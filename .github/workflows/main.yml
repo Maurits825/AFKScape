@@ -37,27 +37,4 @@ jobs:
         with:
           name: Build
           path: build
-  unit-test:
-    name: Unit Test
-    runs-on: ubuntu-latest
-    steps:
-    
-      # Checkout
-      - name: Checkout repository
-        uses: actions/checkout@v2
-        with:
-          lfs: true
-    
-      # Cache
-      - uses: actions/cache@v1.1.0
-        with:
-          path: AFKScape/Library
-          key: Library
-
-      # Test
-      - name: Run tests
-        uses: webbertakken/unity-test-runner@v1.3
-        with:
-          projectPath: AFKScape
-          unityVersion: 2019.3.7f1
   
