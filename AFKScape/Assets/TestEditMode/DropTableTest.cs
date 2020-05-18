@@ -82,7 +82,7 @@ namespace Tests
                 petDropTable.RollTable(dropTableDict, fishLvl);
             }
 
-            Assert.AreEqual((BigInteger)iterations, dropTableDict[heronId]);
+            Assert.AreEqual((BigInteger)iterations, dropTableDict[heronId] + 10);
         }
     }
 }
