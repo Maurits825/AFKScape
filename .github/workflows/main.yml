@@ -9,7 +9,7 @@ env:
 
 jobs:
   unit-test:
-    name: Build my project
+    name: Unit Test
     runs-on: ubuntu-latest
     steps:
     
@@ -31,3 +31,34 @@ jobs:
         with:
           projectPath: AFKScape
           unityVersion: 2019.3.7f1
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    
+      # Checkout
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+    
+      # Cache
+      - uses: actions/cache@v1.1.0
+        with:
+          path: Library
+          key: Library
+
+      # Build
+      - name: Build project
+        uses: webbertakken/unity-builder@v0.10
+        with:
+          unityVersion: 2019.2.11f1
+          targetPlatform: StandaloneWindows64  
+
+      # Output 
+      - uses: actions/upload-artifact@v1
+        with:
+          name: Build
+          path: build
+  
