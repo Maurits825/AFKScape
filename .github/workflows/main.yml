@@ -20,7 +20,7 @@ jobs:
             
         # run style cop
         - name: Run Style Cop
-          run: ./Scripts/run-style-cop.sh
+          run: sh ./Scripts/run-style-cop.sh
   
   unit-test:
     name: Unit Test
