@@ -12,6 +12,13 @@ jobs:
     name: Style Cop
     runs-on: ubuntu-latest
     steps:
+        # Checkout
+        - name: Checkout repository
+          uses: actions/checkout@v2
+          with:
+            lfs: true
+            
+        # run style cop
         - name: Run Style Cop
           run: ./Scripts/run-style-cop.sh
   
