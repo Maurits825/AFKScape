@@ -2,12 +2,12 @@ name: Actions
 
 on:
   pull_request: {}
-  push: { branches: [master], paths: 'AFKScape/**'}
+  push: { branches: [master] }
 
 env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
 
-jobs:  
+jobs:
   unit-test:
     name: Unit Test
     runs-on: ubuntu-latest
@@ -43,10 +43,6 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '2.1.202'
-          
-      # run style cop
-      - name: Run Style Cop
-        run: sh ./Scripts/run-style-cop.sh
           
       # Do the report magic
       - name: Generate .html report
@@ -90,4 +86,3 @@ jobs:
         with:
           name: Build
           path: build
-  
