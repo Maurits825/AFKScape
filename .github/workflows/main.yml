@@ -6,7 +6,6 @@ on:
 
 env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-  UNITY_VERSION: 2019.3.13f1
 
 jobs:  
   unit-test:
@@ -35,7 +34,7 @@ jobs:
         uses: webbertakken/unity-test-runner@v1.3
         with:
           projectPath: AFKScape
-          unityVersion: $UNITY_VERSION
+          unityVersion: 2019.3.13f1
           artifactsPath: ./testReports/${{ matrix.targetPlatform }}
           
       # Install dotnet
@@ -83,7 +82,7 @@ jobs:
       - name: Build AFKScape
         uses: webbertakken/unity-builder@v0.10
         with:
-          unityVersion: $UNITY_VERSION
+          unityVersion: 2019.3.13f1
           targetPlatform: StandaloneWindows64  
 
       # Output 
