@@ -1,4 +1,4 @@
-name: Actions
+name: Build project
 
 on:
   pull_request: {}
@@ -8,26 +8,37 @@ env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
 
 jobs:
-  build:
-    name: Testing
+  testAllModes:
+    name: Test in ${{ matrix.testMode }} on version ${{ matrix.unityVersion }}
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        projectPath:
+          - AFKScape
+        unityVersion:
+          - 2019.3.7f1
+        testMode:
+          - playmode
+          - editmode
     steps:
-    
-      # Checkout
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
         with:
           lfs: true
-    
-      # Cache
       - uses: actions/cache@v1.2.0
         with:
-          path: AFKScape/Library
-          key: Library2
-
-      # Test
-      - name: Run tests
-        uses: webbertakken/unity-test-runner@v1.6
+          path: ${{ matrix.projectPath }}/Library
+          key: Library-${{ matrix.projectPath }}
+          restore-keys: |
+            Library-
+      - uses: webbertakken/unity-test-runner@v1.6
+        id: tests
         with:
-          projectPath: AFKScape
-          unityVersion: 2019.3.7f1
+          projectPath: ${{ matrix.projectPath }}
+          unityVersion: ${{ matrix.unityVersion }}
+          testMode: ${{ matrix.testMode }}
+          artifactsPath: ${{ matrix.testMode }}-artifacts
+      - uses: actions/upload-artifact@v1
+        with:
+          name: Test results for ${{ matrix.testMode }}
+          path: ${{ steps.tests.outputs.artifactsPath }}
