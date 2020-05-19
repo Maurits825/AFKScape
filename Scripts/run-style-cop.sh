@@ -5,6 +5,8 @@ insert='    <Analyzer Include="packages\\StyleCop.Analyzers.1.1.118\\analyzers\\
 file='ScriptsAssembly.csproj'
 style_cop_csproj='ScriptsAssemblyStyleCop.csproj'
 
+echo "--env --"
+ls
 echo "Creating StyleCop csproj"
 sed "s/$match/\1\n$insert/" $file > $style_cop_csproj
 
