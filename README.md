@@ -17,7 +17,7 @@ Imagine not juicing
 ## Development Environment
 ### AFKScape
 * `git clone https://github.com/Maurits825/AFKScape.git`
-* install unity version 2019.3.7f1 or higher with [Unity Hub](https://unity3d.com/get-unity/download)
+* install unity version 2019.3.13f1 with [Unity Hub](https://unity3d.com/get-unity/download)
 * open the project AFKScape with Unity and wait for the assets to import (this could take a long time if its the first time)
 * install [Visual Studio IDE](https://visualstudio.microsoft.com/downloads/) (or another IDE) to edit and debug
 ### Tools
