@@ -1,88 +1,20 @@
-name: Actions
-
-on:
-  pull_request: {}
-  push: { branches: [master] }
-
-env:
-  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+name: Greet Everyone
+# This workflow is triggered on pushes to the repository.
+on: [push]
 
 jobs:
-  unit-test:
-    name: Unit Test
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        targetPlatform:
-          - StandaloneWindows64
-    steps:
-    
-      # Checkout
-      - name: Checkout repository
-        uses: actions/checkout@v2
-        with:
-          lfs: true
-    
-      # Cache
-      - uses: actions/cache@v1.1.0
-        with:
-          path: AFKScape/Library
-          key: Library
-
-      # Test
-      - name: Run Unit Tests
-        uses: webbertakken/unity-test-runner@v1.3
-        with:
-          projectPath: AFKScape
-          unityVersion: 2019.3.7f1
-          artifactsPath: ./testReports/${{ matrix.targetPlatform }}
-          
-      # Install dotnet
-      - name: Installing dotnet
-        if: always()
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: '2.1.202'
-          
-      # Do the report magic
-      - name: Generate .html report
-        run: sudo dotnet ./Tools/ExtentReports/ExtentReportsDotNetCLI.dll -i=testReports/${{ matrix.targetPlatform }}/editmode-results.xml -o testReports/${{ matrix.targetPlatform }}/
-        if: always()
-        
-      # Upload test results
-      - name: Upload Test Results
-        if: always()
-        uses: actions/upload-artifact@v1
-        with:
-          name: Test results
-          path: ./testReports/${{ matrix.targetPlatform }}
-
   build:
-    name: Build
+    # Job name is Greeting
+    name: Greeting
+    # This job runs on Linux
     runs-on: ubuntu-latest
     steps:
-    
-      # Checkout
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      # This step uses GitHub's hello-world-javascript-action: https://github.com/actions/hello-world-javascript-action
+      - name: Hello world
+        uses: actions/hello-world-javascript-action@v1
         with:
-          lfs: true
-    
-      # Cache
-      - uses: actions/cache@v1.1.0
-        with:
-          path: Library
-          key: Library
-
-      # Build
-      - name: Build AFKScape
-        uses: webbertakken/unity-builder@v0.10
-        with:
-          unityVersion: 2019.3.7f1
-          targetPlatform: StandaloneWindows64  
-
-      # Output 
-      - uses: actions/upload-artifact@v1
-        with:
-          name: Build
-          path: build
+          who-to-greet: 'Mona the Octocat'
+        id: hello
+      # This step prints an output (time) from the previous step's action.
+      - name: Echo the greeting's time
+        run: echo 'The time was ${{ steps.hello.outputs.time }}.'
