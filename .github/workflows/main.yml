@@ -7,34 +7,7 @@ on:
 env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
 
-jobs:
-  style-cop:
-    name: Style Cop
-    runs-on: ubuntu-latest
-    steps:
-        # Checkout
-        - name: Checkout repository
-          uses: actions/checkout@v2
-          with:
-            lfs: true
-            
-        # Cache
-        - uses: actions/cache@v1.1.0
-          with:
-            path: AFKScape/Library
-            key: Library
-            
-        # Install dotnet
-        - name: Installing dotnet
-          if: always()
-          uses: actions/setup-dotnet@v1
-          with:
-            dotnet-version: '2.1.202'
-            
-        # run style cop
-        - name: Run Style Cop
-          run: sh ./Scripts/run-style-cop.sh
-  
+jobs:  
   unit-test:
     name: Unit Test
     runs-on: ubuntu-latest
@@ -70,6 +43,10 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '2.1.202'
+          
+      # run style cop
+        - name: Run Style Cop
+          run: sh ./Scripts/run-style-cop.sh
           
       # Do the report magic
       - name: Generate .html report
