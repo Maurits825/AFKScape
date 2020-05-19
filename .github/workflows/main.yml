@@ -35,7 +35,7 @@ jobs:
         uses: webbertakken/unity-test-runner@v1.3
         with:
           projectPath: AFKScape
-          unityVersion: UNITY_VERSION
+          unityVersion: $UNITY_VERSION
           artifactsPath: ./testReports/${{ matrix.targetPlatform }}
           
       # Install dotnet
@@ -83,7 +83,7 @@ jobs:
       - name: Build AFKScape
         uses: webbertakken/unity-builder@v0.10
         with:
-          unityVersion: UNITY_VERSION
+          unityVersion: $UNITY_VERSION
           targetPlatform: StandaloneWindows64  
 
       # Output 
