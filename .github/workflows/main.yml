@@ -45,8 +45,8 @@ jobs:
           dotnet-version: '2.1.202'
           
       # run style cop
-        - name: Run Style Cop
-          run: sh ./Scripts/run-style-cop.sh
+      - name: Run Style Cop
+        run: sh ./Scripts/run-style-cop.sh
           
       # Do the report magic
       - name: Generate .html report
