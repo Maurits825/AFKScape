@@ -40,7 +40,11 @@ jobs:
           unityVersion: ${{ matrix.unityVersion }}
           testMode: ${{ matrix.testMode }}
           artifactsPath: testReports/${{ matrix.testMode }}
-          artifactsPath: AFKScape/ScriptsAssembly.csproj
+       
+       #testing
+      - name: ~~~ Testing ~~~
+        run: ls AFKScape
+        if: always()
       
       # Install dotnet
       - name: Installing dotnet
@@ -51,11 +55,6 @@ jobs:
       # Do the report magic
       - name: Generate .html report
         run: sudo dotnet ./Tools/ExtentReports/ExtentReportsDotNetCLI.dll -i=testReports/${{ matrix.testMode }}/${{ matrix.testMode }}-results.xml -o testReports/${{ matrix.testMode }}/
-        if: always()
-       
-      #testing aread
-      - name: ~~~ Testing ~~~
-        run: ls AFKScape
         if: always()
         
       # Upload test results
