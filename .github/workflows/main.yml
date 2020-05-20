@@ -38,7 +38,7 @@ jobs:
           projectPath: ${{ matrix.projectPath }}
           unityVersion: ${{ matrix.unityVersion }}
           testMode: ${{ matrix.testMode }}
-          artifactsPath: testReports/${{ matrix.testMode }}-artifacts.xml
+          artifactsPath: testReports/${{ matrix.testMode }}
       
       # Install dotnet
       - name: Installing dotnet
@@ -48,7 +48,7 @@ jobs:
           dotnet-version: '2.1.202'
       # Do the report magic
       - name: Generate .html report
-        run: sudo dotnet ./Tools/ExtentReports/ExtentReportsDotNetCLI.dll -i=${{ steps.tests.outputs.artifactsPath }} -o testReports/${{ matrix.targetPlatform }}/
+        run: sudo dotnet ./Tools/ExtentReports/ExtentReportsDotNetCLI.dll -i=${{ steps.tests.outputs.artifactsPath }}/editmode-results.xml -o testReports/${{ matrix.testMode }}/
         if: always()
        
       # Upload test results
