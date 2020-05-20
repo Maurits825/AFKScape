@@ -65,6 +65,27 @@ jobs:
           name: Test results
           path: testReports
           
+      # Upload csprojc?
+      - name: Upload csprojc
+        if: always()
+        uses: actions/upload-artifact@v1
+        with:
+          name: Scripts Assembly csproj
+          path: AFKScape/ScriptsAssembly.csproj
+  
+  mytestjob:
+    name: testing stuff
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download csprojc
+        uses: actions/download-artifact@v1
+        with:
+          name: Scripts Assembly csproj
+      #testing
+      - name: ~~~ Testing again ~~~
+        run: ls AFKScape
+        if: always
+
   buildForSomePlatforms:
     name: Build for ${{ matrix.targetPlatform }} on version ${{ matrix.unityVersion }}
     runs-on: ubuntu-latest
