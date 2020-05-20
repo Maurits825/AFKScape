@@ -3,9 +3,6 @@
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
 
-# dont ignore this for style-cop
-!AFKScape/ScriptsAssembly.csproj
-
 [Ll]ibrary/
 [Tt]emp/
 [Oo]bj/
@@ -33,6 +30,10 @@
 ExportedObj/
 .consulo/
 *.csproj
+
+# dont ignore this for style-cop
+!AFKScape/ScriptsAssembly.csproj
+
 *.unityproj
 *.sln
 *.suo
