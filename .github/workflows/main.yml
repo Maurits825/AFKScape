@@ -38,7 +38,7 @@ jobs:
           projectPath: ${{ matrix.projectPath }}
           unityVersion: ${{ matrix.unityVersion }}
           testMode: ${{ matrix.testMode }}
-          artifactsPath: ${{ matrix.testMode }}-artifacts
+          artifactsPath: testReports/${{ matrix.testMode }}-artifactsResults.xml
           
       - uses: actions/upload-artifact@v1
         with:
@@ -53,7 +53,7 @@ jobs:
           dotnet-version: '2.1.202'
       # Do the report magic
       - name: Generate .html report
-        run: sudo dotnet ./Tools/ExtentReports/ExtentReportsDotNetCLI.dll -i=testReports/${{ matrix.targetPlatform }}/editmode-results.xml -o testReports/${{ matrix.targetPlatform }}/
+        run: sudo dotnet ./Tools/ExtentReports/ExtentReportsDotNetCLI.dll -i=${{ steps.tests.outputs.artifactsPath }} -o testReports/${{ matrix.targetPlatform }}/
         if: always()
       # Upload test results
       - name: Upload Test Results
