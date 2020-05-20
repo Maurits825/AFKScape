@@ -24,12 +24,14 @@ jobs:
       - uses: actions/checkout@v2
         with:
           lfs: true
+          
       - uses: actions/cache@v1.2.0
         with:
           path: ${{ matrix.projectPath }}/Library
           key: Library-${{ matrix.projectPath }}
           restore-keys: |
             Library-
+            
       - uses: webbertakken/unity-test-runner@v1.6
         id: tests
         with:
@@ -37,10 +39,29 @@ jobs:
           unityVersion: ${{ matrix.unityVersion }}
           testMode: ${{ matrix.testMode }}
           artifactsPath: ${{ matrix.testMode }}-artifacts
+          
       - uses: actions/upload-artifact@v1
         with:
           name: Test results for ${{ matrix.testMode }}
           path: ${{ steps.tests.outputs.artifactsPath }}
+      
+      # Install dotnet
+      - name: Installing dotnet
+        if: always()
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '2.1.202'
+      # Do the report magic
+      - name: Generate .html report
+        run: sudo dotnet ./Tools/ExtentReports/ExtentReportsDotNetCLI.dll -i=testReports/${{ matrix.targetPlatform }}/editmode-results.xml -o testReports/${{ matrix.targetPlatform }}/
+        if: always()
+      # Upload test results
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v1
+        with:
+          name: Test results
+          path: ./testReports/${{ matrix.targetPlatform }}
           
   buildForSomePlatforms:
     name: Build for ${{ matrix.targetPlatform }} on version ${{ matrix.unityVersion }}
