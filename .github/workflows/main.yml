@@ -75,6 +75,7 @@ jobs:
   
   mytestjob:
     name: testing stuff
+    needs: testAllModes
     runs-on: ubuntu-latest
     steps:
       - name: Download csprojc
