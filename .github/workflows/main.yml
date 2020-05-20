@@ -62,7 +62,7 @@ jobs:
   
   stylecop:
     name: Style Cop
-    runs-on: ubuntu-latest
+    runs-on: mono:latest
     steps:
       - uses: actions/checkout@v2
         with:

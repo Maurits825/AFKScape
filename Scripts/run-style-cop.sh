@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "Downloading dependencies"
-sudo apt install mono-complete
+#sudo apt install mono-complete
 
 match='\(.*<Analyzer Include.*\)'
 insert='    <Analyzer Include="packages\\StyleCop.Analyzers.1.1.118\\analyzers\\dotnet\\cs\\StyleCop.Analyzers.CodeFixes.dll" \/>\n    <Analyzer Include="packages\\StyleCop.Analyzers.1.1.118\\analyzers\\dotnet\\cs\\StyleCop.Analyzers.dll" \/>'
