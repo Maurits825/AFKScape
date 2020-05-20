@@ -38,7 +38,7 @@ jobs:
           projectPath: ${{ matrix.projectPath }}
           unityVersion: ${{ matrix.unityVersion }}
           testMode: ${{ matrix.testMode }}
-          artifactsPath: testReports/${{ matrix.testMode }}-artifactsResults.xml
+          artifactsPath: testReports/${{ matrix.testMode }}-artifacts.xml
       
       # Install dotnet
       - name: Installing dotnet
@@ -57,7 +57,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: Test results
-          path: ./testReports/${{ matrix.targetPlatform }}
+          path: ${{ steps.tests.outputs.artifactsPath }}
           
   buildForSomePlatforms:
     name: Build for ${{ matrix.targetPlatform }} on version ${{ matrix.unityVersion }}
