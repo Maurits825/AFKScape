@@ -1,4 +1,4 @@
-name: Build project
+name: Main Checks
 
 on:
   pull_request: {}
@@ -40,11 +40,6 @@ jobs:
           unityVersion: ${{ matrix.unityVersion }}
           testMode: ${{ matrix.testMode }}
           artifactsPath: testReports/${{ matrix.testMode }}
-       
-       #testing
-      - name: ~~~ Testing ~~~
-        run: ls AFKScape
-        if: always()
       
       # Install dotnet
       - name: Installing dotnet
@@ -63,29 +58,26 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: Test results
-          path: testReports
-          
-      # Upload csprojc?
-      - name: Upload csprojc
-        if: always()
-        uses: actions/upload-artifact@v1
-        with:
-          name: Scripts Assembly csproj
-          path: AFKScape/ScriptsAssembly.csproj
+          path: testReports 
   
-  mytestjob:
-    name: testing stuff
-    needs: testAllModes
+  stylecop:
+    name: Style Cop
     runs-on: ubuntu-latest
     steps:
-      - name: Download csprojc
-        uses: actions/download-artifact@v1
+      - uses: actions/checkout@v2
         with:
-          name: Scripts Assembly csproj
-      #testing
-      - name: ~~~ Testing again ~~~
-        run: ls AFKScape
+          lfs: true
+          
+      # Install dotnet
+      - name: Installing dotnet
         if: always()
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '2.1.202'
+          
+      # run style cop
+        - name: Run Style Cop
+          run: sh ./Scripts/run-style-cop.sh
 
   buildForSomePlatforms:
     name: Build for ${{ matrix.targetPlatform }} on version ${{ matrix.unityVersion }}
