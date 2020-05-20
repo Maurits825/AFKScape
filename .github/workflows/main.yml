@@ -39,11 +39,6 @@ jobs:
           unityVersion: ${{ matrix.unityVersion }}
           testMode: ${{ matrix.testMode }}
           artifactsPath: testReports/${{ matrix.testMode }}-artifactsResults.xml
-          
-      - uses: actions/upload-artifact@v1
-        with:
-          name: Test results for ${{ matrix.testMode }}
-          path: ${{ steps.tests.outputs.artifactsPath }}
       
       # Install dotnet
       - name: Installing dotnet
@@ -55,6 +50,7 @@ jobs:
       - name: Generate .html report
         run: sudo dotnet ./Tools/ExtentReports/ExtentReportsDotNetCLI.dll -i=${{ steps.tests.outputs.artifactsPath }} -o testReports/${{ matrix.targetPlatform }}/
         if: always()
+       
       # Upload test results
       - name: Upload Test Results
         if: always()
