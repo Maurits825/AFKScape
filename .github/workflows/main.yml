@@ -76,8 +76,8 @@ jobs:
           dotnet-version: '2.1.202'
           
       # run style cop
-        - name: Run Style Cop
-          run: sh ./Scripts/run-style-cop.sh
+      - name: Run Style Cop
+        run: sh ./Scripts/run-style-cop.sh
 
   buildForSomePlatforms:
     name: Build for ${{ matrix.targetPlatform }} on version ${{ matrix.unityVersion }}
