@@ -20,6 +20,7 @@ jobs:
           - 2019.3.7f1
         testMode:
           - editmode
+          - playmode
     steps:
       - uses: actions/checkout@v2
         with:
@@ -48,7 +49,7 @@ jobs:
           dotnet-version: '2.1.202'
       # Do the report magic
       - name: Generate .html report
-        run: sudo dotnet ./Tools/ExtentReports/ExtentReportsDotNetCLI.dll -i=${{ steps.tests.outputs.artifactsPath }}/editmode-results.xml -o testReports/${{ matrix.testMode }}/
+        run: sudo dotnet ./Tools/ExtentReports/ExtentReportsDotNetCLI.dll -i=${{ steps.tests.outputs.artifactsPath }}/${{ matrix.testMode }}-results.xml -o testReports/${{ matrix.testMode }}/
         if: always()
        
       # Upload test results
