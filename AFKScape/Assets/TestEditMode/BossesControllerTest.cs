@@ -133,7 +133,7 @@ namespace Tests
             foreach (long id in expectedRate.Keys)
             {
                 float simRate = (float)dropTableDict[id] / iterations;
-                Assert.IsTrue(CheckThreshold(simRate, expectedRate[id]), Database.items[id].name + ", " + simRate.ToString() + ", " + expectedRate[id].ToString());
+                Assert.IsTrue(CheckThreshold(simRate, expectedRate[id]) + 10, Database.items[id].name + ", " + simRate.ToString() + ", " + expectedRate[id].ToString());
             }
         }
     }
