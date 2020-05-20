@@ -84,7 +84,7 @@ jobs:
       #testing
       - name: ~~~ Testing again ~~~
         run: ls AFKScape
-        if: always
+        if: always()
 
   buildForSomePlatforms:
     name: Build for ${{ matrix.targetPlatform }} on version ${{ matrix.unityVersion }}
