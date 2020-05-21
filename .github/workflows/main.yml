@@ -79,8 +79,8 @@ jobs:
       # Run Everything
       - name: Run Style-Cop
         run: |
-          sudo apt-get update
-          sudo apt-get install mono-devel
+          apt-get update
+          apt-get install mono-devel
           export FrameworkPathOverride=/Library/Frameworks/Mono.framework/Versions/Current
           echo "check files"
           ls /opt/Unity/Editor/
