@@ -78,7 +78,7 @@ jobs:
       # testing Docker
       - name: Docker Test
         if: always()
-        run: docker run -it mono:latest bash
+        run: docker run mono:latest bash
         
       # run style cop
       - name: Run Style Cop
