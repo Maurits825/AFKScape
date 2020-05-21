@@ -81,9 +81,10 @@ jobs:
         
       # dependencies
       - name: Set up Dependencies
-        run: sudo apt-get update
-        run: sudo apt-get install mono-devel
-        run: export FrameworkPathOverride=/Library/Frameworks/Mono.framework/Versions/Current
+        run: |
+          sudo apt-get update
+          sudo apt-get install mono-devel
+          export FrameworkPathOverride=/Library/Frameworks/Mono.framework/Versions/Current
         
       # run style cop
       - name: Run Style Cop
