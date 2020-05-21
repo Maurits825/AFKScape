@@ -83,7 +83,7 @@ jobs:
           sudo apt-get install mono-devel
           export FrameworkPathOverride=/Library/Frameworks/Mono.framework/Versions/Current
           echo "check files"
-          ls /opt/Unity/Editor/Data/Managed/
+          ls /opt/Unity/Editor/
           sh ./Scripts/run-style-cop.sh
 
   buildForSomePlatforms:
