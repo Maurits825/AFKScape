@@ -1,7 +1,11 @@
 #!/bin/bash
 
+echo "Installing Mono"
+sudo apt-get update
+sudo apt-get install mono-devel
 echo "Check env"
 mono --version
+ls
 echo "Export cmd"
 export FrameworkPathOverride=/Library/Frameworks/Mono.framework/Versions/Current
 
