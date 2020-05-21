@@ -75,20 +75,14 @@ jobs:
         with:
           dotnet-version: '3.1.100'
       
-      # Docker
-      - name: Run Unity Docker
-        run: docker run gableroux/unity3d:2019.3.7f1
-        
-      # dependencies
-      - name: Set up Dependencies
+      # Run Everything
+      - name: Run Style-Cop
         run: |
+          docker run gableroux/unity3d:2019.3.7f1
           sudo apt-get update
           sudo apt-get install mono-devel
           export FrameworkPathOverride=/Library/Frameworks/Mono.framework/Versions/Current
-        
-      # run style cop
-      - name: Run Style Cop
-        run: sh ./Scripts/run-style-cop.sh
+          sh ./Scripts/run-style-cop.sh
 
   buildForSomePlatforms:
     name: Build for ${{ matrix.targetPlatform }} on version ${{ matrix.unityVersion }}

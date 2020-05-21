@@ -1,6 +1,7 @@
 #!/bin/bash
 
 echo "Check env"
+mono --version
 ls
 
 match='\(.*<Analyzer Include.*\)'
