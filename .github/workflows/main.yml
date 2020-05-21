@@ -79,6 +79,12 @@ jobs:
       - name: Run Unity Docker
         run: docker run gableroux/unity3d:2019.3.7f1
         
+      # dependencies
+      - name: Set up Dependencies
+        run: sudo apt-get update
+        run: sudo apt-get install mono-devel
+        run: export FrameworkPathOverride=/Library/Frameworks/Mono.framework/Versions/Current
+        
       # run style cop
       - name: Run Style Cop
         run: sh ./Scripts/run-style-cop.sh
