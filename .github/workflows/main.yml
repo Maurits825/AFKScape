@@ -63,8 +63,8 @@ jobs:
   stylecop:
     name: Style Cop
     runs-on: ubuntu-latest
-    container: 
-    steps: gableroux/unity3d:2019.3.7f1
+    container: gableroux/unity3d:2019.3.7f1
+    steps:
       - uses: actions/checkout@v2
         with:
           lfs: true
