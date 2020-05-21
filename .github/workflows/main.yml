@@ -65,7 +65,7 @@ jobs:
     runs-on: ubuntu-latest
     container: gableroux/unity3d:2019.3.7f1
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v1
         with:
           lfs: true
           
