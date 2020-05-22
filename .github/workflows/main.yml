@@ -95,6 +95,9 @@ jobs:
           apt-get install -y mono-devel
           export FrameworkPathOverride=/Library/Frameworks/Mono.framework/Versions/Current
       
+      - name: Create License file
+        run: 'echo "$UNITY_LICENSE" > license.ulf'
+        
       - name: Set-up Unity
         run: sh ./Scripts/unity-set-up.sh
         
