@@ -82,6 +82,8 @@ jobs:
           apt-get update
           apt-get install -y mono-devel
           export FrameworkPathOverride=/Library/Frameworks/Mono.framework/Versions/Current
+          /opt/Unity/Editor/Unity -batchmode -manualLicenseFile $UNITY_LICENSE -logfile - -nographics
+          /opt/Unity/Editor/Unity -batchmode -logfile - -projectPath AFKScape/ -nographics
           ls AFKScape
           sh ./Scripts/run-style-cop.sh
 
