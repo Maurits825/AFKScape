@@ -82,9 +82,9 @@ jobs:
           apt-get update
           apt-get install -y mono-devel
           export FrameworkPathOverride=/Library/Frameworks/Mono.framework/Versions/Current
-          echo "check files"
-          ls /opt/Unity/Editor/
-          sh ./Scripts/run-style-cop.sh
+          /opt/Unity/Editor/Unity -batchmode -logfile - -projectPath AFKScape/ -nographics -quit
+          ls AFKScape
+      #sh ./Scripts/run-style-cop.sh
 
   buildForSomePlatforms:
     name: Build for ${{ matrix.targetPlatform }} on version ${{ matrix.unityVersion }}
