@@ -76,15 +76,14 @@ jobs:
         with:
           dotnet-version: '3.1.100'
       
-      # Run Everything
+      # Run Everything /opt/Unity/Editor/Unity -batchmode -logfile - -projectPath AFKScape/ -nographics -quit
       - name: Run Style-Cop
         run: |
           apt-get update
           apt-get install -y mono-devel
           export FrameworkPathOverride=/Library/Frameworks/Mono.framework/Versions/Current
-          /opt/Unity/Editor/Unity -batchmode -logfile - -projectPath AFKScape/ -nographics -quit
           ls AFKScape
-      #sh ./Scripts/run-style-cop.sh
+          sh ./Scripts/run-style-cop.sh
 
   buildForSomePlatforms:
     name: Build for ${{ matrix.targetPlatform }} on version ${{ matrix.unityVersion }}
