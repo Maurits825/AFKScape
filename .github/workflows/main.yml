@@ -83,9 +83,10 @@ jobs:
           apt-get install -y mono-devel
           export FrameworkPathOverride=/Library/Frameworks/Mono.framework/Versions/Current
           echo $UNITY_LICENSE > license.ulf
-          /opt/Unity/Editor/Unity -batchmode -manualLicenseFile license.ulf -logfile - -nographics -quit
+          echo "Activating license"
+          /opt/Unity/Editor/Unity -batchmode -manualLicenseFile license.ulf -logfile /dev/stdout -nographics -quit
           echo "Opening unity proj"
-          /opt/Unity/Editor/Unity -batchmode -logfile - -projectPath AFKScape/ -nographics -quit
+          /opt/Unity/Editor/Unity -batchmode -logfile /dev/stdout -projectPath AFKScape/ -nographics -quit
           ls AFKScape
           sh ./Scripts/run-style-cop.sh
 
