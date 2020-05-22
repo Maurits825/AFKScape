@@ -86,17 +86,20 @@ jobs:
       - name: Create License file
         run: 'echo "$UNITY_LICENSE" > license.ulf'
       - name: Activate  License
-        run : /opt/Unity/Editor/Unity -batchmode -manualLicenseFile license.ulf -logfile /dev/stdout -nographics -quit -silent-crashes
-          
+        run : |
+          /opt/Unity/Editor/Unity -batchmode -manualLicenseFile license.ulf -logfile /dev/stdout -nographics -quit
+          exit 0
+
       - name: Run Style-Cop
         if: always()
         run: |          
           echo "--- Sync solution ---"
-          /opt/Unity/Editor/Unity -batchmode -logFile /dev/stdout -projectPath AFKScape/ -executeMethod MainControllerEditor.createSLN 
+          /opt/Unity/Editor/Unity -batchmode -logFile /dev/stdout -projectPath AFKScape/ -executeMethod MainControllerEditor.createSLN -nographics -quit
           echo "--- checking env ---"
           ls AFKScape
           echo "--- run sh ---"
-          sh ./Scripts/run-style-cop.sh
+          dotnet build AFKScape/ScriptsAssembly.csproj
+        #sh ./Scripts/run-style-cop.sh
 
   buildForSomePlatforms:
     name: Build for ${{ matrix.targetPlatform }} on version ${{ matrix.unityVersion }}
