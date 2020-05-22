@@ -231,4 +231,9 @@ public class MainControllerEditor : Editor
 
         return actualAmount;
     }
+	
+	public static void createSLN()
+    {
+        UnityEditor.EditorApplication.ExecuteMenuItem("Assets/Open C# Project");
+    }
 }
