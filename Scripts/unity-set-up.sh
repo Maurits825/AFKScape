@@ -8,3 +8,4 @@ echo "--- Sync solution ---"
 
 echo "--- Checking Env ---"
 ls AFKScape
+find ../ -name *.csproj

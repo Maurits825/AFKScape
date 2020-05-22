@@ -89,7 +89,7 @@ jobs:
           dotnet-version: '3.1.100'
       
       # 
-      - name: Dependencies
+      - name: Install Mono
         run: |
           apt-get update
           apt-get install -y mono-devel
