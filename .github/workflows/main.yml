@@ -83,11 +83,10 @@ jobs:
           apt-get install -y mono-devel
           export FrameworkPathOverride=/Library/Frameworks/Mono.framework/Versions/Current
       
-      - name: License
-        run : |
-          'echo "$UNITY_LICENSE" > license.ulf'
-          echo " --- Activating license ---"
-          /opt/Unity/Editor/Unity -batchmode -manualLicenseFile license.ulf -logfile /dev/stdout -nographics
+      - name: Create License file
+        run: 'echo "$UNITY_LICENSE" > license.ulf'
+      - name: Activate  License
+        run : /opt/Unity/Editor/Unity -batchmode -manualLicenseFile license.ulf -logfile /dev/stdout -nographics
           
       - name: Run Style-Cop
         run: |          
