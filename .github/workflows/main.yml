@@ -92,7 +92,7 @@ jobs:
         if: always()
         run: |          
           echo "--- Sync solution ---"
-          /opt/Unity/Editor/Unity -batchmode -logfile /dev/stdout -projectPath AFKScape/ -nographics -executeMethod UnityEditor.SyncVS.SyncSolution 
+          /opt/Unity/Editor/Unity -batchmode -logFile /dev/stdout -projectPath AFKScape/ -executeMethod MainControllerEditor.createSLN 
           echo "--- checking env ---"
           ls AFKScape
           echo "--- run sh ---"
