@@ -234,6 +234,17 @@ public class MainControllerEditor : Editor
 	
 	public static void createSLN()
     {
-        UnityEditor.EditorApplication.ExecuteMenuItem("Assets/Open C# Project");
+        Debug.Log("### QualityPrepareCommand:PrepareSonarFiles - Started...");
+		// We actually ask Unity to create the CSPROJ and SLN files.
+		bool success = EditorApplication.ExecuteMenuItem("Assets/Open C# Project");
+		Debug.Log("### QualityPrepareCommand:PrepareSonarFiles - " + (success ? "Done" : "FAILED") + ".");
+
+		// Unsupported Version
+		Debug.Log("### QualityPrepareCommand:PrepareSonarFiles - Started V2...");
+		System.Type T = System.Type.GetType("UnityEditor.SyncVS,UnityEditor");
+		System.Reflection.MethodInfo SyncSolution = T.GetMethod("SyncSolution", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+		SyncSolution.Invoke(null, null);
+		Debug.Log("### QualityPrepareCommand:PrepareSonarFiles - Ended V2...");
+		// ---
     }
 }
