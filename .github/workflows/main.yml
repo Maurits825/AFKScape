@@ -86,15 +86,16 @@ jobs:
       - name: Create License file
         run: 'echo "$UNITY_LICENSE" > license.ulf'
       - name: Activate  License
-        run : /opt/Unity/Editor/Unity -batchmode -manualLicenseFile license.ulf -logfile /dev/stdout -nographics
+        run : /opt/Unity/Editor/Unity -batchmode -manualLicenseFile license.ulf -logfile /dev/stdout -nographics -quit -silent-crashes
           
       - name: Run Style-Cop
         if: always()
         run: |          
-          echo "--- Opening unity proj ---"
-          /opt/Unity/Editor/Unity -batchmode -logfile /dev/stdout -projectPath AFKScape/ -nographics -quit -silent-crashes
+          echo "--- Sync solution ---"
+          /opt/Unity/Editor/Unity -batchmode -logfile /dev/stdout -projectPath AFKScape/ -nographics -executeMethod UnityEditor.SyncVS.SyncSolution 
           echo "--- checking env ---"
           ls AFKScape
+          echo "--- run sh ---"
           sh ./Scripts/run-style-cop.sh
 
   buildForSomePlatforms:

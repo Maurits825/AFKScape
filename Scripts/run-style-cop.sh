@@ -1,9 +1,5 @@
 #!/bin/bash
 
-echo "Check env"
-mono --version
-ls
-
 match='\(.*<Analyzer Include.*\)'
 insert='    <Analyzer Include="Packages\\StyleCop.Analyzers.1.1.118\\analyzers\\dotnet\\cs\\StyleCop.Analyzers.CodeFixes.dll" \/>\n    <Analyzer Include="Packages\\StyleCop.Analyzers.1.1.118\\analyzers\\dotnet\\cs\\StyleCop.Analyzers.dll" \/>'
 file='./AFKScape/ScriptsAssembly.csproj'
