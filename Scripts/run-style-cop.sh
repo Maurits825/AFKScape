@@ -35,6 +35,7 @@ repo_path='A:\/repo\/AFKScape\/'
 sed -i "s/$repo_path//" $style_cop_csproj
 
 echo "Running Style Cop Analyzer"
+export FrameworkPathOverride=/Library/Frameworks/Mono.framework/Versions/Current
 dotnet build $style_cop_csproj
 
 echo "Cleaning up"

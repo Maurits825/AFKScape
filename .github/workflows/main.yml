@@ -93,7 +93,6 @@ jobs:
         run: |
           apt-get update
           apt-get install -y mono-devel
-          export FrameworkPathOverride=/Library/Frameworks/Mono.framework/Versions/Current
       
       - name: Create License file
         run: 'echo "$UNITY_LICENSE" > license.ulf'
