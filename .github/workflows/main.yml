@@ -89,9 +89,11 @@ jobs:
         run : /opt/Unity/Editor/Unity -batchmode -manualLicenseFile license.ulf -logfile /dev/stdout -nographics
           
       - name: Run Style-Cop
+        if: always()
         run: |          
           echo "--- Opening unity proj ---"
           /opt/Unity/Editor/Unity -batchmode -logfile /dev/stdout -projectPath AFKScape/ -nographics -quit -silent-crashes
+          echo "--- checking env ---"
           ls AFKScape
           sh ./Scripts/run-style-cop.sh
 
