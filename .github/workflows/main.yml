@@ -77,7 +77,7 @@ jobs:
           dotnet-version: '3.1.100'
       
       # Run Everything /opt/Unity/Editor/Unity -batchmode -logfile - -projectPath AFKScape/ -nographics -quit
-      -name: Dependencies
+      - name: Dependencies
         run: |
           apt-get update
           apt-get install -y mono-devel
@@ -85,10 +85,12 @@ jobs:
           
       - name: Run Style-Cop
         run: |
+          echo "--- Disp license ---"
+          echo $UNITY_LICENSE
           echo $UNITY_LICENSE > license.ulf
-          echo "Activating license"
+          echo " --- Activating license ---"
           /opt/Unity/Editor/Unity -batchmode -manualLicenseFile license.ulf -logfile /dev/stdout -nographics -quit -silent-crashes
-          echo "Opening unity proj"
+          echo "--- Opening unity proj ---"
           /opt/Unity/Editor/Unity -batchmode -logfile /dev/stdout -projectPath AFKScape/ -nographics -quit -silent-crashes
           ls AFKScape
           sh ./Scripts/run-style-cop.sh
