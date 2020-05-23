@@ -1,7 +1,5 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
-using System;
 using System.Numerics;
 
 [Serializable]
@@ -31,7 +29,7 @@ public class GeneralDropTable : DropTable
                 //TODO look at this, min=max=1 no need to call getamount
                 if (IsLootDropped(loot.chance, loot.baseChance))
                 {
-                    int amount = GetAmount(loot.amountMin, loot.amountMax); 
+                    int amount = GetAmount(loot.amountMin, loot.amountMax);
                     dropTableDict[loot.id] += amount;
                 }
             }

@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Numerics;
-using UnityEngine;
 
 //TODO will be used later for specific drop table mechanics, (cerberus and zulrah)
 public class DropTableManager

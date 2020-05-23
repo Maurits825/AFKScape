@@ -1,7 +1,5 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
-using System;
 using System.Numerics;
 
 public class EventManager
@@ -11,7 +9,7 @@ public class EventManager
 
     //TODO this is just silly
     public static void SetIntance(EventManager inst)
-    { 
+    {
         Instance = inst;
     }
     #endregion

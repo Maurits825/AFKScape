@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class BossesPageUI : MonoBehaviour
@@ -41,7 +39,7 @@ public class BossesPageUI : MonoBehaviour
             BossSelectionPanel.SetActive(false);
             animationObj.SetActive(true);
         }
-        
+
         status.text = bossName;
     }
 

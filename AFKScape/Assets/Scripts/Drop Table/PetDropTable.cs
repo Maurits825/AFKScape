@@ -1,8 +1,7 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
-using System;
 using System.Numerics;
+using UnityEngine;
 
 [Serializable]
 public class PetDropTable : DropTable

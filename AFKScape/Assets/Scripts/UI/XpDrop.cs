@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,8 +25,8 @@ public class XpDrop : MonoBehaviour
     {
         float xpDropheight = xpDropObj.GetComponent<RectTransform>().rect.height;
         float areaHeight = GetComponent<RectTransform>().rect.height;
-        target = new Vector3(0, areaHeight/2 + xpDropheight/2, 0);
-        startPos = new Vector3(0, 0 - areaHeight/2 - xpDropheight/2, 0);
+        target = new Vector3(0, areaHeight / 2 + xpDropheight / 2, 0);
+        startPos = new Vector3(0, 0 - areaHeight / 2 - xpDropheight / 2, 0);
         xpCummulative = 0;
 
         spacing = startPos.y + xpDropheight;
@@ -61,7 +60,7 @@ public class XpDrop : MonoBehaviour
                 xpDropPool.Enqueue(obj);
             }
         }
-        
+
     }
 
     public void StartXpDrop(string skillIcon, int xp)

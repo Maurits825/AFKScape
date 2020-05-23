@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Numerics;
-using UnityEngine;
 
 public class Monster
 {
@@ -24,7 +22,7 @@ public class Monster
     public void GetDropTableHandler(string name)
     {
         monsterDropTableHandler = JsonHandler.GetMonsterDropTableHandler(name);
-        
+
         if (monsterDropTableHandler.preMadeTables.Count != 0)
         {
             foreach (MonsterDropTableHandler.TableInfo tableInfo in monsterDropTableHandler.preMadeTables)

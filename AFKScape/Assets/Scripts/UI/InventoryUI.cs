@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -162,7 +161,7 @@ public class InventoryUI : MonoBehaviour, IDropHandler
         }
         else
         {
-            indX = Mathf.FloorToInt(((localX - widthOffset) / (inventoryRect.width - 2*widthOffset)) * NUMCOLS);
+            indX = Mathf.FloorToInt(((localX - widthOffset) / (inventoryRect.width - 2 * widthOffset)) * NUMCOLS);
         }
 
         if (localY <= heightOffset)
@@ -175,7 +174,7 @@ public class InventoryUI : MonoBehaviour, IDropHandler
         }
         else
         {
-            indY = (NUMROWS - 1) - Mathf.FloorToInt(((localY - heightOffset) / (inventoryRect.height - 2*heightOffset)) * NUMROWS);
+            indY = (NUMROWS - 1) - Mathf.FloorToInt(((localY - heightOffset) / (inventoryRect.height - 2 * heightOffset)) * NUMROWS);
         }
 
         return GetLinearIndex(indX, indY, NUMCOLS);

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -34,7 +32,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
     private Vector2 mouseOffset = Vector2.zero;
 
     private Vector2 initPos;
-    
+
     void Start()
     {
         canvasGroup = gameObject.GetComponent<CanvasGroup>();
@@ -42,10 +40,10 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
         parentTransform = transform.parent.gameObject.transform;
         parentRect = transform.parent.GetComponent<RectTransform>().rect;
         GridLayoutGroup gridLayoutGroup = GetComponentInParent<GridLayoutGroup>();
-        xMin = parentTransform.position.x - parentRect.width/2 + gridLayoutGroup.cellSize.x/2;
-        xMax = parentTransform.position.x + parentRect.width/2 - gridLayoutGroup.cellSize.x/2;
-        yMin = parentTransform.position.y - parentRect.height/2 + gridLayoutGroup.cellSize.y/2;
-        yMax = parentTransform.position.y + parentRect.height/2 - gridLayoutGroup.cellSize.y/2;
+        xMin = parentTransform.position.x - parentRect.width / 2 + gridLayoutGroup.cellSize.x / 2;
+        xMax = parentTransform.position.x + parentRect.width / 2 - gridLayoutGroup.cellSize.x / 2;
+        yMin = parentTransform.position.y - parentRect.height / 2 + gridLayoutGroup.cellSize.y / 2;
+        yMax = parentTransform.position.y + parentRect.height / 2 - gridLayoutGroup.cellSize.y / 2;
 
         toolTipObject.SetActive(false);
         toolTipTransform = toolTipObject.transform;
@@ -65,7 +63,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
         {
             toolTipTransform.position = new Vector3(
                 Mathf.Clamp(Input.mousePosition.x, 0.0F, Screen.width - textWidth),
-                Mathf.Clamp(Input.mousePosition.y + yPosoffset, 0.0F + textHeight/2.0F, Screen.height),
+                Mathf.Clamp(Input.mousePosition.y + yPosoffset, 0.0F + textHeight / 2.0F, Screen.height),
                 0.0F);
         }
     }

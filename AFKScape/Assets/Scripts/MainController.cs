@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class MainController : MonoBehaviour
 {
@@ -39,7 +36,7 @@ public class MainController : MonoBehaviour
     void Start()
     {
         SetInstances();
-       
+
         EventManager.Instance.OnMainTabClicked += OnTabClicked;
 
         //call init on all classes

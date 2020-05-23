@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerUI : MonoBehaviour
 {
@@ -16,7 +14,7 @@ public class PlayerUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void ShowHidePlayerUI(int index)

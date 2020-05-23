@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Numerics;
-using UnityEngine;
 
 public class Zulrah : Monster
 {
@@ -20,7 +18,7 @@ public class Zulrah : Monster
         {
             name = "Unique",
             weight = 0,
-            baseChance = 256*4
+            baseChance = 256 * 4
         };
 
         MonsterDropTable.BasicLoot tanz = new MonsterDropTable.BasicLoot
