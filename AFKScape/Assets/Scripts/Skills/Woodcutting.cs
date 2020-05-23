@@ -2,6 +2,6 @@
 {
     public Woodcutting() : base("Woodcutting")
     {
-        populateTrainingMethods(skillName);
+        PopulateTrainingMethods(skillName);
     }
 }

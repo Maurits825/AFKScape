@@ -2,6 +2,6 @@
 {
     public Firemaking() : base("Firemaking")
     {
-        populateTrainingMethods(skillName);
+        PopulateTrainingMethods(skillName);
     }
 }

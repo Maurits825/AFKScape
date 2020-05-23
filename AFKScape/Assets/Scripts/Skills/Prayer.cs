@@ -2,6 +2,6 @@
 {
     public Prayer() : base("Prayer")
     {
-        populateTrainingMethods(skillName);
+        PopulateTrainingMethods(skillName);
     }
 }

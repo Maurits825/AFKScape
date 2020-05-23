@@ -2,6 +2,6 @@
 {
     public Agility() : base("Agility")
     {
-        populateTrainingMethods(skillName);
+        PopulateTrainingMethods(skillName);
     }
 }

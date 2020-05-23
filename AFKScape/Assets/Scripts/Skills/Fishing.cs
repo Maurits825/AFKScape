@@ -2,6 +2,6 @@
 {
     public Fishing() : base("Fishing")
     {
-        populateTrainingMethods(skillName);
+        PopulateTrainingMethods(skillName);
     }
 }

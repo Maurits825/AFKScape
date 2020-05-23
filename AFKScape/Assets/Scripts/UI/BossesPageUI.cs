@@ -12,12 +12,12 @@ public class BossesPageUI : MonoBehaviour
 
     private BossSelectionScrollView bossSelectionScrollView;
 
-    void Awake()
+    private void Awake()
     {
         bossSelectionScrollView = BossSelectionPanel.GetComponent<BossSelectionScrollView>();
     }
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         EventManager.Instance.OnBossClicked += BossClicked;
         EventManager.Instance.OnBossKilled += BossKilled;

@@ -13,7 +13,7 @@ public class LastLootScrollView : MonoBehaviour
     private Dictionary<long, Text> lastLootText = new Dictionary<long, Text>();
     private Dictionary<long, Image> lastLootImage = new Dictionary<long, Image>();
 
-    void Start()
+    private void Start()
     {
         EventManager.Instance.OnBankItemAdded += UpdateLastLootUI;
         EventManager.Instance.OnBossClicked += ClearLastLootUI;

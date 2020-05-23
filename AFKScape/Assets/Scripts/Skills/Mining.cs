@@ -2,6 +2,6 @@
 {
     public Mining() : base("Mining")
     {
-        populateTrainingMethods(skillName);
+        PopulateTrainingMethods(skillName);
     }
 }

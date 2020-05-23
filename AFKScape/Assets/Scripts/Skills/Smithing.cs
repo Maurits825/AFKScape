@@ -1,7 +1,8 @@
 ﻿public class Smithing : Skill
 {
-    public Smithing() : base("Smithing")
+    public Smithing()
+        : base("Smithing")
     {
-        populateTrainingMethods(skillName);
+        PopulateTrainingMethods(skillName);
     }
 }

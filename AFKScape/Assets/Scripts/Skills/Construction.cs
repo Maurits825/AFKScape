@@ -2,6 +2,6 @@
 {
     public Construction() : base("Construction")
     {
-        populateTrainingMethods(skillName);
+        PopulateTrainingMethods(skillName);
     }
 }

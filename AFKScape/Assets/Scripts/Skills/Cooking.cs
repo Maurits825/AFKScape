@@ -2,6 +2,6 @@
 {
     public Cooking() : base("Cooking")
     {
-        populateTrainingMethods(skillName);
+        PopulateTrainingMethods(skillName);
     }
 }

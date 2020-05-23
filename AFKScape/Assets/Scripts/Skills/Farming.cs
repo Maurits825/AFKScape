@@ -2,6 +2,6 @@
 {
     public Farming() : base("Farming")
     {
-        populateTrainingMethods(skillName);
+        PopulateTrainingMethods(skillName);
     }
 }

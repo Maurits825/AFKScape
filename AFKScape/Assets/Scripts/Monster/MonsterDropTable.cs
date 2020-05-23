@@ -11,17 +11,6 @@ public class MonsterDropTable
     public int baseChance;
     public List<BasicLoot> basicLoots;
 
-    [Serializable]
-    public struct BasicLoot
-    {
-        [ItemId]
-        public long id;
-
-        public int weight;
-        public int amountMin;
-        public int amountMax;
-    }
-
     public MonsterDropTable()
     {
         basicLoots = new List<BasicLoot>();
@@ -37,6 +26,7 @@ public class MonsterDropTable
         int amount = GetAmount(loot.amountMin, loot.amountMax);
         dropTableDict[loot.id] += amount;
     }
+
     public virtual bool Roll(Dictionary<long, BigInteger> dropTableDict)
     {
         int index = UnityEngine.Random.Range(1, baseChance + 1);
@@ -53,5 +43,16 @@ public class MonsterDropTable
         }
 
         return false;
+    }
+
+    [Serializable]
+    public struct BasicLoot
+    {
+        [ItemId]
+        public long id;
+
+        public int weight;
+        public int amountMin;
+        public int amountMax;
     }
 }

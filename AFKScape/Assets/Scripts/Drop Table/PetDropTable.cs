@@ -18,7 +18,6 @@ public class PetDropTable : DropTable
         lootItems = dropTable.lootItems;
     }
 
-
     public override void RollTable(Dictionary<long, BigInteger> dropTableDict, int skillLevel)
     {
         if (IsPet(lootItems[0].chance, lootItems[0].baseChance, skillLevel))

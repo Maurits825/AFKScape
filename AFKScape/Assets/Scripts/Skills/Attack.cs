@@ -1,6 +1,7 @@
 ﻿public class Attack : Skill
 {
-    public Attack() : base("Attack")
+    public Attack()
+        : base("Attack")
     {
         //populateTrainingMethods(skillName);
     }

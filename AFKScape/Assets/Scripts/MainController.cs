@@ -26,14 +26,14 @@ public class MainController : MonoBehaviour
     public Inventory inventory;
     public Bank bank;
 
-    void Awake()
+    private void Awake()
     {
         EventManager.SetIntance(new EventManager());
         Database.LoadAll();
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         SetInstances();
 
@@ -48,7 +48,7 @@ public class MainController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         switch (gameState)
         {

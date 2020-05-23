@@ -2,6 +2,6 @@
 {
     public Crafting() : base("Crafting")
     {
-        populateTrainingMethods(skillName);
+        PopulateTrainingMethods(skillName);
     }
 }

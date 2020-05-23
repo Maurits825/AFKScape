@@ -5,7 +5,8 @@ public class Zulrah : Monster
 {
     private MonsterDropTable uniqueDropTable;
 
-    public Zulrah() : base("Zulrah")
+    public Zulrah()
+        : base("Zulrah")
     {
         GetDropTableHandler(bossName);
         CreateUniqueDropTable();

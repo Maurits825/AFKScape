@@ -11,12 +11,6 @@ public class PlayerUI : MonoBehaviour
         EventManager.Instance.OnMainTabClicked += ShowHidePlayerUI;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     private void ShowHidePlayerUI(int index)
     {
         if (index == 5)

@@ -3,7 +3,9 @@
 public abstract class Skill
 {
     public string skillName;
+
     public int xp { get { return (int)xpFloat; } }
+
     public float xpFloat = 0;
     public int currentLevel = 1;
     public int boostedLevel = 1;
@@ -17,7 +19,7 @@ public abstract class Skill
         xpNextLvl = Database.experienceTable[1]; //TODO could hardcode 83 here if loading sync issues
     }
 
-    public void populateTrainingMethods(string skillName)
+    public void PopulateTrainingMethods(string skillName)
     {
         trainingMethods = JsonHandler.GetTrainingMethods(skillName);
     }

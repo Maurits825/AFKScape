@@ -2,6 +2,6 @@
 {
     public Runecraft() : base("Runecraft")
     {
-        populateTrainingMethods(skillName);
+        PopulateTrainingMethods(skillName);
     }
 }

@@ -2,6 +2,6 @@
 {
     public Fletching() : base("Fletching")
     {
-        populateTrainingMethods(skillName);
+        PopulateTrainingMethods(skillName);
     }
 }

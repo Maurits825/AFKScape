@@ -43,7 +43,7 @@ public class XpDrop : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         float step = speed * Time.deltaTime;
 

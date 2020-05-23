@@ -10,7 +10,7 @@ public class BossSelectionScrollView : MonoBehaviour
     private List<GameObject> buttonGameObjects;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         buttonGameObjects = new List<GameObject>();
         CreateBossSelectionButtons(Database.bossesNames);

@@ -2,6 +2,6 @@
 {
     public Hunter() : base("Hunter")
     {
-        populateTrainingMethods(skillName);
+        PopulateTrainingMethods(skillName);
     }
 }

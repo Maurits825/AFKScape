@@ -17,7 +17,8 @@ public class ClueDropTable : DropTable
     private static readonly int clueCount = 4;
     public static readonly long beginnerClueId = 23182;
 
-    public ClueDropTable() : base("Clue")
+    public ClueDropTable()
+        : base("Clue")
     {
         tableType = DropTableType.Clue;
     }

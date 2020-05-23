@@ -5,7 +5,8 @@ using System.Numerics;
 [Serializable]
 public class GeneralDropTable : DropTable
 {
-    public GeneralDropTable() : base("General")
+    public GeneralDropTable()
+        : base("General")
     {
         tableType = DropTableType.General;
     }

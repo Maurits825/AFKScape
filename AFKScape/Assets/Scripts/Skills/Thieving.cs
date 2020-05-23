@@ -2,6 +2,6 @@
 {
     public Thieving() : base("Thieving")
     {
-        populateTrainingMethods(skillName);
+        PopulateTrainingMethods(skillName);
     }
 }

@@ -2,6 +2,6 @@
 {
     public Herblore() : base("Herblore")
     {
-        populateTrainingMethods(skillName);
+        PopulateTrainingMethods(skillName);
     }
 }

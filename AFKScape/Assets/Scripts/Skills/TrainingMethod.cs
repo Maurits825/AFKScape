@@ -44,7 +44,9 @@ public struct Consumables
 public class TrainingMethod
 {
     public string name;
+
     public float baseXpRate { get { return xpPerResource * baseResourceRate; } }
+
     public float xpPerResource;
     public float baseResourceRate;
 

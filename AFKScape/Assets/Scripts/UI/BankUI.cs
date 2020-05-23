@@ -12,7 +12,7 @@ public class BankUI : MonoBehaviour
     private Dictionary<long, Text> bankText = new Dictionary<long, Text>();
     private Dictionary<long, Image> bankImage = new Dictionary<long, Image>();
 
-    void Start()
+    private void Start()
     {
         EventManager.Instance.OnBankItemAdded += BankItemAdded;
         EventManager.Instance.OnBankItemRemoved += BankItemRemoved;
