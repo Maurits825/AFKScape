@@ -232,7 +232,7 @@ public class MainControllerEditor : Editor
         return actualAmount;
     }
 	
-	public static void createSLN()
+	public static void CreateSLNFiles()
     {
         Debug.Log("### QualityPrepareCommand:PrepareSonarFiles - Started...");
 		// We actually ask Unity to create the CSPROJ and SLN files.
