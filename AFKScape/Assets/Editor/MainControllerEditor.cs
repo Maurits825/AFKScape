@@ -245,6 +245,5 @@ public class MainControllerEditor : Editor
 		System.Reflection.MethodInfo SyncSolution = T.GetMethod("SyncSolution", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
 		SyncSolution.Invoke(null, null);
 		Debug.Log("### QualityPrepareCommand:PrepareSonarFiles - Ended V2...");
-		// ---
     }
 }
