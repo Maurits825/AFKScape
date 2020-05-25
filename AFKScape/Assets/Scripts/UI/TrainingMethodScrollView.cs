@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class TrainingMethodScrollView : MonoBehaviour
 {
     public GameObject buttonPrefab;
     public Transform buttonListParent;
 
     private List<GameObject> buttonGameObjects;
-    // Start is called before the first frame update
+
     private void Start()
     {
         buttonGameObjects = new List<GameObject>();
@@ -16,7 +17,7 @@ public class TrainingMethodScrollView : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void CreateTrainingMethodButtons(List<TrainingMethod> trainingMethodList)
+    private void CreateTrainingMethodButtons(List<TrainingMethod> trainingMethodList)
     {
         //TODO dynamically Destroy and Instantiate, could be improved for better performance by storing all in mem
         if (buttonGameObjects.Count > 0)

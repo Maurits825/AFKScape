@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+
 public class TrainingMethodButton : MonoBehaviour
 {
     public Text buttonText;

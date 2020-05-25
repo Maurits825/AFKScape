@@ -63,7 +63,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
         {
             toolTipTransform.position = new Vector3(
                 Mathf.Clamp(Input.mousePosition.x, 0.0F, Screen.width - textWidth),
-                Mathf.Clamp(Input.mousePosition.y + yPosoffset, 0.0F + textHeight / 2.0F, Screen.height),
+                Mathf.Clamp(Input.mousePosition.y + yPosoffset, 0.0F + (textHeight / 2.0F), Screen.height),
                 0.0F);
         }
     }
@@ -145,6 +145,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
             {
                 gameObject.transform.position = initPos;
             }
+
             canvasGroup.alpha = 1F;
             canvasGroup.blocksRaycasts = true;
 

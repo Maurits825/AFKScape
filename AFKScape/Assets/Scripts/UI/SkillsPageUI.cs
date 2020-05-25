@@ -24,8 +24,8 @@ public class SkillsPageUI : MonoBehaviour
         skillProgressbar = progressBar.GetComponent<ProgressBar>();
         xpDrop = xpDropObj.GetComponent<XpDrop>();
 
-        currentXp.text = "";
-        status.text = "";
+        currentXp.text = string.Empty;
+        status.text = string.Empty;
 
         animationObj.SetActive(false);
 

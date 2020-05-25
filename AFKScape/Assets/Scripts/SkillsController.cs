@@ -130,6 +130,7 @@ public class SkillsController
                 return i;
             }
         }
+
         return maxLvl;
     }
 
@@ -154,6 +155,7 @@ public class SkillsController
                 return false;
             }
         }
+
         return true;
     }
 
@@ -166,6 +168,7 @@ public class SkillsController
                 return false;
             }
         }
+
         return true;
     }
 
@@ -175,6 +178,7 @@ public class SkillsController
         {
             return true;
         }
+
         for (int i = 0; i < generalItemIds.Count; i++)
         {
             if (inventory.Contains(generalItemIds[i]))
@@ -182,6 +186,7 @@ public class SkillsController
                 return true;
             }
         }
+
         return false;
     }
 
@@ -198,21 +203,25 @@ public class SkillsController
             EventManager.Instance.ShowPopUpMsg("Need lvl x");
             return false;
         }
+
         if (!ItemRequirement(trainingMethod.requirements.itemIds))
         {
             EventManager.Instance.ShowPopUpMsg("Need item x");
             return false;
         }
+
         if (!QuestRequirement(trainingMethod.requirements.questIds))
         {
             EventManager.Instance.ShowPopUpMsg("Need quest x");
             return false;
         }
+
         if (!GeneralItemRequirement(trainingMethod.requirements.generalSkillItems))
         {
             EventManager.Instance.ShowPopUpMsg("Need some kind of x item");
             return false;
         }
+
         return true;
     }
 

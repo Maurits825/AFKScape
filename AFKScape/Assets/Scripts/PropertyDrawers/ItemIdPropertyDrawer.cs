@@ -3,13 +3,7 @@ using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-public class ItemIdAttribute : PropertyAttribute
-{
-    public ItemIdAttribute()
-    {
 
-    }
-}
 #if UNITY_EDITOR
 [CustomPropertyDrawer(typeof(ItemIdAttribute))]
 public class ItemIdPropertyDrawer : PropertyDrawer
@@ -20,7 +14,6 @@ public class ItemIdPropertyDrawer : PropertyDrawer
         Rect idRect = position;
         idRect.width = idRect.width / 2;
         EditorGUI.PropertyField(idRect, property);
-
 
         Rect nameRect = position;
         nameRect.x = nameRect.x + idRect.width;
@@ -44,3 +37,10 @@ public class ItemIdPropertyDrawer : PropertyDrawer
     }
 }
 #endif
+
+public class ItemIdAttribute : PropertyAttribute
+{
+    public ItemIdAttribute()
+    {
+    }
+}

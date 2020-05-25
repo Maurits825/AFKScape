@@ -15,5 +15,5 @@ public class PopUpMessage : MonoBehaviour
     {
         EventManager.Instance.OnShowPopUpMsg += ShowMessage;
         gameObject.SetActive(false);
-    }    
+    }
 }

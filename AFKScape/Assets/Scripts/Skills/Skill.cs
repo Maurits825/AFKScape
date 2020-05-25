@@ -4,7 +4,10 @@ public abstract class Skill
 {
     public string skillName;
 
-    public int xp { get { return (int)xpFloat; } }
+    public int xp
+    {
+        get { return (int)xpFloat; }
+    }
 
     public float xpFloat = 0;
     public int currentLevel = 1;

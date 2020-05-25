@@ -4,7 +4,7 @@ using System.Numerics;
 public class Monster
 {
     //stats from database
-    int id;
+    public int id;
     public string bossName;
 
     public int killCount;

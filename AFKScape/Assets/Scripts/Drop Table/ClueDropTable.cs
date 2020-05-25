@@ -11,7 +11,7 @@ public class ClueDropTable : DropTable
             (2677, new int[] { 4, 10 }),
             (2801, new int[] { 3, 10 }),
             (2722, new int[] { 2, 10 }),
-            (12073, new int[] { 1, 10 })
+            (12073, new int[] { 1, 10 }),
         };
 
     private static readonly int clueCount = 4;

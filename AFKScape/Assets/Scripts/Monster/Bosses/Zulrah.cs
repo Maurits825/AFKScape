@@ -19,7 +19,7 @@ public class Zulrah : Monster
         {
             name = "Unique",
             weight = 0,
-            baseChance = 256 * 4
+            baseChance = 256 * 4,
         };
 
         MonsterDropTable.BasicLoot tanz = new MonsterDropTable.BasicLoot
@@ -27,7 +27,7 @@ public class Zulrah : Monster
             id = 12922,
             weight = 1,
             amountMin = 1,
-            amountMax = 1
+            amountMax = 1,
         };
         uniqueDropTable.basicLoots.Add(tanz);
 
@@ -36,7 +36,7 @@ public class Zulrah : Monster
             id = 12932,
             weight = 1,
             amountMin = 1,
-            amountMax = 1
+            amountMax = 1,
         };
         uniqueDropTable.basicLoots.Add(magic);
 
@@ -45,7 +45,7 @@ public class Zulrah : Monster
             id = 12927,
             weight = 1,
             amountMin = 1,
-            amountMax = 1
+            amountMax = 1,
         };
         uniqueDropTable.basicLoots.Add(visage);
 
@@ -54,7 +54,7 @@ public class Zulrah : Monster
             id = 6571,
             weight = 1,
             amountMin = 1,
-            amountMax = 1
+            amountMax = 1,
         };
         uniqueDropTable.basicLoots.Add(onyx);
     }

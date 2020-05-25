@@ -40,7 +40,6 @@ public class Storage
         }
 
         return addedItem;
-
     }
 
     public void AddMultipleItems(Dictionary<long, BigInteger> items)

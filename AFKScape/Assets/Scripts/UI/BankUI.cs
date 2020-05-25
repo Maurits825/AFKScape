@@ -19,7 +19,7 @@ public class BankUI : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    void BankItemAdded(long id, BigInteger amount, BigInteger _)
+    public void BankItemAdded(long id, BigInteger amount, BigInteger _)
     {
         if (amount > 0)
         {

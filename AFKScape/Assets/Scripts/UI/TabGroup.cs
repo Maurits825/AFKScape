@@ -27,6 +27,7 @@ public class TabGroup : MonoBehaviour
         {
             tabButtons = new List<TabButton>();
         }
+
         tabButtons.Add(button);
     }
 
@@ -68,7 +69,6 @@ public class TabGroup : MonoBehaviour
 
     public virtual void RaiseEvents(int index)
     {
-
     }
 
     public void ResetTabs()

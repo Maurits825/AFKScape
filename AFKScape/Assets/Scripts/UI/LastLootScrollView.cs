@@ -20,7 +20,7 @@ public class LastLootScrollView : MonoBehaviour
         EventManager.Instance.OnSkillButtonClicked += ClearLastLootUI;
     }
 
-    void UpdateLastLootUI(long id, BigInteger _, BigInteger amountDiff)
+    private void UpdateLastLootUI(long id, BigInteger _, BigInteger amountDiff)
     {
         if (!lastLootText.ContainsKey(id))
         {
@@ -44,7 +44,7 @@ public class LastLootScrollView : MonoBehaviour
 
     //TODO when to call?
     //TODO should only be cleared when a "clear" button pressed?
-    void ClearLastLootUI(string _)
+    private void ClearLastLootUI(string _)
     {
         if (slotsObjects.Count > 0)
         {

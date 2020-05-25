@@ -46,7 +46,6 @@ public static class Database
 
     public static void LoadQuests()
     {
-
     }
 
     public static void LoadBosses()

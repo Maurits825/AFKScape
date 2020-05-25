@@ -2,9 +2,9 @@
 
 public class PlayerUI : MonoBehaviour
 {
-    GameObject playerUi;
-    // Start is called before the first frame update
-    void Start()
+    private GameObject playerUi;
+
+    private void Start()
     {
         playerUi = gameObject;
         playerUi.SetActive(true);
