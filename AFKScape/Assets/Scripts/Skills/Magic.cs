@@ -1,6 +1,7 @@
 ﻿public class Magic : Skill
 {
-    public Magic() : base("Magic")
+    public Magic()
+        : base("Magic")
     {
         //populateTrainingMethods(skillName);
     }

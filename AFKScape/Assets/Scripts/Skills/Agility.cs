@@ -1,6 +1,7 @@
 ﻿public class Agility : Skill
 {
-    public Agility() : base("Agility")
+    public Agility()
+        : base("Agility")
     {
         PopulateTrainingMethods(skillName);
     }

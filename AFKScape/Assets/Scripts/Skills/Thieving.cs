@@ -1,6 +1,7 @@
 ﻿public class Thieving : Skill
 {
-    public Thieving() : base("Thieving")
+    public Thieving()
+        : base("Thieving")
     {
         PopulateTrainingMethods(skillName);
     }

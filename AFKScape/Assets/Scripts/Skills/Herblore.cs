@@ -1,6 +1,7 @@
 ﻿public class Herblore : Skill
 {
-    public Herblore() : base("Herblore")
+    public Herblore()
+        : base("Herblore")
     {
         PopulateTrainingMethods(skillName);
     }

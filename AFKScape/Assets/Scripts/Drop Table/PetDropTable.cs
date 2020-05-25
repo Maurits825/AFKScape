@@ -6,12 +6,14 @@ using UnityEngine;
 [Serializable]
 public class PetDropTable : DropTable
 {
-    public PetDropTable() : base("Pet")
+    public PetDropTable()
+        : base("Pet")
     {
         tableType = DropTableType.Pet;
     }
 
-    public PetDropTable(DropTable dropTable) : base("Pet")
+    public PetDropTable(DropTable dropTable)
+        : base("Pet")
     {
         tableType = DropTableType.Pet;
         numRolls = dropTable.numRolls;

@@ -11,7 +11,8 @@ public class GeneralDropTable : DropTable
         tableType = DropTableType.General;
     }
 
-    public GeneralDropTable(DropTable dropTable) : base("General")
+    public GeneralDropTable(DropTable dropTable)
+        : base("General")
     {
         tableType = DropTableType.General;
         numRolls = dropTable.numRolls;
@@ -26,6 +27,7 @@ public class GeneralDropTable : DropTable
             for (int i = 0; i < lootItems.Count; i++)
             {
                 Loot loot = lootItems[i];
+
                 //TODO if chance=base=1 no need for rolling
                 //TODO look at this, min=max=1 no need to call getamount
                 if (IsLootDropped(loot.chance, loot.baseChance))

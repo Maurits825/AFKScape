@@ -1,6 +1,7 @@
 ﻿public class Mining : Skill
 {
-    public Mining() : base("Mining")
+    public Mining()
+        : base("Mining")
     {
         PopulateTrainingMethods(skillName);
     }

@@ -36,12 +36,12 @@ public class DropTableManager
         {
             if (dropTable.tableType == DropTable.DropTableType.Clue)
             {
-                foreach ((int, int[]) tuple in ClueDropTable.clueChances)
+                foreach ((int, int[]) tuple in ClueDropTable.ClueChances)
                 {
                     dropTableDict.Add(tuple.Item1, 0);
                 }
 
-                dropTableDict.Add(ClueDropTable.beginnerClueId, 0);
+                dropTableDict.Add(ClueDropTable.BeginnerClueId, 0);
             }
             else
             {

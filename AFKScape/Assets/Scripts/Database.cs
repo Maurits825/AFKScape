@@ -11,7 +11,7 @@ public static class Database
 
     public static List<int> experienceTable;
 
-    private const int numSpriteSheets = 7;
+    private const int NumSpriteSheets = 7;
     public static List<Sprite> sprites = new List<Sprite>();
 
     public static void LoadAll()
@@ -55,7 +55,7 @@ public static class Database
 
     public static void LoadIcons()
     {
-        for (int i = 1; i <= numSpriteSheets; i++)
+        for (int i = 1; i <= NumSpriteSheets; i++)
         {
             string spriteSheetPath = "Item Icons/spritesheet_" + i.ToString();
             Sprite[] spritesSheet = Resources.LoadAll<Sprite>(spriteSheetPath);

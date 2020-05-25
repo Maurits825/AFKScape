@@ -1,6 +1,7 @@
 ﻿public class Prayer : Skill
 {
-    public Prayer() : base("Prayer")
+    public Prayer()
+        : base("Prayer")
     {
         PopulateTrainingMethods(skillName);
     }

@@ -62,6 +62,6 @@ public class DropTable
     public bool IsLootDropped(int chance, int baseChance)
     {
         int num = UnityEngine.Random.Range(1, baseChance + 1);
-        return (num <= chance);
+        return num <= chance;
     }
 }
