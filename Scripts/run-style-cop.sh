@@ -1,7 +1,10 @@
 #!/bin/bash
 
 match='\(<Project ToolsVersion.*\)'
-insert='<ItemGroup><Analyzer Include="Packages\\StyleCop.Analyzers.1.1.118\\analyzers\\dotnet\\cs\\StyleCop.Analyzers.CodeFixes.dll" \/>\n<Analyzer Include="Packages\\StyleCop.Analyzers.1.1.118\\analyzers\\dotnet\\cs\\StyleCop.Analyzers.dll" \/><\/ItemGroup>'
+insert='<ItemGroup><Analyzer Include="Packages\\StyleCop.Analyzers.1.1.118\\analyzers\\dotnet\\cs\\StyleCop.Analyzers.CodeFixes.dll" \/> \n \
+<Analyzer Include="Packages\\StyleCop.Analyzers.1.1.118\\analyzers\\dotnet\\cs\\StyleCop.Analyzers.dll" \/><\/ItemGroup> \n \
+<PropertyGroup><CodeAnalysisRuleSet>StyleCop.ruleset<\/CodeAnalysisRuleSet><\/PropertyGroup> '
+
 file='./AFKScape/ScriptsAssembly.csproj'
 style_cop_csproj='./AFKScape/ScriptsAssemblyStyleCop.csproj'
 
@@ -13,7 +16,7 @@ cat $style_cop_csproj
 
 echo "--- Running Style Cop Analyzer ---"
 export FrameworkPathOverride=/Library/Frameworks/Mono.framework/Versions/Current
-dotnet build $style_cop_csproj --verbosity diag
+dotnet build $style_cop_csproj --verbosity n
 
 echo "--- Cleaning up ---"
 rm $style_cop_csproj
