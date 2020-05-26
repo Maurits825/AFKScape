@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class MainController : MonoBehaviour
 {
@@ -29,17 +26,17 @@ public class MainController : MonoBehaviour
     public Inventory inventory;
     public Bank bank;
 
-    void Awake()
+    private void Awake()
     {
         EventManager.SetIntance(new EventManager());
         Database.LoadAll();
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         SetInstances();
-       
+
         EventManager.Instance.OnMainTabClicked += OnTabClicked;
 
         //call init on all classes
@@ -51,7 +48,7 @@ public class MainController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         switch (gameState)
         {

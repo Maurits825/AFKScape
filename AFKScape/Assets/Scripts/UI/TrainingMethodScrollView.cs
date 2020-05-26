@@ -1,15 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class TrainingMethodScrollView : MonoBehaviour
 {
     public GameObject buttonPrefab;
     public Transform buttonListParent;
 
     private List<GameObject> buttonGameObjects;
-    // Start is called before the first frame update
-    void Start()
+
+    private void Start()
     {
         buttonGameObjects = new List<GameObject>();
         EventManager.Instance.OnDrawTrainingMethods += CreateTrainingMethodButtons;
@@ -17,7 +17,7 @@ public class TrainingMethodScrollView : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void CreateTrainingMethodButtons(List<TrainingMethod> trainingMethodList)
+    private void CreateTrainingMethodButtons(List<TrainingMethod> trainingMethodList)
     {
         //TODO dynamically Destroy and Instantiate, could be improved for better performance by storing all in mem
         if (buttonGameObjects.Count > 0)
@@ -33,7 +33,7 @@ public class TrainingMethodScrollView : MonoBehaviour
         int index = 0;
         foreach (TrainingMethod trainingMethod in trainingMethodList)
         {
-            GameObject button = Instantiate(buttonPrefab) as GameObject;
+            GameObject button = Instantiate(buttonPrefab);
             buttonGameObjects.Add(button);
             button.SetActive(true);
 

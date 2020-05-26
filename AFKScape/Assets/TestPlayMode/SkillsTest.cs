@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using NUnit.Framework;
-using UnityEngine;
+﻿using NUnit.Framework;
+using System.Collections;
 using UnityEngine.TestTools;
 
 namespace Tests
@@ -12,7 +10,7 @@ namespace Tests
         [Test]
         public void SkillsTestSimplePasses()
         {
-            
+
         }
 
         // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use

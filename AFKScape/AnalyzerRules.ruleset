@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="New Rule Set" Description=" " ToolsVersion="16.0">
+  <Rules AnalyzerId="Microsoft.CodeAnalysis.CSharp.Features" RuleNamespace="Microsoft.CodeAnalysis.CSharp.Features">
+    <Rule Id="IDE0035" Action="Warning" />
+  </Rules>
+  <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
+    <Rule Id="SA1600" Action="None" />
+	<Rule Id="SA1307" Action="None" />
+	<Rule Id="SA1101" Action="None" />
+	<Rule Id="SA1005" Action="None" />
+	<Rule Id="SA1401" Action="None" />
+	<Rule Id="SA1633" Action="None" />
+	<Rule Id="SA1201" Action="None" />
+	<Rule Id="SA1402" Action="None" />
+	<Rule Id="SA1602" Action="None" />
+	<Rule Id="SA1204" Action="None" />
+	<Rule Id="SA1512" Action="None" />
+	<Rule Id="SA1300" Action="None" />
+	<Rule Id="SA1202" Action="None" />
+	<Rule Id="SA0001" Action="None" />
+  </Rules>
+  <Rules AnalyzerId="SonarAnalyzer.CSharp" RuleNamespace="SonarAnalyzer.CSharp">
+    <Rule Id="S1104" Action="None" />
+	<Rule Id="S3903" Action="None" />
+	<Rule Id="S1135" Action="Info" />
+	<Rule Id="S2933" Action="None" />
+	<Rule Id="S2386" Action="None" />
+	<Rule Id="S2223" Action="None" />
+	<Rule Id="S3904" Action="None" />
+  </Rules>
+</RuleSet>

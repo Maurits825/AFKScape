@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Numerics;
-using UnityEngine;
 
 //TODO will be used later for specific drop table mechanics, (cerberus and zulrah)
-public class DropTableManager
+public static class DropTableManager
 {
     public static void RollResources(Dictionary<long, BigInteger> dropTableDict, TrainingMethod trainingMethod, int boostedLvl)
     {
@@ -38,12 +36,12 @@ public class DropTableManager
         {
             if (dropTable.tableType == DropTable.DropTableType.Clue)
             {
-                foreach ((int, int[]) tuple in ClueDropTable.clueChances)
+                foreach ((int, int[]) tuple in ClueDropTable.ClueChances)
                 {
                     dropTableDict.Add(tuple.Item1, 0);
                 }
 
-                dropTableDict.Add(ClueDropTable.beginnerClueId, 0);
+                dropTableDict.Add(ClueDropTable.BeginnerClueId, 0);
             }
             else
             {
@@ -53,6 +51,7 @@ public class DropTableManager
                 }
             }
         }
+
         return dropTableDict;
     }
 }

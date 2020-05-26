@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,21 +12,21 @@ public class BankUI : MonoBehaviour
     private Dictionary<long, Text> bankText = new Dictionary<long, Text>();
     private Dictionary<long, Image> bankImage = new Dictionary<long, Image>();
 
-    void Start()
+    private void Start()
     {
         EventManager.Instance.OnBankItemAdded += BankItemAdded;
         EventManager.Instance.OnBankItemRemoved += BankItemRemoved;
         gameObject.SetActive(false);
     }
 
-    void BankItemAdded(long id, BigInteger amount, BigInteger _)
+    public void BankItemAdded(long id, BigInteger amount, BigInteger amoutDiff)
     {
         if (amount > 0)
         {
             if (!bankText.ContainsKey(id))
             {
                 //TODO put this into function or something
-                GameObject slotObject = Instantiate(slotPrefab) as GameObject;
+                GameObject slotObject = Instantiate(slotPrefab);
                 slotObject.transform.SetParent(slotListParent, false);
 
                 Slot slot = slotObject.GetComponent<Slot>();
@@ -43,7 +42,7 @@ public class BankUI : MonoBehaviour
         }
     }
 
-    public void BankItemRemoved(long id, BigInteger amount, BigInteger _)
+    public void BankItemRemoved(long id, BigInteger amount, BigInteger amoutDiff)
     {
         if (bankText.ContainsKey(id))
         {

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 
@@ -42,7 +40,6 @@ public class Storage
         }
 
         return addedItem;
-
     }
 
     public void AddMultipleItems(Dictionary<long, BigInteger> items)

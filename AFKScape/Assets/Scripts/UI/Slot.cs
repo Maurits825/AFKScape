@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -15,7 +13,6 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
     public GameObject toolTipObject;
 
     private Transform parentTransform;
-    private Rect parentRect;
     private float yMin;
     private float yMax;
     private float xMin;
@@ -26,7 +23,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
 
     private CanvasGroup canvasGroup;
 
-    private static readonly float yPosoffset = -65.0F;
+    private static readonly float YPosOffset = -65.0F;
 
     private float textHeight = 0;
     private float textWidth = 0;
@@ -34,25 +31,26 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
     private Vector2 mouseOffset = Vector2.zero;
 
     private Vector2 initPos;
-    
-    void Start()
+
+    private void Start()
     {
         canvasGroup = gameObject.GetComponent<CanvasGroup>();
+        Rect parentRect;
 
         parentTransform = transform.parent.gameObject.transform;
         parentRect = transform.parent.GetComponent<RectTransform>().rect;
         GridLayoutGroup gridLayoutGroup = GetComponentInParent<GridLayoutGroup>();
-        xMin = parentTransform.position.x - parentRect.width/2 + gridLayoutGroup.cellSize.x/2;
-        xMax = parentTransform.position.x + parentRect.width/2 - gridLayoutGroup.cellSize.x/2;
-        yMin = parentTransform.position.y - parentRect.height/2 + gridLayoutGroup.cellSize.y/2;
-        yMax = parentTransform.position.y + parentRect.height/2 - gridLayoutGroup.cellSize.y/2;
+        xMin = parentTransform.position.x - (parentRect.width / 2) + (gridLayoutGroup.cellSize.x / 2);
+        xMax = parentTransform.position.x + (parentRect.width / 2) - (gridLayoutGroup.cellSize.x / 2);
+        yMin = parentTransform.position.y - (parentRect.height / 2) + (gridLayoutGroup.cellSize.y / 2);
+        yMax = parentTransform.position.y + (parentRect.height / 2) - (gridLayoutGroup.cellSize.y / 2);
 
         toolTipObject.SetActive(false);
         toolTipTransform = toolTipObject.transform;
         isOver = false;
     }
 
-    void Update()
+    private void Update()
     {
         if (textHeight == 0)
         {
@@ -65,7 +63,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
         {
             toolTipTransform.position = new Vector3(
                 Mathf.Clamp(Input.mousePosition.x, 0.0F, Screen.width - textWidth),
-                Mathf.Clamp(Input.mousePosition.y + yPosoffset, 0.0F + textHeight/2.0F, Screen.height),
+                Mathf.Clamp(Input.mousePosition.y + YPosOffset, 0.0F + (textHeight / 2.0F), Screen.height),
                 0.0F);
         }
     }
@@ -147,6 +145,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
             {
                 gameObject.transform.position = initPos;
             }
+
             canvasGroup.alpha = 1F;
             canvasGroup.blocksRaycasts = true;
 

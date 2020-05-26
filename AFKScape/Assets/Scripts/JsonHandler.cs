@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.IO;
 using UnityEditor;
+using UnityEngine;
 
 public static class JsonHandler
 {
@@ -66,21 +65,21 @@ public static class JsonHandler
 
     public static string[] GetLoadedSkills()
     {
-        TextAsset JsonString = Resources.Load<TextAsset>("JSON/Skills");
-        JsonHelper jsonHelperSkills = JsonUtility.FromJson<JsonHelper>(JsonString.text);
+        TextAsset jsonString = Resources.Load<TextAsset>("JSON/Skills");
+        JsonHelper jsonHelperSkills = JsonUtility.FromJson<JsonHelper>(jsonString.text);
         return jsonHelperSkills.data.ToArray();
     }
 
     public static ItemList GetLoadedItems()
     {
-        TextAsset JsonString = Resources.Load<TextAsset>(string.Concat("JSON/", "Items"));
-        return JsonUtility.FromJson<ItemList>(JsonString.text);
+        TextAsset jsonString = Resources.Load<TextAsset>(string.Concat("JSON/", "Items"));
+        return JsonUtility.FromJson<ItemList>(jsonString.text);
     }
 
     public static List<string> GetBossesNames()
     {
-        TextAsset JsonString = Resources.Load<TextAsset>("JSON/Bosses");
-        JsonHelper jsonHelperBosses = JsonUtility.FromJson<JsonHelper>(JsonString.text);
+        TextAsset jsonString = Resources.Load<TextAsset>("JSON/Bosses");
+        JsonHelper jsonHelperBosses = JsonUtility.FromJson<JsonHelper>(jsonString.text);
         return jsonHelperBosses.data;
     }
 
@@ -101,13 +100,13 @@ public static class JsonHandler
         tMethodList.Sort((x, y) => x.requirements.levelRequirements[0].levelReq.CompareTo(y.requirements.levelRequirements[0].levelReq));
         TrainingMethodList trainingMethodList = new TrainingMethodList
         {
-            trainingMethodList = tMethodList
+            trainingMethodList = tMethodList,
         };
 
-        string JSONString = JsonUtility.ToJson(trainingMethodList);
+        string jsonString = JsonUtility.ToJson(trainingMethodList);
 
         //TODO better way for path?
-        File.WriteAllText(string.Concat(Application.dataPath, "/Resources/JSON/TrainingMethods/", selectedSkillName, ".json"), JSONString);
+        File.WriteAllText(string.Concat(Application.dataPath, "/Resources/JSON/TrainingMethods/", selectedSkillName, ".json"), jsonString);
 #if UNITY_EDITOR
         AssetDatabase.Refresh();
 #endif
@@ -115,10 +114,10 @@ public static class JsonHandler
 
     public static void SaveJsonFile(MonsterDropTableHandler monsterDropTable, string monsterName)
     {
-        string JSONString = JsonUtility.ToJson(monsterDropTable);
+        string jsonString = JsonUtility.ToJson(monsterDropTable);
 
         //TODO better way for path?
-        File.WriteAllText(string.Concat(Application.dataPath, "/Resources/JSON/MonsterDropTable/", monsterName, ".json"), JSONString);
+        File.WriteAllText(string.Concat(Application.dataPath, "/Resources/JSON/MonsterDropTable/", monsterName, ".json"), jsonString);
 #if UNITY_EDITOR
         AssetDatabase.Refresh();
 #endif

@@ -1,7 +1,48 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+
+[Serializable]
+public class TrainingMethod
+{
+    public string name;
+
+    public float baseXpRate
+    {
+        get { return xpPerResource * baseResourceRate; }
+    }
+
+    public float xpPerResource;
+    public float baseResourceRate;
+
+    public List<Consumables> consumables;
+
+    public List<DropTable> dropTables;
+
+    public Requirements requirements;
+
+    public TrainingMethod()
+    {
+        name = string.Empty;
+        baseResourceRate = 0;
+        xpPerResource = 0;
+        consumables = new List<Consumables>();
+        dropTables = new List<DropTable>();
+        requirements = new Requirements();
+    }
+
+    public TrainingMethod(string methodName, int resourceRate, Requirements req)
+    {
+        name = methodName;
+        baseResourceRate = resourceRate;
+        requirements = req;
+    }
+}
+
+[Serializable]
+public class TrainingMethodList
+{
+    public List<TrainingMethod> trainingMethodList;
+}
 
 [Serializable]
 public struct LevelRequirement
@@ -40,41 +81,4 @@ public struct Consumables
 {
     public long itemId;
     public int amount;
-}
-
-[Serializable]
-public class TrainingMethod
-{
-    public string name;
-    public float baseXpRate { get { return xpPerResource * baseResourceRate; } }
-    public float xpPerResource;
-    public float baseResourceRate;
-
-    public List<Consumables> consumables;
-
-    public List<DropTable> dropTables;
-
-    public Requirements requirements;
-
-    public TrainingMethod()
-    {
-        name = "";
-        baseResourceRate = 0;
-        xpPerResource = 0;
-        consumables = new List<Consumables>();
-        dropTables = new List<DropTable>();
-        requirements = new Requirements();
-    }
-    public TrainingMethod(string methodName, int resourceRate, Requirements req)
-    {
-        name = methodName;
-        baseResourceRate = resourceRate;
-        requirements = req;
-    }
-}
-
-[Serializable]
-public class TrainingMethodList
-{
-    public List<TrainingMethod> trainingMethodList;
 }

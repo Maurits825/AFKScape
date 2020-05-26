@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,18 +13,18 @@ public class LastLootScrollView : MonoBehaviour
     private Dictionary<long, Text> lastLootText = new Dictionary<long, Text>();
     private Dictionary<long, Image> lastLootImage = new Dictionary<long, Image>();
 
-    void Start()
+    private void Start()
     {
         EventManager.Instance.OnBankItemAdded += UpdateLastLootUI;
         EventManager.Instance.OnBossClicked += ClearLastLootUI;
         EventManager.Instance.OnSkillButtonClicked += ClearLastLootUI;
     }
 
-    void UpdateLastLootUI(long id, BigInteger _, BigInteger amountDiff)
+    private void UpdateLastLootUI(long id, BigInteger amount, BigInteger amountDiff)
     {
         if (!lastLootText.ContainsKey(id))
         {
-            GameObject slotObject = Instantiate(slotPrefab) as GameObject;
+            GameObject slotObject = Instantiate(slotPrefab);
             slotObject.transform.SetParent(slotListParent, false);
             slotsObjects.Add(slotObject);
 
@@ -45,7 +44,7 @@ public class LastLootScrollView : MonoBehaviour
 
     //TODO when to call?
     //TODO should only be cleared when a "clear" button pressed?
-    void ClearLastLootUI(string _)
+    private void ClearLastLootUI(string bossName)
     {
         if (slotsObjects.Count > 0)
         {

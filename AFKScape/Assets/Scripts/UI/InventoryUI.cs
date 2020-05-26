@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -27,7 +26,7 @@ public class InventoryUI : MonoBehaviour, IDropHandler
     private Dictionary<int, long> indexId = new Dictionary<int, long>();
     private List<bool> isUsed = new List<bool>();
 
-    void Awake()
+    private void Awake()
     {
         inventoryTransform = GetComponent<Transform>();
         inventoryRect = GetComponent<RectTransform>().rect;
@@ -38,7 +37,7 @@ public class InventoryUI : MonoBehaviour, IDropHandler
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         EventManager.Instance.OnInvItemAdded += InventoryItemAdded;
         EventManager.Instance.OnInvItemRemoved += InventoryItemRemoved;
@@ -47,9 +46,10 @@ public class InventoryUI : MonoBehaviour, IDropHandler
 
     public void InitUI()
     {
-        for (int i = 0; i < 28; i++) //TODO magic num 28
+        //TODO magic num 28
+        for (int i = 0; i < 28; i++)
         {
-            GameObject slotObject = Instantiate(slotPrefab) as GameObject;
+            GameObject slotObject = Instantiate(slotPrefab);
             slotObject.transform.SetParent(slotListParent, false);
 
             Slot slot = slotObject.GetComponent<Slot>();
@@ -162,7 +162,7 @@ public class InventoryUI : MonoBehaviour, IDropHandler
         }
         else
         {
-            indX = Mathf.FloorToInt(((localX - widthOffset) / (inventoryRect.width - 2*widthOffset)) * NUMCOLS);
+            indX = Mathf.FloorToInt(((localX - widthOffset) / (inventoryRect.width - (2 * widthOffset))) * NUMCOLS);
         }
 
         if (localY <= heightOffset)
@@ -175,7 +175,7 @@ public class InventoryUI : MonoBehaviour, IDropHandler
         }
         else
         {
-            indY = (NUMROWS - 1) - Mathf.FloorToInt(((localY - heightOffset) / (inventoryRect.height - 2*heightOffset)) * NUMROWS);
+            indY = (NUMROWS - 1) - Mathf.FloorToInt(((localY - heightOffset) / (inventoryRect.height - (2 * heightOffset))) * NUMROWS);
         }
 
         return GetLinearIndex(indX, indY, NUMCOLS);

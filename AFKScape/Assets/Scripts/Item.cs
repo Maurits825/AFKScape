@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using System.IO;
-using UnityEditor;
 
 [Serializable]
 public class Item
@@ -42,23 +38,23 @@ public class Item
 }
 
 [Serializable]
-public class Equipment
+public class Equipment // --- TODO fix py script!!!
 {
-    public int attack_stab;
-    public int attack_slash;
-    public int attack_crush;
-    public int attack_magic;
-    public int attack_ranged;
+    public int attackStab;
+    public int attackSlash;
+    public int attackCrush;
+    public int attackMagic;
+    public int attackRanged;
 
-    public int defence_stab;
-    public int defence_slash;
-    public int defence_crush;
-    public int defence_magic;
-    public int defence_ranged;
+    public int defenceStab;
+    public int defenceSlash;
+    public int defenceCrush;
+    public int defenceMagic;
+    public int defenceRanged;
 
-    public int melee_strength;
-    public int ranged_strength;
-    public int magic_damage;
+    public int meleeStrength;
+    public int rangedStrength;
+    public int magicDamage;
 
     public int prayer;
 
@@ -70,17 +66,17 @@ public class Equipment
 [Serializable]
 public class Weapon
 {
-    public int attack_speed;
-    public string weapon_type;
+    public int attackSpeed;
+    public string weaponType;
     public List<Stance> stances;
 }
 
 [Serializable]
 public class Stance
 {
-    public string combat_style;
-    public string attack_type;
-    public string attack_style;
+    public string combatStyle;
+    public string attackType;
+    public string attackStyle;
     public string experience;
     public object boosts;
 }

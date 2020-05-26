@@ -1,11 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Smithing : Skill
+﻿public class Smithing : Skill
 {
-    public Smithing() : base("Smithing")
+    public Smithing()
+        : base("Smithing")
     {
-        populateTrainingMethods(skillName);
+        PopulateTrainingMethods(skillName);
     }
 }

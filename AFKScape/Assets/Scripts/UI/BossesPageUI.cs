@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class BossesPageUI : MonoBehaviour
@@ -14,12 +12,12 @@ public class BossesPageUI : MonoBehaviour
 
     private BossSelectionScrollView bossSelectionScrollView;
 
-    void Awake()
+    private void Awake()
     {
         bossSelectionScrollView = BossSelectionPanel.GetComponent<BossSelectionScrollView>();
     }
-    // Start is called before the first frame update
-    void Start()
+
+    private void Start()
     {
         EventManager.Instance.OnBossClicked += BossClicked;
         EventManager.Instance.OnBossKilled += BossKilled;
@@ -41,7 +39,7 @@ public class BossesPageUI : MonoBehaviour
             BossSelectionPanel.SetActive(false);
             animationObj.SetActive(true);
         }
-        
+
         status.text = bossName;
     }
 

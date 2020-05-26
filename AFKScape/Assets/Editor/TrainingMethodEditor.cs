@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 using UnityEditor;
+using UnityEngine;
 
 [CustomEditor(typeof(TrainingMethodAdder))]
 public class trainingMethodEditor : Editor
@@ -59,7 +58,7 @@ public class trainingMethodEditor : Editor
                 isTrainMethodSelected.Add(false);
             }
         }
-            
+
         if (selectedSkillName != null && JSONLoaded)
         {
             EditorGUILayout.LabelField(string.Concat("JSON File: ", selectedSkillName));
@@ -224,7 +223,7 @@ public class trainingMethodEditor : Editor
                     EditorGUILayout.Space(3);
                 }
             }
-            
+
         }
 
         serializedObject.ApplyModifiedProperties();

@@ -1,7 +1,5 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
-using System;
 using System.Numerics;
 
 [Serializable]
@@ -64,6 +62,6 @@ public class DropTable
     public bool IsLootDropped(int chance, int baseChance)
     {
         int num = UnityEngine.Random.Range(1, baseChance + 1);
-        return (num <= chance);
+        return num <= chance;
     }
 }

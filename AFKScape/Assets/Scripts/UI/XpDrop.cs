@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,12 +21,12 @@ public class XpDrop : MonoBehaviour
     private int xpCummulative;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         float xpDropheight = xpDropObj.GetComponent<RectTransform>().rect.height;
         float areaHeight = GetComponent<RectTransform>().rect.height;
-        target = new Vector3(0, areaHeight/2 + xpDropheight/2, 0);
-        startPos = new Vector3(0, 0 - areaHeight/2 - xpDropheight/2, 0);
+        target = new Vector3(0, (areaHeight / 2) + (xpDropheight / 2), 0);
+        startPos = new Vector3(0, 0 - (areaHeight / 2) - (xpDropheight / 2), 0);
         xpCummulative = 0;
 
         spacing = startPos.y + xpDropheight;
@@ -36,7 +35,7 @@ public class XpDrop : MonoBehaviour
         xpDropPool = new Queue<GameObject>();
         for (int i = 0; i < poolSize; i++)
         {
-            GameObject obj = Instantiate(xpDropObj) as GameObject;
+            GameObject obj = Instantiate(xpDropObj);
             xpDropPool.Enqueue(obj);
             obj.transform.SetParent(transform, false);
             obj.transform.localPosition = startPos;
@@ -44,7 +43,7 @@ public class XpDrop : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         float step = speed * Time.deltaTime;
 
@@ -61,7 +60,6 @@ public class XpDrop : MonoBehaviour
                 xpDropPool.Enqueue(obj);
             }
         }
-        
     }
 
     public void StartXpDrop(string skillIcon, int xp)

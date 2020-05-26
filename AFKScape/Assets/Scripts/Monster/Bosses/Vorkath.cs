@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Vorkath : Monster
+﻿public class Vorkath : Monster
 {
-    public Vorkath() : base("Vorkath")
+    public Vorkath()
+        : base("Vorkath")
     {
         GetDropTableHandler(bossName);
         dropTableDict = CreateDropTableDictionary(null);

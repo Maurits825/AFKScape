@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -25,12 +23,12 @@ public class TabButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHandl
         tabGroup.OnTabExit(this);
     }
 
-    void Awake()
+    private void Awake()
     {
         background = GetComponent<Image>();
     }
 
-    void Start()
+    private void Start()
     {
         tabGroup.Subscribe(this);
     }

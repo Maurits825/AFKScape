@@ -1,24 +1,24 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
-using System;
 using System.Numerics;
+using UnityEngine;
 
 [Serializable]
 public class PetDropTable : DropTable
 {
-    public PetDropTable() : base("Pet")
+    public PetDropTable()
+        : base("Pet")
     {
         tableType = DropTableType.Pet;
     }
 
-    public PetDropTable(DropTable dropTable) : base("Pet")
+    public PetDropTable(DropTable dropTable)
+        : base("Pet")
     {
         tableType = DropTableType.Pet;
         numRolls = dropTable.numRolls;
         lootItems = dropTable.lootItems;
     }
-
 
     public override void RollTable(Dictionary<long, BigInteger> dropTableDict, int skillLevel)
     {

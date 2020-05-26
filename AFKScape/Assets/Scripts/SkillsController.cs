@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
 
@@ -7,12 +6,12 @@ public class SkillsController
 {
     public Dictionary<string, Skill> skillsClasses = new Dictionary<string, Skill>();
     private Skill selectedSkill;
-    public int selectedTrainingMethodInd = 0;
+    private TrainingMethod selectedTrainingMethod; //TODO this
     private bool isTrainingMethodSelected = false;
 
     private float actionCount;
 
-    private static int maxLvl = 126;
+    private static readonly int MaxLvl = 126;
 
     private Dictionary<long, BigInteger> dropTableDict = new Dictionary<long, BigInteger>();
 
@@ -33,7 +32,7 @@ public class SkillsController
     {
         if (selectedSkill != null && isTrainingMethodSelected)
         {
-            SkillGameLoop(selectedSkill.trainingMethods[selectedTrainingMethodInd], selectedSkill, Time.deltaTime);
+            SkillGameLoop(selectedTrainingMethod, selectedSkill, Time.deltaTime);
         }
     }
 
@@ -92,9 +91,10 @@ public class SkillsController
             //foreach (skill in trainingMethod.additionSkills)
             // skill.xp += xpPerResource
             // raise xp event? --> eventManager.xpgained
-            //if (getlevel(xp) != skill.lvl) --> eventManager.levelup
+            ////if (getlevel(xp) != skill.lvl) --> eventManager.levelup
 
             DropTableManager.RollResources(dropTableDict, trainingMethod, skill.boostedLevel);
+
             //TODO remove consumables
 
             if (skill.xp >= skill.xpNextLvl)
@@ -119,7 +119,7 @@ public class SkillsController
             }
         }
 
-        bank.AddMultipleItems(dropTableDict);//TODO this will add to bank later
+        bank.AddMultipleItems(dropTableDict); //TODO this will add to bank later
     }
 
     public static int GetLevel(int xp)
@@ -131,7 +131,8 @@ public class SkillsController
                 return i;
             }
         }
-        return maxLvl;
+
+        return MaxLvl;
     }
 
     public int GetTotalLevel()
@@ -145,16 +146,17 @@ public class SkillsController
         return totalLvl;
     }
 
-    public bool LevelRequirement(List<LevelRequirement> Levelrequirement)
+    public bool LevelRequirement(List<LevelRequirement> levelRequirement)
     {
-        for (int i = 0; i < Levelrequirement.Count; i++)
+        for (int i = 0; i < levelRequirement.Count; i++)
         {
-            string skillName = Levelrequirement[i].skillName;
-            if (skillsClasses[skillName].boostedLevel < Levelrequirement[i].levelReq)
+            string skillName = levelRequirement[i].skillName;
+            if (skillsClasses[skillName].boostedLevel < levelRequirement[i].levelReq)
             {
                 return false;
             }
         }
+
         return true;
     }
 
@@ -167,6 +169,7 @@ public class SkillsController
                 return false;
             }
         }
+
         return true;
     }
 
@@ -176,6 +179,7 @@ public class SkillsController
         {
             return true;
         }
+
         for (int i = 0; i < generalItemIds.Count; i++)
         {
             if (inventory.Contains(generalItemIds[i]))
@@ -183,6 +187,7 @@ public class SkillsController
                 return true;
             }
         }
+
         return false;
     }
 
@@ -199,21 +204,25 @@ public class SkillsController
             EventManager.Instance.ShowPopUpMsg("Need lvl x");
             return false;
         }
+
         if (!ItemRequirement(trainingMethod.requirements.itemIds))
         {
             EventManager.Instance.ShowPopUpMsg("Need item x");
             return false;
         }
+
         if (!QuestRequirement(trainingMethod.requirements.questIds))
         {
             EventManager.Instance.ShowPopUpMsg("Need quest x");
             return false;
         }
+
         if (!GeneralItemRequirement(trainingMethod.requirements.generalSkillItems))
         {
             EventManager.Instance.ShowPopUpMsg("Need some kind of x item");
             return false;
         }
+
         return true;
     }
 
@@ -228,13 +237,13 @@ public class SkillsController
 
     public void SetTrainingMethod(int index)
     {
-        selectedTrainingMethodInd = index;
+        selectedTrainingMethod = selectedSkill.trainingMethods[index];
 
-        if (CheckRequirement(selectedSkill.trainingMethods[selectedTrainingMethodInd]))
+        if (CheckRequirement(selectedTrainingMethod))
         {
             isTrainingMethodSelected = true;
             actionCount = 0;
-            dropTableDict = DropTableManager.CreateDropTableDictionary(selectedSkill.trainingMethods[selectedTrainingMethodInd].dropTables);
+            dropTableDict = DropTableManager.CreateDropTableDictionary(selectedTrainingMethod.dropTables);
             EventManager.Instance.SkillingStarted();
         }
         else

@@ -60,8 +60,8 @@ jobs:
           name: Test results
           path: testReports 
   
-  stylecop:
-    name: Style Cop
+  Analyzers:
+    name: Analyzers
     runs-on: ubuntu-latest
     container: gableroux/unity3d:2019.3.7f1
     strategy:
@@ -98,11 +98,15 @@ jobs:
         run: 'echo "$UNITY_LICENSE" > license.ulf'
         
       - name: Set-up Unity
-        run: sh ./Scripts/unity-set-up.sh
+        run: bash ./Scripts/unity_set_up.sh
         
       - name: Run Style-Cop
         if: always()
-        run: sh ./Scripts/run-style-cop.sh
+        run: bash ./Scripts/run_style_cop.sh
+      
+      - name: Run Sonar Lint
+        if: always()
+        run: bash ./Scripts/run_sonar_lint.sh
 
   buildForSomePlatforms:
     name: Build for ${{ matrix.targetPlatform }} on version ${{ matrix.unityVersion }}

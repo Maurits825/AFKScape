@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class TabGroup : MonoBehaviour
@@ -28,6 +27,7 @@ public class TabGroup : MonoBehaviour
         {
             tabButtons = new List<TabButton>();
         }
+
         tabButtons.Add(button);
     }
 
@@ -69,7 +69,6 @@ public class TabGroup : MonoBehaviour
 
     public virtual void RaiseEvents(int index)
     {
-
     }
 
     public void ResetTabs()

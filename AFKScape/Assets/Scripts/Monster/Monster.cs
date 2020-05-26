@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Numerics;
-using UnityEngine;
 
 public class Monster
 {
     //stats from database
-    int id;
+    public int id;
     public string bossName;
 
     public int killCount;
@@ -24,7 +22,7 @@ public class Monster
     public void GetDropTableHandler(string name)
     {
         monsterDropTableHandler = JsonHandler.GetMonsterDropTableHandler(name);
-        
+
         if (monsterDropTableHandler.preMadeTables.Count != 0)
         {
             foreach (MonsterDropTableHandler.TableInfo tableInfo in monsterDropTableHandler.preMadeTables)
@@ -40,31 +38,28 @@ public class Monster
 
     public Dictionary<long, BigInteger> CreateDropTableDictionary(List<MonsterDropTable> extraTables)
     {
-        Dictionary<long, BigInteger> dropTableDict = new Dictionary<long, BigInteger>();
+        Dictionary<long, BigInteger> dropTable = new Dictionary<long, BigInteger>();
 
         foreach (MonsterDropTable.BasicLoot basicLoot in monsterDropTableHandler.basicLoots)
         {
-            dropTableDict[basicLoot.id] = 0;
+            dropTable[basicLoot.id] = 0;
         }
 
         foreach (MonsterDropTable table in monsterDropTableHandler.monsterDropTables)
         {
             foreach (MonsterDropTable.BasicLoot basicLoot in table.basicLoots)
             {
-                dropTableDict[basicLoot.id] = 0;
+                dropTable[basicLoot.id] = 0;
             }
         }
 
-        if (extraTables != null)
+        if (extraTables != null && extraTables.Count != 0)
         {
-            if (extraTables.Count != 0)
+            foreach (MonsterDropTable table in extraTables)
             {
-                foreach (MonsterDropTable table in extraTables)
+                foreach (MonsterDropTable.BasicLoot basicLoot in table.basicLoots)
                 {
-                    foreach (MonsterDropTable.BasicLoot basicLoot in table.basicLoots)
-                    {
-                        dropTableDict[basicLoot.id] = 0;
-                    }
+                    dropTable[basicLoot.id] = 0;
                 }
             }
         }
@@ -73,11 +68,11 @@ public class Monster
         {
             foreach (DropTable.Loot loot in table.lootItems)
             {
-                dropTableDict[loot.id] = 0;
+                dropTable[loot.id] = 0;
             }
         }
 
-        return dropTableDict;
+        return dropTable;
     }
 
     public Dictionary<long, BigInteger> GetDropTableDict()

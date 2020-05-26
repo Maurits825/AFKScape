@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Numerics;
+using UnityEngine;
 
 public class BossesController
 {
@@ -75,7 +73,7 @@ public class BossesController
     public void OnBossSelected(string bossName)
     {
         selectedBossName = bossName;
-        
+
         if (!string.IsNullOrEmpty(selectedBossName))
         {
             currentMonster = bossesClasses[selectedBossName];

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemLookup : MonoBehaviour
@@ -7,7 +6,7 @@ public class ItemLookup : MonoBehaviour
     public enum FilterType
     {
         None,
-        Normal
+        Normal,
     }
 
     public FilterType filterType;
@@ -22,7 +21,7 @@ public class ItemLookup : MonoBehaviour
         {
             if (item.Value.name.IndexOf(itemName, System.StringComparison.OrdinalIgnoreCase) >= 0)
             {
-                string extraInfo = "";
+                string extraInfo = string.Empty;
                 if (item.Value.noted)
                 {
                     extraInfo += " Noted";
@@ -31,6 +30,7 @@ public class ItemLookup : MonoBehaviour
                         continue;
                     }
                 }
+
                 if (item.Value.duplicate)
                 {
                     extraInfo += " Duplicate";
@@ -39,6 +39,7 @@ public class ItemLookup : MonoBehaviour
                         continue;
                     }
                 }
+
                 if (item.Value.placeholder)
                 {
                     extraInfo += " Placeholder";

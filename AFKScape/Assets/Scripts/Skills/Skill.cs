@@ -1,11 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
 public abstract class Skill
 {
     public string skillName;
-    public int xp { get { return (int)xpFloat; } }
+
+    public int xp
+    {
+        get { return (int)xpFloat; }
+    }
+
     public float xpFloat = 0;
     public int currentLevel = 1;
     public int boostedLevel = 1;
@@ -13,13 +16,13 @@ public abstract class Skill
 
     public List<TrainingMethod> trainingMethods = new List<TrainingMethod>();
 
-    public Skill(string name)
+    protected Skill(string name)
     {
         skillName = name;
         xpNextLvl = Database.experienceTable[1]; //TODO could hardcode 83 here if loading sync issues
     }
 
-    public void populateTrainingMethods(string skillName)
+    public void PopulateTrainingMethods(string skillName)
     {
         trainingMethods = JsonHandler.GetTrainingMethods(skillName);
     }
@@ -32,7 +35,7 @@ public abstract class Skill
         return baseResourceRate + (baseResourceRate * lvlBoost * boostedLevel);
 
         //TODO -- something like this for each skill
-        //if equipedItems.handSlot == dragon pickaxe {PickaxeBoost = 1.2}
-        //if perks.twoHanded {pickAxeBoost*2}
+        //if equipedItems.handSlot == dragon pickaxe then PickaxeBoost = 1.2
+        //if perks.twoHanded then pickAxeBoost*2
     }
 }

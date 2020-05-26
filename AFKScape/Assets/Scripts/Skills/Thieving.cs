@@ -1,11 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Thieving : Skill
+﻿public class Thieving : Skill
 {
-    public Thieving() : base("Thieving")
+    public Thieving()
+        : base("Thieving")
     {
-        populateTrainingMethods(skillName);
+        PopulateTrainingMethods(skillName);
     }
 }
