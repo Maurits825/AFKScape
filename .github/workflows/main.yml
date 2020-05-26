@@ -39,8 +39,8 @@ jobs:
           projectPath: ${{ matrix.projectPath }}
           unityVersion: ${{ matrix.unityVersion }}
           testMode: ${{ matrix.testMode }}
-          artifactsPath: testReports/${{ matrix.testMode }}_CovReport
-          customParameters: -enableCodeCoverage -coverageResultsPath testReports/${{ matrix.testMode }}_CovReport -coverageOptions enableCyclomaticComplexity\;generateHtmlReport\;generateBadgeReport\;assemblyFilters:+ScriptsAssembly
+          artifactsPath: testReports/${{ matrix.testMode }}
+          customParameters: -enableCodeCoverage -coverageResultsPath testReports/${{ matrix.testMode }}/ -coverageOptions enableCyclomaticComplexity\;generateHtmlReport\;generateBadgeReport\;assemblyFilters:+ScriptsAssembly
       
       # Install dotnet
       - name: Installing dotnet
