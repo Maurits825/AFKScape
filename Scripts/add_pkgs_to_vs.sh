@@ -9,7 +9,7 @@ insert='<ItemGroup> \n \
 <Analyzer Include="packages\\SonarAnalyzer.CSharp.8.7.0.17535\\analyzers\\SonarAnalyzer.CSharp.dll" \/> \n \
 <Analyzer Include="packages\\SonarAnalyzer.CSharp.8.7.0.17535\\analyzers\\SonarAnalyzer.dll" \/> \n \
 <\/ItemGroup> \n \
-<PropertyGroup><CodeAnalysisRuleSet>StyleCop.ruleset<\/CodeAnalysisRuleSet><\/PropertyGroup> '
+<PropertyGroup><CodeAnalysisRuleSet>AnalyzerRules.ruleset<\/CodeAnalysisRuleSet><\/PropertyGroup> '
 
 file='../AFKScape/ScriptsAssembly.csproj'
 

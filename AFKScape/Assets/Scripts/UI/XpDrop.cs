@@ -35,7 +35,7 @@ public class XpDrop : MonoBehaviour
         xpDropPool = new Queue<GameObject>();
         for (int i = 0; i < poolSize; i++)
         {
-            GameObject obj = Instantiate(xpDropObj) as GameObject;
+            GameObject obj = Instantiate(xpDropObj);
             xpDropPool.Enqueue(obj);
             obj.transform.SetParent(transform, false);
             obj.transform.localPosition = startPos;

@@ -26,7 +26,7 @@ public class BankUI : MonoBehaviour
             if (!bankText.ContainsKey(id))
             {
                 //TODO put this into function or something
-                GameObject slotObject = Instantiate(slotPrefab) as GameObject;
+                GameObject slotObject = Instantiate(slotPrefab);
                 slotObject.transform.SetParent(slotListParent, false);
 
                 Slot slot = slotObject.GetComponent<Slot>();

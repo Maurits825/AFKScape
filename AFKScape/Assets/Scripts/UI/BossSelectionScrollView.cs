@@ -20,7 +20,7 @@ public class BossSelectionScrollView : MonoBehaviour
     {
         foreach (string name in bossesNames)
         {
-            GameObject buttonObj = Instantiate(buttonPrefab) as GameObject;
+            GameObject buttonObj = Instantiate(buttonPrefab);
             buttonGameObjects.Add(buttonObj);
             buttonObj.SetActive(true);
 

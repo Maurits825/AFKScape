@@ -5,7 +5,7 @@ insert='<ItemGroup> \n \
 <Analyzer Include="Packages\\StyleCop.Analyzers.1.1.118\\analyzers\\dotnet\\cs\\StyleCop.Analyzers.CodeFixes.dll" \/> \n \
 <Analyzer Include="Packages\\StyleCop.Analyzers.1.1.118\\analyzers\\dotnet\\cs\\StyleCop.Analyzers.dll" \/> \n \
 <\/ItemGroup> \n \
-<PropertyGroup><CodeAnalysisRuleSet>StyleCop.ruleset<\/CodeAnalysisRuleSet><\/PropertyGroup> '
+<PropertyGroup><CodeAnalysisRuleSet>AnalyzerRules.ruleset<\/CodeAnalysisRuleSet><\/PropertyGroup> '
 
 file='./AFKScape/ScriptsAssembly.csproj'
 style_cop_csproj='./AFKScape/ScriptsAssemblyStyleCop.csproj'

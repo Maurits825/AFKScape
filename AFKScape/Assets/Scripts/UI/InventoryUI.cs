@@ -49,7 +49,7 @@ public class InventoryUI : MonoBehaviour, IDropHandler
         //TODO magic num 28
         for (int i = 0; i < 28; i++)
         {
-            GameObject slotObject = Instantiate(slotPrefab) as GameObject;
+            GameObject slotObject = Instantiate(slotPrefab);
             slotObject.transform.SetParent(slotListParent, false);
 
             Slot slot = slotObject.GetComponent<Slot>();

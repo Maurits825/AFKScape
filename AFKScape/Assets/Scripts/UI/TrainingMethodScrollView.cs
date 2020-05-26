@@ -33,7 +33,7 @@ public class TrainingMethodScrollView : MonoBehaviour
         int index = 0;
         foreach (TrainingMethod trainingMethod in trainingMethodList)
         {
-            GameObject button = Instantiate(buttonPrefab) as GameObject;
+            GameObject button = Instantiate(buttonPrefab);
             buttonGameObjects.Add(button);
             button.SetActive(true);
 

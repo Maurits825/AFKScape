@@ -24,7 +24,7 @@ public class LastLootScrollView : MonoBehaviour
     {
         if (!lastLootText.ContainsKey(id))
         {
-            GameObject slotObject = Instantiate(slotPrefab) as GameObject;
+            GameObject slotObject = Instantiate(slotPrefab);
             slotObject.transform.SetParent(slotListParent, false);
             slotsObjects.Add(slotObject);
 
