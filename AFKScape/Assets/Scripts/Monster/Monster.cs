@@ -53,7 +53,7 @@ public class Monster
             }
         }
 
-        if (extraTables != null && extraTables.Count == 0)
+        if (extraTables != null && extraTables.Count != 0)
         {
             foreach (MonsterDropTable table in extraTables)
             {
