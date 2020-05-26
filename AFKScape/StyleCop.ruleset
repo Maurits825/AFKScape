@@ -17,5 +17,10 @@
 	<Rule Id="SA1512" Action="None" />
 	<Rule Id="SA1300" Action="None" />
 	<Rule Id="SA1202" Action="None" />
+	<Rule Id="SA0001" Action="None" />
+  </Rules>
+  <Rules AnalyzerId="SonarAnalyzer.CSharp" RuleNamespace="SonarAnalyzer.CSharp">
+    <Rule Id="S1104" Action="None" />
+	<Rule Id="S3903" Action="None" />
   </Rules>
 </RuleSet>

@@ -1,8 +1,10 @@
 #!/bin/bash
 
 match='\(<Project ToolsVersion.*\)'
-insert='<ItemGroup><Analyzer Include="Packages\\StyleCop.Analyzers.1.1.118\\analyzers\\dotnet\\cs\\StyleCop.Analyzers.CodeFixes.dll" \/> \n \
-<Analyzer Include="Packages\\StyleCop.Analyzers.1.1.118\\analyzers\\dotnet\\cs\\StyleCop.Analyzers.dll" \/><\/ItemGroup> \n \
+insert='<ItemGroup> \n \
+<Analyzer Include="Packages\\StyleCop.Analyzers.1.1.118\\analyzers\\dotnet\\cs\\StyleCop.Analyzers.CodeFixes.dll" \/> \n \
+<Analyzer Include="Packages\\StyleCop.Analyzers.1.1.118\\analyzers\\dotnet\\cs\\StyleCop.Analyzers.dll" \/> \n \
+<\/ItemGroup> \n \
 <PropertyGroup><CodeAnalysisRuleSet>StyleCop.ruleset<\/CodeAnalysisRuleSet><\/PropertyGroup> '
 
 file='./AFKScape/ScriptsAssembly.csproj'
