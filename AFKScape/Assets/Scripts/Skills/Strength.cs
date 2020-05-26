@@ -3,6 +3,5 @@
     public Strength()
         : base("Strength")
     {
-        //populateTrainingMethods(skillName);
     }
 }

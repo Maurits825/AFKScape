@@ -13,7 +13,6 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
     public GameObject toolTipObject;
 
     private Transform parentTransform;
-    private Rect parentRect;
     private float yMin;
     private float yMax;
     private float xMin;
@@ -36,6 +35,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
     private void Start()
     {
         canvasGroup = gameObject.GetComponent<CanvasGroup>();
+        Rect parentRect;
 
         parentTransform = transform.parent.gameObject.transform;
         parentRect = transform.parent.GetComponent<RectTransform>().rect;

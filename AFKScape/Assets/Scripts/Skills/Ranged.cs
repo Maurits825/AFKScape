@@ -3,6 +3,5 @@
     public Ranged()
         : base("Ranged")
     {
-        //populateTrainingMethods(skillName);
     }
 }

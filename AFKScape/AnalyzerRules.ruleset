@@ -24,5 +24,7 @@
 	<Rule Id="S3903" Action="None" />
 	<Rule Id="S1135" Action="Info" />
 	<Rule Id="S2933" Action="None" />
+	<Rule Id="S2386" Action="None" />
+	<Rule Id="S2223" Action="None" />
   </Rules>
 </RuleSet>

@@ -3,6 +3,5 @@
     public Attack()
         : base("Attack")
     {
-        //populateTrainingMethods(skillName);
     }
 }

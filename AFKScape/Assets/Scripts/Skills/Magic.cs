@@ -3,6 +3,5 @@
     public Magic()
         : base("Magic")
     {
-        //populateTrainingMethods(skillName);
     }
 }

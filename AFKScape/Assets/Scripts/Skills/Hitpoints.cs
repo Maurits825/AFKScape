@@ -3,6 +3,5 @@
     public Hitpoints()
         : base("Hitpoints")
     {
-        //populateTrainingMethods(skillName);
     }
 }

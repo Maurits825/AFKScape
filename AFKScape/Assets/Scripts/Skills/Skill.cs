@@ -35,7 +35,7 @@ public abstract class Skill
         return baseResourceRate + (baseResourceRate * lvlBoost * boostedLevel);
 
         //TODO -- something like this for each skill
-        //if equipedItems.handSlot == dragon pickaxe {PickaxeBoost = 1.2}
-        //if perks.twoHanded {pickAxeBoost*2}
+        //if equipedItems.handSlot == dragon pickaxe then PickaxeBoost = 1.2
+        //if perks.twoHanded then pickAxeBoost*2
     }
 }

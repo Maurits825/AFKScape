@@ -3,6 +3,5 @@
     public Defence()
         : base("Defence")
     {
-        //populateTrainingMethods(skillName);
     }
 }
