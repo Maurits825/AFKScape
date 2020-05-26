@@ -98,15 +98,15 @@ jobs:
         run: 'echo "$UNITY_LICENSE" > license.ulf'
         
       - name: Set-up Unity
-        run: sh ./Scripts/unity_set_up.sh
+        run: bash ./Scripts/unity_set_up.sh
         
       - name: Run Style-Cop
         if: always()
-        run: sh ./Scripts/run_style_cop.sh
+        run: bash ./Scripts/run_style_cop.sh
       
       - name: Run Sonar Lint
         if: always()
-        run: sh ./Scripts/run_sonar_lint.sh
+        run: bash ./Scripts/run_sonar_lint.sh
 
   buildForSomePlatforms:
     name: Build for ${{ matrix.targetPlatform }} on version ${{ matrix.unityVersion }}
