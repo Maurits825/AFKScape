@@ -1,9 +1,5 @@
-﻿using System.Collections;
+﻿using NUnit.Framework;
 using System.Collections.Generic;
-using NUnit.Framework;
-using UnityEngine;
-using UnityEngine.TestTools;
-using System.Linq;
 
 namespace Tests
 {
@@ -73,7 +69,7 @@ namespace Tests
                 }
 
                 foreach (MonsterDropTable monsterDropTable in monster.monsterDropTableHandler.monsterDropTables)
-                { 
+                {
                     baseChance = monsterDropTable.baseChance;
                     totalWeight = GetWeightSum(monsterDropTable.basicLoots);
                     Assert.AreEqual(baseChance, totalWeight);

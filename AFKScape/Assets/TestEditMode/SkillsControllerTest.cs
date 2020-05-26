@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using NUnit.Framework;
-using UnityEngine;
-using UnityEngine.TestTools;
+﻿using NUnit.Framework;
 
 namespace Tests
 {
@@ -61,7 +57,7 @@ namespace Tests
             Cooking cooking = new Cooking();
 
             Assert.AreEqual(false, skillsController.CheckRequirement(mining.trainingMethods[0]));
-            inventory.AddItem(1267,1);
+            inventory.AddItem(1267, 1);
             Assert.AreEqual(true, inventory.Contains(1267));
             Assert.AreEqual(true, skillsController.CheckRequirement(mining.trainingMethods[0]));
             Assert.AreEqual(true, skillsController.CheckRequirement(cooking.trainingMethods[0]));

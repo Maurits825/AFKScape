@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 using UnityEditor;
+using UnityEngine;
 
 [CustomEditor(typeof(ItemLookup))]
 public class ItemLookupEditor : Editor
@@ -11,7 +10,7 @@ public class ItemLookupEditor : Editor
     string status;
 
     List<(long, string, string)> itemList = new List<(long, string, string)>();
-    
+
     SerializedProperty filterType;
     SerializedProperty idList;
 
@@ -74,7 +73,7 @@ public class ItemLookupEditor : Editor
                     EditorGUILayout.BeginHorizontal();
                     EditorGUILayout.LabelField("Name: " + item.Item2, GUILayout.ExpandWidth(true), GUILayout.MinWidth(50));
                     EditorGUILayout.LabelField("Extra info: " + item.Item3, GUILayout.ExpandWidth(true), GUILayout.MinWidth(50));
-                    
+
                     if (GUILayout.Button("Copy ID", GUILayout.ExpandWidth(true), GUILayout.MinWidth(50)))
                     {
                         EditorGUIUtility.systemCopyBuffer = item.Item1.ToString();

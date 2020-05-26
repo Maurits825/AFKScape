@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
+﻿using System.Collections.Generic;
 using System.Numerics;
+using UnityEditor;
+using UnityEngine;
 
 [CustomEditor(typeof(MainController))]
 public class MainControllerEditor : Editor
@@ -156,7 +155,7 @@ public class MainControllerEditor : Editor
         if (GUILayout.Button("Level # in skill"))
         {
             Skill skill = skillsController.skillsClasses[skillName];
-            skill.xpFloat = Database.experienceTable[level-1];
+            skill.xpFloat = Database.experienceTable[level - 1];
 
             SimEvents(skill, skillName);
         }
@@ -231,19 +230,19 @@ public class MainControllerEditor : Editor
 
         return actualAmount;
     }
-	
-	public static void CreateSLNFiles()
+
+    public static void CreateSLNFiles()
     {
         Debug.Log("### QualityPrepareCommand:PrepareSonarFiles - Started...");
-		// We actually ask Unity to create the CSPROJ and SLN files.
-		bool success = EditorApplication.ExecuteMenuItem("Assets/Open C# Project");
-		Debug.Log("### QualityPrepareCommand:PrepareSonarFiles - " + (success ? "Done" : "FAILED") + ".");
+        // We actually ask Unity to create the CSPROJ and SLN files.
+        bool success = EditorApplication.ExecuteMenuItem("Assets/Open C# Project");
+        Debug.Log("### QualityPrepareCommand:PrepareSonarFiles - " + (success ? "Done" : "FAILED") + ".");
 
-		// Unsupported Version
-		Debug.Log("### QualityPrepareCommand:PrepareSonarFiles - Started V2...");
-		System.Type T = System.Type.GetType("UnityEditor.SyncVS,UnityEditor");
-		System.Reflection.MethodInfo SyncSolution = T.GetMethod("SyncSolution", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
-		SyncSolution.Invoke(null, null);
-		Debug.Log("### QualityPrepareCommand:PrepareSonarFiles - Ended V2...");
+        // Unsupported Version
+        Debug.Log("### QualityPrepareCommand:PrepareSonarFiles - Started V2...");
+        System.Type T = System.Type.GetType("UnityEditor.SyncVS,UnityEditor");
+        System.Reflection.MethodInfo SyncSolution = T.GetMethod("SyncSolution", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+        SyncSolution.Invoke(null, null);
+        Debug.Log("### QualityPrepareCommand:PrepareSonarFiles - Ended V2...");
     }
 }
