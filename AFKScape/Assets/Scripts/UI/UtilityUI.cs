@@ -1,7 +1,7 @@
 ﻿using System.Numerics;
 using UnityEngine;
 
-public class UtilityUI
+public static class UtilityUI
 {
     public static (string, Color) FormatNumber(BigInteger num)
     {

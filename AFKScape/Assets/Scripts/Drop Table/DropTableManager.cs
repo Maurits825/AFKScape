@@ -2,7 +2,7 @@
 using System.Numerics;
 
 //TODO will be used later for specific drop table mechanics, (cerberus and zulrah)
-public class DropTableManager
+public static class DropTableManager
 {
     public static void RollResources(Dictionary<long, BigInteger> dropTableDict, TrainingMethod trainingMethod, int boostedLvl)
     {

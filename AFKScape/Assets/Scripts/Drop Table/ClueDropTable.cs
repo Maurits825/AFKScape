@@ -6,7 +6,7 @@ using UnityEngine;
 [Serializable]
 public class ClueDropTable : DropTable
 {
-    public static readonly List<(int, int[])> ClueChances = new List<(int, int[])>
+    public static List<(int, int[])> ClueChances = new List<(int, int[])>
         {
             (2677, new int[] { 4, 10 }),
             (2801, new int[] { 3, 10 }),

@@ -16,7 +16,7 @@ public abstract class Skill
 
     public List<TrainingMethod> trainingMethods = new List<TrainingMethod>();
 
-    public Skill(string name)
+    protected Skill(string name)
     {
         skillName = name;
         xpNextLvl = Database.experienceTable[1]; //TODO could hardcode 83 here if loading sync issues

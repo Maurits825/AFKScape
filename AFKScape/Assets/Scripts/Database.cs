@@ -46,6 +46,7 @@ public static class Database
 
     public static void LoadQuests()
     {
+        //TODO implement
     }
 
     public static void LoadBosses()
