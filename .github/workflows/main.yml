@@ -98,7 +98,7 @@ jobs:
         run: 'echo "$UNITY_LICENSE" > license.ulf'
         
       - name: Set-up Unity
-        run: sh ./Scripts/unity-set-up.sh
+        run: sh ./Scripts/unity_set_up.sh
         
       - name: Run Style-Cop
         if: always()
