@@ -57,7 +57,7 @@ jobs:
       # Upload cov report
       - name: Upload coverage report
         if: always()
-        run: bash <(curl -s https://codecov.io/bash) -v -s /github/workspace/testReports
+        run: bash <(curl -s https://codecov.io/bash) -v -f testReports/editmode/AFKScape-opencov/EditMode/TestCoverageResults_0000.xml
         
       # Upload test results
       - name: Upload Test Results
