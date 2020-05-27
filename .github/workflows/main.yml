@@ -40,7 +40,7 @@ jobs:
           unityVersion: ${{ matrix.unityVersion }}
           testMode: ${{ matrix.testMode }}
           artifactsPath: testReports/${{ matrix.testMode }}
-          customParameters: -enableCodeCoverage -coverageResultsPath ${{ GITHUB_WORKSPACE }}/testReports/${{ matrix.testMode }}/ -coverageOptions enableCyclomaticComplexity\;generateHtmlReport\;generateBadgeReport\;assemblyFilters:+ScriptsAssembly
+          customParameters: -enableCodeCoverage -coverageResultsPath ${{ env.GITHUB_WORKSPACE }}/testReports/${{ matrix.testMode }}/ -coverageOptions enableCyclomaticComplexity\;generateHtmlReport\;generateBadgeReport\;assemblyFilters:+ScriptsAssembly
       
       # Install dotnet
       - name: Installing dotnet
