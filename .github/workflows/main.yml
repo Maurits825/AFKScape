@@ -55,7 +55,7 @@ jobs:
         run: sudo dotnet ./Tools/ExtentReports/ExtentReportsDotNetCLI.dll -i=testReports/${{ matrix.testMode }}/${{ matrix.testMode }}-results.xml -o testReports/${{ matrix.testMode }}/
   
       # Upload cov report
-      - name: Upload coverage report
+      - name: Upload Coverage Report
         if: always()
         run: bash <(curl -s https://codecov.io/bash) -v -f "*.xml" -s ${{ matrix.projectPath }}/${{ matrix.testMode }}-Coverage
         
