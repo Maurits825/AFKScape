@@ -41,7 +41,7 @@ jobs:
           unityVersion: ${{ matrix.unityVersion }}
           testMode: ${{ matrix.testMode }}
           artifactsPath: testReports/${{ matrix.testMode }}
-          customParameters: -enableCodeCoverage -coverageResultsPath /github/workspace/testReports/${{ matrix.testMode }}/Coverage/ -coverageOptions enableCyclomaticComplexity;assemblyFilters:+ScriptsAssembly
+          customParameters: -enableCodeCoverage -coverageResultsPath ${{ matrix.testMode }}-Coverage -coverageOptions enableCyclomaticComplexity;assemblyFilters:+ScriptsAssembly
       
       # Install dotnet
       - name: Installing dotnet
@@ -50,14 +50,14 @@ jobs:
         with:
           dotnet-version: '2.1.202'
       # Do the report magic
-      - name: Generate .html report
+      - name: Generate UT html report
         if: always()
         run: sudo dotnet ./Tools/ExtentReports/ExtentReportsDotNetCLI.dll -i=testReports/${{ matrix.testMode }}/${{ matrix.testMode }}-results.xml -o testReports/${{ matrix.testMode }}/
   
       # Upload cov report
       - name: Upload coverage report
         if: always()
-        run: bash <(curl -s https://codecov.io/bash) -v -f "*.xml" -s testReports/${{ matrix.testMode }}/Coverage/
+        run: bash <(curl -s https://codecov.io/bash) -v -f "*.xml" -s ${{ matrix.projectPath }}/${{ matrix.testMode }}-Coverage
         
       # Upload test results
       - name: Upload Test Results
