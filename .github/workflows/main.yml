@@ -41,7 +41,7 @@ jobs:
           unityVersion: ${{ matrix.unityVersion }}
           testMode: ${{ matrix.testMode }}
           artifactsPath: testReports/${{ matrix.testMode }}
-          customParameters: -enableCodeCoverage -coverageResultsPath /github/workspace/testReports/${{ matrix.testMode }}/ -coverageOptions enableCyclomaticComplexity;generateHtmlReport;generateBadgeReport;assemblyFilters:+ScriptsAssembly
+          customParameters: -enableCodeCoverage -coverageResultsPath /github/workspace/testReports/${{ matrix.testMode }}/Coverage/ -coverageOptions enableCyclomaticComplexity;assemblyFilters:+ScriptsAssembly
       
       # Install dotnet
       - name: Installing dotnet
@@ -57,7 +57,7 @@ jobs:
       # Upload cov report
       - name: Upload coverage report
         if: always()
-        run: bash <(curl -s https://codecov.io/bash) -v -f testReports/editmode/AFKScape-opencov/EditMode/TestCoverageResults_0000.xml
+        run: bash <(curl -s https://codecov.io/bash) -v -s testReports/${{ matrix.testMode }}/Coverage/
         
       # Upload test results
       - name: Upload Test Results
