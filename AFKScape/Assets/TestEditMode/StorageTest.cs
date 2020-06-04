@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 
-
 namespace Tests
 {
     public class StorageTest
@@ -8,33 +7,71 @@ namespace Tests
         private Storage storage;
         private long heronId = 13320;
         private long dragonMedId = 1149;
+        private int totalSlots = 5;
 
         [SetUp]
         public void Setup()
         {
             storage = new Storage();
-            storage.totalSlots = 10;
-            storage.AddItem(heronId, 1);
-            storage.AddItem(heronId, 1);
-            storage.AddItem(dragonMedId, 8);
+            storage.totalSlots = totalSlots;
         }
 
         [Test]
         public void AddItemTest()
         {
-            Assert.AreEqual(true, storage.Contains(heronId));
-            Assert.AreEqual(true, storage.Contains(dragonMedId));
+            storage.AddItem(heronId, 1);
+            storage.AddItem(dragonMedId, 8);
+            Assert.IsTrue(storage.Contains(heronId));
+            Assert.IsTrue(storage.Contains(dragonMedId));
         }
 
         [Test]
         public void RemoveItemTest()
         {
+            storage.AddItem(heronId, 1);
+            storage.AddItem(heronId, 1);
+            storage.AddItem(dragonMedId, 8);
+
             storage.RemoveItem(heronId, 1);
-            Assert.AreEqual(true, storage.Contains(heronId));
+            Assert.IsTrue(storage.Contains(heronId));
+
             storage.RemoveItem(heronId, 1);
-            Assert.AreEqual(false, storage.Contains(heronId));
+            Assert.IsFalse(storage.Contains(heronId));
+
             storage.RemoveAll();
-            Assert.AreEqual(false, storage.Contains(dragonMedId));
+            Assert.IsFalse(storage.Contains(dragonMedId));
+        }
+
+        [Test]
+        public void FullStorageTest()
+        {
+            bool itemAdded;
+            for (int i = 0; i < 5; i++)
+            {
+                itemAdded = storage.AddItem(i, 1);
+                Assert.IsTrue(itemAdded);
+            }
+
+            itemAdded = storage.AddItem(dragonMedId, 1);
+            Assert.IsFalse(itemAdded);
+            Assert.IsFalse(storage.Contains(dragonMedId));
+        }
+
+        [Test]
+        public void RemoveMoreTest()
+        {
+            storage.AddItem(dragonMedId, 2);
+            bool itemRemoved = storage.RemoveItem(dragonMedId, 5);
+            Assert.IsTrue(itemRemoved);
+            Assert.IsFalse(storage.Contains(dragonMedId));
+        }
+
+        [Test]
+        public void RemoveNonExistingTest()
+        {
+            storage.AddItem(dragonMedId, 2);
+            bool itemRemoved = storage.RemoveItem(heronId, 5);
+            Assert.IsFalse(itemRemoved);
         }
     }
 }
