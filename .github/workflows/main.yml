@@ -41,7 +41,7 @@ jobs:
           unityVersion: ${{ matrix.unityVersion }}
           testMode: ${{ matrix.testMode }}
           artifactsPath: testReports/${{ matrix.testMode }}
-          customParameters: -enableCodeCoverage -coverageResultsPath ${{ matrix.testMode }}-Coverage -coverageOptions enableCyclomaticComplexity;assemblyFilters:+ScriptsAssembly
+          customParameters: -enableCodeCoverage -coverageResultsPath ${{ matrix.testMode }}-Coverage -coverageOptions enableCyclomaticComplexity;assemblyFilters:+ScriptsAssembly;pathFilters:-*Scripts/UI*,-*Scripts/Tools*
       
       # Install dotnet
       - name: Installing dotnet

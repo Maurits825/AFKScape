@@ -7,7 +7,7 @@ namespace Tests
     public class DropTableTest
     {
         [Test]
-        public void TestGeneralDropTable()
+        public void GeneralDropTableTest()
         {
             GeneralDropTable generalDropTable = new GeneralDropTable();
             long itemId = 315;
@@ -26,7 +26,7 @@ namespace Tests
         }
 
         [Test]
-        public void TestClueDropTable()
+        public void ClueDropTableTest()
         {
             ClueDropTable clueDropTable = new ClueDropTable();
 
@@ -54,7 +54,7 @@ namespace Tests
         }
 
         [Test]
-        public void TestPetDropTable()
+        public void PetDropTableTest()
         {
             long heronId = 13320;
             PetDropTable petDropTable = new PetDropTable();

@@ -15,7 +15,7 @@ namespace Tests
         }
 
         [Test]
-        public void TestItemLoad()
+        public void ItemLoadTest()
         {
             Database.items.Clear();
             Database.LoadItems();
@@ -24,9 +24,9 @@ namespace Tests
         }
 
         [Test]
-        public void TestItemListParsing()
+        public void ItemListParsingTest()
         {
-            TextAsset JSONFile = Resources.Load<TextAsset>(string.Concat("JSON/Test/", "item"));
+            TextAsset JSONFile = Resources.Load<TextAsset>("JSON/Items");
             itemList = JsonUtility.FromJson<ItemList>(JSONFile.text);
             Assert.NotNull(itemList.itemList[0].name);
         }

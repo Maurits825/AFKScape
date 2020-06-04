@@ -87,7 +87,7 @@ public class InventoryUI : MonoBehaviour, IDropHandler
         }
     }
 
-    public void InventoryItemRemoved(long id, BigInteger amount)
+    private void InventoryItemRemoved(long id, BigInteger amount)
     {
         if (inventoryText.ContainsKey(id))
         {

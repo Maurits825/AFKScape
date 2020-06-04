@@ -30,7 +30,7 @@ public class TrainingMethod
         requirements = new Requirements();
     }
 
-    public TrainingMethod(string methodName, int resourceRate, Requirements req)
+    public TrainingMethod(string methodName, float resourceRate, Requirements req)
     {
         name = methodName;
         baseResourceRate = resourceRate;
@@ -65,7 +65,7 @@ public class Requirements
     [ItemId]
     public List<long> itemIds;
     [ItemId]
-    public List<long> generalSkillItems; //Require at least of these items to start skill
+    public List<long> generalSkillItems; //Require at least one of these items to start skill
 
     public Requirements()
     {
