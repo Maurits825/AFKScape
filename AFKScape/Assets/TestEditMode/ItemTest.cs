@@ -26,7 +26,7 @@ namespace Tests
         [Test]
         public void ItemListParsingTest()
         {
-            TextAsset JSONFile = Resources.Load<TextAsset>(string.Concat("JSON/Test/", "item"));
+            TextAsset JSONFile = Resources.Load<TextAsset>("JSON/Items");
             itemList = JsonUtility.FromJson<ItemList>(JSONFile.text);
             Assert.NotNull(itemList.itemList[0].name);
         }
