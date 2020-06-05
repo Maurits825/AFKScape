@@ -2,7 +2,7 @@
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerClickHandler
 {
     public Text amountText;
     public Image iconImage;
@@ -11,6 +11,8 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
 
     public Text toolTipText;
     public GameObject toolTipObject;
+
+    public long id;
 
     private Transform parentTransform;
     private float yMin;
@@ -31,6 +33,15 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
     private Vector2 mouseOffset = Vector2.zero;
 
     private Vector2 initPos;
+
+    public enum State
+    {
+        Bank,
+        Inventory,
+        Equipped,
+    }
+
+    private State state;
 
     private void Start()
     {
@@ -73,6 +84,11 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
         toolTipText.text = itemName;
     }
 
+    public void SetId(long val)
+    {
+        id = val;
+    }
+
     public void SetAlpha(float value)
     {
         if (canvasGroup == null)
@@ -102,6 +118,11 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
             canvasGroup.alpha = 0F;
             canvasGroup.blocksRaycasts = false;
         }
+    }
+
+    public void SetState(State newState)
+    {
+        state = newState;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -151,5 +172,11 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
 
             LayoutRebuilder.MarkLayoutForRebuild(parentTransform.GetComponent<RectTransform>());
         }
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        EventManager.Instance.SlotClicked(state, id);
+        Debug.Log("Slot clicked!");
     }
 }

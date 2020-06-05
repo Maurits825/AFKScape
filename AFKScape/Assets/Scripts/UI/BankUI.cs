@@ -7,6 +7,7 @@ public class BankUI : MonoBehaviour
 {
     public GameObject slotPrefab;
     public Transform slotListParent;
+    public Toggle bankButton;
 
     private Dictionary<long, Slot> slots = new Dictionary<long, Slot>();
     private Dictionary<long, Text> bankText = new Dictionary<long, Text>();
@@ -16,6 +17,7 @@ public class BankUI : MonoBehaviour
     {
         EventManager.Instance.OnBankItemAdded += BankItemAdded;
         EventManager.Instance.OnBankItemRemoved += BankItemRemoved;
+        bankButton.onValueChanged.AddListener(delegate { BankToggleValueChanged(bankButton); });
         gameObject.SetActive(false);
     }
 
@@ -31,6 +33,8 @@ public class BankUI : MonoBehaviour
 
                 Slot slot = slotObject.GetComponent<Slot>();
                 slot.SetItemName(Database.items[id].name);
+                slot.SetId(id);
+                slot.SetState(Slot.State.Bank);
                 slots.Add(id, slot);
 
                 bankText.Add(id, slot.amountText);
@@ -54,5 +58,10 @@ public class BankUI : MonoBehaviour
                 bankImage[id].sprite = null; //TODO
             }
         }
+    }
+    
+    private void BankToggleValueChanged(Toggle bankToggle)
+    {
+        EventManager.Instance.BankActiveChanged(bankToggle.isOn);
     }
 }

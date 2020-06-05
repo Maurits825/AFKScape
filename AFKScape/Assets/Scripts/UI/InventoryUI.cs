@@ -70,6 +70,8 @@ public class InventoryUI : MonoBehaviour, IDropHandler
             {
                 Slot slot = slots[nextAvailableSlot];
                 slot.SetItemName(Database.items[id].name);
+                slot.SetId(id);
+                slot.SetState(Slot.State.Inventory);
                 slot.SetSlotActive(true);
 
                 inventoryText.Add(id, slot.amountText);

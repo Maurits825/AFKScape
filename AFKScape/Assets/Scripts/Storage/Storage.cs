@@ -105,7 +105,6 @@ public class Storage
         }
     }
 
-    //TODO dont really need two events?
     public virtual void RaiseItemAddedEvent(long id, BigInteger amount, BigInteger amounDiff)
     {
     }

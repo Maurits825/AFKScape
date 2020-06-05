@@ -276,7 +276,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2068937638}
   m_HandleRect: {fileID: 2068937637}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -421,7 +421,7 @@ GameObject:
   - component: {fileID: 87427341}
   - component: {fileID: 87427343}
   m_Layer: 5
-  m_Name: Bankbutton
+  m_Name: BankButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5869,7 +5869,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 535688372}
   m_HandleRect: {fileID: 535688371}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -7344,7 +7344,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1371932630}
   m_HandleRect: {fileID: 1371932629}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -8302,7 +8302,6 @@ MonoBehaviour:
   progressBar: {fileID: 316829854}
   xpDropObj: {fileID: 2000304429}
   animationObj: {fileID: 208682989}
-  slotTest: {fileID: 0}
 --- !u!1001 &1150022002
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12140,6 +12139,7 @@ MonoBehaviour:
   slotPrefab: {fileID: 491972891584927928, guid: 39063523f3d1a2540b3790f112cef81e,
     type: 3}
   slotListParent: {fileID: 1600241063}
+  bankButton: {fileID: 87427343}
 --- !u!1001 &1749260586
 PrefabInstance:
   m_ObjectHideFlags: 0

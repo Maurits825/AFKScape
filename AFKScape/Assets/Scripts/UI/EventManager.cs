@@ -107,6 +107,28 @@ public class EventManager
         OnBankItemRemoved?.Invoke(id, amount, amounDiff);
     }
 
+    public event Action<bool> OnBankActiveChanged;
+
+    public void BankActiveChanged(bool isActive)
+    {
+        OnBankActiveChanged?.Invoke(isActive);
+    }
+
+    public event Action<int> OnBankAmountChanged;
+
+    public void BankAmountChanged(int amount)
+    {
+        OnBankAmountChanged?.Invoke(amount);
+    }
+
+    //---- Slots ----
+    public event Action<Slot.State, long> OnSlotClicked;
+
+    public void SlotClicked(Slot.State state, long id)
+    {
+        OnSlotClicked?.Invoke(state, id);
+    }
+
     //---- Tabs ----
     public event Action<int> OnMainTabClicked;
 

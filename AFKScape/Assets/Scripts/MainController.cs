@@ -23,6 +23,7 @@ public class MainController : MonoBehaviour
     public SkillsController skillsController;
     public BossesController bossesController;
 
+    public ItemManager itemManager;
     public Inventory inventory;
     public Bank bank;
 
@@ -42,6 +43,7 @@ public class MainController : MonoBehaviour
         //call init on all classes
         skillsController.Initialize(inventory, bank);
         bossesController.Initialize(inventory, bank);
+        itemManager.Initialize(inventory, bank);
 
         //default tab is skills
         gameState = States.Skills;
@@ -88,6 +90,7 @@ public class MainController : MonoBehaviour
         skillsController = new SkillsController();
         bossesController = new BossesController();
 
+        itemManager = new ItemManager();
         inventory = new Inventory();
         bank = new Bank();
     }
