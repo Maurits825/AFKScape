@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using UnityEngine;
 
@@ -120,6 +121,8 @@ public class SkillsController
         }
 
         bank.AddMultipleItems(dropTableDict);
+        EventManager.Instance.UpdateLastLoot(dropTableDict);
+        ClearDropTable(dropTableDict);
     }
 
     public static int GetLevel(int xp)
@@ -255,5 +258,13 @@ public class SkillsController
     private void OnTabClicked(int tabIndex)
     {
         isTrainingMethodSelected = false;
+    }
+
+    private void ClearDropTable(Dictionary<long, BigInteger> dropTable)
+    {
+        foreach (long id in dropTable.Keys.ToList())
+        {
+            dropTable[id] = 0;
+        }
     }
 }

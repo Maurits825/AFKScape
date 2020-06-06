@@ -99,7 +99,6 @@ public class InventoryUI : MonoBehaviour, IDropHandler
                 Slot slot = slots[index];
                 slot.SetSlotActive(false);
 
-                //inventoryImage[id].sprite = null; //TODO
                 inventoryText.Remove(id);
                 inventoryImage.Remove(id);
 

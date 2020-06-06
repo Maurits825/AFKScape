@@ -38,7 +38,7 @@ public class Storage
 
             if (addedItem)
             {
-                RaiseItemAddedEvent(id, items[id], amount);
+                RaiseItemAddedEvent(id, items[id]);
             }
         }
 
@@ -50,7 +50,6 @@ public class Storage
         foreach (long id in items.Keys.ToList())
         {
             AddItem(id, items[id]);
-            items[id] = 0;
         }
     }
 
@@ -71,7 +70,7 @@ public class Storage
                 items[id] -= amount;
             }
 
-            RaiseItemRemovedEvent(id, items[id], amountRemoved);
+            RaiseItemRemovedEvent(id, items[id]);
 
             if (items[id] == 0)
             {
@@ -99,11 +98,11 @@ public class Storage
         }
     }
 
-    public virtual void RaiseItemAddedEvent(long id, BigInteger amount, BigInteger amounDiff)
+    public virtual void RaiseItemAddedEvent(long id, BigInteger amount)
     {
     }
 
-    public virtual void RaiseItemRemovedEvent(long id, BigInteger amount, BigInteger amounDiff)
+    public virtual void RaiseItemRemovedEvent(long id, BigInteger amount)
     {
     }
 }

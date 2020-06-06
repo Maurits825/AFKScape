@@ -93,18 +93,18 @@ public class EventManager
     }
 
     //---- Bank ----
-    public event Action<long, BigInteger, BigInteger> OnBankItemAdded;
+    public event Action<long, BigInteger> OnBankItemAdded;
 
-    public void BankItemAdded(long id, BigInteger amount, BigInteger amounDiff)
+    public void BankItemAdded(long id, BigInteger amount)
     {
-        OnBankItemAdded?.Invoke(id, amount, amounDiff);
+        OnBankItemAdded?.Invoke(id, amount);
     }
 
-    public event Action<long, BigInteger, BigInteger> OnBankItemRemoved;
+    public event Action<long, BigInteger> OnBankItemRemoved;
 
-    public void BankItemRemoved(long id, BigInteger amount, BigInteger amounDiff)
+    public void BankItemRemoved(long id, BigInteger amount)
     {
-        OnBankItemRemoved?.Invoke(id, amount, amounDiff);
+        OnBankItemRemoved?.Invoke(id, amount);
     }
 
     public event Action<bool> OnBankActiveChanged;
@@ -119,6 +119,14 @@ public class EventManager
     public void BankAmountChanged(int amount)
     {
         OnBankAmountChanged?.Invoke(amount);
+    }
+
+    //---- Last loot ----
+    public event Action<Dictionary<long, BigInteger>> OnUpdateLastLoot;
+
+    public void UpdateLastLoot(Dictionary<long, BigInteger> items)
+    {
+        OnUpdateLastLoot?.Invoke(items);
     }
 
     //---- Slots ----

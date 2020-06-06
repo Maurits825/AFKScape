@@ -12,14 +12,14 @@ public class Bank : Storage
         EventManager.Instance.OnBankAmountChanged += SetAmount;
     }
 
-    public override void RaiseItemAddedEvent(long id, BigInteger amount, BigInteger amounDiff)
+    public override void RaiseItemAddedEvent(long id, BigInteger amount)
     {
-        EventManager.Instance.BankItemAdded(id, amount, amounDiff);
+        EventManager.Instance.BankItemAdded(id, amount);
     }
 
-    public override void RaiseItemRemovedEvent(long id, BigInteger amount, BigInteger amounDiff)
+    public override void RaiseItemRemovedEvent(long id, BigInteger amount)
     {
-        EventManager.Instance.BankItemRemoved(id, amount, amounDiff);
+        EventManager.Instance.BankItemRemoved(id, amount);
     }
 
     private void SetActive(bool state)

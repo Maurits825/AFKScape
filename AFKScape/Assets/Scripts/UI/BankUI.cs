@@ -21,7 +21,7 @@ public class BankUI : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void BankItemAdded(long id, BigInteger amount, BigInteger amoutDiff)
+    public void BankItemAdded(long id, BigInteger amount)
     {
         if (amount > 0)
         {
@@ -43,10 +43,11 @@ public class BankUI : MonoBehaviour
             }
 
             (bankText[id].text, bankText[id].color) = UtilityUI.FormatNumber(amount);
+            slots[id].SetAlpha(1.0F);
         }
     }
 
-    public void BankItemRemoved(long id, BigInteger amount, BigInteger amoutDiff)
+    public void BankItemRemoved(long id, BigInteger amount)
     {
         if (bankText.ContainsKey(id))
         {
@@ -55,7 +56,6 @@ public class BankUI : MonoBehaviour
             if (amount == 0)
             {
                 slots[id].SetAlpha(0.6F);
-                bankImage[id].sprite = null; //TODO
             }
         }
     }
