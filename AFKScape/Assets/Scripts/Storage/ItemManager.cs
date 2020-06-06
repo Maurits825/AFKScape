@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 
 public class ItemManager
@@ -40,13 +41,13 @@ public class ItemManager
 
     private void WithdrawToInventory(long id)
     {
-        bank.RemoveItem(id, bank.amount);
-        inventory.AddItem(id, bank.amount);
+        BigInteger amountRemoved = bank.RemoveItem(id, bank.amount);
+        inventory.AddItem(id, amountRemoved);
     }
 
     private void DepositToBank(long id)
     {
-        inventory.RemoveItem(id, bank.amount);
-        bank.AddItem(id, bank.amount);
+        BigInteger amountRemoved = inventory.RemoveItem(id, bank.amount);
+        bank.AddItem(id, amountRemoved);
     }
 }

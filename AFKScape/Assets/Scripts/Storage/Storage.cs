@@ -16,27 +16,30 @@ public class Storage
 
     public bool AddItem(long id, BigInteger amount)
     {
-        bool addedItem;
+        bool addedItem = false;
 
-        if (items.ContainsKey(id))
+        if (amount > 0)
         {
-            items[id] += amount;
-            addedItem = true;
-        }
-        else if (usedSlots < totalSlots)
-        {
-            items.Add(id, amount);
-            usedSlots++;
-            addedItem = true;
-        }
-        else
-        {
-            addedItem = false;
-        }
+            if (items.ContainsKey(id))
+            {
+                items[id] += amount;
+                addedItem = true;
+            }
+            else if (usedSlots < totalSlots)
+            {
+                items.Add(id, amount);
+                usedSlots++;
+                addedItem = true;
+            }
+            else
+            {
+                addedItem = false;
+            }
 
-        if (addedItem)
-        {
-            RaiseItemAddedEvent(id, items[id], amount);
+            if (addedItem)
+            {
+                RaiseItemAddedEvent(id, items[id], amount);
+            }
         }
 
         return addedItem;
@@ -46,33 +49,28 @@ public class Storage
     {
         foreach (long id in items.Keys.ToList())
         {
-            if (items[id] > 0)
-            {
-                AddItem(id, items[id]);
-                items[id] = 0;
-            }
+            AddItem(id, items[id]);
+            items[id] = 0;
         }
     }
 
-    public bool RemoveItem(long id, BigInteger amount)
+    public BigInteger RemoveItem(long id, BigInteger amount)
     {
-        bool removedItem;
+        BigInteger amountRemoved = 0;
 
         if (items.ContainsKey(id))
         {
-            BigInteger amountRemoved;
             if (amount > items[id])
             {
-                items[id] = 0;
                 amountRemoved = items[id];
+                items[id] = 0;
             }
             else
             {
-                items[id] -= amount;
                 amountRemoved = amount;
+                items[id] -= amount;
             }
 
-            removedItem = true;
             RaiseItemRemovedEvent(id, items[id], amountRemoved);
 
             if (items[id] == 0)
@@ -81,12 +79,8 @@ public class Storage
                 usedSlots--;
             }
         }
-        else
-        {
-            removedItem = false;
-        }
 
-        return removedItem;
+        return amountRemoved;
     }
 
     public void RemoveAll()

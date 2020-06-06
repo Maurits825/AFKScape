@@ -177,6 +177,5 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
     public void OnPointerClick(PointerEventData eventData)
     {
         EventManager.Instance.SlotClicked(state, id);
-        Debug.Log("Slot clicked!");
     }
 }

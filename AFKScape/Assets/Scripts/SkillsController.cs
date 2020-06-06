@@ -119,7 +119,7 @@ public class SkillsController
             }
         }
 
-        bank.AddMultipleItems(dropTableDict); //TODO this will add to bank later
+        bank.AddMultipleItems(dropTableDict);
     }
 
     public static int GetLevel(int xp)
