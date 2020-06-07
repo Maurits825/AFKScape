@@ -23,7 +23,16 @@ namespace Tests
             storage.AddItem(heronId, 1);
             storage.AddItem(dragonMedId, 8);
             Assert.IsTrue(storage.Contains(heronId));
-            Assert.IsTrue(storage.Contains(dragonMedId));            
+            Assert.IsTrue(storage.Contains(dragonMedId));
+        }
+
+        [Test]
+        public void GetAmountTest()
+        {
+            storage.AddItem(dragonMedId, 8);
+
+            Assert.AreEqual((BigInteger)8, storage.GetAmount(dragonMedId));
+            Assert.AreEqual((BigInteger)0, storage.GetAmount(heronId));
         }
 
         [Test]

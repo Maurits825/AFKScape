@@ -4,7 +4,7 @@ using System.Numerics;
 
 public class Storage
 {
-    public Dictionary<long, BigInteger> items = new Dictionary<long, BigInteger>();
+    private Dictionary<long, BigInteger> items = new Dictionary<long, BigInteger>();
 
     private int usedSlots = 0;
     public int totalSlots;
@@ -12,6 +12,18 @@ public class Storage
     public bool Contains(long id)
     {
         return items.ContainsKey(id);
+    }
+
+    public BigInteger GetAmount(long id)
+    {
+        if (items.ContainsKey(id))
+        {
+            return items[id];
+        }
+        else
+        {
+            return 0;
+        }
     }
 
     public bool AddItem(long id, BigInteger amount)

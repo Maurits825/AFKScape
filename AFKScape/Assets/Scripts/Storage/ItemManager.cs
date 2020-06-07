@@ -41,13 +41,33 @@ public class ItemManager
 
     private void WithdrawToInventory(long id)
     {
-        BigInteger amountRemoved = bank.RemoveItem(id, bank.amount);
+        BigInteger amount;
+        if (bank.amount == -1)
+        {
+            amount = bank.GetAmount(id);
+        }
+        else
+        {
+            amount = bank.amount;
+        }
+
+        BigInteger amountRemoved = bank.RemoveItem(id, amount);
         inventory.AddItem(id, amountRemoved);
     }
 
     private void DepositToBank(long id)
     {
-        BigInteger amountRemoved = inventory.RemoveItem(id, bank.amount);
+        BigInteger amount;
+        if (bank.amount == -1)
+        {
+            amount = inventory.GetAmount(id);
+        }
+        else
+        {
+            amount = bank.amount;
+        }
+
+        BigInteger amountRemoved = inventory.RemoveItem(id, amount);
         bank.AddItem(id, amountRemoved);
     }
 }

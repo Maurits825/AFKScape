@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -38,6 +39,35 @@ namespace Tests
             EventManager.Instance.SlotClicked(Slot.State.Inventory, dragonClaws);
             Assert.IsFalse(inventory.Contains(dragonClaws));
             Assert.IsTrue(bank.Contains(dragonClaws));
+        }
+
+        [Test]
+        public void SlotClickedInBankTest()
+        {
+            bank.isActive = true;
+            bank.AddItem(dragonClaws, 1);            
+            EventManager.Instance.SlotClicked(Slot.State.Bank, dragonClaws);
+            Assert.IsTrue(inventory.Contains(dragonClaws));
+            Assert.IsFalse(bank.Contains(dragonClaws));
+        }
+
+        [Test]
+        public void BankAmountTest()
+        {
+            bank.isActive = true;
+            BigInteger amount = 55;
+            bank.AddItem(dragonClaws, amount);
+            bank.amount = -1;
+
+            EventManager.Instance.SlotClicked(Slot.State.Bank, dragonClaws);
+            Assert.IsTrue(inventory.Contains(dragonClaws));
+            Assert.AreEqual(amount, inventory.GetAmount(dragonClaws));
+            Assert.IsFalse(bank.Contains(dragonClaws));
+
+            EventManager.Instance.SlotClicked(Slot.State.Inventory, dragonClaws);
+            Assert.IsTrue(bank.Contains(dragonClaws));
+            Assert.AreEqual(amount, bank.GetAmount(dragonClaws));
+            Assert.IsFalse(inventory.Contains(dragonClaws));
         }
     }
 }
