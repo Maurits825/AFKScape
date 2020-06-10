@@ -51,11 +51,15 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
         parentTransform = transform.parent.gameObject.transform;
         parentRect = transform.parent.GetComponent<RectTransform>().rect;
         GridLayoutGroup gridLayoutGroup = GetComponentInParent<GridLayoutGroup>();
-        xMin = parentTransform.position.x - (parentRect.width / 2) + (gridLayoutGroup.cellSize.x / 2);
-        xMax = parentTransform.position.x + (parentRect.width / 2) - (gridLayoutGroup.cellSize.x / 2);
-        yMin = parentTransform.position.y - (parentRect.height / 2) + (gridLayoutGroup.cellSize.y / 2);
-        yMax = parentTransform.position.y + (parentRect.height / 2) - (gridLayoutGroup.cellSize.y / 2);
 
+        if (gridLayoutGroup != null)
+        {
+            xMin = parentTransform.position.x - (parentRect.width / 2) + (gridLayoutGroup.cellSize.x / 2);
+            xMax = parentTransform.position.x + (parentRect.width / 2) - (gridLayoutGroup.cellSize.x / 2);
+            yMin = parentTransform.position.y - (parentRect.height / 2) + (gridLayoutGroup.cellSize.y / 2);
+            yMax = parentTransform.position.y + (parentRect.height / 2) - (gridLayoutGroup.cellSize.y / 2);
+        }
+ 
         toolTipObject.SetActive(false);
         toolTipTransform = toolTipObject.transform;
         isOver = false;
