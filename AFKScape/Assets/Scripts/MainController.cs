@@ -26,6 +26,7 @@ public class MainController : MonoBehaviour
     public ItemManager itemManager;
     public Inventory inventory;
     public Bank bank;
+    public Equipment equipment;
 
     private void Awake()
     {
@@ -43,7 +44,7 @@ public class MainController : MonoBehaviour
         //call init on all classes
         skillsController.Initialize(inventory, bank);
         bossesController.Initialize(inventory, bank);
-        itemManager.Initialize(inventory, bank);
+        itemManager.Initialize(inventory, bank, equipment);
 
         //default tab is skills
         gameState = States.Skills;

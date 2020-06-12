@@ -121,6 +121,14 @@ public class EventManager
         OnBankAmountChanged?.Invoke(amount);
     }
 
+    //---- Equiped items ----
+    public event Action<long, Equipment.EquipmentSlot> OnItemEquipped;
+
+    public void ItemEquipped(long id, Equipment.EquipmentSlot slot)
+    {
+        OnItemEquipped?.Invoke(id, slot);
+    }
+
     //---- Last loot ----
     public event Action<Dictionary<long, BigInteger>> OnUpdateLastLoot;
 

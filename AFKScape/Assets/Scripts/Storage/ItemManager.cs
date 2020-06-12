@@ -7,11 +7,13 @@ public class ItemManager
 {
     private Inventory inventory;
     private Bank bank;
+    private Equipment equipment;
 
-    public void Initialize(Inventory inventory, Bank bank)
+    public void Initialize(Inventory inventory, Bank bank, Equipment equipment)
     {
         this.inventory = inventory;
         this.bank = bank;
+        this.equipment = equipment;
 
         EventManager.Instance.OnSlotClicked += HandleSlotClicked;
     }
@@ -28,6 +30,10 @@ public class ItemManager
                 if (bank.isActive)
                 {
                     DepositToBank(id);
+                }
+                else
+                {
+                    EquipItem(id);
                 }
                 break;
 
@@ -69,5 +75,10 @@ public class ItemManager
 
         BigInteger amountRemoved = inventory.RemoveItem(id, amount);
         bank.AddItem(id, amountRemoved);
+    }
+
+    private void EquipItem(long id)
+    {
+        //equipment.EquipItem(id, Database.items[id].equipment.slot);
     }
 }

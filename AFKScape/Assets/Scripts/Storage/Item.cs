@@ -33,12 +33,12 @@ public class Item
 
     public bool questItem;
 
-    public Equipment equipment;
+    public EquipmentStats equipment;
     public Weapon weapon;
 }
 
 [Serializable]
-public class Equipment // --- TODO fix py script!!!
+public class EquipmentStats // --- TODO fix py script!!!
 {
     public int attackStab;
     public int attackSlash;

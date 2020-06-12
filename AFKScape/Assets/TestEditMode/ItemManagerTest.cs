@@ -12,6 +12,7 @@ namespace Tests
         private ItemManager itemManager;
         private Inventory inventory;
         private Bank bank;
+        private Equipment equipment;
 
         private long dragonClaws = 13652;
 
@@ -22,19 +23,15 @@ namespace Tests
             itemManager = new ItemManager();
             inventory = new Inventory();
             bank = new Bank();
+            equipment = new Equipment();
 
-            itemManager.Initialize(inventory, bank);
+            itemManager.Initialize(inventory, bank, equipment);
         }
 
         [Test]
         public void SlotClickedInInventoryTest()
         {
             inventory.AddItem(dragonClaws, 1);
-            bank.isActive = false;
-            EventManager.Instance.SlotClicked(Slot.State.Inventory, dragonClaws);
-            Assert.IsTrue(inventory.Contains(dragonClaws));
-            Assert.IsFalse(bank.Contains(dragonClaws));
-
             bank.isActive = true;
             EventManager.Instance.SlotClicked(Slot.State.Inventory, dragonClaws);
             Assert.IsFalse(inventory.Contains(dragonClaws));
