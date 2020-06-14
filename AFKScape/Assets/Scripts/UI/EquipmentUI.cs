@@ -9,6 +9,7 @@ public class EquipmentUI : MonoBehaviour
     void Start()
     {
         EventManager.Instance.OnItemEquipped += EquipItem;
+        EventManager.Instance.OnItemUnEquipped += UnEquipItem;
     }
 
     private void EquipItem(long id, Equipment.EquipmentSlot equipmentSlot)
@@ -18,6 +19,13 @@ public class EquipmentUI : MonoBehaviour
         slot.SetItemName(Database.items[id].name);
         slot.SetId(id);
         slot.SetState(Slot.State.Equipped);
-        //slot.SetSlotActive(true);
+        slot.iconImage.sprite = Database.sprites[(int)id];
+        slot.SetSlotActive(true);
+    }
+
+    private void UnEquipItem(long id, Equipment.EquipmentSlot equipmentSlot)
+    {
+        Slot slot = equipmentSlots[(int)equipmentSlot];
+        slot.SetSlotActive(false);
     }
 }

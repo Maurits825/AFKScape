@@ -103,9 +103,23 @@ public class MainControllerEditor : Editor
             for (int i = 0; i < 28; i++)
             {
                 int idRand = Random.Range(1, 20000);
-                while (!Database.items.ContainsKey(idRand))
+                while (true)
                 {
-                    idRand++;
+                    if (Database.items.ContainsKey(idRand))
+                    {
+                        if (Database.items[idRand].duplicate || Database.items[idRand].placeholder)
+                        {
+                            idRand++;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        idRand++;
+                    }
                 }
                 int amountRand = Random.Range(1, 100);
                 storageRef.AddItem(idRand, amountRand);

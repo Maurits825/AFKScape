@@ -38,6 +38,7 @@ public class ItemManager
                 break;
 
             case Slot.State.Equipped:
+                UnEquipItem(id);
                 break;
 
             default:
@@ -79,6 +80,11 @@ public class ItemManager
 
     private void EquipItem(long id)
     {
-        //equipment.EquipItem(id, Database.items[id].equipment.slot);
+        equipment.EquipItem(id, Database.items[id].equipment.slot);
+    }
+
+    private void UnEquipItem(long id)
+    {
+        equipment.UnEquipItem(id, Database.items[id].equipment.slot);
     }
 }

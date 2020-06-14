@@ -45,6 +45,7 @@ public class MainController : MonoBehaviour
         skillsController.Initialize(inventory, bank);
         bossesController.Initialize(inventory, bank);
         itemManager.Initialize(inventory, bank, equipment);
+        equipment.Initialize(inventory);
 
         //default tab is skills
         gameState = States.Skills;
@@ -94,6 +95,7 @@ public class MainController : MonoBehaviour
         itemManager = new ItemManager();
         inventory = new Inventory();
         bank = new Bank();
+        equipment = new Equipment();
     }
 
     private void OnTabClicked(int index)

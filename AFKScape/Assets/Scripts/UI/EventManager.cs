@@ -129,6 +129,13 @@ public class EventManager
         OnItemEquipped?.Invoke(id, slot);
     }
 
+    public event Action<long, Equipment.EquipmentSlot> OnItemUnEquipped;
+
+    public void ItemUnEquipped(long id, Equipment.EquipmentSlot slot)
+    {
+        OnItemUnEquipped?.Invoke(id, slot);
+    }
+
     //---- Last loot ----
     public event Action<Dictionary<long, BigInteger>> OnUpdateLastLoot;
 

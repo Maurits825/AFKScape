@@ -30,7 +30,7 @@ namespace Tests
         {
             Database.LoadItems();
 
-            //Assert.AreEqual(Equipment.EquipmentSlot.weapon, Database.items[whipId].equipment.slot);
+            Assert.AreEqual(Equipment.EquipmentSlot.weapon, Database.items[whipId].equipment.slot);
             Assert.AreEqual(Equipment.EquipmentSlot.feet, Database.items[dragonBootsId].equipment.slot);
         }
     }

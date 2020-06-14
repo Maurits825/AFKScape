@@ -58,7 +58,7 @@ public class EquipmentStats // --- TODO fix py script!!!
 
     public int prayer;
 
-    public string slot;
+    public Equipment.EquipmentSlot slot;
 
     public Requirements requirements;
 }
