@@ -122,11 +122,11 @@ public class EventManager
     }
 
     //---- Equiped items ----
-    public event Action<long, Equipment.EquipmentSlot> OnItemEquipped;
+    public event Action<long, Equipment.EquipmentSlot, BigInteger> OnItemEquipped;
 
-    public void ItemEquipped(long id, Equipment.EquipmentSlot slot)
+    public void ItemEquipped(long id, Equipment.EquipmentSlot slot, BigInteger amount)
     {
-        OnItemEquipped?.Invoke(id, slot);
+        OnItemEquipped?.Invoke(id, slot, amount);
     }
 
     public event Action<long, Equipment.EquipmentSlot> OnItemUnEquipped;

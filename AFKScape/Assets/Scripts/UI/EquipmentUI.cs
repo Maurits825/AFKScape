@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 
 public class EquipmentUI : MonoBehaviour
@@ -12,7 +13,7 @@ public class EquipmentUI : MonoBehaviour
         EventManager.Instance.OnItemUnEquipped += UnEquipItem;
     }
 
-    private void EquipItem(long id, Equipment.EquipmentSlot equipmentSlot)
+    private void EquipItem(long id, Equipment.EquipmentSlot equipmentSlot, BigInteger amount)
     {
         Slot slot = equipmentSlots[(int)equipmentSlot];
 
@@ -20,6 +21,8 @@ public class EquipmentUI : MonoBehaviour
         slot.SetId(id);
         slot.SetState(Slot.State.Equipped);
         slot.iconImage.sprite = Database.sprites[(int)id];
+        (slot.amountText.text, slot.amountText.color) = UtilityUI.FormatNumber(amount);
+
         slot.SetSlotActive(true);
     }
 

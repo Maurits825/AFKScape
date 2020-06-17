@@ -25,15 +25,14 @@ public class Equipment
 
     private long[] equipedItems = new long[11];
     private bool isTwoHandedEquipped = false;
+    private BigInteger ammoCount = 0;
 
     public void Initialize(Inventory inventory)
     {
         this.inventory = inventory;
     }
 
-    //TODO ammo slot count
     //TODO button to show item stats UI and keep track of item stats/dmg bonuses
-    //TODO equip/unequip same item/slot, slot stays same, make new inv.add func? -- issue
     public void EquipItem(long id, EquipmentSlot slot)
     {
         if (Database.items[id].equipableByPlayer && CheckRequirements())
@@ -51,7 +50,16 @@ public class Equipment
                 actualSlot = slot;
             }
 
-            BigInteger amountRemoved = inventory.RemoveItem(id, 1);            
+            BigInteger amount;
+            if (slot == EquipmentSlot.ammo)
+            {
+                amount = inventory.RemoveItem(id, inventory.GetAmount(id));
+                ammoCount = amount;
+            }
+            else
+            {
+                amount = inventory.RemoveItem(id, 1);
+            }
 
             if (slot == EquipmentSlot.twoHanded)
             {
@@ -95,7 +103,7 @@ public class Equipment
             }
 
             equipedItems[slotIndex] = id;
-            EventManager.Instance.ItemEquipped(id, actualSlot);
+            EventManager.Instance.ItemEquipped(id, actualSlot, amount);
         }
     }
 
@@ -112,7 +120,16 @@ public class Equipment
         }
 
         equipedItems[slotIndex] = 0;
-        inventory.AddItem(id, 1);
+
+        if (slot == EquipmentSlot.ammo)
+        {
+            inventory.AddItem(id, ammoCount);
+            ammoCount = 0;
+        }
+        else
+        {
+            inventory.AddItem(id, 1);
+        }
 
         EventManager.Instance.ItemUnEquipped(id, slot);
     }
