@@ -15,6 +15,21 @@ namespace Tests
         private Equipment equipment;
 
         private long dragonClaws = 13652;
+        private long whip = 4151;
+
+        [OneTimeSetUp]
+        public void OneTimeSetup()
+        {
+            Database.LoadItems();
+            Database.LoadIcons();
+        }
+
+        [OneTimeTearDown]
+        public void Cleanup()
+        {
+            Database.items.Clear();
+            Database.sprites.Clear();
+        }
 
         [SetUp]
         public void SetUp()
@@ -26,16 +41,24 @@ namespace Tests
             equipment = new Equipment();
 
             itemManager.Initialize(inventory, bank, equipment);
+            equipment.Initialize(inventory);
         }
 
         [Test]
         public void SlotClickedInInventoryTest()
         {
             inventory.AddItem(dragonClaws, 1);
+            inventory.AddItem(whip, 1);
             bank.isActive = true;
             EventManager.Instance.SlotClicked(Slot.State.Inventory, dragonClaws);
             Assert.IsFalse(inventory.Contains(dragonClaws));
             Assert.IsTrue(bank.Contains(dragonClaws));
+
+            bank.isActive = false;
+            EventManager.Instance.SlotClicked(Slot.State.Inventory, whip);
+            Assert.IsFalse(inventory.Contains(whip));
+            Assert.IsFalse(bank.Contains(whip));
+            //TODO check whip equipped, maybe check cmb bonuses/stats?
         }
 
         [Test]
