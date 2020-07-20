@@ -7,7 +7,7 @@
 ![GitHub top language](https://img.shields.io/github/languages/top/maurits825/afkscape)
 
 # AFKScape
-Imagine not juicing
+Theme based on OSRS
 
 ## About
 :rocket: no xp waste :rocket:
