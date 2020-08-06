@@ -26,6 +26,7 @@ public class Equipment
     private long[] equipedItems = new long[11];
     private bool isTwoHandedEquipped = false;
     private BigInteger ammoCount = 0;
+    private BigInteger prevAmmoCount = 0;
 
     public void Initialize(Inventory inventory)
     {
@@ -33,10 +34,20 @@ public class Equipment
     }
 
     //TODO button to show item stats UI and keep track of item stats/dmg bonuses
-    public void EquipItem(long id, EquipmentSlot slot)
+    public void EquipItem(long id)
     {
-        if (Database.items[id].equipableByPlayer && CheckRequirements())
+        if ((Database.items[id].equipableByPlayer || Database.items[Database.items[id].linkedIdItem].equipableByPlayer) && CheckRequirements())
         {
+            EquipmentSlot slot;
+            if (Database.items[id].equipableByPlayer)
+            {
+                slot = Database.items[id].equipment.slot;
+            }
+            else
+            {
+                slot = Database.items[Database.items[id].linkedIdItem].equipment.slot;
+            }
+             
             int slotIndex;
             EquipmentSlot actualSlot;
             if (slot == EquipmentSlot.twoHanded)
@@ -54,6 +65,7 @@ public class Equipment
             if (slot == EquipmentSlot.ammo)
             {
                 amount = inventory.RemoveItem(id, inventory.GetAmount(id));
+                prevAmmoCount = ammoCount;
                 ammoCount = amount;
             }
             else
@@ -65,12 +77,12 @@ public class Equipment
             {
                 if (equipedItems[(int)EquipmentSlot.weapon] != 0)
                 {
-                    UnEquipItem(equipedItems[(int)EquipmentSlot.weapon], EquipmentSlot.weapon);
+                    UnEquipItem(equipedItems[(int)EquipmentSlot.weapon]);
                 }
 
                 if (equipedItems[(int)EquipmentSlot.shield] != 0)
                 {
-                    UnEquipItem(equipedItems[(int)EquipmentSlot.shield], EquipmentSlot.shield);
+                    UnEquipItem(equipedItems[(int)EquipmentSlot.shield]);
                 }
 
                 isTwoHandedEquipped = true;
@@ -79,11 +91,11 @@ public class Equipment
             {
                 if (equipedItems[(int)EquipmentSlot.shield] != 0)
                 {
-                    UnEquipItem(equipedItems[(int)EquipmentSlot.shield], EquipmentSlot.shield);
+                    UnEquipItem(equipedItems[(int)EquipmentSlot.shield]);
                 }
                 else if (isTwoHandedEquipped)
                 {
-                    UnEquipItem(equipedItems[(int)EquipmentSlot.weapon], EquipmentSlot.weapon);
+                    UnEquipItem(equipedItems[(int)EquipmentSlot.weapon]);
                 }
 
                 isTwoHandedEquipped = false;
@@ -92,14 +104,14 @@ public class Equipment
             {
                 if (equipedItems[(int)EquipmentSlot.weapon] != 0)
                 {
-                    UnEquipItem(equipedItems[(int)EquipmentSlot.weapon], EquipmentSlot.weapon);
+                    UnEquipItem(equipedItems[(int)EquipmentSlot.weapon]);
                 }
 
                 isTwoHandedEquipped = false;
             }
             else if (equipedItems[slotIndex] != 0)
             {
-                UnEquipItem(equipedItems[slotIndex], slot);
+                UnEquipItem(equipedItems[slotIndex]);
             }
 
             equipedItems[slotIndex] = id;
@@ -107,8 +119,18 @@ public class Equipment
         }
     }
 
-    public void UnEquipItem(long id, EquipmentSlot slot)
+    public void UnEquipItem(long id)
     {
+        EquipmentSlot slot;
+        if (Database.items[id].equipableByPlayer)
+        {
+            slot = Database.items[id].equipment.slot;
+        }
+        else
+        {
+            slot = Database.items[Database.items[id].linkedIdItem].equipment.slot;
+        }
+
         int slotIndex;
         if (slot == EquipmentSlot.twoHanded)
         {
@@ -123,8 +145,8 @@ public class Equipment
 
         if (slot == EquipmentSlot.ammo)
         {
-            inventory.AddItem(id, ammoCount);
-            ammoCount = 0;
+            inventory.AddItem(id, prevAmmoCount);
+            prevAmmoCount = ammoCount;
         }
         else
         {

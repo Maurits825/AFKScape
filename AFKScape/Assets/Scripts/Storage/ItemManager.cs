@@ -33,12 +33,12 @@ public class ItemManager
                 }
                 else
                 {
-                    EquipItem(id);
+                    equipment.EquipItem(id); ;
                 }
                 break;
 
             case Slot.State.Equipped:
-                UnEquipItem(id);
+                equipment.UnEquipItem(id);
                 break;
 
             default:
@@ -76,15 +76,5 @@ public class ItemManager
 
         BigInteger amountRemoved = inventory.RemoveItem(id, amount);
         bank.AddItem(id, amountRemoved);
-    }
-
-    private void EquipItem(long id)
-    {
-        equipment.EquipItem(id, Database.items[id].equipment.slot);
-    }
-
-    private void UnEquipItem(long id)
-    {
-        equipment.UnEquipItem(id, Database.items[id].equipment.slot);
     }
 }
