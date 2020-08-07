@@ -211,5 +211,7 @@ public class Equipment
 
             totalEquipmentStats.prayer += Database.items[id].equipment.prayer;
         }
+
+        EventManager.Instance.UpdateTotalEquipmentStats(totalEquipmentStats);
     }
 }
