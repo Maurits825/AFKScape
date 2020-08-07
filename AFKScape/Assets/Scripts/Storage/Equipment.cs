@@ -28,6 +28,8 @@ public class Equipment
     private BigInteger ammoCount = 0;
     private BigInteger prevAmmoCount = 0;
 
+    private EquipmentStats totalEquipmentStats = new EquipmentStats();
+
     public void Initialize(Inventory inventory)
     {
         this.inventory = inventory;
@@ -116,6 +118,7 @@ public class Equipment
 
             equipedItems[slotIndex] = id;
             EventManager.Instance.ItemEquipped(id, actualSlot, amount);
+            UpdateTotalEquipmentStats();
         }
     }
 
@@ -154,11 +157,59 @@ public class Equipment
         }
 
         EventManager.Instance.ItemUnEquipped(id, slot);
+        UpdateTotalEquipmentStats();
+    }
+
+    public EquipmentStats GetTotalEquipmentStats()
+    {
+        return totalEquipmentStats;
     }
 
     private bool CheckRequirements()
     {
         //TODO implement
         return true;
+    }
+
+    private void UpdateTotalEquipmentStats()
+    {
+        totalEquipmentStats.attackStab = 0;
+        totalEquipmentStats.attackSlash = 0;
+        totalEquipmentStats.attackCrush = 0;
+        totalEquipmentStats.attackMagic = 0;
+        totalEquipmentStats.attackRanged = 0;
+
+        totalEquipmentStats.defenceStab = 0;
+        totalEquipmentStats.defenceSlash = 0;
+        totalEquipmentStats.defenceCrush = 0;
+        totalEquipmentStats.defenceMagic = 0;
+        totalEquipmentStats.defenceRanged = 0;
+
+        totalEquipmentStats.meleeStrength = 0;
+        totalEquipmentStats.rangedStrength = 0;
+        totalEquipmentStats.magicDamage = 0;
+
+        totalEquipmentStats.prayer = 0;
+
+        foreach (long id in equipedItems)
+        {
+            totalEquipmentStats.attackStab += Database.items[id].equipment.attackStab;
+            totalEquipmentStats.attackSlash += Database.items[id].equipment.attackSlash;
+            totalEquipmentStats.attackCrush += Database.items[id].equipment.attackCrush;
+            totalEquipmentStats.attackMagic += Database.items[id].equipment.attackMagic;
+            totalEquipmentStats.attackRanged += Database.items[id].equipment.attackRanged;
+
+            totalEquipmentStats.defenceStab += Database.items[id].equipment.defenceStab;
+            totalEquipmentStats.defenceSlash += Database.items[id].equipment.defenceSlash;
+            totalEquipmentStats.defenceCrush += Database.items[id].equipment.defenceCrush;
+            totalEquipmentStats.defenceMagic += Database.items[id].equipment.defenceMagic;
+            totalEquipmentStats.defenceRanged += Database.items[id].equipment.defenceRanged;
+
+            totalEquipmentStats.meleeStrength += Database.items[id].equipment.meleeStrength;
+            totalEquipmentStats.rangedStrength += Database.items[id].equipment.rangedStrength;
+            totalEquipmentStats.magicDamage += Database.items[id].equipment.magicDamage;
+
+            totalEquipmentStats.prayer += Database.items[id].equipment.prayer;
+        }
     }
 }

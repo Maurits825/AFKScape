@@ -52,7 +52,7 @@ namespace Tests
             inventory.AddItem(ancestralHat, 1);
             equipment.EquipItem(helmOfNeitz);
             Assert.IsFalse(inventory.Contains(helmOfNeitz));
-            //TODO check is equipped
+
             equipment.EquipItem(ancestralHat);
             Assert.IsFalse(inventory.Contains(ancestralHat));
 
@@ -69,7 +69,6 @@ namespace Tests
             inventory.AddItem(helmOfNeitz, 1);
             equipment.EquipItem(helmOfNeitz);
             Assert.IsFalse(inventory.Contains(helmOfNeitz));
-            //TODO check is equipped
 
             equipment.UnEquipItem(helmOfNeitz);
             Assert.IsTrue(inventory.Contains(helmOfNeitz));
@@ -93,7 +92,6 @@ namespace Tests
             Assert.IsFalse(inventory.Contains(whip));
             Assert.IsFalse(inventory.Contains(avernic));
             Assert.IsTrue(inventory.Contains(ags));
-            //TODO check whip/def equipped
 
             equipment.EquipItem(ags);
             Assert.IsTrue(inventory.Contains(whip));
@@ -132,6 +130,37 @@ namespace Tests
             Assert.AreEqual((BigInteger)15, inventory.GetAmount(runeArrows));
             Assert.IsTrue(inventory.Contains(bronzeArrows));
             Assert.AreEqual((BigInteger)35, inventory.GetAmount(bronzeArrows));
+        }
+
+        [Test]
+        public void TotalEquipmentStatsTest()
+        {
+            EquipmentStats stats;
+            stats = equipment.GetTotalEquipmentStats();
+            Assert.Zero(stats.attackSlash);
+            Assert.Zero(stats.meleeStrength);
+
+            inventory.AddItem(whip, 1);
+            inventory.AddItem(avernic, 1);
+            equipment.EquipItem(whip);
+            stats = equipment.GetTotalEquipmentStats();
+            Assert.AreEqual(82, stats.attackSlash);
+            Assert.AreEqual(82, stats.meleeStrength);
+
+            equipment.EquipItem(avernic);
+            stats = equipment.GetTotalEquipmentStats();
+            Assert.AreEqual(82 + 29, stats.attackSlash);
+            Assert.AreEqual(82 + 8, stats.meleeStrength);
+
+            equipment.UnEquipItem(whip);
+            stats = equipment.GetTotalEquipmentStats();
+            Assert.AreEqual(29, stats.attackSlash);
+            Assert.AreEqual(8, stats.meleeStrength);
+
+            equipment.UnEquipItem(avernic);
+            stats = equipment.GetTotalEquipmentStats();
+            Assert.AreEqual(0, stats.attackSlash);
+            Assert.AreEqual(0, stats.meleeStrength);
         }
     }
 }

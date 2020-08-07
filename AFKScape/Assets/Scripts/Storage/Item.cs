@@ -38,7 +38,7 @@ public class Item
 }
 
 [Serializable]
-public class EquipmentStats // --- TODO fix py script!!!
+public class EquipmentStats
 {
     public int attackStab;
     public int attackSlash;
