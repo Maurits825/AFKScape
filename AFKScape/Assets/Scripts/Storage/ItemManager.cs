@@ -30,8 +30,9 @@ public class ItemManager
                 }
                 else
                 {
-                    equipment.EquipItem(id); ;
+                    equipment.EquipItem(id);
                 }
+
                 break;
 
             case Slot.State.Equipped:

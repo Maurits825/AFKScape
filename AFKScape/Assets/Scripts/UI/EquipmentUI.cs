@@ -11,7 +11,7 @@ public class EquipmentUI : MonoBehaviour
     private EquipmentStats equipmentStats = new EquipmentStats();
     private bool isStatsPanelActive = false;
 
-    void Start()
+    public void Start()
     {
         EventManager.Instance.OnItemEquipped += EquipItem;
         EventManager.Instance.OnItemUnEquipped += UnEquipItem;
