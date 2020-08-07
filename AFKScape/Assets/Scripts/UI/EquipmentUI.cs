@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
 using UnityEngine.UI;
@@ -36,22 +34,22 @@ public class EquipmentUI : MonoBehaviour
             isStatsPanelActive = true;
             Text statsText = statsPanel.GetComponentInChildren<Text>();
             string txt = "attackStab: " + equipmentStats.attackStab.ToString()
-            +"\nattackSlash: " + equipmentStats.attackSlash.ToString()
-            +"\nattackCrush: " + equipmentStats.attackCrush.ToString()
-            +"\nattackMagic: " + equipmentStats.attackMagic.ToString()
-            +"\nattackRanged: " + equipmentStats.attackRanged.ToString()
+            + "\nattackSlash: " + equipmentStats.attackSlash.ToString()
+            + "\nattackCrush: " + equipmentStats.attackCrush.ToString()
+            + "\nattackMagic: " + equipmentStats.attackMagic.ToString()
+            + "\nattackRanged: " + equipmentStats.attackRanged.ToString()
 
-            +"\ndefenceStab: " + equipmentStats.defenceStab.ToString()
-            +"\ndefenceSlash: " + equipmentStats.defenceSlash.ToString()
-            +"\ndefenceCrush: " + equipmentStats.defenceCrush.ToString()
-            +"\ndefenceMagic: " + equipmentStats.defenceMagic.ToString()
-            +"\ndefenceRanged: " + equipmentStats.defenceRanged.ToString()
+            + "\ndefenceStab: " + equipmentStats.defenceStab.ToString()
+            + "\ndefenceSlash: " + equipmentStats.defenceSlash.ToString()
+            + "\ndefenceCrush: " + equipmentStats.defenceCrush.ToString()
+            + "\ndefenceMagic: " + equipmentStats.defenceMagic.ToString()
+            + "\ndefenceRanged: " + equipmentStats.defenceRanged.ToString()
 
-            +"\nmeleeStrength: " + equipmentStats.meleeStrength.ToString()
-            +"\nrangedStrength: " + equipmentStats.rangedStrength.ToString()
-            +"\nmagicDamage: " + equipmentStats.magicDamage.ToString()
+            + "\nmeleeStrength: " + equipmentStats.meleeStrength.ToString()
+            + "\nrangedStrength: " + equipmentStats.rangedStrength.ToString()
+            + "\nmagicDamage: " + equipmentStats.magicDamage.ToString()
 
-            +"\nprayer: " + equipmentStats.prayer.ToString();
+            + "\nprayer: " + equipmentStats.prayer.ToString();
 
             statsText.text = txt;
         }

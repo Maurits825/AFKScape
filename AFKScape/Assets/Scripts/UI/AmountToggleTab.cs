@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class AmountToggleTab : TabGroup
+﻿public class AmountToggleTab : TabGroup
 {
     private static int[] amounts = { 1, 5, 10, 0, -1 };
     public override void RaiseEvents(int index)

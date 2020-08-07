@@ -59,7 +59,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
             yMin = parentTransform.position.y - (parentRect.height / 2) + (gridLayoutGroup.cellSize.y / 2);
             yMax = parentTransform.position.y + (parentRect.height / 2) - (gridLayoutGroup.cellSize.y / 2);
         }
- 
+
         toolTipObject.SetActive(false);
         toolTipTransform = toolTipObject.transform;
         isOver = false;

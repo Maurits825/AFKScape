@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Numerics;
-using UnityEngine;
+﻿using System.Numerics;
 
 public class Equipment
 {
@@ -49,7 +46,7 @@ public class Equipment
             {
                 slot = Database.items[Database.items[id].linkedIdItem].equipment.slot;
             }
-             
+
             int slotIndex;
             EquipmentSlot actualSlot;
             if (slot == EquipmentSlot.twoHanded)

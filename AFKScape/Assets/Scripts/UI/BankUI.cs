@@ -59,7 +59,7 @@ public class BankUI : MonoBehaviour
             }
         }
     }
-    
+
     private void BankToggleValueChanged(Toggle bankToggle)
     {
         EventManager.Instance.BankActiveChanged(bankToggle.isOn);
