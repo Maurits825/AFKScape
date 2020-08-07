@@ -32,10 +32,10 @@ public class Equipment
         this.inventory = inventory;
     }
 
-    //TODO button to show item stats UI and keep track of item stats/dmg bonuses
+    //TODO requirments check
     public void EquipItem(long id)
     {
-        if ((Database.items[id].equipableByPlayer || Database.items[Database.items[id].linkedIdItem].equipableByPlayer) && CheckRequirements())
+        if (Database.items[id].equipableByPlayer || Database.items[Database.items[id].linkedIdItem].equipableByPlayer)
         {
             EquipmentSlot slot;
             if (Database.items[id].equipableByPlayer)
@@ -160,12 +160,6 @@ public class Equipment
     public EquipmentStats GetTotalEquipmentStats()
     {
         return totalEquipmentStats;
-    }
-
-    private bool CheckRequirements()
-    {
-        //TODO implement
-        return true;
     }
 
     private void UpdateTotalEquipmentStats()
