@@ -4,7 +4,7 @@ using System.Numerics;
 
 public class Storage
 {
-    public Dictionary<long, BigInteger> items = new Dictionary<long, BigInteger>();
+    private Dictionary<long, BigInteger> items = new Dictionary<long, BigInteger>();
 
     private int usedSlots = 0;
     public int totalSlots;
@@ -14,29 +14,44 @@ public class Storage
         return items.ContainsKey(id);
     }
 
-    public bool AddItem(long id, BigInteger amount)
+    public BigInteger GetAmount(long id)
     {
-        bool addedItem;
-
         if (items.ContainsKey(id))
         {
-            items[id] += amount;
-            addedItem = true;
-        }
-        else if (usedSlots < totalSlots)
-        {
-            items.Add(id, amount);
-            usedSlots++;
-            addedItem = true;
+            return items[id];
         }
         else
         {
-            addedItem = false;
+            return 0;
         }
+    }
 
-        if (addedItem)
+    public bool AddItem(long id, BigInteger amount)
+    {
+        bool addedItem = false;
+
+        if (amount > 0)
         {
-            RaiseItemAddedEvent(id, items[id], amount);
+            if (items.ContainsKey(id))
+            {
+                items[id] += amount;
+                addedItem = true;
+            }
+            else if (usedSlots < totalSlots)
+            {
+                items.Add(id, amount);
+                usedSlots++;
+                addedItem = true;
+            }
+            else
+            {
+                addedItem = false;
+            }
+
+            if (addedItem)
+            {
+                RaiseItemAddedEvent(id, items[id]);
+            }
         }
 
         return addedItem;
@@ -46,34 +61,28 @@ public class Storage
     {
         foreach (long id in items.Keys.ToList())
         {
-            if (items[id] > 0)
-            {
-                AddItem(id, items[id]);
-                items[id] = 0;
-            }
+            AddItem(id, items[id]);
         }
     }
 
-    public bool RemoveItem(long id, BigInteger amount)
+    public BigInteger RemoveItem(long id, BigInteger amount)
     {
-        bool removedItem;
+        BigInteger amountRemoved = 0;
 
         if (items.ContainsKey(id))
         {
-            BigInteger amountRemoved;
             if (amount > items[id])
             {
-                items[id] = 0;
                 amountRemoved = items[id];
+                items[id] = 0;
             }
             else
             {
-                items[id] -= amount;
                 amountRemoved = amount;
+                items[id] -= amount;
             }
 
-            removedItem = true;
-            RaiseItemRemovedEvent(id, items[id], amountRemoved);
+            RaiseItemRemovedEvent(id, items[id]);
 
             if (items[id] == 0)
             {
@@ -81,12 +90,8 @@ public class Storage
                 usedSlots--;
             }
         }
-        else
-        {
-            removedItem = false;
-        }
 
-        return removedItem;
+        return amountRemoved;
     }
 
     public void RemoveAll()
@@ -105,12 +110,11 @@ public class Storage
         }
     }
 
-    //TODO dont really need two events?
-    public virtual void RaiseItemAddedEvent(long id, BigInteger amount, BigInteger amounDiff)
+    public virtual void RaiseItemAddedEvent(long id, BigInteger amount)
     {
     }
 
-    public virtual void RaiseItemRemovedEvent(long id, BigInteger amount, BigInteger amounDiff)
+    public virtual void RaiseItemRemovedEvent(long id, BigInteger amount)
     {
     }
 }

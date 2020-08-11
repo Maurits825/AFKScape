@@ -93,18 +93,70 @@ public class EventManager
     }
 
     //---- Bank ----
-    public event Action<long, BigInteger, BigInteger> OnBankItemAdded;
+    public event Action<long, BigInteger> OnBankItemAdded;
 
-    public void BankItemAdded(long id, BigInteger amount, BigInteger amounDiff)
+    public void BankItemAdded(long id, BigInteger amount)
     {
-        OnBankItemAdded?.Invoke(id, amount, amounDiff);
+        OnBankItemAdded?.Invoke(id, amount);
     }
 
-    public event Action<long, BigInteger, BigInteger> OnBankItemRemoved;
+    public event Action<long, BigInteger> OnBankItemRemoved;
 
-    public void BankItemRemoved(long id, BigInteger amount, BigInteger amounDiff)
+    public void BankItemRemoved(long id, BigInteger amount)
     {
-        OnBankItemRemoved?.Invoke(id, amount, amounDiff);
+        OnBankItemRemoved?.Invoke(id, amount);
+    }
+
+    public event Action<bool> OnBankActiveChanged;
+
+    public void BankActiveChanged(bool isActive)
+    {
+        OnBankActiveChanged?.Invoke(isActive);
+    }
+
+    public event Action<int> OnBankAmountChanged;
+
+    public void BankAmountChanged(int amount)
+    {
+        OnBankAmountChanged?.Invoke(amount);
+    }
+
+    //---- Equiped items ----
+    public event Action<long, Equipment.EquipmentSlot, BigInteger> OnItemEquipped;
+
+    public void ItemEquipped(long id, Equipment.EquipmentSlot slot, BigInteger amount)
+    {
+        OnItemEquipped?.Invoke(id, slot, amount);
+    }
+
+    public event Action<long, Equipment.EquipmentSlot> OnItemUnEquipped;
+
+    public void ItemUnEquipped(long id, Equipment.EquipmentSlot slot)
+    {
+        OnItemUnEquipped?.Invoke(id, slot);
+    }
+
+    public event Action<EquipmentStats> OnUpdateTotalEquipmentStats;
+
+    public void UpdateTotalEquipmentStats(EquipmentStats stats)
+    {
+        OnUpdateTotalEquipmentStats?.Invoke(stats);
+    }
+
+    //---- Last loot ----
+    public event Action<Dictionary<long, BigInteger>> OnUpdateLastLoot;
+
+    public void UpdateLastLoot(Dictionary<long, BigInteger> items)
+    {
+        OnUpdateLastLoot?.Invoke(items);
+    }
+
+    //---- Slots ----
+    public event Action<Slot.State, long> OnSlotClicked;
+
+    public void SlotClicked(Slot.State state, long id)
+    {
+        OnSlotClicked?.Invoke(state, id);
     }
 
     //---- Tabs ----

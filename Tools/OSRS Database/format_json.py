@@ -16,53 +16,76 @@ for item in all_db_items:
     item_dict["incomplete"] = item.incomplete
     item_dict["members"] = item.members
     item_dict["tradeable"] = item.tradeable
-    item_dict["tradeable_on_ge"] = item.tradeable_on_ge
+    item_dict["tradeableOnGe"] = item.tradeable_on_ge
     item_dict["stackable"] = item.stackable
     item_dict["noted"] = item.noted
     item_dict["noteable"] = item.noteable
-    item_dict["linked_id_item"] = item.linked_id_item
-    item_dict["linked_id_noted"] = item.linked_id_noted
-    item_dict["linked_id_placeholder"] = item.linked_id_placeholder
+    item_dict["linkedIdItem"] = item.linked_id_item
+    item_dict["linkedIdNoted"] = item.linked_id_noted
+    item_dict["linkedIdPlaceholder"] = item.linked_id_placeholder
     item_dict["placeholder"] = item.placeholder
     item_dict["equipable"] = item.equipable
-    item_dict["equipable_by_player"] = item.equipable_by_player
-    item_dict["equipable_weapon"] = item.equipable_weapon
+    item_dict["equipableByPlayer"] = item.equipable_by_player
+    item_dict["equipableWeapon"] = item.equipable_weapon
     item_dict["cost"] = item.cost
     item_dict["lowalch"] = item.lowalch
     item_dict["highalch"] = item.highalch
     item_dict["weight"] = item.weight
-    item_dict["buy_limit"] = item.buy_limit
-    item_dict["quest_item"] = item.quest_item
-    item_dict["release_date"] = item.release_date
+    item_dict["buyLimit"] = item.buy_limit
+    item_dict["questItem"] = item.quest_item
     item_dict["duplicate"] = item.duplicate
     item_dict["examine"] = item.examine
-    item_dict["wiki_name"] = item.wiki_name
-    item_dict["wiki_url"] = item.wiki_url
 
     if item.equipment:
         equipment = dict()
-        equipment["attack_stab"] = item.equipment.attack_stab
-        equipment["attack_slash"] = item.equipment.attack_slash
-        equipment["attack_crush"] = item.equipment.attack_crush
-        equipment["attack_magic"] = item.equipment.attack_magic
-        equipment["attack_ranged"] = item.equipment.attack_ranged
-        equipment["defence_stab"] = item.equipment.defence_stab
-        equipment["defence_slash"] = item.equipment.defence_slash
-        equipment["defence_crush"] = item.equipment.defence_crush
-        equipment["defence_magic"] = item.equipment.defence_magic
-        equipment["defence_ranged"] = item.equipment.defence_ranged
-        equipment["melee_strength"] = item.equipment.melee_strength
-        equipment["ranged_strength"] = item.equipment.ranged_strength
-        equipment["magic_damage"] = item.equipment.magic_damage
+        equipment["attackStab"] = item.equipment.attack_stab
+        equipment["attackSlash"] = item.equipment.attack_slash
+        equipment["attackCrush"] = item.equipment.attack_crush
+        equipment["attackMagic"] = item.equipment.attack_magic
+        equipment["attackRanged"] = item.equipment.attack_ranged
+        equipment["defenceStab"] = item.equipment.defence_stab
+        equipment["defenceSlash"] = item.equipment.defence_slash
+        equipment["defenceCrush"] = item.equipment.defence_crush
+        equipment["defenceMagic"] = item.equipment.defence_magic
+        equipment["defenceRanged"] = item.equipment.defence_ranged
+        equipment["meleeStrength"] = item.equipment.melee_strength
+        equipment["rangedStrength"] = item.equipment.ranged_strength
+        equipment["magicDamage"] = item.equipment.magic_damage
         equipment["prayer"] = item.equipment.prayer
         equipment["slot"] = item.equipment.slot
+
+        if item.equipment.slot == "head":
+            equipment["slot"] = 0
+        elif item.equipment.slot == "cape":
+            equipment["slot"] = 1
+        elif item.equipment.slot == "neck":
+            equipment["slot"] = 2
+        elif item.equipment.slot == "ammo":
+            equipment["slot"] = 3
+        elif item.equipment.slot == "weapon":
+            equipment["slot"] = 4
+        elif item.equipment.slot == "body":
+            equipment["slot"] = 5
+        elif item.equipment.slot == "shield":
+            equipment["slot"] = 6
+        elif item.equipment.slot == "legs":
+            equipment["slot"] = 7
+        elif item.equipment.slot == "hands":
+            equipment["slot"] = 8
+        elif item.equipment.slot == "feet":
+            equipment["slot"] = 9
+        elif item.equipment.slot == "ring":
+            equipment["slot"] = 10
+        elif item.equipment.slot == "2h":
+            equipment["slot"] = 11
+
         item_dict["equipment"] = equipment
         item_dict["requirements"] = item.equipment.requirements #TODO
 
     if item.weapon:
         weapon = dict()
-        weapon["attack_speed"] = item.weapon.attack_speed
-        weapon["weapon_type"] = item.weapon.weapon_type
+        weapon["attackSpeed"] = item.weapon.attack_speed
+        weapon["weaponType"] = item.weapon.weapon_type
         weapon["stances"] = item.weapon.stances
         item_dict["weapon"] = weapon
 

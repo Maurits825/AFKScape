@@ -7,12 +7,12 @@ public class Inventory : Storage
         totalSlots = 28;
     }
 
-    public override void RaiseItemAddedEvent(long id, BigInteger amount, BigInteger amounDiff)
+    public override void RaiseItemAddedEvent(long id, BigInteger amount)
     {
         EventManager.Instance.InvItemAdded(id, amount);
     }
 
-    public override void RaiseItemRemovedEvent(long id, BigInteger amount, BigInteger amounDiff)
+    public override void RaiseItemRemovedEvent(long id, BigInteger amount)
     {
         EventManager.Instance.InvItemRemoved(id, amount);
     }

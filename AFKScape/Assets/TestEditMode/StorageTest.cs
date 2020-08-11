@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System.Numerics;
 
 namespace Tests
 {
@@ -23,6 +24,22 @@ namespace Tests
             storage.AddItem(dragonMedId, 8);
             Assert.IsTrue(storage.Contains(heronId));
             Assert.IsTrue(storage.Contains(dragonMedId));
+        }
+
+        [Test]
+        public void GetAmountTest()
+        {
+            storage.AddItem(dragonMedId, 8);
+
+            Assert.AreEqual((BigInteger)8, storage.GetAmount(dragonMedId));
+            Assert.AreEqual((BigInteger)0, storage.GetAmount(heronId));
+        }
+
+        [Test]
+        public void AddZeroItemTest()
+        {
+            storage.AddItem(dragonMedId, 0);
+            Assert.IsFalse(storage.Contains(dragonMedId));
         }
 
         [Test]
@@ -61,8 +78,8 @@ namespace Tests
         public void RemoveMoreTest()
         {
             storage.AddItem(dragonMedId, 2);
-            bool itemRemoved = storage.RemoveItem(dragonMedId, 5);
-            Assert.IsTrue(itemRemoved);
+            BigInteger amountRemoved = storage.RemoveItem(dragonMedId, 5);
+            Assert.AreEqual((BigInteger)2, amountRemoved);
             Assert.IsFalse(storage.Contains(dragonMedId));
         }
 
@@ -70,8 +87,8 @@ namespace Tests
         public void RemoveNonExistingTest()
         {
             storage.AddItem(dragonMedId, 2);
-            bool itemRemoved = storage.RemoveItem(heronId, 5);
-            Assert.IsFalse(itemRemoved);
+            BigInteger amountRemoved = storage.RemoveItem(heronId, 5);
+            Assert.AreEqual((BigInteger)0, amountRemoved);
         }
     }
 }

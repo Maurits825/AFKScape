@@ -4,6 +4,15 @@ namespace Tests
 {
     public class DatabaseTest
     {
+        [OneTimeTearDown]
+        public void Cleanup()
+        {
+            Database.bossesNames.Clear();
+            Database.items.Clear();
+            Database.experienceTable.Clear();
+            Database.sprites.Clear();
+        }
+
         [Test]
         public void LoadAllTest()
         {

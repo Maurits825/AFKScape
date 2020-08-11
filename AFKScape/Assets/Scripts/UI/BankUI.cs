@@ -7,6 +7,7 @@ public class BankUI : MonoBehaviour
 {
     public GameObject slotPrefab;
     public Transform slotListParent;
+    public Toggle bankButton;
 
     private Dictionary<long, Slot> slots = new Dictionary<long, Slot>();
     private Dictionary<long, Text> bankText = new Dictionary<long, Text>();
@@ -16,10 +17,11 @@ public class BankUI : MonoBehaviour
     {
         EventManager.Instance.OnBankItemAdded += BankItemAdded;
         EventManager.Instance.OnBankItemRemoved += BankItemRemoved;
+        bankButton.onValueChanged.AddListener(delegate { BankToggleValueChanged(bankButton); });
         gameObject.SetActive(false);
     }
 
-    public void BankItemAdded(long id, BigInteger amount, BigInteger amoutDiff)
+    public void BankItemAdded(long id, BigInteger amount)
     {
         if (amount > 0)
         {
@@ -31,6 +33,8 @@ public class BankUI : MonoBehaviour
 
                 Slot slot = slotObject.GetComponent<Slot>();
                 slot.SetItemName(Database.items[id].name);
+                slot.SetId(id);
+                slot.SetState(Slot.State.Bank);
                 slots.Add(id, slot);
 
                 bankText.Add(id, slot.amountText);
@@ -39,10 +43,11 @@ public class BankUI : MonoBehaviour
             }
 
             (bankText[id].text, bankText[id].color) = UtilityUI.FormatNumber(amount);
+            slots[id].SetAlpha(1.0F);
         }
     }
 
-    public void BankItemRemoved(long id, BigInteger amount, BigInteger amoutDiff)
+    public void BankItemRemoved(long id, BigInteger amount)
     {
         if (bankText.ContainsKey(id))
         {
@@ -51,8 +56,12 @@ public class BankUI : MonoBehaviour
             if (amount == 0)
             {
                 slots[id].SetAlpha(0.6F);
-                bankImage[id].sprite = null; //TODO
             }
         }
+    }
+
+    private void BankToggleValueChanged(Toggle bankToggle)
+    {
+        EventManager.Instance.BankActiveChanged(bankToggle.isOn);
     }
 }

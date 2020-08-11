@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,12 +16,20 @@ public class LastLootScrollView : MonoBehaviour
 
     private void Start()
     {
-        EventManager.Instance.OnBankItemAdded += UpdateLastLootUI;
+        EventManager.Instance.OnUpdateLastLoot += UpdateLastLoot;
         EventManager.Instance.OnBossClicked += ClearLastLootUI;
         EventManager.Instance.OnSkillButtonClicked += ClearLastLootUI;
     }
 
-    private void UpdateLastLootUI(long id, BigInteger amount, BigInteger amountDiff)
+    private void UpdateLastLoot(Dictionary<long, BigInteger> items)
+    {
+        foreach (long id in items.Keys.ToList())
+        {
+            UpdateUI(id, items[id]);
+        }
+    }
+
+    private void UpdateUI(long id, BigInteger amountDiff)
     {
         if (!lastLootText.ContainsKey(id))
         {

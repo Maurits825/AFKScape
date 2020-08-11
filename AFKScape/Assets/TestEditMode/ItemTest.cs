@@ -5,8 +5,10 @@ namespace Tests
 {
     public class ItemTest
     {
-
         public static ItemList itemList;
+
+        private long whipId = 4151;
+        private long dragonBootsId = 11840;
 
         [OneTimeTearDown]
         public void Cleanup()
@@ -26,9 +28,10 @@ namespace Tests
         [Test]
         public void ItemListParsingTest()
         {
-            TextAsset JSONFile = Resources.Load<TextAsset>("JSON/Items");
-            itemList = JsonUtility.FromJson<ItemList>(JSONFile.text);
-            Assert.NotNull(itemList.itemList[0].name);
+            Database.LoadItems();
+
+            Assert.AreEqual(Equipment.EquipmentSlot.weapon, Database.items[whipId].equipment.slot);
+            Assert.AreEqual(Equipment.EquipmentSlot.feet, Database.items[dragonBootsId].equipment.slot);
         }
     }
 }

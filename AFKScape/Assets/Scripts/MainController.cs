@@ -23,8 +23,10 @@ public class MainController : MonoBehaviour
     public SkillsController skillsController;
     public BossesController bossesController;
 
+    public ItemManager itemManager;
     public Inventory inventory;
     public Bank bank;
+    public Equipment equipment;
 
     private void Awake()
     {
@@ -42,6 +44,8 @@ public class MainController : MonoBehaviour
         //call init on all classes
         skillsController.Initialize(inventory, bank);
         bossesController.Initialize(inventory, bank);
+        itemManager.Initialize(inventory, bank, equipment);
+        equipment.Initialize(inventory);
 
         //default tab is skills
         gameState = States.Skills;
@@ -88,8 +92,10 @@ public class MainController : MonoBehaviour
         skillsController = new SkillsController();
         bossesController = new BossesController();
 
+        itemManager = new ItemManager();
         inventory = new Inventory();
         bank = new Bank();
+        equipment = new Equipment();
     }
 
     private void OnTabClicked(int index)

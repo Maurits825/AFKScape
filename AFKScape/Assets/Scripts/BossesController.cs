@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using UnityEngine;
 
@@ -54,6 +55,8 @@ public class BossesController
         }
 
         bank.AddMultipleItems(dropTableDict);
+        EventManager.Instance.UpdateLastLoot(dropTableDict);
+        ClearDropTable(dropTableDict);
     }
 
     public void InitMonsterClasses()
@@ -78,6 +81,14 @@ public class BossesController
         {
             currentMonster = bossesClasses[selectedBossName];
             dropTableDict = currentMonster.GetDropTableDict();
+        }
+    }
+
+    private void ClearDropTable(Dictionary<long, BigInteger> dropTable)
+    {
+        foreach (long id in dropTable.Keys.ToList())
+        {
+            dropTable[id] = 0;
         }
     }
 }
