@@ -87,6 +87,26 @@ def check_table_header(header, exclude):
     return True
 
 
+def get_clue_drop_table(url, exclude):
+    dfs, table_headers = get_data_frames(url, "Rewards")
+    table_headers.remove("Standard_table")
+
+    default_exclude = ["Shared_treasure_trail_items", "Tertiary"]
+    all_exclude = default_exclude + exclude
+    item_drop_list = []
+    header_ind = 0
+    for data_frame in dfs:
+        try:
+            data_frame.iloc[0].loc['Item']
+        except KeyError:
+            pass
+        else:
+            if check_table_header(table_headers[header_ind], all_exclude):
+                process_data_frame(data_frame, item_drop_list)
+            header_ind = header_ind + 1
+
+    return item_drop_list
+
 def get_drop_table(url, exclude):
     dfs, table_headers = get_data_frames(url)
 
@@ -186,6 +206,8 @@ def json_from_boss(name, exclude, table_type, table_name, start_table):
         drop_list = get_drop_table(url, list(exclude))
     elif table_type == "single":
         drop_list = get_single_table(url, table_name, start_table)
+    elif table_type == 'clue':
+        drop_list = get_clue_drop_table(url, list(exclude))
     else:
         raise ValueError
     print_parsed_data(drop_list)
