@@ -95,6 +95,26 @@ public static class JsonHandler
         return JsonUtility.FromJson<MonsterDropTable>(dropTableJsonFile.text);
     }
 
+    public static T LoadJsonFile<T>(string fileName)
+        where T : new()
+    {
+        TextAsset jsonString = Resources.Load<TextAsset>(fileName);
+        T jsonData = JsonUtility.FromJson<T>(jsonString.text);
+        return jsonData;
+    }
+
+    public static void SaveJsonFile<T>(T obj, string fileName)
+        where T : new()
+    {
+        string jsonString = JsonUtility.ToJson(obj);
+
+        //TODO better way for path?
+        File.WriteAllText(string.Concat(Application.dataPath, "/Resources/JSON/", fileName, ".json"), jsonString);
+#if UNITY_EDITOR
+        AssetDatabase.Refresh();
+#endif
+    }
+
     public static void SaveJsonFile(List<TrainingMethod> tMethodList, string selectedSkillName)
     {
         tMethodList.Sort((x, y) => x.requirements.levelRequirements[0].levelReq.CompareTo(y.requirements.levelRequirements[0].levelReq));
