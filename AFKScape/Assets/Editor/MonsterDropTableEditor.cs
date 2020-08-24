@@ -51,11 +51,6 @@ public class MonsterDropTableEditor : Editor
 
         if (monsterName != null && JSONLoaded)
         {
-            EditorGUILayout.LabelField("General Info", EditorStyles.boldLabel);
-            EditorGUILayout.PropertyField(monsterDropTableHandler.FindPropertyRelative("rolls"));
-
-            EditorGUILayout.Space(10);
-
             EditorGUILayout.LabelField("100% Drop and Tertiary", EditorStyles.boldLabel);
             if (GUILayout.Button("Add"))
             {
@@ -82,6 +77,11 @@ public class MonsterDropTableEditor : Editor
 
             }
             EditorGUI.indentLevel--;
+
+            EditorGUILayout.Space(10);
+
+            EditorGUILayout.LabelField("General Info", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(monsterDropTableHandler.FindPropertyRelative("rolls"));
 
             EditorGUILayout.Space(10);
 

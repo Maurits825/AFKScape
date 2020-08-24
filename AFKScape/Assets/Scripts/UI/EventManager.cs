@@ -85,6 +85,13 @@ public class EventManager
         OnClueClicked?.Invoke(clueName);
     }
 
+    public event Action<int> OnClueCompleted;
+
+    public void ClueCompleted(int killCount)
+    {
+        OnClueCompleted?.Invoke(killCount);
+    }
+
     //---- Inventory ----
     public event Action<long, BigInteger> OnInvItemAdded;
 

@@ -15960,7 +15960,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1763800182}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61bc43fb191f4b44da8614006e55a71c, type: 3}
+  m_Script: {fileID: 11500000, guid: 877f0f9224a6b1c48b96357a33c098a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   buttonPrefab: {fileID: 2901379022261289584, guid: 499334c2e1efc9348b8339a11a066c97,
@@ -18301,6 +18301,7 @@ GameObject:
   - component: {fileID: 1966381825}
   - component: {fileID: 1966381827}
   - component: {fileID: 1966381826}
+  - component: {fileID: 1966381828}
   m_Layer: 5
   m_Name: CluesPage
   m_TagString: Untagged
@@ -18368,6 +18369,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1966381824}
   m_CullTransparentMesh: 0
+--- !u!114 &1966381828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966381824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c45d77f829a37e45ba97be90cea3018, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ClueSelectionPanel: {fileID: 1763800182}
+  animationObj: {fileID: 2000518575}
+  newClueButton: {fileID: 1162213138}
+  status: {fileID: 1177899440}
+  killCountText: {fileID: 648532060}
 --- !u!1001 &1967667539
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18756,6 +18774,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2000304429}
   m_CullTransparentMesh: 0
+--- !u!1 &2000518575 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5118197265056154669, guid: 8b75dad16001c6146922b3775a61f39d,
+    type: 3}
+  m_PrefabInstance: {fileID: 383405965}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2002239575
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19684,7 +19708,7 @@ MonoBehaviour:
       amountMin: 250
       amountMax: 250
     - id: 5974
-      weight: 5
+      weight: 6
       amountMin: 20
       amountMax: 20
     - id: 1939
@@ -19699,7 +19723,7 @@ MonoBehaviour:
     generalDropTables:
     - name: 100%
       tableType: 0
-      numRolls: 2
+      numRolls: 1
       lootItems:
       - id: 3999
         amountMin: 100
