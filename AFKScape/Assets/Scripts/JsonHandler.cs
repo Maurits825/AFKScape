@@ -95,14 +95,16 @@ public static class JsonHandler
         return JsonUtility.FromJson<MonsterDropTable>(dropTableJsonFile.text);
     }
 
-    public static T LoadJsonFile<T>(string fileName) where T: new()
+    public static T LoadJsonFile<T>(string fileName)
+        where T : new()
     {
         TextAsset jsonString = Resources.Load<TextAsset>(fileName);
         T jsonData = JsonUtility.FromJson<T>(jsonString.text);
         return jsonData;
     }
 
-    public static void SaveJsonFile<T>(T obj, string fileName) where T: new()
+    public static void SaveJsonFile<T>(T obj, string fileName)
+        where T : new()
     {
         string jsonString = JsonUtility.ToJson(obj);
 
