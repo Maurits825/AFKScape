@@ -19,6 +19,12 @@ public class Monster
         killCount = 0;
     }
 
+    public void Initialize()
+    {
+        GetDropTableHandler(bossName);
+        dropTableDict = CreateDropTableDictionary(null);
+    }
+
     public void GetDropTableHandler(string name)
     {
         monsterDropTableHandler = JsonHandler.GetMonsterDropTableHandler(name);

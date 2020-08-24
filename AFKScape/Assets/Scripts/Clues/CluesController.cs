@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class CluesController
 {
-    /*
+    public Dictionary<string, Monster> cluesClasses = new Dictionary<string, Monster>();
     private Dictionary<long, BigInteger> dropTableDict = new Dictionary<long, BigInteger>();
+    private Monster currentClue;
 
     private Inventory inventory;
     private Bank bank;
@@ -21,17 +22,33 @@ public class CluesController
         this.bank = bank;
 
         SubscribeEvents();
+        InitCluesClasses();
+    }
+
+    public void InitCluesClasses()
+    {
+        foreach (string clue in Database.cluesNames)
+        {
+            Monster newClue = new Monster(clue);
+            newClue.Initialize();
+            cluesClasses.Add(clue, newClue);
+        }
+    }
+
+    public void SubscribeEvents()
+    {
+        EventManager.Instance.OnClueClicked += OnClueSelected;
     }
 
     public void Operate()
     {
-        if (!string.IsNullOrEmpty(selectedBossName))
+        if (!string.IsNullOrEmpty(selectedClueName))
         {
-            BossGameLoop(currentMonster, Time.deltaTime);
+            ClueGameLoop(currentClue, Time.deltaTime);
         }
     }
 
-    public void BossGameLoop(Monster monster, float deltaTime)
+    public void ClueGameLoop(Monster monster, float deltaTime)
     {
         //float kcRate = monster.GetKillCountRate(); //TODO
         float kcRate = 10000;
@@ -42,13 +59,12 @@ public class CluesController
         int actionDone = 0;
         while (actionCount >= 1.0F)
         {
-            //lvl up cmbt skills?
             actionCount -= 1.0F;
             actionDone++;
 
             monster.KillBoss(dropTableDict);
             monster.killCount++;
-            EventManager.Instance.BossKilled(monster.killCount);
+            EventManager.Instance.ClueCompleted(monster.killCount);
         }
 
         bank.AddMultipleItems(dropTableDict);
@@ -56,19 +72,7 @@ public class CluesController
         ClearDropTable(dropTableDict);
     }
 
-    public void InitMonsterClasses()
-    {
-        //TODO is there a better way to add/manage these
-        //could use monster id
-        //TODO also this could be different, there could be a specific Zulrah class
-        bossesClasses.Add("Zulrah", new Zulrah());
-        bossesClasses.Add("Vorkath", new Vorkath());
-    }
-
-    public void SubscribeEvents()
-    {
-        EventManager.Instance.OnClueClicked += OnClueSelected;
-    }
+    
 
     public void OnClueSelected(string clueName)
     {
@@ -76,8 +80,8 @@ public class CluesController
 
         if (!string.IsNullOrEmpty(selectedClueName))
         {
-            currentMonster = bossesClasses[selectedBossName];
-            dropTableDict = currentMonster.GetDropTableDict();
+            currentClue = cluesClasses[selectedClueName];
+            dropTableDict = currentClue.GetDropTableDict();
         }
     }
 
@@ -88,5 +92,4 @@ public class CluesController
             dropTable[id] = 0;
         }
     }
-    */
 }

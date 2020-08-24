@@ -1,5 +1,6 @@
 ﻿using UnityEditor;
 using UnityEngine;
+using System.Collections.Generic;
 
 [CustomEditor(typeof(MonsterDropTableAdder))]
 public class MonsterDropTableEditor : Editor
@@ -12,6 +13,8 @@ public class MonsterDropTableEditor : Editor
     private string monsterName;
     private int monsterInd = 0;
     private int prevMonsterInd = 0;
+
+    private List<string> allBosses = new List<string>();
 
     private bool JSONLoaded = false;
 
@@ -28,9 +31,11 @@ public class MonsterDropTableEditor : Editor
         if (GUILayout.Button("Load Bosses"))
         {
             Database.LoadBosses();
+            allBosses = Database.bossesNames;
+            allBosses.AddRange(Database.cluesNames);
         }
 
-        monsterInd = EditorGUILayout.Popup("Select Boss:", monsterInd, Database.bossesNames.ToArray());
+        monsterInd = EditorGUILayout.Popup("Select Boss:", monsterInd, allBosses.ToArray());
         if (Database.bossesNames.Count != 0)
         {
             monsterName = Database.bossesNames[monsterInd];
@@ -40,7 +45,7 @@ public class MonsterDropTableEditor : Editor
         {
             JSONLoaded = false;
         }
-
+        
         if (GUILayout.Button("Load JSON"))
         {
             monsterDropTableAdder.monsterDropTableHandler = JsonHandler.GetMonsterDropTableHandler(monsterName);

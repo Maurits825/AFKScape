@@ -22,6 +22,7 @@ public class MainController : MonoBehaviour
     //all class "singleton" instances, make static?
     public SkillsController skillsController;
     public BossesController bossesController;
+    public CluesController cluesController;
 
     public ItemManager itemManager;
     public Inventory inventory;
@@ -44,6 +45,7 @@ public class MainController : MonoBehaviour
         //call init on all classes
         skillsController.Initialize(inventory, bank);
         bossesController.Initialize(inventory, bank);
+        cluesController.Initialize(inventory, bank);
         itemManager.Initialize(inventory, bank, equipment);
         equipment.Initialize(inventory);
 
@@ -77,6 +79,7 @@ public class MainController : MonoBehaviour
                 break;
 
             case States.Clues:
+                cluesController.Operate();
                 break;
 
             case States.CollectionLog:
@@ -91,6 +94,7 @@ public class MainController : MonoBehaviour
     {
         skillsController = new SkillsController();
         bossesController = new BossesController();
+        cluesController = new CluesController();
 
         itemManager = new ItemManager();
         inventory = new Inventory();

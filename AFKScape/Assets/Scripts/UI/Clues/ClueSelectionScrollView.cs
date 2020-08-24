@@ -8,20 +8,12 @@ public class ClueSelectionScrollView : MonoBehaviour
     public Transform buttonListParent;
 
     private List<GameObject> buttonGameObjects;
-    private readonly List<string> cluesNames = new List<string> {
-        "Beginner",
-        "Easy",
-        "Medium",
-        "Hard",
-        "Elite",
-        "Master",
-    };
 
     // Start is called before the first frame update
     private void Start()
     {
         buttonGameObjects = new List<GameObject>();
-        CreateBossSelectionButtons(cluesNames);
+        CreateBossSelectionButtons(Database.cluesNames);
     }
 
     public void CreateBossSelectionButtons(List<string> clues)

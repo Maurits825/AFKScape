@@ -25,7 +25,10 @@ public class LastLootScrollView : MonoBehaviour
     {
         foreach (long id in items.Keys.ToList())
         {
-            UpdateUI(id, items[id]);
+            if (items[id] > 0)
+            {
+                UpdateUI(id, items[id]);
+            }
         }
     }
 
