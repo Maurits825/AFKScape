@@ -162,7 +162,8 @@ def create_json(drops):
     for drop in drops:
         actual_chance.append(drop.actual_chance)
         base_chances.append(drop.base_chance)
-        ids.append(all_db_items.lookup_by_item_name(drop.name).id)
+        item_name = drop.name.replace(" (Treasure Trails)", "")
+        ids.append(all_db_items.lookup_by_item_name(item_name).id)
 
     actual_chance_arr = np.array(actual_chance).astype(np.int)
     base_chance_arr = np.array(base_chances).astype(np.int)
