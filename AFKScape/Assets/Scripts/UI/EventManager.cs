@@ -77,6 +77,14 @@ public class EventManager
         OnBossKilled?.Invoke(killCount);
     }
 
+    //---- Clues ----
+    public event Action<string> OnClueClicked;
+
+    public void ClueClicked(string clueName)
+    {
+        OnClueClicked?.Invoke(clueName);
+    }
+
     //---- Inventory ----
     public event Action<long, BigInteger> OnInvItemAdded;
 
