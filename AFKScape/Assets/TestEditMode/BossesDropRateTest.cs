@@ -13,6 +13,7 @@ namespace Tests
         private Bank bank;
 
         private const int Iterations = 500_000;
+        private const float PercentThreshold = 20.0F;
 
         [OneTimeSetUp]
         public void OneTimeSetup()
@@ -46,7 +47,7 @@ namespace Tests
         private bool CheckThreshold(float sim, float expected)
         {
             float diff = Mathf.Abs(sim - expected);
-            float thresh = (20.0F / 100.0F) * expected;
+            float thresh = (PercentThreshold / 100.0F) * expected;
             return diff < thresh;
         }
 
@@ -74,7 +75,12 @@ namespace Tests
                 foreach (long id in expectedRate.Keys)
                 {
                     float simRate = (float)dropTableDict[id] / Iterations;
-                    if (!(CheckThreshold(simRate, expectedRate[id])))
+                    bool result = (CheckThreshold(simRate, expectedRate[id]));
+                    Assert.IsTrue(result, "Item: " + Database.items[id].name +
+                        ", Expected: " + expectedRate[id].ToString() +
+                        ", Sim: " + simRate);
+
+                    if (!result)
                     {
                         passed = false;
                         break;
@@ -122,6 +128,34 @@ namespace Tests
 
             expectedRate[1621] = 2 / 1536.0F;
             expectedRate[830] = 10 / 24576.0F;
+
+            Assert.IsTrue(CheckAllRates(monster, expectedRate));
+        }
+
+        [Test]
+        public void ClueMediumDropRateTest()
+        {
+            Monster monster = new Monster(Database.cluesNames[2]);
+            monster.Initialize();
+
+            Dictionary<long, float> expectedRate = new Dictionary<long, float>();
+            expectedRate[2577] = 1 / 1133.0F;
+            expectedRate[20266] = 1 / 2266.0F;
+
+            expectedRate[1161] = 1 / 34.1F;
+            expectedRate[855] = 1 / 37.9F;
+            expectedRate[10364] = 1 / 341.0F;
+
+            expectedRate[7329] = 7 / 189.4F;
+            expectedRate[20275] = 1 / 341.0F;
+            expectedRate[12402] = 10 / 428.7F;
+
+            expectedRate[20220] = 1 / 682.0F;
+            expectedRate[3827] = 1 / 818.4F;
+            expectedRate[21387] = 1 / 750.2F;
+
+            //TODO test entire med fire table?
+            expectedRate[19835] = 1 / 30.0F;
 
             Assert.IsTrue(CheckAllRates(monster, expectedRate));
         }

@@ -19625,7 +19625,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 185a65c1007af8f42be834eaf50c38fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  filterType: 0
+  filterType: 1
   idList: 
 --- !u!114 &2100768140
 MonoBehaviour:
@@ -20208,6 +20208,10 @@ MonoBehaviour:
       weight: 780740
       amountMin: 5
       amountMax: 10
+    - id: 21387
+      weight: 35488
+      amountMin: 1
+      amountMax: 1
     rolls: 1
     generalDropTables:
     - name: General
@@ -20228,7 +20232,7 @@ MonoBehaviour:
     - name: teleport
       weight: 780740
     - name: med_fire
-      weight: 780740
+      weight: 745664
     totalBasicLootCount: 0
 --- !u!4 &2100768141
 Transform:
