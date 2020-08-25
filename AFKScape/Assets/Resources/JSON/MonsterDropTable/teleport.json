@@ -1,0 +1,78 @@
+{
+    "name": "general",
+    "baseChance": 12,
+    "basicLoots": [
+        {
+            "id": 12402,
+            "weight": 1.0,
+            "amountMin": 5,
+            "amountMax": 15
+        },
+        {
+            "id": 12411,
+            "weight": 1.0,
+            "amountMin": 5,
+            "amountMax": 15
+        },
+        {
+            "id": 12406,
+            "weight": 1.0,
+            "amountMin": 5,
+            "amountMax": 15
+        },
+        {
+            "id": 12404,
+            "weight": 1.0,
+            "amountMin": 5,
+            "amountMax": 15
+        },
+        {
+            "id": 12405,
+            "weight": 1.0,
+            "amountMin": 5,
+            "amountMax": 15
+        },
+        {
+            "id": 12403,
+            "weight": 1.0,
+            "amountMin": 5,
+            "amountMax": 15
+        },
+        {
+            "id": 12408,
+            "weight": 1.0,
+            "amountMin": 5,
+            "amountMax": 15
+        },
+        {
+            "id": 12407,
+            "weight": 1.0,
+            "amountMin": 5,
+            "amountMax": 15
+        },
+        {
+            "id": 12409,
+            "weight": 1.0,
+            "amountMin": 5,
+            "amountMax": 15
+        },
+        {
+            "id": 12642,
+            "weight": 1.0,
+            "amountMin": 5,
+            "amountMax": 15
+        },
+        {
+            "id": 20238,
+            "weight": 1.0,
+            "amountMin": 5,
+            "amountMax": 15
+        },
+        {
+            "id": 12410,
+            "weight": 1.0,
+            "amountMin": 5,
+            "amountMax": 15
+        }
+    ]
+}

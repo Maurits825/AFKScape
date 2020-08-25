@@ -1,0 +1,42 @@
+{
+    "name": "general",
+    "baseChance": 50,
+    "basicLoots": [
+        {
+            "id": 7329,
+            "weight": 9.0,
+            "amountMin": 4,
+            "amountMax": 10
+        },
+        {
+            "id": 7330,
+            "weight": 9.0,
+            "amountMin": 4,
+            "amountMax": 10
+        },
+        {
+            "id": 7331,
+            "weight": 9.0,
+            "amountMin": 4,
+            "amountMax": 10
+        },
+        {
+            "id": 10326,
+            "weight": 9.0,
+            "amountMin": 4,
+            "amountMax": 10
+        },
+        {
+            "id": 10327,
+            "weight": 9.0,
+            "amountMin": 4,
+            "amountMax": 10
+        },
+        {
+            "id": 20275,
+            "weight": 5.0,
+            "amountMin": 1,
+            "amountMax": 1
+        }
+    ]
+}

@@ -1,0 +1,54 @@
+{
+    "name": "general",
+    "baseChance": 20,
+    "basicLoots": [
+        {
+            "id": 20220,
+            "weight": 1.0,
+            "amountMin": 1,
+            "amountMax": 1
+        },
+        {
+            "id": 20223,
+            "weight": 1.0,
+            "amountMin": 1,
+            "amountMax": 1
+        },
+        {
+            "id": 20226,
+            "weight": 1.0,
+            "amountMin": 1,
+            "amountMax": 1
+        },
+        {
+            "id": 20232,
+            "weight": 1.0,
+            "amountMin": 1,
+            "amountMax": 1
+        },
+        {
+            "id": 20229,
+            "weight": 1.0,
+            "amountMin": 1,
+            "amountMax": 1
+        },
+        {
+            "id": 20235,
+            "weight": 1.0,
+            "amountMin": 1,
+            "amountMax": 1
+        },
+        {
+            "id": 1004,
+            "weight": 7.0,
+            "amountMin": 10000,
+            "amountMax": 15000
+        },
+        {
+            "id": 10483,
+            "weight": 7.0,
+            "amountMin": 8,
+            "amountMax": 12
+        }
+    ]
+}
