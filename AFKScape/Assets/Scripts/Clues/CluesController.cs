@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using UnityEngine;
@@ -15,6 +16,16 @@ public class CluesController
     private string selectedClueName;
 
     private float actionCount;
+
+    private Dictionary<string, (int, int)> rolls = new Dictionary<string, (int, int)>
+    {
+        {"Clue scroll (Beginner)", (1, 3)},
+        {"Clue scroll (Easy)", (2, 4)},
+        {"Clue scroll (Medium)", (3, 5)},
+        {"Clue scroll (Hard)", (4, 6)},
+        {"Clue scroll (Elite)", (4, 6)},
+        {"Clue scroll (Master)", (5, 7)},
+    };
 
     public void Initialize(Inventory inventory, Bank bank)
     {
@@ -62,6 +73,7 @@ public class CluesController
             actionCount -= 1.0F;
             actionDone++;
 
+            monster.monsterDropTableHandler.rolls = GetRandomRoll();
             monster.KillBoss(dropTableDict);
             monster.killCount++;
             EventManager.Instance.ClueCompleted(monster.killCount);
@@ -71,8 +83,6 @@ public class CluesController
         EventManager.Instance.UpdateLastLoot(dropTableDict);
         ClearDropTable(dropTableDict);
     }
-
-    
 
     public void OnClueSelected(string clueName)
     {
@@ -91,5 +101,10 @@ public class CluesController
         {
             dropTable[id] = 0;
         }
+    }
+
+    private int GetRandomRoll()
+    {
+        return UnityEngine.Random.Range(rolls[selectedClueName].Item1, rolls[selectedClueName].Item2 + 1);
     }
 }

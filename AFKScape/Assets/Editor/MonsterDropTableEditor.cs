@@ -114,6 +114,22 @@ public class MonsterDropTableEditor : Editor
             {
                 monsterDropTableAdder.monsterDropTableHandler.preMadeTables.Add(new MonsterDropTableHandler.TableInfo("tree_herb_seed", 0));
             }
+            if (GUILayout.Button("Add Prayer Page Table"))
+            {
+                monsterDropTableAdder.monsterDropTableHandler.preMadeTables.Add(new MonsterDropTableHandler.TableInfo("pages", 0));
+            }
+            if (GUILayout.Button("Add Blessing Table"))
+            {
+                monsterDropTableAdder.monsterDropTableHandler.preMadeTables.Add(new MonsterDropTableHandler.TableInfo("blessing", 0));
+            }
+            if (GUILayout.Button("Add Teleport Table"))
+            {
+                monsterDropTableAdder.monsterDropTableHandler.preMadeTables.Add(new MonsterDropTableHandler.TableInfo("teleport", 0));
+            }
+            if (GUILayout.Button("Add med-fire Table"))
+            {
+                monsterDropTableAdder.monsterDropTableHandler.preMadeTables.Add(new MonsterDropTableHandler.TableInfo("med_fire", 0));
+            }
             if (GUILayout.Button("Add Custom"))
             {
                 monsterDropTableAdder.monsterDropTableHandler.monsterDropTables.Add(new MonsterDropTable());

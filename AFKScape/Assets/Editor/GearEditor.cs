@@ -14,12 +14,15 @@ public class GearEditor : Editor
 
     void OnEnable()
     {
-        gear = (Gear)target;
-        gear.LoadGearList();
+        if (target != null)
+        {
+            gear = (Gear)target;
+            gear.LoadGearList();
 
-        gearList = serializedObject.FindProperty("gearList");
+            gearList = serializedObject.FindProperty("gearList");
 
-        gearNames = gear.GetGearNames();
+            gearNames = gear.GetGearNames();
+        }
     }
 
     public override void OnInspectorGUI()
