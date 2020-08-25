@@ -28,6 +28,7 @@ def create_dict():
                 stack_count[correct_linked_id] = item.stacked
 
     stacked_items_link[617] = 1004  # coins
+    stacked_items_link[4561] = 10483  # purple sweets
 
     return stacked_items_link
 

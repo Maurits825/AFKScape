@@ -30,8 +30,13 @@ def get_rarity(raw):
         return 1, 1
     else:
         raw_no_comma = raw.replace(',', '')
-        chances = re.findall(r'([0-9]*)/([0-9]*)', raw_no_comma)
-        return chances[0][0], chances[0][1]
+        chances = re.findall(r'([0-9]*)/([0-9]*)\.?([0-9]*)', raw_no_comma)
+        if chances[0][2]:
+            decimal_places = len(chances[0][2])
+            gain = 10**decimal_places
+            return int(chances[0][0])*gain, int(chances[0][1])*gain + int(chances[0][2])
+        else:
+            return chances[0][0], chances[0][1]
 
 
 def print_parsed_data(drops):
@@ -104,6 +109,16 @@ def get_clue_drop_table(url, exclude):
             if check_table_header(table_headers[header_ind], all_exclude):
                 process_data_frame(data_frame, item_drop_list)
             header_ind = header_ind + 1
+
+    return item_drop_list
+
+
+def get_clue_extra_table(file_name):
+    data_frame = pd.read_csv(file_name)
+    item_drop_list = []
+
+    for row in data_frame.itertuples():
+        item_drop_list.append(ItemDrop(row.name, row.min_amount, row.max_amount, row.chance, row.base))
 
     return item_drop_list
 
@@ -209,6 +224,8 @@ def json_from_boss(name, exclude, table_type, table_name, start_table):
         drop_list = get_single_table(url, table_name, start_table)
     elif table_type == 'clue':
         drop_list = get_clue_drop_table(url, list(exclude))
+    elif table_type == 'clue_extra':
+        drop_list = get_clue_extra_table(name)
     else:
         raise ValueError
     print_parsed_data(drop_list)
