@@ -45,6 +45,6 @@ public class CluesPageUI : MonoBehaviour
 
     private void ClueCompleted(int killCount)
     {
-        killCountText.text = "Completed Count: " + killCount.ToString();
+        killCountText.text = "Count: " + killCount.ToString();
     }
 }

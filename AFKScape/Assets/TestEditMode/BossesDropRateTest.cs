@@ -140,23 +140,85 @@ namespace Tests
 
             Dictionary<long, float> expectedRate = new Dictionary<long, float>();
             expectedRate[2577] = 1 / 1133.0F;
+            expectedRate[23389] = 1 / 1133.0F;
             expectedRate[20266] = 1 / 2266.0F;
+            expectedRate[10416] = 1 / 2266.0F;
 
             expectedRate[1161] = 1 / 34.1F;
+            expectedRate[556] = 75 / 34.1F;
+            expectedRate[1271] = 1 / 34.1F;
+
             expectedRate[855] = 1 / 37.9F;
+            expectedRate[1731] = 1 / 37.9F;
+
             expectedRate[10364] = 1 / 341.0F;
+            expectedRate[10282] = 1 / 341.0F;
 
-            expectedRate[7329] = 7 / 189.4F;
             expectedRate[20275] = 1 / 341.0F;
-            expectedRate[12402] = 10 / 428.7F;
 
+            //firelighter
+            expectedRate[7329] = 7 / 189.4F;
+            expectedRate[10326] = 7 / 189.4F;            
+
+            //teleports
+            expectedRate[12402] = 10 / 428.7F;
+            expectedRate[12403] = 10 / 428.7F;
+
+            //blessing
             expectedRate[20220] = 1 / 682.0F;
+            expectedRate[20232] = 1 / 682.0F;
+
+            //pages
             expectedRate[3827] = 1 / 818.4F;
+            expectedRate[3835] = 1 / 818.4F;
+            expectedRate[12620] = 1 / 818.4F;
+
+            //master scroll book
             expectedRate[21387] = 1 / 750.2F;
 
-            //TODO test entire med fire table?
             expectedRate[19835] = 1 / 30.0F;
 
+            Assert.IsTrue(CheckAllRates(monster, expectedRate));
+        }
+
+        [Test]
+        public void ClueEasyDropRateTest()
+        {
+            Monster monster = new Monster(Database.cluesNames[1]);
+            monster.Initialize();
+
+            Dictionary<long, float> expectedRate = new Dictionary<long, float>();
+            expectedRate[10366] = 1 / 360.0F;
+            expectedRate[20166] = 1 / 1404.0F;
+            expectedRate[20205] = 1 / 2808.0F;
+            expectedRate[20211] = 1 / 5616.0F;
+            expectedRate[20199] = 1 / 14040.0F;
+
+            expectedRate[1165] = 1 / 36.0F;
+            expectedRate[847] = 1 / 40.0F;
+            expectedRate[10280] = 1 / 360.0F;
+
+            //firelighter
+            expectedRate[7329] = 4 / 180.0F;
+            expectedRate[10326] = 4 / 180.0F;
+
+            //teleports
+            expectedRate[12402] = 10 / 452.6F;
+            expectedRate[12403] = 10 / 452.6F;
+
+            //blessing
+            expectedRate[20220] = 1 / 2160.0F;
+            expectedRate[20232] = 1 / 2160.0F;
+
+            //pages
+            expectedRate[3827] = 1 / 864.0F;
+            expectedRate[3835] = 1 / 864.0F;
+            expectedRate[12620] = 1 / 864.0F;
+
+            //master scroll book
+            expectedRate[21387] = 1 / 792.0F;
+
+            expectedRate[19835] = 1 / 50.0F;
             Assert.IsTrue(CheckAllRates(monster, expectedRate));
         }
     }

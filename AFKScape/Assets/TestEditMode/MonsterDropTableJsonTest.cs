@@ -97,7 +97,7 @@ namespace Tests
             bossesController.InitMonsterClasses();
 
             //TODO change
-            List<string> cluesTemp = new List<string> { Database.cluesNames[2] };
+            List<string> cluesTemp = new List<string> { Database.cluesNames[1], Database.cluesNames[2] };
             foreach (string clueName in cluesTemp)
             {
                 Monster monster = new Monster(clueName);
