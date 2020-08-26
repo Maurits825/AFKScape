@@ -12,8 +12,9 @@ namespace Tests
         private Inventory inventory;
         private Bank bank;
 
-        private const int Iterations = 500_000;
+        private const int Iterations = 1_000_000;
         private const float PercentThreshold = 20.0F;
+        private const int TotalAttempts = 5;
 
         [OneTimeSetUp]
         public void OneTimeSetup()
@@ -54,7 +55,7 @@ namespace Tests
         private bool CheckAllRates(Monster monster, Dictionary<long, float> expectedRate)
         {
             bool passed = false;
-            for (int attempt = 0; attempt < 5; attempt++)
+            for (int attempt = 0; attempt < TotalAttempts; attempt++)
             {
                 passed = true;
 
