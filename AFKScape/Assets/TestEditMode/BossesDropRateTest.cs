@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using UnityEditor;
 using UnityEngine;
+using UnityScript.Steps;
 
 namespace Tests
 {
@@ -96,6 +98,32 @@ namespace Tests
             }
 
             return passed;
+        }
+
+        private int GetWeight(long id, MonsterDropTable table)
+        {
+            foreach (MonsterDropTable.BasicLoot loot in table.basicLoots)
+            {
+                if (loot.id == id)
+                {
+                    return loot.weight;
+                }
+            }
+
+            return 0;
+        }
+
+        private void CheckExactDropRate(int totalWeight, MonsterDropTable table, Dictionary<long, float> expectedRate)
+        {
+            foreach (KeyValuePair<long, float> item in expectedRate)
+            {
+                int weigth = GetWeight(item.Key, table);
+                int baseChance = table.baseChance;
+
+                float rate = ((float)weigth / (float)table.baseChance) * ((float)table.weight / (float)totalWeight);
+
+                Assert.AreEqual(item.Value, rate, 0.00001);
+            }
         }
 
         [Test]
@@ -235,10 +263,6 @@ namespace Tests
             expectedRate[12538] = 1 / 1250.0F;
             expectedRate[19970] = 1 / 12500.0F;
 
-            expectedRate[20005] = 1 / 28750.0F;
-            expectedRate[3486] = 1 / 63250.0F;
-            expectedRate[12424] = 1 / 488750.0F;
-
             expectedRate[1127] = 1 / 32.3F;
             expectedRate[8778] = 70 / 32.3F;
             expectedRate[985] = 1 / 64.6F;
@@ -267,6 +291,12 @@ namespace Tests
             expectedRate[19835] = 1 / 5.0F;
 
             Assert.IsTrue(CheckAllRates(monster, expectedRate));
+
+            Dictionary<long, float> expectedRareRate = new Dictionary<long, float>();
+            expectedRareRate[20005] = 1 / 28750.0F;
+            expectedRareRate[3486] = 1 / 63250.0F;
+            expectedRareRate[12424] = 1 / 488750.0F;
+            CheckExactDropRate(monster.monsterDropTableHandler.baseChance, monster.monsterDropTableHandler.monsterDropTables[0], expectedRareRate);
         }
 
         [Test]
@@ -285,10 +315,7 @@ namespace Tests
 
             //mega rare
             expectedRate[20059] = 1 / 13616.0F;
-            //expectedRate[3486] = 1 / 149776.0F;
-            //expectedRate[10350] = 1 / 313168.0F;
-            //expectedRate[20014] = 1 / 313168.0F;
-
+            
             //standard
             expectedRate[1215] = 1 / 30.3F;
             expectedRate[985] = 1 / 60.6F;
@@ -317,6 +344,12 @@ namespace Tests
             expectedRate[19730] = 1 / 1000.0F;
 
             Assert.IsTrue(CheckAllRates(monster, expectedRate));
+
+            Dictionary<long, float> expectedRareRate = new Dictionary<long, float>();
+            expectedRareRate[3486] = 1 / 149776.0F;
+            expectedRareRate[10350] = 1 / 313168.0F;
+            expectedRareRate[20014] = 1 / 313168.0F;
+            CheckExactDropRate(monster.monsterDropTableHandler.baseChance, monster.monsterDropTableHandler.monsterDropTables[0], expectedRareRate);
         }
     }
 }
