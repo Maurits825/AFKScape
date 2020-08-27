@@ -126,10 +126,6 @@ public class MonsterDropTableEditor : Editor
             {
                 monsterDropTableAdder.monsterDropTableHandler.preMadeTables.Add(new MonsterDropTableHandler.TableInfo("teleport", 0));
             }
-            if (GUILayout.Button("Add med-fire Table"))
-            {
-                monsterDropTableAdder.monsterDropTableHandler.preMadeTables.Add(new MonsterDropTableHandler.TableInfo("med_fire", 0));
-            }
             if (GUILayout.Button("Add Custom"))
             {
                 monsterDropTableAdder.monsterDropTableHandler.monsterDropTables.Add(new MonsterDropTable());

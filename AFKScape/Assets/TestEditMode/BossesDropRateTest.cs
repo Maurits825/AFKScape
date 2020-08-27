@@ -14,7 +14,7 @@ namespace Tests
 
         private const int Iterations = 1_000_000;
         private const float PercentThreshold = 20.0F;
-        private const int TotalAttempts = 5;
+        private const int TotalAttempts = 10;
 
         [OneTimeSetUp]
         public void OneTimeSetup()
@@ -235,7 +235,7 @@ namespace Tests
             expectedRate[12538] = 1 / 1250.0F;
             expectedRate[19970] = 1 / 12500.0F;
 
-            expectedRate[20005] = 1 / 28750.0F; //TODO test
+            expectedRate[20005] = 1 / 28750.0F;
             expectedRate[3486] = 1 / 63250.0F;
             expectedRate[12424] = 1 / 488750.0F;
 
@@ -244,8 +244,6 @@ namespace Tests
             expectedRate[985] = 1 / 64.6F;
             expectedRate[5255] = 1 / 96.9F;
 
-            
-            //TODO all good down here expect master clue book
             //firelighter
             expectedRate[7329] = 12 / 161.5F;
             expectedRate[10326] = 12 / 161.5F;
@@ -267,6 +265,56 @@ namespace Tests
             expectedRate[21387] = 1 / 355.2F;
 
             expectedRate[19835] = 1 / 5.0F;
+
+            Assert.IsTrue(CheckAllRates(monster, expectedRate));
+        }
+
+        [Test]
+        public void ClueMasterDropRateTest()
+        {
+            Monster monster = new Monster(Database.cluesNames[5]);
+            monster.Initialize();
+
+            Dictionary<long, float> expectedRate = new Dictionary<long, float>();
+
+            //rare table
+            expectedRate[20065] = 1 / 851.0F;
+            expectedRate[20068] = 1 / 3404.0F;
+            expectedRate[20095] = 1 / 12765.0F;
+            expectedRate[22239] = 1 / 25530.0F;
+
+            //mega rare
+            expectedRate[20059] = 1 / 13616.0F;
+            //expectedRate[3486] = 1 / 149776.0F;
+            //expectedRate[10350] = 1 / 313168.0F;
+            //expectedRate[20014] = 1 / 313168.0F;
+
+            //standard
+            expectedRate[1215] = 1 / 30.3F;
+            expectedRate[985] = 1 / 60.6F;
+            expectedRate[5255] = 1.5F / 91.0F;
+
+            //firelighter
+            expectedRate[7329] = 29 / 151.6F;
+            expectedRate[10326] = 29 / 151.6F;
+
+            //teleports
+            expectedRate[12402] = 10 / 190.6F;
+            expectedRate[12403] = 10 / 190.6F;
+
+            //blessing
+            expectedRate[20220] = 1 / 606.4F;
+            expectedRate[20232] = 1 / 606.4F;
+
+            //pages
+            expectedRate[3827] = 1 / 702.6F;
+            expectedRate[3835] = 1 / 702.6F;
+            expectedRate[12620] = 1 / 702.6F;
+
+            //master scroll book
+            expectedRate[21387] = 1 / 333.5F;
+
+            expectedRate[19730] = 1 / 1000.0F;
 
             Assert.IsTrue(CheckAllRates(monster, expectedRate));
         }
