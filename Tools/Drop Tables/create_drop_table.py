@@ -41,8 +41,8 @@ def get_rarity(raw):
 
 def print_parsed_data(drops):
     for drop in drops:
-        print(drop.name + ", " + str(drop.amount_min) + "-" + str(drop.amount_max) +
-              ", " + str(drop.actual_chance) + "/" + str(drop.base_chance))
+        print(drop.name + ", " + str(drop.amount_min) + "," + str(drop.amount_max) +
+              ", " + str(drop.actual_chance) + "," + str(drop.base_chance))
 
 
 def get_data_frames(url, start="Drops", end="Tertiary"):

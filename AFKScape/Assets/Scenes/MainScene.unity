@@ -5137,7 +5137,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -94.600006}
+  m_AnchoredPosition: {x: 0, y: -94.6001}
   m_SizeDelta: {x: 1920, y: -189.20001}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &621731702
@@ -13673,7 +13673,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -94.600006}
+  m_AnchoredPosition: {x: 0, y: -94.6001}
   m_SizeDelta: {x: 0, y: 189.20001}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1525784151
@@ -19625,7 +19625,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 185a65c1007af8f42be834eaf50c38fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  filterType: 1
+  filterType: 0
   idList: 
 --- !u!114 &2100768140
 MonoBehaviour:
@@ -19642,576 +19642,380 @@ MonoBehaviour:
   monsterDropTableHandler:
     name: 
     weight: 0
-    baseChance: 26623234
+    baseChance: 4262500
     basicLoots:
-    - id: 2577
-      weight: 23498
+    - id: 12538
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 2579
-      weight: 23498
+    - id: 12534
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 12598
-      weight: 23498
+    - id: 12536
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 23389
-      weight: 23498
+    - id: 12532
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 23413
-      weight: 23498
+    - id: 20002
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 2605
-      weight: 23498
+    - id: 12526
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 2599
-      weight: 23498
+    - id: 12530
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 2601
-      weight: 23498
+    - id: 12528
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 3474
-      weight: 23498
+    - id: 12397
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 2603
-      weight: 23498
+    - id: 12393
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 2613
-      weight: 23498
+    - id: 12395
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 2607
-      weight: 23498
+    - id: 12439
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 2609
-      weight: 23498
+    - id: 12351
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 3475
-      weight: 23498
+    - id: 12441
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 2611
-      weight: 23498
+    - id: 12443
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 7334
-      weight: 23498
+    - id: 12381
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 7340
-      weight: 23498
+    - id: 12385
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 7346
-      weight: 23498
+    - id: 12383
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 7352
-      weight: 23498
+    - id: 12387
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 7358
-      weight: 23498
+    - id: 12596
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 10296
-      weight: 23498
+    - id: 19994
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 10298
-      weight: 23498
+    - id: 19997
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 10300
-      weight: 23498
+    - id: 12363
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 10302
-      weight: 23498
+    - id: 12365
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 10304
-      weight: 23498
+    - id: 12367
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 23392
-      weight: 23498
+    - id: 12369
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 23395
-      weight: 23498
+    - id: 23270
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 23398
-      weight: 23498
+    - id: 23273
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 23401
-      weight: 23498
+    - id: 19943
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 23404
-      weight: 23498
+    - id: 19946
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 12283
-      weight: 23498
+    - id: 19949
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 12277
-      weight: 23498
+    - id: 19952
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 12279
-      weight: 23498
+    - id: 19955
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 12285
-      weight: 23498
+    - id: 12357
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 12281
-      weight: 23498
+    - id: 12373
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 12293
-      weight: 23498
+    - id: 19991
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 12287
-      weight: 23498
+    - id: 19988
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 12289
-      weight: 23498
+    - id: 12540
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 12295
-      weight: 23498
+    - id: 12430
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 12291
-      weight: 23498
+    - id: 12355
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 7370
-      weight: 23498
+    - id: 12432
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 7372
-      weight: 23498
+    - id: 12353
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 7378
-      weight: 23498
+    - id: 12335
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 7380
-      weight: 23498
+    - id: 12337
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 10452
-      weight: 23498
+    - id: 19970
+      weight: 341
       amountMin: 1
       amountMax: 1
-    - id: 10446
-      weight: 23498
+    - id: 19958
+      weight: 341
       amountMin: 1
       amountMax: 1
-    - id: 10454
-      weight: 23498
+    - id: 19961
+      weight: 341
       amountMin: 1
       amountMax: 1
-    - id: 10448
-      weight: 23498
+    - id: 19964
+      weight: 341
       amountMin: 1
       amountMax: 1
-    - id: 10456
-      weight: 23498
+    - id: 19967
+      weight: 341
       amountMin: 1
       amountMax: 1
-    - id: 10450
-      weight: 23498
+    - id: 19985
+      weight: 341
       amountMin: 1
       amountMax: 1
-    - id: 12203
-      weight: 23498
+    - id: 19973
+      weight: 341
       amountMin: 1
       amountMax: 1
-    - id: 12197
-      weight: 23498
+    - id: 19976
+      weight: 341
       amountMin: 1
       amountMax: 1
-    - id: 12201
-      weight: 23498
+    - id: 19979
+      weight: 341
       amountMin: 1
       amountMax: 1
-    - id: 12199
-      weight: 23498
+    - id: 19982
+      weight: 341
       amountMin: 1
       amountMax: 1
-    - id: 12259
-      weight: 23498
+    - id: 23249
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 12261
-      weight: 23498
+    - id: 23255
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 12257
-      weight: 23498
+    - id: 23252
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 12263
-      weight: 23498
+    - id: 23246
+      weight: 3410
       amountMin: 1
       amountMax: 1
-    - id: 12271
-      weight: 23498
+    - id: 1127
+      weight: 132000
       amountMin: 1
       amountMax: 1
-    - id: 12273
-      weight: 23498
+    - id: 1079
+      weight: 132000
       amountMin: 1
       amountMax: 1
-    - id: 12269
-      weight: 23498
+    - id: 1093
+      weight: 132000
       amountMin: 1
       amountMax: 1
-    - id: 12275
-      weight: 23498
+    - id: 1201
+      weight: 132000
       amountMin: 1
       amountMax: 1
-    - id: 7319
-      weight: 23498
+    - id: 9185
+      weight: 132000
       amountMin: 1
       amountMax: 1
-    - id: 7323
-      weight: 23498
+    - id: 1215
+      weight: 132000
       amountMin: 1
       amountMax: 1
-    - id: 7321
-      weight: 23498
+    - id: 1434
+      weight: 132000
       amountMin: 1
       amountMax: 1
-    - id: 7327
-      weight: 23498
+    - id: 1305
+      weight: 132000
       amountMin: 1
       amountMax: 1
-    - id: 7325
-      weight: 23498
-      amountMin: 1
-      amountMax: 1
-    - id: 12309
-      weight: 23498
-      amountMin: 1
-      amountMax: 1
-    - id: 12311
-      weight: 23498
-      amountMin: 1
-      amountMax: 1
-    - id: 12313
-      weight: 23498
-      amountMin: 1
-      amountMax: 1
-    - id: 2645
-      weight: 23498
-      amountMin: 1
-      amountMax: 1
-    - id: 2647
-      weight: 23498
-      amountMin: 1
-      amountMax: 1
-    - id: 2649
-      weight: 23498
-      amountMin: 1
-      amountMax: 1
-    - id: 12299
-      weight: 23498
-      amountMin: 1
-      amountMax: 1
-    - id: 12301
-      weight: 23498
-      amountMin: 1
-      amountMax: 1
-    - id: 12303
-      weight: 23498
-      amountMin: 1
-      amountMax: 1
-    - id: 12305
-      weight: 23498
-      amountMin: 1
-      amountMax: 1
-    - id: 12307
-      weight: 23498
-      amountMin: 1
-      amountMax: 1
-    - id: 12319
-      weight: 23498
-      amountMin: 1
-      amountMax: 1
-    - id: 12377
-      weight: 23498
-      amountMin: 1
-      amountMax: 1
-    - id: 12361
-      weight: 23498
-      amountMin: 1
-      amountMax: 1
-    - id: 12428
-      weight: 23498
-      amountMin: 1
-      amountMax: 1
-    - id: 12359
-      weight: 23498
-      amountMin: 1
-      amountMax: 1
-    - id: 20240
-      weight: 23498
-      amountMin: 1
-      amountMax: 1
-    - id: 20243
-      weight: 23498
-      amountMin: 1
-      amountMax: 1
-    - id: 20251
-      weight: 23498
-      amountMin: 1
-      amountMax: 1
-    - id: 20260
-      weight: 23498
-      amountMin: 1
-      amountMax: 1
-    - id: 20254
-      weight: 23498
-      amountMin: 1
-      amountMax: 1
-    - id: 20263
-      weight: 23498
-      amountMin: 1
-      amountMax: 1
-    - id: 20257
-      weight: 23498
-      amountMin: 1
-      amountMax: 1
-    - id: 20272
-      weight: 23498
-      amountMin: 1
-      amountMax: 1
-    - id: 23407
-      weight: 23498
-      amountMin: 1
-      amountMax: 1
-    - id: 23410
-      weight: 23498
-      amountMin: 1
-      amountMax: 1
-    - id: 20246
-      weight: 23498
-      amountMin: 1
-      amountMax: 1
-    - id: 20266
-      weight: 11749
-      amountMin: 1
-      amountMax: 1
-    - id: 20269
-      weight: 11749
-      amountMin: 1
-      amountMax: 1
-    - id: 10416
-      weight: 11749
-      amountMin: 1
-      amountMax: 1
-    - id: 10436
-      weight: 11749
-      amountMin: 1
-      amountMax: 1
-    - id: 10418
-      weight: 11749
-      amountMin: 1
-      amountMax: 1
-    - id: 10438
-      weight: 11749
-      amountMin: 1
-      amountMax: 1
-    - id: 10400
-      weight: 11749
-      amountMin: 1
-      amountMax: 1
-    - id: 10420
-      weight: 11749
-      amountMin: 1
-      amountMax: 1
-    - id: 10402
-      weight: 11749
-      amountMin: 1
-      amountMax: 1
-    - id: 10422
-      weight: 11749
-      amountMin: 1
-      amountMax: 1
-    - id: 12315
-      weight: 11749
-      amountMin: 1
-      amountMax: 1
-    - id: 12339
-      weight: 11749
-      amountMin: 1
-      amountMax: 1
-    - id: 12317
-      weight: 11749
-      amountMin: 1
-      amountMax: 1
-    - id: 12341
-      weight: 11749
-      amountMin: 1
-      amountMax: 1
-    - id: 12347
-      weight: 11749
-      amountMin: 1
-      amountMax: 1
-    - id: 12343
-      weight: 11749
-      amountMin: 1
-      amountMax: 1
-    - id: 12349
-      weight: 11749
-      amountMin: 1
-      amountMax: 1
-    - id: 12345
-      weight: 11749
-      amountMin: 1
-      amountMax: 1
-    - id: 1161
-      weight: 780740
-      amountMin: 1
-      amountMax: 1
-    - id: 1123
-      weight: 780740
-      amountMin: 1
-      amountMax: 1
-    - id: 1073
-      weight: 780740
-      amountMin: 1
-      amountMax: 1
-    - id: 1301
-      weight: 780740
-      amountMin: 1
-      amountMax: 1
-    - id: 1211
-      weight: 780740
-      amountMin: 1
-      amountMax: 1
-    - id: 1371
-      weight: 780740
-      amountMin: 1
-      amountMax: 1
-    - id: 1357
-      weight: 780740
-      amountMin: 1
-      amountMax: 1
-    - id: 1271
-      weight: 780740
-      amountMin: 1
-      amountMax: 1
-    - id: 1135
-      weight: 780740
-      amountMin: 1
-      amountMax: 1
-    - id: 1099
-      weight: 780740
-      amountMin: 1
-      amountMax: 1
-    - id: 857
-      weight: 780740
-      amountMin: 1
-      amountMax: 1
-    - id: 855
-      weight: 702460
-      amountMin: 1
-      amountMax: 1
-    - id: 10282
-      weight: 78074
-      amountMin: 1
-      amountMax: 1
-    - id: 1393
-      weight: 780740
-      amountMin: 1
-      amountMax: 1
-    - id: 1731
-      weight: 702460
-      amountMin: 1
-      amountMax: 1
-    - id: 10364
-      weight: 78074
-      amountMin: 1
-      amountMax: 1
-    - id: 556
-      weight: 780740
-      amountMin: 50
-      amountMax: 100
-    - id: 558
-      weight: 780740
-      amountMin: 50
-      amountMax: 100
-    - id: 555
-      weight: 780740
-      amountMin: 50
-      amountMax: 100
-    - id: 557
-      weight: 780740
-      amountMin: 50
-      amountMax: 100
-    - id: 554
-      weight: 780740
-      amountMin: 50
-      amountMax: 100
-    - id: 562
-      weight: 780740
-      amountMin: 10
-      amountMax: 20
-    - id: 561
-      weight: 780740
-      amountMin: 10
-      amountMax: 20
+    - id: 9234
+      weight: 132000
+      amountMin: 8
+      amountMax: 12
     - id: 563
-      weight: 780740
-      amountMin: 10
-      amountMax: 20
+      weight: 132000
+      amountMin: 50
+      amountMax: 75
     - id: 560
-      weight: 780740
-      amountMin: 10
-      amountMax: 20
-    - id: 379
-      weight: 780740
-      amountMin: 8
-      amountMax: 12
-    - id: 373
-      weight: 780740
-      amountMin: 8
-      amountMax: 12
-    - id: 1004
-      weight: 780740
-      amountMin: 200
-      amountMax: 1000
-    - id: 10483
-      weight: 780740
-      amountMin: 5
-      amountMax: 10
-    - id: 21387
-      weight: 35488
+      weight: 132000
+      amountMin: 50
+      amountMax: 75
+    - id: 565
+      weight: 132000
+      amountMin: 50
+      amountMax: 75
+    - id: 566
+      weight: 132000
+      amountMin: 50
+      amountMax: 75
+    - id: 11115
+      weight: 132000
       amountMin: 1
       amountMax: 1
+    - id: 1664
+      weight: 132000
+      amountMin: 1
+      amountMax: 1
+    - id: 1645
+      weight: 132000
+      amountMin: 1
+      amountMax: 1
+    - id: 7060
+      weight: 132000
+      amountMin: 15
+      amountMax: 20
+    - id: 7218
+      weight: 132000
+      amountMin: 15
+      amountMax: 20
+    - id: 8778
+      weight: 132000
+      amountMin: 60
+      amountMax: 80
+    - id: 8780
+      weight: 132000
+      amountMin: 40
+      amountMax: 50
+    - id: 8782
+      weight: 132000
+      amountMin: 20
+      amountMax: 30
+    - id: 2363
+      weight: 132000
+      amountMin: 1
+      amountMax: 3
+    - id: 985
+      weight: 66000
+      amountMin: 1
+      amountMax: 1
+    - id: 987
+      weight: 66000
+      amountMin: 1
+      amountMax: 1
+    - id: 5255
+      weight: 44000
+      amountMin: 1
+      amountMax: 1
+    - id: 5110
+      weight: 44000
+      amountMin: 1
+      amountMax: 1
+    - id: 5126
+      weight: 44000
+      amountMin: 1
+      amountMax: 1
+    - id: 1004
+      weight: 132000
+      amountMin: 20000
+      amountMax: 30000
+    - id: 10483
+      weight: 132000
+      amountMin: 9
+      amountMax: 23
+    - id: 21387
+      weight: 12000
+      amountMin: 1
+      amountMax: 1
+    - id: 7329
+      weight: 26400
+      amountMin: 9
+      amountMax: 15
+    - id: 7330
+      weight: 26400
+      amountMin: 9
+      amountMax: 15
+    - id: 7331
+      weight: 26400
+      amountMin: 9
+      amountMax: 15
+    - id: 10326
+      weight: 26400
+      amountMin: 9
+      amountMax: 15
+    - id: 10327
+      weight: 26400
+      amountMin: 9
+      amountMax: 15
     rolls: 1
     generalDropTables:
     - name: General
@@ -20222,17 +20026,199 @@ MonoBehaviour:
         amountMin: 1
         amountMax: 1
         chance: 1
-        baseChance: 30
-    monsterDropTables: []
+        baseChance: 5
+    monsterDropTables:
+    - name: mega rare
+      weight: 3410
+      baseChance: 4301
+      basicLoots:
+      - id: 12389
+        weight: 187
+        amountMin: 1
+        amountMax: 1
+      - id: 12391
+        weight: 187
+        amountMin: 1
+        amountMax: 1
+      - id: 1391
+        weight: 187
+        amountMin: 100
+        amountMax: 100
+      - id: 989
+        weight: 187
+        amountMin: 1
+        amountMax: 1
+      - id: 12371
+        weight: 187
+        amountMin: 1
+        amountMax: 1
+      - id: 2444
+        weight: 187
+        amountMin: 30
+        amountMax: 30
+      - id: 6685
+        weight: 187
+        amountMin: 30
+        amountMax: 30
+      - id: 3024
+        weight: 187
+        amountMin: 30
+        amountMax: 30
+      - id: 20005
+        weight: 187
+        amountMin: 1
+        amountMax: 1
+      - id: 11951
+        weight: 187
+        amountMin: 30
+        amountMax: 30
+      - id: 23258
+        weight: 187
+        amountMin: 1
+        amountMax: 1
+      - id: 23261
+        weight: 187
+        amountMin: 1
+        amountMax: 1
+      - id: 23264
+        weight: 187
+        amountMin: 1
+        amountMax: 1
+      - id: 23267
+        weight: 187
+        amountMin: 1
+        amountMax: 1
+      - id: 23276
+        weight: 187
+        amountMin: 1
+        amountMax: 1
+      - id: 23279
+        weight: 187
+        amountMin: 1
+        amountMax: 1
+      - id: 23282
+        weight: 187
+        amountMin: 1
+        amountMax: 1
+      - id: 10334
+        weight: 11
+        amountMin: 1
+        amountMax: 1
+      - id: 10330
+        weight: 11
+        amountMin: 1
+        amountMax: 1
+      - id: 10332
+        weight: 11
+        amountMin: 1
+        amountMax: 1
+      - id: 10336
+        weight: 11
+        amountMin: 1
+        amountMax: 1
+      - id: 10338
+        weight: 11
+        amountMin: 1
+        amountMax: 1
+      - id: 10340
+        weight: 11
+        amountMin: 1
+        amountMax: 1
+      - id: 10342
+        weight: 11
+        amountMin: 1
+        amountMax: 1
+      - id: 10344
+        weight: 11
+        amountMin: 1
+        amountMax: 1
+      - id: 10346
+        weight: 11
+        amountMin: 1
+        amountMax: 1
+      - id: 10348
+        weight: 11
+        amountMin: 1
+        amountMax: 1
+      - id: 10350
+        weight: 11
+        amountMin: 1
+        amountMax: 1
+      - id: 23242
+        weight: 11
+        amountMin: 1
+        amountMax: 1
+      - id: 10352
+        weight: 11
+        amountMin: 1
+        amountMax: 1
+      - id: 12426
+        weight: 11
+        amountMin: 1
+        amountMax: 1
+      - id: 12437
+        weight: 11
+        amountMin: 1
+        amountMax: 1
+      - id: 12422
+        weight: 11
+        amountMin: 1
+        amountMax: 1
+      - id: 12424
+        weight: 11
+        amountMin: 1
+        amountMax: 1
+      - id: 3481
+        weight: 85
+        amountMin: 1
+        amountMax: 1
+      - id: 3483
+        weight: 85
+        amountMin: 1
+        amountMax: 1
+      - id: 3485
+        weight: 85
+        amountMin: 1
+        amountMax: 1
+      - id: 3486
+        weight: 85
+        amountMin: 1
+        amountMax: 1
+      - id: 3488
+        weight: 85
+        amountMin: 1
+        amountMax: 1
+      - id: 20146
+        weight: 85
+        amountMin: 1
+        amountMax: 1
+      - id: 20149
+        weight: 85
+        amountMin: 1
+        amountMax: 1
+      - id: 20152
+        weight: 85
+        amountMin: 1
+        amountMax: 1
+      - id: 20155
+        weight: 85
+        amountMin: 1
+        amountMax: 1
+      - id: 20158
+        weight: 85
+        amountMin: 1
+        amountMax: 1
+      - id: 20161
+        weight: 85
+        amountMin: 1
+        amountMax: 1
     preMadeTables:
     - name: pages
-      weight: 780740
+      weight: 132000
     - name: blessing
-      weight: 780740
+      weight: 132000
     - name: teleport
-      weight: 745252
-    - name: med_fire
-      weight: 781152
+      weight: 252000
     totalBasicLootCount: 0
 --- !u!4 &2100768141
 Transform:

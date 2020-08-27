@@ -153,6 +153,11 @@ public class Equipment
             inventory.AddItem(id, 1);
         }
 
+        if (slot == EquipmentSlot.twoHanded)
+        {
+            slot = EquipmentSlot.weapon;
+        }
+
         EventManager.Instance.ItemUnEquipped(id, slot);
         UpdateTotalEquipmentStats();
     }

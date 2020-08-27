@@ -134,6 +134,12 @@ public class MonsterDropTableEditor : Editor
             {
                 monsterDropTableAdder.monsterDropTableHandler.monsterDropTables.Add(new MonsterDropTable());
             }
+            if (GUILayout.Button("Add Loot from temp.json"))
+            {
+                tempDropTable = JsonHandler.GetMonsterDropTable("temp");
+                monsterDropTableAdder.monsterDropTableHandler.monsterDropTables.Add(tempDropTable);
+            }
+
             EditorGUILayout.PropertyField(monsterDropTableHandler.FindPropertyRelative("monsterDropTables"));
 
             SerializedProperty preMadeTables = monsterDropTableHandler.FindPropertyRelative("preMadeTables");
