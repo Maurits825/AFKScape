@@ -367,5 +367,54 @@ namespace Tests
             expectedRareRate[20014] = 1 / 313168.0F;
             CheckExactDropRate(monster.monsterDropTableHandler.baseChance, monster.monsterDropTableHandler.monsterDropTables[0], expectedRareRate);
         }
+
+        [Test]
+        public void ClueHardDropRateTest()
+        {
+            Monster monster = new Monster(Database.cluesNames[3]);
+            monster.Initialize();
+
+            Dictionary<long, float> expectedRate = new Dictionary<long, float>();
+
+            //rare table
+            expectedRate[2581] = 1 / 1625.0F;
+            expectedRate[23209] = 1 / 8125.0F;
+            expectedRate[23191] = 1 / 9750.0F;
+
+            //standard
+            expectedRate[1163] = 1 / 27.1F;
+            expectedRate[859] = 1 / 30.1F;
+            expectedRate[10284] = 1 / 270.8F;
+
+            //firelighter
+            expectedRate[7329] = 12 / 135.4F;
+            expectedRate[10326] = 12 / 135.4F;
+
+            //teleports
+            expectedRate[12402] = 10 / 340.5F;
+            expectedRate[12403] = 10 / 340.5F;
+
+            //blessing
+            expectedRate[20220] = 1 / 541.7F;
+            expectedRate[20232] = 1 / 541.7F;
+
+            //pages
+            expectedRate[3827] = 1 / 650.0F;
+            expectedRate[3835] = 1 / 650.0F;
+            expectedRate[12620] = 1 / 650.0F;
+
+            //master scroll book
+            expectedRate[21387] = 1 / 595.8F;
+
+            expectedRate[19835] = 1 / 15.0F;
+
+            Assert.IsTrue(CheckAllRates(monster, expectedRate));
+
+            Dictionary<long, float> expectedRareRate = new Dictionary<long, float>();
+            expectedRareRate[3016] = 1 / 16250.0F;
+            expectedRareRate[3486] = 1 / 35750.0F;
+            expectedRareRate[10350] = 1 / 211250.0F;
+            CheckExactDropRate(monster.monsterDropTableHandler.baseChance, monster.monsterDropTableHandler.monsterDropTables[0], expectedRareRate);
+        }
     }
 }
