@@ -163,6 +163,22 @@ namespace Tests
         }
 
         [Test]
+        public void ClueBeginnerDropRateTest()
+        {
+            Monster monster = new Monster(Database.cluesNames[0]);
+            monster.Initialize();
+
+            Dictionary<long, float> expectedRate = new Dictionary<long, float>();
+            expectedRate[23285] = 1 / 360.0F;
+            expectedRate[1313] = 1 / 805.1F;
+
+            expectedRate[1267] = 1 / 44.73F;
+            expectedRate[1965] = 7 / 24.0F;
+
+            Assert.IsTrue(CheckAllRates(monster, expectedRate));
+        }
+
+        [Test]
         public void ClueEasyDropRateTest()
         {
             Monster monster = new Monster(Database.cluesNames[1]);

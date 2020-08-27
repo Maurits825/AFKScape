@@ -94,7 +94,10 @@ def check_table_header(header, exclude):
 
 def get_clue_drop_table(url, exclude):
     dfs, table_headers = get_data_frames(url, "Rewards")
-    table_headers.remove("Standard_table")
+    try:
+        table_headers.remove("Standard_table")
+    except:
+        pass
 
     default_exclude = ["Shared_treasure_trail_items", "Tertiary"]
     all_exclude = default_exclude + exclude
