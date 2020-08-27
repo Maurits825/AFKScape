@@ -97,7 +97,7 @@ namespace Tests
             bossesController.InitMonsterClasses();
 
             //TODO change
-            List<string> cluesTemp = new List<string> { Database.cluesNames[1], Database.cluesNames[2], Database.cluesNames[4] };
+            List<string> cluesTemp = new List<string> { Database.cluesNames[1], Database.cluesNames[2], Database.cluesNames[4], Database.cluesNames[5] };
             foreach (string clueName in cluesTemp)
             {
                 Monster monster = new Monster(clueName);
@@ -173,6 +173,60 @@ namespace Tests
         public void HerbSeedTableTest()
         {
             MonsterDropTable monsterDropTable = JsonHandler.GetMonsterDropTable("tree_herb_seed");
+            int baseChance = monsterDropTable.baseChance;
+            int totalWeight = GetWeightSum(monsterDropTable.basicLoots);
+
+            Assert.AreEqual(baseChance, totalWeight);
+            Assert.Greater(baseChance, 0);
+
+            foreach (MonsterDropTable.BasicLoot item in monsterDropTable.basicLoots)
+            {
+                Assert.Greater(item.id, 0);
+                Assert.Greater(item.amountMin, 0);
+                Assert.Greater(item.amountMax, 0);
+            }
+        }
+
+        [Test]
+        public void BlessingTableTest()
+        {
+            MonsterDropTable monsterDropTable = JsonHandler.GetMonsterDropTable("blessing");
+            int baseChance = monsterDropTable.baseChance;
+            int totalWeight = GetWeightSum(monsterDropTable.basicLoots);
+
+            Assert.AreEqual(baseChance, totalWeight);
+            Assert.Greater(baseChance, 0);
+
+            foreach (MonsterDropTable.BasicLoot item in monsterDropTable.basicLoots)
+            {
+                Assert.Greater(item.id, 0);
+                Assert.Greater(item.amountMin, 0);
+                Assert.Greater(item.amountMax, 0);
+            }
+        }
+
+        [Test]
+        public void TeleportTableTest()
+        {
+            MonsterDropTable monsterDropTable = JsonHandler.GetMonsterDropTable("teleport");
+            int baseChance = monsterDropTable.baseChance;
+            int totalWeight = GetWeightSum(monsterDropTable.basicLoots);
+
+            Assert.AreEqual(baseChance, totalWeight);
+            Assert.Greater(baseChance, 0);
+
+            foreach (MonsterDropTable.BasicLoot item in monsterDropTable.basicLoots)
+            {
+                Assert.Greater(item.id, 0);
+                Assert.Greater(item.amountMin, 0);
+                Assert.Greater(item.amountMax, 0);
+            }
+        }
+
+        [Test]
+        public void PagesTableTest()
+        {
+            MonsterDropTable monsterDropTable = JsonHandler.GetMonsterDropTable("pages");
             int baseChance = monsterDropTable.baseChance;
             int totalWeight = GetWeightSum(monsterDropTable.basicLoots);
 
