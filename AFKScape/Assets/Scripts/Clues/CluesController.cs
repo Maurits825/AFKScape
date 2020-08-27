@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using UnityEngine;
@@ -19,12 +18,12 @@ public class CluesController
 
     private Dictionary<string, (int, int)> rolls = new Dictionary<string, (int, int)>
     {
-        {"Clue scroll (Beginner)", (1, 3)},
-        {"Clue scroll (Easy)", (2, 4)},
-        {"Clue scroll (Medium)", (3, 5)},
-        {"Clue scroll (Hard)", (4, 6)},
-        {"Clue scroll (Elite)", (4, 6)},
-        {"Clue scroll (Master)", (5, 7)},
+        { "Clue scroll (Beginner)", (1, 3) },
+        { "Clue scroll (Easy)", (2, 4) },
+        { "Clue scroll (Medium)", (3, 5) },
+        { "Clue scroll (Hard)", (4, 6) },
+        { "Clue scroll (Elite)", (4, 6) },
+        { "Clue scroll (Master)", (5, 7) },
     };
 
     public void Initialize(Inventory inventory, Bank bank)

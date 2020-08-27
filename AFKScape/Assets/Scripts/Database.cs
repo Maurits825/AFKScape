@@ -14,7 +14,8 @@ public static class Database
     private const int NumSpriteSheets = 7;
     public static List<Sprite> sprites = new List<Sprite>();
 
-    public static List<string> cluesNames = new List<string> {
+    public static List<string> cluesNames = new List<string>
+    {
         "Clue scroll (Beginner)",
         "Clue scroll (Easy)",
         "Clue scroll (Medium)",
