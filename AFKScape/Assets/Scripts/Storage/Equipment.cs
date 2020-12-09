@@ -27,7 +27,12 @@ public class Equipment
 
     private EquipmentStats totalEquipmentStats = new EquipmentStats();
 
-    public void Initialize(Inventory inventory)
+    public Equipment(Inventory inventory)
+    {
+        Initialize(inventory);
+    }
+
+    private void Initialize(Inventory inventory)
     {
         this.inventory = inventory;
     }

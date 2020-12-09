@@ -34,11 +34,11 @@ namespace Tests
         public void SetUp()
         {
             EventManager.SetIntance(new EventManager());
-            cluesController = new CluesController();
+
             inventory = new Inventory();
             bank = new Bank();
 
-            cluesController.Initialize(inventory, bank);
+            cluesController = new CluesController(inventory, bank);
         }
 
         [Test]

@@ -19,7 +19,12 @@ public class SkillsController
     private Inventory inventory;
     private Bank bank;
 
-    public void Initialize(Inventory inventory, Bank bank)
+    public SkillsController(Inventory inventory, Bank bank)
+    {
+        Initialize(inventory, bank);
+    }
+
+    private void Initialize(Inventory inventory, Bank bank)
     {
         this.inventory = inventory;
         this.bank = bank;

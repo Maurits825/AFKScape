@@ -42,13 +42,6 @@ public class MainController : MonoBehaviour
 
         EventManager.Instance.OnMainTabClicked += OnTabClicked;
 
-        //call init on all classes
-        skillsController.Initialize(inventory, bank);
-        bossesController.Initialize(inventory, bank);
-        cluesController.Initialize(inventory, bank);
-        itemManager.Initialize(inventory, bank, equipment);
-        equipment.Initialize(inventory);
-
         //default tab is skills
         gameState = States.Skills;
     }
@@ -92,14 +85,15 @@ public class MainController : MonoBehaviour
 
     private void SetInstances()
     {
-        skillsController = new SkillsController();
-        bossesController = new BossesController();
-        cluesController = new CluesController();
-
-        itemManager = new ItemManager();
         inventory = new Inventory();
         bank = new Bank();
-        equipment = new Equipment();
+
+        skillsController = new SkillsController(inventory, bank);
+        bossesController = new BossesController(inventory, bank);
+        cluesController = new CluesController(inventory, bank);
+
+        equipment = new Equipment(inventory);
+        itemManager = new ItemManager(inventory, bank, equipment);
     }
 
     private void OnTabClicked(int index)

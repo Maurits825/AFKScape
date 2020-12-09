@@ -40,11 +40,11 @@ namespace Tests
         public void SetUp()
         {
             EventManager.SetIntance(new EventManager());
-            bossesController = new BossesController();
+
             inventory = new Inventory();
             bank = new Bank();
 
-            bossesController.Initialize(inventory, bank);
+            bossesController = new BossesController(inventory, bank);
         }
 
         private bool CheckThreshold(float sim, float expected)

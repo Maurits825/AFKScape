@@ -17,7 +17,12 @@ public class BossesController
 
     private float actionCount;
 
-    public void Initialize(Inventory inventory, Bank bank)
+    public BossesController(Inventory inventory, Bank bank)
+    {
+        Initialize(inventory, bank);
+    }
+
+    private void Initialize(Inventory inventory, Bank bank)
     {
         this.inventory = inventory;
         this.bank = bank;

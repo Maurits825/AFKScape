@@ -32,11 +32,16 @@ namespace Tests
             return weightSum;
         }
 
+        [OneTimeSetUp]
+        public void OneTimeSetup()
+        {
+            EventManager.SetIntance(new EventManager());
+        }
+
         [Test]
         public void AllMonsterDropTableJsonTest()
         {
-            BossesController bossesController = new BossesController();
-            bossesController.InitMonsterClasses();
+            BossesController bossesController = new BossesController(new Inventory(), new Bank());
 
             foreach (Monster monster in bossesController.bossesClasses.Values)
             {
@@ -93,8 +98,7 @@ namespace Tests
         [Test]
         public void AllCluesDropTableJsonTest()
         {
-            BossesController bossesController = new BossesController();
-            bossesController.InitMonsterClasses();
+            BossesController bossesController = new BossesController(new Inventory(), new Bank());
             
             foreach (string clueName in Database.cluesNames)
             {

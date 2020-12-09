@@ -6,7 +6,12 @@ public class ItemManager
     private Bank bank;
     private Equipment equipment;
 
-    public void Initialize(Inventory inventory, Bank bank, Equipment equipment)
+    public ItemManager(Inventory inventory, Bank bank, Equipment equipment)
+    {
+        Initialize(inventory, bank, equipment);
+    }
+
+    private void Initialize(Inventory inventory, Bank bank, Equipment equipment)
     {
         this.inventory = inventory;
         this.bank = bank;

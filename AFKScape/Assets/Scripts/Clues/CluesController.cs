@@ -26,7 +26,12 @@ public class CluesController
         { "Clue scroll (Master)", (5, 7) },
     };
 
-    public void Initialize(Inventory inventory, Bank bank)
+    public CluesController(Inventory inventory, Bank bank)
+    {
+        Initialize(inventory, bank);
+    }
+
+    private void Initialize(Inventory inventory, Bank bank)
     {
         this.inventory = inventory;
         this.bank = bank;
