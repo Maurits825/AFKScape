@@ -13,14 +13,13 @@ namespace Tests
         {
             EventManager.SetIntance(new EventManager());
             Database.LoadExperienceTable();
-            skillsController = new SkillsController();
+
             inventory = new Inventory();
             bank = new Bank();
 
-            skillsController.Initialize(inventory, bank);
+            skillsController = new SkillsController(inventory, bank);
         }
 
-        // A Test behaves as an ordinary method
         [Test]
         public void MainGameLoopTest()
         {

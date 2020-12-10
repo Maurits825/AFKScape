@@ -1,5 +1,6 @@
 ﻿using UnityEditor;
 using UnityEngine;
+using System.Collections.Generic;
 
 [CustomEditor(typeof(MonsterDropTableAdder))]
 public class MonsterDropTableEditor : Editor
@@ -12,6 +13,8 @@ public class MonsterDropTableEditor : Editor
     private string monsterName;
     private int monsterInd = 0;
     private int prevMonsterInd = 0;
+
+    private List<string> allBosses = new List<string>();
 
     private bool JSONLoaded = false;
 
@@ -28,9 +31,11 @@ public class MonsterDropTableEditor : Editor
         if (GUILayout.Button("Load Bosses"))
         {
             Database.LoadBosses();
+            allBosses = Database.bossesNames;
+            allBosses.AddRange(Database.cluesNames);
         }
 
-        monsterInd = EditorGUILayout.Popup("Select Boss:", monsterInd, Database.bossesNames.ToArray());
+        monsterInd = EditorGUILayout.Popup("Select Boss:", monsterInd, allBosses.ToArray());
         if (Database.bossesNames.Count != 0)
         {
             monsterName = Database.bossesNames[monsterInd];
@@ -40,7 +45,7 @@ public class MonsterDropTableEditor : Editor
         {
             JSONLoaded = false;
         }
-
+        
         if (GUILayout.Button("Load JSON"))
         {
             monsterDropTableAdder.monsterDropTableHandler = JsonHandler.GetMonsterDropTableHandler(monsterName);
@@ -51,11 +56,6 @@ public class MonsterDropTableEditor : Editor
 
         if (monsterName != null && JSONLoaded)
         {
-            EditorGUILayout.LabelField("General Info", EditorStyles.boldLabel);
-            EditorGUILayout.PropertyField(monsterDropTableHandler.FindPropertyRelative("rolls"));
-
-            EditorGUILayout.Space(10);
-
             EditorGUILayout.LabelField("100% Drop and Tertiary", EditorStyles.boldLabel);
             if (GUILayout.Button("Add"))
             {
@@ -85,6 +85,11 @@ public class MonsterDropTableEditor : Editor
 
             EditorGUILayout.Space(10);
 
+            EditorGUILayout.LabelField("General Info", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(monsterDropTableHandler.FindPropertyRelative("rolls"));
+
+            EditorGUILayout.Space(10);
+
             EditorGUILayout.LabelField("General Loot", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(monsterDropTableHandler.FindPropertyRelative("baseChance"));
 
@@ -109,10 +114,28 @@ public class MonsterDropTableEditor : Editor
             {
                 monsterDropTableAdder.monsterDropTableHandler.preMadeTables.Add(new MonsterDropTableHandler.TableInfo("tree_herb_seed", 0));
             }
+            if (GUILayout.Button("Add Prayer Page Table"))
+            {
+                monsterDropTableAdder.monsterDropTableHandler.preMadeTables.Add(new MonsterDropTableHandler.TableInfo("pages", 0));
+            }
+            if (GUILayout.Button("Add Blessing Table"))
+            {
+                monsterDropTableAdder.monsterDropTableHandler.preMadeTables.Add(new MonsterDropTableHandler.TableInfo("blessing", 0));
+            }
+            if (GUILayout.Button("Add Teleport Table"))
+            {
+                monsterDropTableAdder.monsterDropTableHandler.preMadeTables.Add(new MonsterDropTableHandler.TableInfo("teleport", 0));
+            }
             if (GUILayout.Button("Add Custom"))
             {
                 monsterDropTableAdder.monsterDropTableHandler.monsterDropTables.Add(new MonsterDropTable());
             }
+            if (GUILayout.Button("Add Loot from temp.json"))
+            {
+                tempDropTable = JsonHandler.GetMonsterDropTable("temp");
+                monsterDropTableAdder.monsterDropTableHandler.monsterDropTables.Add(tempDropTable);
+            }
+
             EditorGUILayout.PropertyField(monsterDropTableHandler.FindPropertyRelative("monsterDropTables"));
 
             SerializedProperty preMadeTables = monsterDropTableHandler.FindPropertyRelative("preMadeTables");

@@ -30,14 +30,19 @@ def get_rarity(raw):
         return 1, 1
     else:
         raw_no_comma = raw.replace(',', '')
-        chances = re.findall(r'([0-9]*)/([0-9]*)', raw_no_comma)
-        return chances[0][0], chances[0][1]
+        chances = re.findall(r'([0-9]*)/([0-9]*)\.?([0-9]*)', raw_no_comma)
+        if chances[0][2]:
+            decimal_places = len(chances[0][2])
+            gain = 10**decimal_places
+            return int(chances[0][0])*gain, int(chances[0][1])*gain + int(chances[0][2])
+        else:
+            return chances[0][0], chances[0][1]
 
 
 def print_parsed_data(drops):
     for drop in drops:
-        print(drop.name + ", " + str(drop.amount_min) + "-" + str(drop.amount_max) +
-              ", " + str(drop.actual_chance) + "/" + str(drop.base_chance))
+        print(drop.name + ", " + str(drop.amount_min) + "," + str(drop.amount_max) +
+              ", " + str(drop.actual_chance) + "," + str(drop.base_chance))
 
 
 def get_data_frames(url, start="Drops", end="Tertiary"):
@@ -86,6 +91,39 @@ def check_table_header(header, exclude):
             return False
     return True
 
+
+def get_clue_drop_table(url, exclude):
+    dfs, table_headers = get_data_frames(url, "Rewards")
+    try:
+        table_headers.remove("Standard_table")
+    except:
+        pass
+
+    default_exclude = ["Shared_treasure_trail_items", "Tertiary"]
+    all_exclude = default_exclude + exclude
+    item_drop_list = []
+    header_ind = 0
+    for data_frame in dfs:
+        try:
+            data_frame.iloc[0].loc['Item']
+        except KeyError:
+            pass
+        else:
+            if check_table_header(table_headers[header_ind], all_exclude):
+                process_data_frame(data_frame, item_drop_list)
+            header_ind = header_ind + 1
+
+    return item_drop_list
+
+
+def get_clue_extra_table(file_name):
+    data_frame = pd.read_csv(file_name)
+    item_drop_list = []
+
+    for row in data_frame.itertuples():
+        item_drop_list.append(ItemDrop(row.name, row.min_amount, row.max_amount, row.chance, row.base))
+
+    return item_drop_list
 
 def get_drop_table(url, exclude):
     dfs, table_headers = get_data_frames(url)
@@ -142,7 +180,8 @@ def create_json(drops):
     for drop in drops:
         actual_chance.append(drop.actual_chance)
         base_chances.append(drop.base_chance)
-        ids.append(all_db_items.lookup_by_item_name(drop.name).id)
+        item_name = drop.name.replace(" (Treasure Trails)", "")
+        ids.append(all_db_items.lookup_by_item_name(item_name).id)
 
     actual_chance_arr = np.array(actual_chance).astype(np.int)
     base_chance_arr = np.array(base_chances).astype(np.int)
@@ -186,6 +225,10 @@ def json_from_boss(name, exclude, table_type, table_name, start_table):
         drop_list = get_drop_table(url, list(exclude))
     elif table_type == "single":
         drop_list = get_single_table(url, table_name, start_table)
+    elif table_type == 'clue':
+        drop_list = get_clue_drop_table(url, list(exclude))
+    elif table_type == 'clue_extra':
+        drop_list = get_clue_extra_table(name)
     else:
         raise ValueError
     print_parsed_data(drop_list)

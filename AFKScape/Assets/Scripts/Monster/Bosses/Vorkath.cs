@@ -3,7 +3,6 @@
     public Vorkath()
         : base("Vorkath")
     {
-        GetDropTableHandler(bossName);
-        dropTableDict = CreateDropTableDictionary(null);
+        Initialize();
     }
 }

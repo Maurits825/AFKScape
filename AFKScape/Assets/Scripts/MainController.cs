@@ -22,6 +22,7 @@ public class MainController : MonoBehaviour
     //all class "singleton" instances, make static?
     public SkillsController skillsController;
     public BossesController bossesController;
+    public CluesController cluesController;
 
     public ItemManager itemManager;
     public Inventory inventory;
@@ -40,12 +41,6 @@ public class MainController : MonoBehaviour
         SetInstances();
 
         EventManager.Instance.OnMainTabClicked += OnTabClicked;
-
-        //call init on all classes
-        skillsController.Initialize(inventory, bank);
-        bossesController.Initialize(inventory, bank);
-        itemManager.Initialize(inventory, bank, equipment);
-        equipment.Initialize(inventory);
 
         //default tab is skills
         gameState = States.Skills;
@@ -77,6 +72,7 @@ public class MainController : MonoBehaviour
                 break;
 
             case States.Clues:
+                cluesController.Operate();
                 break;
 
             case States.CollectionLog:
@@ -89,13 +85,15 @@ public class MainController : MonoBehaviour
 
     private void SetInstances()
     {
-        skillsController = new SkillsController();
-        bossesController = new BossesController();
-
-        itemManager = new ItemManager();
         inventory = new Inventory();
         bank = new Bank();
-        equipment = new Equipment();
+
+        skillsController = new SkillsController(inventory, bank);
+        bossesController = new BossesController(inventory, bank);
+        cluesController = new CluesController(inventory, bank);
+
+        equipment = new Equipment(inventory);
+        itemManager = new ItemManager(inventory, bank, equipment);
     }
 
     private void OnTabClicked(int index)

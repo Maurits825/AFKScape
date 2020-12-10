@@ -40,9 +40,7 @@ namespace Tests
         {
             EventManager.SetIntance(new EventManager());
             inventory = new Inventory();
-            equipment = new Equipment();
-
-            equipment.Initialize(inventory);
+            equipment = new Equipment(inventory);
         }
 
         [Test]

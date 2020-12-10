@@ -1,0 +1,150 @@
+{
+    "name": "general",
+    "baseChance": 24,
+    "basicLoots": [
+        {
+            "id": 3827,
+            "weight": 1.0,
+            "amountMin": 1,
+            "amountMax": 1
+        },
+        {
+            "id": 3828,
+            "weight": 1.0,
+            "amountMin": 1,
+            "amountMax": 1
+        },
+        {
+            "id": 3829,
+            "weight": 1.0,
+            "amountMin": 1,
+            "amountMax": 1
+        },
+        {
+            "id": 3830,
+            "weight": 1.0,
+            "amountMin": 1,
+            "amountMax": 1
+        },
+        {
+            "id": 3831,
+            "weight": 1.0,
+            "amountMin": 1,
+            "amountMax": 1
+        },
+        {
+            "id": 3832,
+            "weight": 1.0,
+            "amountMin": 1,
+            "amountMax": 1
+        },
+        {
+            "id": 3833,
+            "weight": 1.0,
+            "amountMin": 1,
+            "amountMax": 1
+        },
+        {
+            "id": 3834,
+            "weight": 1.0,
+            "amountMin": 1,
+            "amountMax": 1
+        },
+        {
+            "id": 3835,
+            "weight": 1.0,
+            "amountMin": 1,
+            "amountMax": 1
+        },
+        {
+            "id": 3836,
+            "weight": 1.0,
+            "amountMin": 1,
+            "amountMax": 1
+        },
+        {
+            "id": 3837,
+            "weight": 1.0,
+            "amountMin": 1,
+            "amountMax": 1
+        },
+        {
+            "id": 3838,
+            "weight": 1.0,
+            "amountMin": 1,
+            "amountMax": 1
+        },
+        {
+            "id": 12613,
+            "weight": 1.0,
+            "amountMin": 1,
+            "amountMax": 1
+        },
+        {
+            "id": 12614,
+            "weight": 1.0,
+            "amountMin": 1,
+            "amountMax": 1
+        },
+        {
+            "id": 12615,
+            "weight": 1.0,
+            "amountMin": 1,
+            "amountMax": 1
+        },
+        {
+            "id": 12616,
+            "weight": 1.0,
+            "amountMin": 1,
+            "amountMax": 1
+        },
+        {
+            "id": 12617,
+            "weight": 1.0,
+            "amountMin": 1,
+            "amountMax": 1
+        },
+        {
+            "id": 12618,
+            "weight": 1.0,
+            "amountMin": 1,
+            "amountMax": 1
+        },
+        {
+            "id": 12619,
+            "weight": 1.0,
+            "amountMin": 1,
+            "amountMax": 1
+        },
+        {
+            "id": 12620,
+            "weight": 1.0,
+            "amountMin": 1,
+            "amountMax": 1
+        },
+        {
+            "id": 12621,
+            "weight": 1.0,
+            "amountMin": 1,
+            "amountMax": 1
+        },
+        {
+            "id": 12622,
+            "weight": 1.0,
+            "amountMin": 1,
+            "amountMax": 1
+        },
+        {
+            "id": 12623,
+            "weight": 1.0,
+            "amountMin": 1,
+            "amountMax": 1
+        },
+        {
+            "id": 12624,
+            "weight": 1.0,
+            "amountMin": 1,
+            "amountMax": 1
+        }
+    ]
+}

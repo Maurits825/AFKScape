@@ -35,13 +35,11 @@ namespace Tests
         public void SetUp()
         {
             EventManager.SetIntance(new EventManager());
-            itemManager = new ItemManager();
+
             inventory = new Inventory();
             bank = new Bank();
-            equipment = new Equipment();
-
-            itemManager.Initialize(inventory, bank, equipment);
-            equipment.Initialize(inventory);
+            equipment = new Equipment(inventory);
+            itemManager = new ItemManager(inventory, bank, equipment);
         }
 
         [Test]
