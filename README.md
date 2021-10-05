@@ -1,4 +1,4 @@
-[![Active](http://img.shields.io/badge/Status-Active-green.svg)](https://github.com/Maurits825/AFKScape)
+[![Active](http://img.shields.io/badge/Status-AFK-green.svg)](https://github.com/Maurits825/AFKScape)
 [![Main Checks](https://github.com/Maurits825/AFKScape/workflows/Main%20Checks/badge.svg)](https://github.com/Maurits825/AFKScape/actions)
 [![codecov](https://codecov.io/gh/Maurits825/AFKScape/branch/master/graph/badge.svg)](https://codecov.io/gh/Maurits825/AFKScape)
 [![GitHub contributors](https://img.shields.io/github/contributors/Maurits825/AFKScape)](https://github.com/Maurits825/AFKScape/graphs/contributors) 
